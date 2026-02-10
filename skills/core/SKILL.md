@@ -105,24 +105,8 @@ AskUserQuestion으로 프로젝트 루트 디렉토리를 설정:
 - **ARGS**: 사용자 요청 원문 전달
 - **RETURN**: 스킬 워크플로우 완료 후 사용자에게 결과 보고
 
-#### 미매칭 시
+#### 미매칭 시 → Skill: help
 
-사용 가능한 명령 목록을 안내:
-
-```
-Abra 플러그인 사용 가능한 명령:
-
-전체 워크플로우:
-- "에이전트 만들어줘", "Agent 개발해줘", "워크플로우 자동화"
-
-개별 단계:
-- "/abra:scenario" 또는 "시나리오 생성해줘"
-- "/abra:dsl-generate" 또는 "DSL 생성해줘"
-- "/abra:prototype" 또는 "프로토타이핑 해줘"
-- "/abra:dev-plan" 또는 "개발계획서 써줘"
-- "/abra:develop" 또는 "코드 개발해줘"
-
-환경 설정:
-- "/abra:dify-setup" 또는 "Dify 설치"
-- "/abra:setup" 또는 "초기 설정"
-```
+- **INTENT**: 사용자에게 사용 가능한 명령 및 자동 라우팅 규칙 안내
+- **ARGS**: 없음
+- **RETURN**: help 스킬 출력 완료 후 흐름 종료

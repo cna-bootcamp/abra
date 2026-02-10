@@ -108,7 +108,6 @@ Dify 환경 구축 완료 후 플러그인 설정 실행:
 3. Python 가상환경 생성
 4. 의존성 설치 (`httpx`, `python-dotenv`, `pyyaml`)
 5. Dify 연결 테스트
-6. 라우팅 테이블 등록 (로컬 또는 전역 `CLAUDE.md`)
 
 **설정 완료 후:**
 
@@ -375,11 +374,12 @@ abra/
 │   ├── prototype-runner/
 │   ├── plan-writer/
 │   └── agent-developer/
-├── skills/                         # 8개 스킬 (core, setup, dify-setup, scenario,
-│   │                              #          dsl-generate, prototype, dev-plan, develop)
+├── skills/                         # 9개 스킬 (core, setup, dify-setup, scenario,
+│   │                              #          dsl-generate, prototype, dev-plan, develop, help)
 │   ├── core/
 │   ├── setup/
 │   ├── dify-setup/
+│   ├── help/
 │   ├── scenario/
 │   ├── dsl-generate/
 │   ├── prototype/
@@ -398,6 +398,7 @@ abra/
 ├── commands/                       # 슬래시 명령 진입점
 │   ├── setup.md
 │   ├── dify-setup.md
+│   ├── help.md
 │   ├── scenario.md
 │   ├── dsl-generate.md
 │   ├── prototype.md
@@ -425,6 +426,7 @@ abra/
 | **core** | 핵심스킬 | 의도 분류 및 라우팅 |
 | **setup** | 설정스킬 | 플러그인 초기 설정 |
 | **dify-setup** | 설정스킬 | Dify 환경 구축 |
+| **help** | 유틸리티스킬 | 사용 안내 |
 | **scenario** | 지휘자스킬 | STEP 1 시나리오 생성 |
 | **dsl-generate** | 지휘자스킬 | STEP 2 DSL 자동생성 |
 | **prototype** | 지휘자스킬 | STEP 3 프로토타이핑 |
