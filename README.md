@@ -3,8 +3,10 @@
 - [Abra — AI Agent 자동 생성 플러그인](#abra--ai-agent-자동-생성-플러그인)
   - [개요](#개요)
   - [설치](#설치)
+  - [업데이트](#업데이트)
   - [사용법](#사용법)
   - [요구사항](#요구사항)
+  - [예제](#예제)
   - [라이선스](#라이선스)
 
 ---
@@ -119,6 +121,22 @@ Dify 환경 구축 완료 후 플러그인 설정 실행:
 /abra:prototype     # STEP 3: 프로토타이핑
 /abra:dev-plan      # STEP 4: 개발계획서 작성
 /abra:develop       # STEP 5: AI Agent 개발
+```
+
+[Top](#abra--ai-agent-자동-생성-플러그인)
+
+---
+
+## 업데이트
+
+Abra 플러그인을 최신 버전으로 업데이트하는 방법:
+
+```bash
+# 1. 마켓플레이스 갱신 (원격 저장소에서 최신 코드 가져오기)
+claude plugin marketplace update unicorn
+
+# 2. 플러그인 업데이트
+claude plugin update abra@unicorn
 ```
 
 [Top](#abra--ai-agent-자동-생성-플러그인)
@@ -432,6 +450,16 @@ abra/
 | **prototype** | 지휘자스킬 | STEP 3 프로토타이핑 |
 | **dev-plan** | 지휘자스킬 | STEP 4 개발계획서 작성 |
 | **develop** | 지휘자스킬 | STEP 5 AI Agent 개발 |
+
+[Top](#abra--ai-agent-자동-생성-플러그인)
+
+---
+
+## 예제
+
+| 프로젝트 | 설명 | 링크 |
+|---------|------|------|
+| **전시정보 카드뉴스** | Abra 플러그인으로 생성한 전시·공연 정보 카드뉴스 AI Agent | [GitHub](https://github.com/cna-bootcamp/culture-card-news) |
 
 [Top](#abra--ai-agent-자동-생성-플러그인)
 
