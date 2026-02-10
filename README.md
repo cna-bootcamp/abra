@@ -1,20 +1,11 @@
-# Abra — AI Agent 자동 생성 플러그인
-
-- [Abra — AI Agent 자동 생성 플러그인](#abra--ai-agent-자동-생성-플러그인)
-  - [개요](#개요)
-  - [설치](#설치)
-  - [업그레이드](#업그레이드)
-  - [사용법](#사용법)
-  - [요구사항](#요구사항)
-  - [예제](#예제)
-  - [라이선스](#라이선스)
+# Abra
+> 비즈니스 요구사항에서 AI Agent 개발까지 전 과정을 자동화하는 선언형 멀티에이전트 플러그인
 
 ---
 
 ## 개요
 
-**Abra**는 자연어로 비즈니스 요구사항을 입력하면 Dify 워크플로우 DSL 생성 → 프로토타이핑
-→ 개발계획서 → AI Agent 개발까지 **전 과정을 자동화**하는 선언형 멀티에이전트 플러그인(DMAP)임.
+**Abra**는 자연어로 비즈니스 요구사항을 입력하면 Dify 워크플로우 DSL 생성 → 프로토타이핑 → 개발계획서 → AI Agent 개발까지 **전 과정을 자동화**하는 선언형 멀티에이전트 플러그인(DMAP)입니다.
 
 ### 핵심 기능
 
@@ -46,42 +37,46 @@ STEP 1          STEP 2          STEP 3          STEP 4          STEP 5
 | STEP 4: 개발계획서 작성 | 검증된 DSL + 시나리오 | 개발계획서 |
 | STEP 5: AI Agent 개발 | 개발계획서 + DSL | 프로덕션 코드 또는 Dify 앱 |
 
-### 'M'사상 체화
-
-Abra는 Unicorn Inc.의 'M'사상을 구현함:
-- **Value-Oriented**: WHY First — 비즈니스 요구사항(WHY)에서 시작하여 기술 구현(HOW)으로 진행
-- **Interactive**: Believe crew — 사용자 선택 인정, 각 단계에서 피드백 반영
-- **Iterative**: Fast fail — 프로토타이핑 에러 시 자동 수정 루프, 빠른 반복 개선
-
-[Top](#abra--ai-agent-자동-생성-플러그인)
-
 ---
 
 ## 설치
 
-### 1단계: 선행 조건 확인
+### 사전 요구사항
 
-Abra 플러그인을 사용하려면 다음 환경이 필요함:
+Abra 플러그인을 사용하기 위해 다음 환경이 필요합니다:
 
 | 항목 | 요구사항 |
 |------|---------|
-| **Claude Code** | DMAP 런타임 지원 버전 |
+| **Claude Code CLI** | [설치 가이드](https://docs.claude.ai/docs/claude-code) 참조 |
 | **Docker** | 20.10+ (Dify 로컬 환경 구축 필요) |
 | **Docker Compose** | 2.0+ (Dify 멀티 컨테이너 관리) |
 | **Python** | 3.10+ (커스텀 도구 실행) |
 | **메모리** | 4 GiB 이상 (Dify 컨테이너) |
 | **디스크** | 5 GiB 이상 (Dify 이미지 + 데이터) |
 
-### 2단계: Dify 로컬 환경 구축
+### 플러그인 설치
 
-플러그인 사용 전 Dify 환경 구축 필수. 다음 명령어로 진행:
+#### 방법 1: 마켓플레이스 — GitHub (권장)
+
+**1단계: GitHub 마켓플레이스 등록**
+
+```bash
+claude plugin marketplace add cna-bootcamp/abra
+```
+
+**2단계: 플러그인 설치**
+
+```bash
+claude plugin install abra@abra
+```
+
+**3단계: Dify 환경 구축**
 
 ```bash
 /abra:dify-setup
 ```
 
-**상세 단계:**
-
+Dify 로컬 환경을 자동으로 구축합니다:
 1. Docker & Docker Compose 설치 여부 자동 확인
 2. Dify 소스 다운로드 (기본: `~/workspace/dify`)
 3. 환경 변수 파일 생성 (`.env`)
@@ -95,25 +90,20 @@ Abra 플러그인을 사용하려면 다음 환경이 필요함:
 curl http://localhost/console/api/health
 ```
 
-### 3단계: 플러그인 초기 설정
-
-Dify 환경 구축 완료 후 플러그인 설정 실행:
+**4단계: 플러그인 초기 설정**
 
 ```bash
 /abra:setup
 ```
 
-**설정 내용:**
-
+플러그인 설정을 진행합니다:
 1. Dify 접속 정보 입력 (Base URL, Email, Password)
 2. `.env` 파일 생성 (`gateway/.env`)
 3. Python 가상환경 생성
 4. 의존성 설치 (`httpx`, `python-dotenv`, `pyyaml`)
 5. Dify 연결 테스트
 
-**설정 완료 후:**
-
-플러그인 사용 준비 완료. 다음 명령어로 사용 가능:
+설정 완료 후 다음 명령어로 사용 가능합니다:
 
 ```bash
 /abra:scenario      # STEP 1: 시나리오 생성
@@ -123,43 +113,111 @@ Dify 환경 구축 완료 후 플러그인 설정 실행:
 /abra:develop       # STEP 5: AI Agent 개발
 ```
 
-[Top](#abra--ai-agent-자동-생성-플러그인)
+#### 방법 2: 마켓플레이스 — 로컬
+
+**1단계: 저장소 클론**
+
+```bash
+git clone https://github.com/cna-bootcamp/abra.git
+cd abra
+```
+
+**2단계: 로컬 마켓플레이스 등록**
+
+```bash
+claude plugin marketplace add ./abra --name abra
+```
+
+**3단계: 플러그인 설치**
+
+```bash
+claude plugin install abra@abra
+```
+
+**4단계: Dify 환경 구축 및 초기 설정**
+
+방법 1의 3-4단계와 동일하게 진행합니다:
+
+```bash
+/abra:dify-setup
+/abra:setup
+```
+
+### 처음 GitHub을 사용하시나요?
+
+GitHub 마켓플레이스 사용이 처음이라면 [GitHub 플러그인 설치 가이드](https://github.com/cna-bootcamp/gen-ma-plugin/blob/main/docs/how-to-install-github-plugin.md)를 참조하세요.
 
 ---
 
 ## 업그레이드
 
-Abra 플러그인을 최신 버전으로 업그레이드하는 방법:
+### Git Repository 마켓플레이스
+
+GitHub에서 설치한 경우:
 
 ```bash
 # 1. 마켓플레이스 갱신 (원격 저장소에서 최신 코드 가져오기)
-claude plugin marketplace update unicorn
+claude plugin marketplace update abra
 
 # 2. 플러그인 업데이트
-claude plugin update abra@unicorn
+claude plugin update abra@abra
 ```
 
-[Top](#abra--ai-agent-자동-생성-플러그인)
+### 로컬 마켓플레이스
+
+로컬에서 설치한 경우:
+
+```bash
+# 1. 저장소에서 최신 코드 가져오기
+cd abra
+git pull
+
+# 2. 플러그인 업데이트
+claude plugin update abra@abra
+```
+
+**갱신이 반영되지 않는 경우:**
+
+플러그인을 제거한 후 재설치합니다:
+
+```bash
+claude plugin uninstall abra@abra
+claude plugin install abra@abra
+```
 
 ---
 
 ## 사용법
 
-### 빠른 시작 (전체 5단계 자동 실행)
+### 슬래시 명령
+
+| 명령어 | 설명 |
+|--------|------|
+| `/abra:scenario` | STEP 1: 비즈니스 시나리오 생성 |
+| `/abra:dsl-generate` | STEP 2: Dify Workflow DSL 자동 생성 |
+| `/abra:prototype` | STEP 3: Dify 프로토타이핑 (Import/Publish/Run) |
+| `/abra:dev-plan` | STEP 4: 개발계획서 작성 |
+| `/abra:develop` | STEP 5: AI Agent 개발 (Dify 또는 코드 기반) |
+| `/abra:dify-setup` | Dify 로컬 환경 구축 |
+| `/abra:setup` | 플러그인 초기 설정 |
+| `/abra:help` | 사용 안내 |
+
+### 사용 예시
+
+#### 빠른 시작 (전체 5단계 자동 실행)
 
 비즈니스 요구사항 한 줄만 입력하면 AI Agent 개발까지 전 과정 자동화:
 
-```bash
+```
 에이전트 만들어줘: 고객 지원 챗봇. 자주 묻는 질문에 자동으로 답변하고,
 복잡한 문제는 인간 상담원에게 에스컬레이션.
 ```
 
-Abra는 자동으로 core 스킬을 통해 의도를 분류하고 `scenario` 스킬부터
-시작하여 `develop` 스킬까지 순차 실행함.
+Abra는 자동으로 core 스킬을 통해 의도를 분류하고 `scenario` 스킬부터 시작하여 `develop` 스킬까지 순차 실행합니다.
 
-### 개별 단계별 사용
+#### 개별 단계별 사용
 
-각 STEP을 독립적으로 실행 가능:
+각 STEP을 독립적으로 실행 가능합니다:
 
 #### STEP 1: 시나리오 생성
 
@@ -173,8 +231,7 @@ Abra는 자동으로 core 스킬을 통해 의도를 분류하고 `scenario` 스
 - 결과 저장 디렉토리 (기본값: `output/`)
 
 **출력:**
-- 다양한 관점(업무자동화, 고객경험, 비용절감, 의사결정, 협업효율화)의
-  N개 시나리오 생성
+- 다양한 관점(업무자동화, 고객경험, 비용절감, 의사결정, 협업효율화)의 N개 시나리오 생성
 - 각 시나리오의 관점·서비스명·핵심가치를 요약한 비교표 제시
 - 사용자가 하나를 선택 → `output/scenario.md` 저장
 
@@ -270,7 +327,7 @@ Abra는 자동으로 core 스킬을 통해 의도를 분류하고 `scenario` 스
 - Option A: 배포된 Dify 앱 + API 엔드포인트
 - Option B: 프로덕션 코드 + 테스트 통과 보고서
 
-### 자동 라우팅 (Core 스킬)
+#### 자동 라우팅 (Core 스킬)
 
 사용자 요청을 자동으로 분석하여 적절한 스킬로 라우팅:
 
@@ -285,7 +342,7 @@ Abra는 자동으로 core 스킬을 통해 의도를 분류하고 `scenario` 스
 | "Dify 설치", "Docker 실행" | `/abra:dify-setup` |
 | "설정해줘", "초기 설정" | `/abra:setup` |
 
-### 결과 산출물
+#### 결과 산출물
 
 각 단계 완료 후 `output/` 디렉토리에 다음 파일 생성:
 
@@ -297,11 +354,11 @@ Abra는 자동으로 core 스킬을 통해 의도를 분류하고 `scenario` 스
 | `{app-name}-code/` | STEP 5-Option B에서 생성된 프로덕션 코드 (Python/Node.js) |
 | `test-results.log` | 테스트 실행 결과 |
 
-### 트러블슈팅
+#### 트러블슈팅
 
 **문제 1: Dify 연결 실패**
 
-```bash
+```
 Error: Unable to connect to Dify API
 ```
 
@@ -313,7 +370,7 @@ Error: Unable to connect to Dify API
 
 **문제 2: DSL 검증 오류**
 
-```bash
+```
 Error: DSL validation failed
 ```
 
@@ -324,7 +381,7 @@ Error: DSL validation failed
 
 **문제 3: Dify 프로토타이핑 에러**
 
-```bash
+```
 Error: Workflow publish/run failed
 ```
 
@@ -335,7 +392,7 @@ Error: Workflow publish/run failed
 
 **문제 4: 의존성 설치 오류**
 
-```bash
+```
 Error: pip install failed
 ```
 
@@ -344,11 +401,51 @@ Error: pip install failed
 2. 인터넷 연결 확인
 3. 가상환경 재생성: `rm -rf gateway/.venv && /abra:setup`
 
-[Top](#abra--ai-agent-자동-생성-플러그인)
+---
+
+## 에이전트 구성
+
+| 에이전트 | 역할 | 티어 |
+|--------|------|------|
+| **scenario-analyst** | 비즈니스 시나리오 분석 및 생성 | MEDIUM |
+| **dsl-architect** | Dify Workflow DSL 설계 | HIGH |
+| **prototype-runner** | Dify 프로토타이핑 자동화 | MEDIUM |
+| **plan-writer** | 개발계획서 작성 | MEDIUM |
+| **agent-developer** | AI Agent 구현 | HIGH |
+
+### 스킬 구성
+
+| 스킬 | 유형 | 역할 |
+|------|------|------|
+| **core** | 핵심스킬 | 의도 분류 및 라우팅 |
+| **setup** | 설정스킬 | 플러그인 초기 설정 |
+| **dify-setup** | 설정스킬 | Dify 환경 구축 |
+| **help** | 유틸리티스킬 | 사용 안내 |
+| **scenario** | 지휘자스킬 | STEP 1 시나리오 생성 |
+| **dsl-generate** | 지휘자스킬 | STEP 2 DSL 자동생성 |
+| **prototype** | 지휘자스킬 | STEP 3 프로토타이핑 |
+| **dev-plan** | 지휘자스킬 | STEP 4 개발계획서 작성 |
+| **develop** | 지휘자스킬 | STEP 5 AI Agent 개발 |
 
 ---
 
 ## 요구사항
+
+### 필수 도구
+
+| 도구 | 버전 | 용도 |
+|------|------|------|
+| Docker | 20.10+ | Dify 컨테이너 실행 |
+| Docker Compose | 2.0+ | Dify 멀티 컨테이너 관리 |
+| Python | 3.10+ | 커스텀 도구 실행 |
+
+### 런타임 호환성
+
+| 런타임 | 지원 |
+|--------|:----:|
+| Claude Code | ✅ |
+| Codex CLI | 미검증 |
+| Gemini CLI | 미검증 |
 
 ### 시스템 요구사항
 
@@ -357,14 +454,8 @@ Error: pip install failed
 | CPU | 2 Core | 4 Core 이상 |
 | RAM | 4 GiB | 8 GiB 이상 |
 | 디스크 | 5 GiB | 20 GiB 이상 |
-| Docker | 20.10+ | 최신 버전 |
-| Docker Compose | 2.0+ | 최신 버전 |
-| Python | 3.10+ | 3.11+ |
 
 ### 소프트웨어 의존성
-
-#### 런타임 (Claude Code)
-- DMAP 빌더 표준 지원 버전
 
 #### Dify
 - 로컬 Docker Compose 기반 설치
@@ -378,31 +469,31 @@ python-dotenv>=1.0.0    # 환경 변수 로더 (.env 파일)
 pyyaml>=6.0             # YAML 파서 (DSL 검증)
 ```
 
-### 플러그인 구조
+---
+
+## 디렉토리 구조
 
 ```
 abra/
 ├── .claude-plugin/                 # 플러그인 메타데이터
 │   ├── plugin.json
 │   └── marketplace.json
-├── agents/                         # 5개 에이전트 (scenario-analyst, dsl-architect,
-│   │                              #            prototype-runner, plan-writer, agent-developer)
-│   ├── scenario-analyst/
-│   ├── dsl-architect/
-│   ├── prototype-runner/
-│   ├── plan-writer/
-│   └── agent-developer/
-├── skills/                         # 9개 스킬 (core, setup, dify-setup, scenario,
-│   │                              #          dsl-generate, prototype, dev-plan, develop, help)
-│   ├── core/
-│   ├── setup/
-│   ├── dify-setup/
-│   ├── help/
-│   ├── scenario/
-│   ├── dsl-generate/
-│   ├── prototype/
-│   ├── dev-plan/
-│   └── develop/
+├── agents/                         # 5개 에이전트
+│   ├── scenario-analyst/          # 시나리오 분석
+│   ├── dsl-architect/             # DSL 설계
+│   ├── prototype-runner/          # 프로토타이핑 실행
+│   ├── plan-writer/               # 개발계획서 작성
+│   └── agent-developer/           # Agent 개발
+├── skills/                         # 9개 스킬
+│   ├── core/                      # 의도 분류 및 라우팅
+│   ├── setup/                     # 플러그인 초기 설정
+│   ├── dify-setup/                # Dify 환경 구축
+│   ├── help/                      # 사용 안내
+│   ├── scenario/                  # STEP 1
+│   ├── dsl-generate/              # STEP 2
+│   ├── prototype/                 # STEP 3
+│   ├── dev-plan/                  # STEP 4
+│   └── develop/                   # STEP 5
 ├── gateway/                        # 런타임 매핑 및 도구
 │   ├── install.yaml
 │   ├── runtime-mapping.yaml
@@ -427,32 +518,6 @@ abra/
 └── README.md                       # 본 가이드
 ```
 
-### 에이전트 구성
-
-| 에이전트 | 역할 | 티어 |
-|--------|------|------|
-| **scenario-analyst** | 비즈니스 시나리오 분석 및 생성 | MEDIUM |
-| **dsl-architect** | Dify Workflow DSL 설계 | HIGH |
-| **prototype-runner** | Dify 프로토타이핑 자동화 | MEDIUM |
-| **plan-writer** | 개발계획서 작성 | MEDIUM |
-| **agent-developer** | AI Agent 구현 | HIGH |
-
-### 스킬 구성
-
-| 스킬 | 유형 | 역할 |
-|------|------|------|
-| **core** | 핵심스킬 | 의도 분류 및 라우팅 |
-| **setup** | 설정스킬 | 플러그인 초기 설정 |
-| **dify-setup** | 설정스킬 | Dify 환경 구축 |
-| **help** | 유틸리티스킬 | 사용 안내 |
-| **scenario** | 지휘자스킬 | STEP 1 시나리오 생성 |
-| **dsl-generate** | 지휘자스킬 | STEP 2 DSL 자동생성 |
-| **prototype** | 지휘자스킬 | STEP 3 프로토타이핑 |
-| **dev-plan** | 지휘자스킬 | STEP 4 개발계획서 작성 |
-| **develop** | 지휘자스킬 | STEP 5 AI Agent 개발 |
-
-[Top](#abra--ai-agent-자동-생성-플러그인)
-
 ---
 
 ## 예제
@@ -461,17 +526,15 @@ abra/
 |---------|------|------|
 | **전시정보 카드뉴스** | Abra 플러그인으로 생성한 전시·공연 정보 카드뉴스 AI Agent | [GitHub](https://github.com/cna-bootcamp/culture-card-news) |
 
-[Top](#abra--ai-agent-자동-생성-플러그인)
-
 ---
 
 ## 라이선스
 
-Abra 플러그인은 MIT 라이선스 하에 배포됨.
+Abra 플러그인은 MIT 라이선스 하에 배포됩니다.
 
 ### 저작권
 
-Copyright (c) 2025 Unicorn Inc.
+Copyright (c) 2026 Unicorn Inc.
 
 ### 라이선스 텍스트
 
@@ -513,5 +576,3 @@ Abra 플러그인은 다음 오픈소스 소프트웨어를 사용함:
 버그 리포트, 기능 요청, 기여는 다음 경로로:
 - GitHub Issues: https://github.com/cna-bootcamp/abra/issues
 - GitHub Discussions: https://github.com/cna-bootcamp/abra/discussions
-
-[Top](#abra--ai-agent-자동-생성-플러그인)
