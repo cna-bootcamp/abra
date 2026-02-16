@@ -2,6 +2,7 @@
 name: prototype
 description: Dify 프로토타이핑 자동화 (STEP 3)
 user-invocable: true
+type: orchestrator
 ---
 
 # Prototype

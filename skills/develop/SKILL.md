@@ -2,6 +2,7 @@
 name: develop
 description: AI Agent 개발 및 배포 (STEP 5)
 user-invocable: true
+type: orchestrator
 ---
 
 # Develop

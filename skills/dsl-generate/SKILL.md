@@ -2,6 +2,7 @@
 name: dsl-generate
 description: Dify DSL 자동생성 (STEP 2)
 user-invocable: true
+type: orchestrator
 ---
 
 # DSL Generate

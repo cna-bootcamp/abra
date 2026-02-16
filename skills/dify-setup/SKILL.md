@@ -3,6 +3,7 @@ name: dify-setup
 description: Dify 로컬 환경 구축 (Docker Compose)
 user-invocable: true
 disable-model-invocation: false
+type: setup
 ---
 
 # dify-setup

@@ -2,6 +2,7 @@
 name: core
 description: Abra 플러그인 의도 분류 및 스킬 라우팅
 user-invocable: false
+type: core
 ---
 
 # Abra Core

@@ -2,6 +2,7 @@
 name: dev-plan
 description: 개발계획서 작성 (STEP 4)
 user-invocable: true
+type: orchestrator
 ---
 
 # dev-plan
@@ -46,11 +47,35 @@ user-invocable: true
 
 ### Phase 0: 입력 확인
 
+#### no_workflow 모드
+
+`no_workflow: true`가 ARGS로 전달된 경우, DSL/시나리오 존재 검증을 스킵하고
+Phase 1로 직행함. 이는 Short Path (Dify 워크플로우 없이 코드만 개발)에서 사용됨.
+
+#### Skill→Skill 사전 입력 처리
+
+`ARGS` 루트 키 존재 시 plugin-to-plugin 호출로 판별하고, 내부 값을 사용:
+
+| ARGS 내부 키 | 대응 항목 | 동작 |
+|-------------|----------|------|
+| `source_plugin` | — | 호출자 플러그인 식별 |
+| `domain_context` | — | 개발계획서 작성 시 컨텍스트로 전달 |
+| `service_purpose` | — | 개발계획서 작성 시 서비스 목적으로 전달 |
+| `requirement` | — | 개발계획서 작성 시 요구사항으로 전달 |
+| `references` | — | 개발계획서 작성 시 참고 자료로 전달 |
+| `project_dir` | 프로젝트 디렉토리 | 제공된 경로 사용 |
+| `allowed_options` | 기술스택 선호 (Phase 1) | 제공된 옵션만 표시 |
+| `no_workflow` | Phase 0 검증 | `true` 시 DSL/시나리오 검증 스킵 |
+
+`ARGS` 키 미존재 시 사용자 직접 호출로 판별하고, AskUserQuestion으로 입력 수집.
+
+#### 기본 모드 (no_workflow 미설정)
+
 검증된 DSL 파일과 scenario.md 파일의 존재 여부를 확인함.
 
 **검증 항목:**
-- DSL 파일: `{output_dir}/{app-name}.dsl.yaml` 존재 확인
-- 시나리오: `{output_dir}/scenario.md` 존재 확인
+- DSL 파일: `{project_dir}/{app-name}.dsl.yaml` 존재 확인
+- 시나리오: `{project_dir}/scenario.md` 존재 확인
 
 **미존재 시:**
 - DSL 파일 없음 → `dsl-generate` 스킬로 위임
@@ -64,11 +89,14 @@ AskUserQuestion으로 비기능요구사항을 수집함.
 
 1. **기술스택 선호**
    - 질문: "어떤 기술스택을 선호하시나요?"
-   - 옵션:
+   - 전체 옵션:
      - "Option A: Dify 런타임 활용 (DSL을 Dify API로 배포)"
      - "Option B: 코드 기반 전환 (Python + LangChain/LangGraph)"
      - "Option C: 코드 기반 전환 (TypeScript + LangChain.js)"
-   - 기본값: "Option A"
+   - 기본값: "Option B"
+   - **allowed_options 적용**: ARGS에 `allowed_options`가 제공된 경우,
+     해당 목록에 포함된 옵션만 사용자에게 표시함.
+     예: `allowed_options: [B, C]` → Option A(Dify) 제외, Option B/C만 표시
 
 2. **배포 환경**
    - 질문: "배포 환경은 무엇인가요?"
@@ -102,7 +130,7 @@ AskUserQuestion으로 비기능요구사항을 수집함.
 ### Phase 2: 개발계획서 작성 → Agent: plan-writer (`/oh-my-claudecode:ralplan` 활용)
 
 - **TASK**: 검증된 DSL과 시나리오를 기반으로 기술스택, 아키텍처, 모듈 설계, 테스트 전략, 배포 계획을 포함하는 개발계획서 작성
-- **EXPECTED OUTCOME**: 완성된 개발계획서 마크다운 파일 (`{output_dir}/dev-plan.md`)
+- **EXPECTED OUTCOME**: 완성된 개발계획서 마크다운 파일 (`{project_dir}/dev-plan.md`)
 - **MUST DO**:
   - `references/develop-plan-generate.md` 프롬프트 템플릿 활용
   - DSL 구조와 계획의 일관성 확보
@@ -113,10 +141,10 @@ AskUserQuestion으로 비기능요구사항을 수집함.
   - DSL 파일 수정 금지
   - 시나리오 파일 수정 금지
 - **CONTEXT**:
-  - DSL 파일: `{output_dir}/{app-name}.dsl.yaml`
-  - 시나리오: `{output_dir}/scenario.md`
+  - DSL 파일: `{project_dir}/{app-name}.dsl.yaml`
+  - 시나리오: `{project_dir}/scenario.md`
   - 비기능요구사항: `{nfr}`
-  - 출력 파일: `{output_dir}/dev-plan.md`
+  - 출력 파일: `{project_dir}/dev-plan.md`
 
 **오케스트레이션 스킬 활용:**
 
@@ -154,7 +182,7 @@ review는 Critic 에이전트가 계획서의 완성도와 일관성을 체계�
 # dev-plan 완료 보고
 
 ## 산출물
-- 개발계획서: `{output_dir}/dev-plan.md`
+- 개발계획서: `{project_dir}/dev-plan.md`
 
 ## 리뷰 포인트
 - [✓/✗] DSL-계획 일관성
@@ -181,7 +209,7 @@ review는 Critic 에이전트가 계획서의 완성도와 일관성을 체계�
 
 ```bash
 # 섹션 존재 여부 확인
-grep -E "^## [0-9]\. (개요|기술스택|아키텍처|모듈 설계|프롬프트 최적화|API 설계서|데이터 모델|테스트 전략|배포 계획)" {output_dir}/dev-plan.md
+grep -E "^## [0-9]\. (개요|기술스택|아키텍처|모듈 설계|프롬프트 최적화|API 설계서|데이터 모델|테스트 전략|배포 계획)" {project_dir}/dev-plan.md
 ```
 
 9개 섹션이 모두 출력되어야 검증 통과.

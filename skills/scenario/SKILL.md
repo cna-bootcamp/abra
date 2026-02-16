@@ -2,6 +2,7 @@
 name: scenario
 description: 요구사항 시나리오 생성 및 선택 (STEP 1)
 user-invocable: true
+type: orchestrator
 ---
 
 # Scenario
@@ -50,6 +51,23 @@ STEP 1: 시나리오 생성 및 선택 단계를 담당.
 
 ### Phase 0: 입력 수집 (`ulw` 활용)
 
+#### Skill→Skill 사전 입력 처리
+
+`ARGS` 루트 키 존재 시 plugin-to-plugin 호출로 판별하고, 내부 값을 사용:
+
+| ARGS 내부 키 | 대응 Phase 0 항목 | 동작 |
+|-------------|-------------------|------|
+| `source_plugin` | — | 호출자 플러그인 식별 |
+| `service_purpose` | 서비스 목적 | 질문 스킵, 제공된 값 사용 |
+| `count` | 생성 갯수 | 질문 스킵, 제공된 값 사용 |
+| `project_dir` | 프로젝트 디렉토리 | 질문 스킵, 제공된 경로 사용 |
+| `domain_context` | — | 시나리오 생성 시 컨텍스트로 전달 |
+| `requirement` | — | 시나리오 생성 시 요구사항으로 전달 |
+| `references` | — | 시나리오 생성 시 참고 자료로 전달 |
+
+`ARGS` 키 미존재 시 사용자 직접 호출로 판별하고, AskUserQuestion으로 입력 수집.
+모든 필수 항목이 `ARGS`에 포함된 경우 Phase 0 전체를 스킵하고 Phase 1로 직행.
+
 AskUserQuestion 도구로 핵심 정보를 사용자로부터 수집:
 
 | 항목 | 필수 | 기본값 | 설명 |
@@ -74,10 +92,10 @@ AskUserQuestion 형식:
 AskUserQuestion으로 확인:
 - 질문: "프로젝트를 생성할 경로를 선택해 주세요"
 - 옵션:
-  - "현재 디렉토리 하위 (`./{추천명}/`)" (권장)
+  - `{project_root}/` (권장)
   - "직접 입력"
 - 디렉토리 생성 후 `output/` 서브디렉토리도 함께 생성
-- 이후 모든 `{output_dir}`는 `{project_root}/output/`을 가리킴
+- 이후 모든 `{project_dir}`는 `{project_root}/output/`을 가리킴
 
 #### 외부 도구 및 데이터 소스 확인
 
@@ -112,7 +130,7 @@ scenario-analyst 에이전트에 위임:
 - **EXPECTED OUTCOME**: 각 시나리오에 8개 섹션(서비스개요, 사용자시나리오, 에이전트역할, 워크플로우설계, 외부도구, AI지시사항, 품질요구사항, 검증시나리오) 포함 + 버전 간 비교표 포함한 마크다운 문서
 - **MUST DO**: `references/requirement-generater.md` 프롬프트 템플릿 활용, 다양한 관점(업무자동화, 고객경험, 비용절감, 의사결정, 협업효율화) 반영, 비즈니스 용어 사용(기술 용어 최소화), 각 시나리오 차별화(서비스명, 우선순위, 품질 지표), 사용자 제공 외부 도구/데이터 소스를 시나리오에 우선 반영, 적합한 도구가 없는 기능은 "커스텀 개발 필요"로 명시
 - **MUST NOT DO**: 사용자에게 직접 질문 금지, 시나리오 선택 금지, DSL 생성 금지
-- **CONTEXT**: 서비스 목적: `{service_purpose}`, 생성 갯수: `{count}`, 출력 디렉토리: `{output_dir}`, 외부 도구/데이터 소스: `{external_tools_and_data}`
+- **CONTEXT**: 서비스 목적: `{service_purpose}`, 생성 갯수: `{count}`, 출력 디렉토리: `{project_dir}`, 외부 도구/데이터 소스: `{external_tools_and_data}`, 도메인 컨텍스트: `{domain_context}` (사전 제공 시), 요구사항: `{requirement}` (사전 제공 시), 참고 자료: `{references}` (사전 제공 시)
 
 ### Phase 2: 사용자 선택
 
@@ -131,7 +149,7 @@ AskUserQuestion 도구로 시나리오 선택:
 
 ### Phase 3: 결과 저장 및 완료
 
-선택된 시나리오를 `{output_dir}/scenario.md`로 저장.
+선택된 시나리오를 `{project_dir}/scenario.md`로 저장.
 
 사용자에게 완료 보고:
 ```
@@ -139,7 +157,7 @@ AskUserQuestion 도구로 시나리오 선택:
 
 - 생성된 시나리오 수: {count}개
 - 선택된 버전: 버전 {selected_version} ({관점})
-- 저장 위치: {output_dir}/scenario.md
+- 저장 위치: {project_dir}/scenario.md
 
 다음 단계: `/abra:dsl-generate`로 Dify DSL 생성
 ```
