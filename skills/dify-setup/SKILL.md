@@ -52,14 +52,28 @@ git clone https://github.com/langgenius/dify.git {설치_위치}
 **이미 설치된 경우:**
 - 기존 디렉토리 사용
 
-### Step 3: 환경 변수 파일 생성 (`ulw` 활용)
+### Step 3: 환경 변수 파일 생성 및 설정 (`ulw` 활용)
 
 ```bash
 cd {설치_위치}/docker
 cp .env.example .env
 ```
 
-`.env` 파일이 이미 있으면 건너뜀 (기존 설정 보존).
+`.env` 파일이 이미 있으면 복사를 건너뜀 (기존 설정 보존).
+
+**필수 환경변수 설정:**
+
+`.env` 파일 생성 후(또는 기존 파일이 있는 경우), 아래 항목이 비어 있으면 설정:
+
+| 변수명 | 설정값 | 용도 |
+|--------|--------|------|
+| `CONSOLE_API_URL` | `http://localhost` | 콘솔 API URL (OAuth 콜백 URI 생성에 필수) |
+| `CONSOLE_WEB_URL` | `http://localhost` | 콘솔 프론트엔드 URL |
+| `APP_WEB_URL` | `http://localhost` | WebApp URL |
+
+> **주의**: 이 값들이 비어 있으면 OAuth 플러그인(Google Drive 등) 연동 시
+> `redirect_uri` 오류(400 invalid_request)가 발생한다.
+> 외부 도메인으로 접속하는 경우 `http://localhost` 대신 해당 도메인으로 설정.
 
 ### Step 4: Docker Compose 실행 (`ulw` 활용)
 
@@ -113,6 +127,9 @@ Dify 관리자 계정 생성 안내:
 1. 브라우저에서 http://localhost/install 접속
 2. 관리자 계정 생성 (이메일, 비밀번호 설정)
 3. /abra:setup 명령으로 플러그인 초기 설정 진행
+
+🔑 비밀번호 초기화:
+cd {설치_위치}/docker && docker compose exec api flask reset-password
 ```
 
 ## 사용자 상호작용

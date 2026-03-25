@@ -2,8 +2,4 @@
 description: 요구사항 시나리오 생성 및 선택 (STEP 1)
 ---
 
-# Scenario Command
-
-Use the Skill tool to invoke the `abra:scenario` skill with all arguments passed through.
-
-사용자가 `/abra:scenario` 명령을 호출하면, 이 진입점은 `abra:scenario` 스킬의 전체 워크플로우를 활성화함.
+~/.claude/plugins/cache/**/{plugin-name}/ 하위 최신 버전 디렉토리의 skills/{skill-name}/SKILL.md 파일을 읽고 실행하세요.

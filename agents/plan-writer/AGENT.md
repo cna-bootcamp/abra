@@ -21,13 +21,28 @@ description: 검증된 DSL과 시나리오 기반 개발계획서 작성 전문�
 
 ### 1. 입력 분석
 
-{tool:file_read}로 검증된 DSL 파일, 시나리오 문서, references 파일을 로드하여 요구사항을 파악함.
+{tool:file_read}로 입력 파일을 로드하여 요구사항을 파악함.
+
+**입력 분기:**
+
+| 조건 | 분기 | 사용 입력 |
+|------|------|----------|
+| DSL + 시나리오 존재 | **Full Path** | DSL 파일, 시나리오 문서, references |
+| DSL + 시나리오 미존재 | **Short Path** | domain_context, requirement, references |
+
+- **Full Path**: 검증된 DSL 파일과 시나리오 문서를 분석하여 기술스택, 아키텍처, 모듈 설계를 도출
+- **Short Path**: domain_context(팀명, 팀 목적, 에이전트 역할)와 requirement(기본 정보, 핵심기능, 사용자 플로우)를 기반으로 개발계획서 작성. DSL 없이 요구사항 중심으로 기술스택과 아키텍처를 결정
 
 ### 2. 기술스택 및 아키텍처 결정
 
-DSL 구조를 분석하여 적합한 기술스택을 결정:
-- **Option A (Dify 런타임 활용)**: Dify API를 활용한 배포
-- **Option B (코드 기반 전환)**: LangChain, LangGraph 등 프레임워크 선택
+입력에 따라 적합한 기술스택을 결정:
+- **Full Path (DSL 존재 시)**: DSL 구조를 분석하여 기술스택 결정
+  - **Option A (Dify 런타임 활용)**: Dify API를 활용한 배포
+  - **Option B (Python)**: Python + LangChain/LangGraph
+  - **Option C (TypeScript)**: TypeScript + LangChain.js
+- **Short Path (DSL 미존재 시)**: requirement를 분석하여 기술스택 결정
+  - **Option B (Python)**: Python + LangChain/LangGraph
+  - **Option C (TypeScript)**: TypeScript + LangChain.js
 
 아키텍처 패턴:
 - MCP 서버 구조 (Streaming HTTP)

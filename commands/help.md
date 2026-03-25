@@ -2,4 +2,4 @@
 allowed-tools: Read, Skill
 ---
 
-Use the Skill tool to invoke the `abra:help` skill with all arguments passed through.
+~/.claude/plugins/cache/**/{plugin-name}/ 하위 최신 버전 디렉토리의 skills/{skill-name}/SKILL.md 파일을 읽고 실행하세요.

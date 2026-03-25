@@ -30,7 +30,7 @@ DSL(YAML) 파일을 생성합니다.
 | 1. 서비스 개요 | 서비스명, 서비스 유형, 서비스 목적 | app.name, app.mode, app.description |
 | 3. 에이전트 역할 및 행동 | 단계별 행동 (입력/처리/출력) | graph.nodes (노드 구성) |
 | 4. 워크플로우 설계 | 입력 항목, 출력 항목, 분기 조건 | start.variables, end.outputs, if-else.cases |
-| 5. 외부 도구 및 데이터 소스 | 외부 연동 서비스 목록 | http-request, tool 노드 |
+| 5. 외부 도구 및 데이터 소스 | 외부 기능 요구사항 목록 | code 노드 ([MOCK] 더미) |
 | 6. AI 지시사항 가이드 | 역할, 응답 기준, 금지 사항 | llm.prompt_template |
 | 3. 예외 처리 | 오류 상황별 대응 | error_strategy, if-else 분기 |
 | 8. 검증 시나리오 | 정상/예외 케이스 | STEP 4 테스트 시나리오에 활용 |
@@ -203,13 +203,13 @@ DSL(YAML) 파일을 생성합니다.
 | AI로 분석/분류/생성 | llm 노드 |
 | JSON 파싱, 데이터 변환 | code 노드 |
 | "만약 ~이면" 분기 조건 | if-else 노드 |
-| 외부 API 호출 (Slack, CRM 등) | http-request 노드 |
-| 지식 검색 / FAQ 조회 | knowledge-retrieval 노드 |
+| 외부 API 호출 (검색, CRM 등) | code 노드 ([MOCK] 더미 - 프리셋 전략) |
+| 지식 검색 / FAQ 조회 | code 노드 ([MOCK] 더미 - 해시 전략) |
 | 질문 유형 분류 | question-classifier 노드 |
 | 배열 반복 처리 | iteration 노드 |
 | 분기 결과 합류 | variable-aggregator 노드 |
 | 템플릿 기반 형식화 | template 노드 |
-| 도구 호출 (내장/외부/MCP) | tool 노드 |
+| 도구 호출 (내장/외부) | code 노드 ([MOCK] 더미 - 프리셋 전략) |
 | 자율적 도구 선택·실행 | agent 노드 |
 | 비구조화 텍스트에서 데이터 추출 | parameter-extractor 노드 |
 | 파일에서 텍스트 추출 | document-extractor 노드 |
@@ -217,6 +217,75 @@ DSL(YAML) 파일을 생성합니다.
 | 스케줄/웹훅 자동 실행 | trigger 노드 |
 | 최종 출력 (Workflow) | end 노드 |
 | 사용자 응답 (Chatflow) | answer 노드 |
+
+### 프로토타입 더미 노드 규칙
+
+프로토타입 DSL 생성 시 외부 의존성이 필요한 노드(tool, knowledge-retrieval, http-request)는
+code 더미 노드로 대체한다. LLM 노드와 흐름 제어 노드는 실제 노드로 유지한다.
+
+**Start 노드 mock 변수:**
+- `mock_preset` (select, 기본값: "default", options: ["default", "empty", "error", "timeout"]): 표준 글로벌 프리셋 (모든 도구 더미 노드가 공유)
+- `mock_override` (string, 기본값: ""): JSON 오버라이드 (선택, 특정 시나리오 직접 지정)
+
+> select 타입 사용 이유: 드롭다운 UI로 오타 방지, 프리셋 목록이 UI에 노출되어 사용법 안내 역할
+
+**지식 더미 (RAG) 코드 템플릿 — 해시 전략:**
+```python
+# [MOCK] 지식 검색 - 입력 해시 기반 자동 변형
+def main(query: str) -> dict:
+    variant = sum(ord(c) for c in query) % 3
+
+    if variant == 0:  # 정상: 복수 결과
+        return {
+            "result": [
+                {"title": "사내 규정 제3조", "content": "연차 휴가는 입사 1년 후 15일이 부여됩니다.", "score": 0.92},
+                {"title": "사내 규정 제5조", "content": "경조사 휴가는 별도로 부여됩니다.", "score": 0.78}
+            ],
+            "count": 2
+        }
+    elif variant == 1:  # 엣지: 결과 없음
+        return {
+            "result": [],
+            "count": 0
+        }
+    else:  # 엣지: 단일 결과 (저관련도)
+        return {
+            "result": [
+                {"title": "일반 공지사항", "content": "사내 식당 메뉴가 변경되었습니다.", "score": 0.35}
+            ],
+            "count": 1
+        }
+```
+
+**도구 더미 코드 템플릿 — 프리셋 전략 (표준 글로벌 프리셋 4종 + try/except 에러 처리):**
+```python
+# [MOCK] 날씨 조회 - 표준 프리셋 + 사용자 오버라이드
+import json
+
+def main(city: str, mock_preset: str, mock_override: str) -> dict:
+    presets = {
+        "default": {"condition": "맑음", "temperature": 25, "humidity": 45, "wind": 8},
+        "empty":   {"condition": "", "temperature": 0, "humidity": 0, "wind": 0, "_mock_note": "데이터 없음"},
+        "error":   {"condition": "", "temperature": 0, "humidity": 0, "wind": 0, "_mock_error": "API 호출 실패"},
+        "timeout": {"condition": "", "temperature": 0, "humidity": 0, "wind": 0, "_mock_error": "응답 시간 초과"},
+    }
+
+    if mock_override and mock_override.strip():
+        try:
+            result = json.loads(mock_override)
+        except json.JSONDecodeError:
+            result = presets.get("default")
+    else:
+        result = presets.get(mock_preset, presets["default"])
+
+    result["city"] = city
+    return result
+```
+
+> **프리셋 해석 규칙**: 각 도구 더미 노드는 표준 프리셋 4종(`default`, `empty`, `error`, `timeout`)을 자기 도메인에 맞게 해석한다.
+> 도메인 특화 시나리오(날씨: rainy/snow 등)는 `mock_override` JSON으로 지정한다.
+> 더미 데이터 규칙: 스키마는 실제 도구와 정확히 일치, 데이터는 최소한(1~2개 예시)으로 유지.
+> [MOCK] code 노드는 반드시 정상 출력을 반환(return dict)해야 하며, 예외(raise)를 발생시키지 않아야 함.
 
 ### 노드 유형별 필수 필드
 
