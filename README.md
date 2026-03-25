@@ -15,7 +15,7 @@
 | **DSL 자동생성** | 선택된 시나리오를 기반으로 Dify Workflow DSL(YAML) 자동 생성 및 문법·구조 사전 검증 |
 | **프로토타이핑** | 생성된 DSL을 Dify에 자동 Import → Publish → Run하여 프로토타이핑 수행. 에러 발생 시 DSL 수정 → 재검증 → 재시도 루프 자동 실행 |
 | **개발계획서 작성** | 검증된 DSL과 시나리오를 기반으로 기술스택, 아키텍처, 모듈 설계, 테스트 전략을 포함한 개발계획서 자동 생성 |
-| **AI Agent 개발** | 개발계획서에 따라 Dify 런타임 활용(Option A) 또는 코드 기반 전환(Option B) 방식으로 AI Agent 구현 |
+| **AI Agent 개발** | 개발계획서에 따라 코드 기반(LangChain/LangGraph 등)으로 AI Agent 구현 |
 | **Dify 환경 구축** | Docker Compose로 로컬 Dify 환경 자동 구축 및 설정 |
 
 ### 작업 흐름 (5단계)
@@ -307,25 +307,15 @@ Abra는 자동으로 core 스킬을 통해 의도를 분류하고 `scenario` 스
 
 **입력:**
 - 개발계획서 + 검증된 DSL 자동 로드
-- 개발 방식 선택:
-  - **Option A**: Dify 런타임 활용 (DSL Import → 환경 설정 → 배포 → API 테스트)
-  - **Option B**: 코드 기반 전환 (LangChain/LangGraph 등으로 구현)
 
-**Option A (Dify 런타임) — 저코드 개발:**
-- DSL을 Dify에 Import
-- 환경 변수 설정
-- 워크플로우 Publish & Deploy
-- API 테스트 자동 실행
-
-**Option B (코드 기반) — 풀코드 개발:**
+**코드 기반 구현:**
 - DSL 참조하여 LangChain/LangGraph 등으로 구현
 - 테스트 코드 자동 생성 및 실행
 - 빌드 오류 자동 수정 (`/oh-my-claudecode:build-fix`)
 - QA 검증 자동 실행 (`/oh-my-claudecode:ultraqa`)
 
 **출력:**
-- Option A: 배포된 Dify 앱 + API 엔드포인트
-- Option B: 프로덕션 코드 + 테스트 통과 보고서
+- 프로덕션 코드 + 테스트 통과 보고서
 
 #### 자동 라우팅 (Core 스킬)
 

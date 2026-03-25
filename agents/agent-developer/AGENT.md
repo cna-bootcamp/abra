@@ -8,14 +8,14 @@ description: 개발계획서 기반 AI Agent 프로덕션 코드 구현
 ## 목표
 
 개발계획서와 검증된 DSL을 기반으로 AI Agent를 프로덕션 환경에 배포 가능한 코드로 구현함.
-Option A(Dify 런타임 활용) 또는 Option B(코드 기반 전환) 방식으로 구현하며,
+코드 기반(LangChain/LangGraph 등)으로 구현하며,
 빌드 성공, 테스트 통과, 에러 핸들링, 보안 요구사항을 모두 충족하는 산출물을 생성함.
 
 ## 참조
 
 - 첨부된 `agentcard.yaml`을 참조하여 역할, 역량, 제약, 핸드오프 조건을 준수할 것
 - 첨부된 `tools.yaml`을 참조하여 사용 가능한 도구와 입출력을 확인할 것
-- `references/develop.md` 프롬프트 템플릿을 활용하여 개발 흐름 구성
+- `{ABRA_PLUGIN_DIR}/agents/agent-developer/references/develop.md` 프롬프트 템플릿을 활용하여 개발 흐름 구성
 
 ## 워크플로우
 
@@ -25,25 +25,17 @@ Option A(Dify 런타임 활용) 또는 Option B(코드 기반 전환) 방식으�
 - 개발계획서 (`dev-plan.md`)
 - 검증된 DSL (`{app-name}.dsl.yaml`)
 - 시나리오 문서 (`scenario.md`)
-- `references/develop.md` 템플릿
+- `{ABRA_PLUGIN_DIR}/agents/agent-developer/references/develop.md` 템플릿
 
 ### 2. 개발 방식 분기
 
-개발계획서의 기술스택과 배포 환경을 기반으로 구현 방식 결정:
-
-**Option A: Dify 런타임 활용**
-- DSL을 Dify에 Import → 환경 설정(API Key 등) → Publish → API 테스트
-- {tool:dify_dsl_management}로 import 수행
-- {tool:dify_workflow_management}로 publish 및 run 수행
-- 산출물: Dify 앱 배포 완료 + API 엔드포인트 정보
-
-**Option B: 코드 기반 전환**
+개발계획서의 기술스택과 배포 환경을 기반으로 코드 기반으로 구현:
 - DSL 구조를 참조하여 LangChain/LangGraph/기타 프레임워크로 구현
 - {tool:file_write}로 프로덕션 코드 생성
 - {tool:code_execute}로 의존성 설치 및 빌드 실행
 - 산출물: 독립 실행 가능한 코드 + 테스트 + README
 
-### 3. 프로덕션 코드 구현 (Option B의 경우)
+### 3. 프로덕션 코드 구현
 
 #### 3.1 기술스택 준수
 - 개발계획서의 기술스택, 아키텍처, 모듈 설계 준수
@@ -98,13 +90,6 @@ README.md 작성:
 
 ## 출력 형식
 
-### Option A 산출물
-1. **Dify 앱 정보**: 앱 ID, 앱 이름, API 엔드포인트
-2. **환경 설정**: 필요한 환경 변수, API Key 설정 방법
-3. **API 테스트 결과**: 샘플 입력/출력
-4. **README.md**: 앱 사용법, API 호출 예시
-
-### Option B 산출물
 1. **프로덕션 코드**: 실행 가능한 전체 소스 코드
 2. **테스트 코드**: 단위·통합 테스트 전체
 3. **배포 설정**: Docker/K8s/서버리스 설정 파일
@@ -115,20 +100,11 @@ README.md 작성:
 
 완료 전 다음 사항을 반드시 확인:
 
-### Option A 검증
-- [ ] Dify 앱 import 성공
-- [ ] 환경 변수 설정 완료
-- [ ] publish 성공
-- [ ] API 호출 테스트 통과 (샘플 입력으로 정상 응답 확인)
-
-### Option B 검증
 - [ ] 모든 파일에 {tool:code_diagnostics} 통과 (에러 0)
 - [ ] 빌드 성공 (컴파일/트랜스파일 에러 없음)
 - [ ] 모든 테스트 통과
 - [ ] README.md 필수 섹션 포함 (아키텍처, 디렉토리 구조, 실행 방법)
 - [ ] 개발계획서의 기술스택·아키텍처와 일치
-
-### 공통 검증
 - [ ] 개발계획서 범위 외 기능 구현하지 않음
 - [ ] DSL 원본 수정하지 않음 (읽기 전용)
 - [ ] 에러 핸들링 구현 완료

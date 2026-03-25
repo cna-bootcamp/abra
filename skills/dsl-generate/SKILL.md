@@ -19,6 +19,18 @@ DSL 구조 검증을 통과한 유효한 파일을 산출하며, 에러 발생 �
 - "DSL 생성", "워크플로우 DSL", "YAML 만들어", "dsl-generate" 키워드 감지 시
 - `/abra:dsl-generate` 명령 호출 시
 
+## {ABRA_PLUGIN_DIR} 변수 해석
+오케스트레이터는 실행 시작 시 다음 순서로 `{ABRA_PLUGIN_DIR}`를 결정:
+0. 현재 프로젝트의 CLAUDE.md에 {ABRA_PLUGIN_DIR}변수가 있으면 해당 경로 사용하고 이후 진행 안함  
+1. 아래 후보 경로 중 존재하는 첫 번째를 `PLUGIN_BASE_DIR`로 선택
+   - `/mnt/.local-plugins/cache/unicorn/dmap` (Cowork VM)
+   - `~/.claude/plugins/cache/unicorn/dmap` (Mac/Linux CLI)
+   - `%APPDATA%/Claude/plugins/cache/unicorn/dmap` (Windows CLI)
+2. `PLUGIN_BASE_DIR` 하위의 버전 디렉토리를 시맨틱 버전 비교하여 최신 버전 선택
+3. 해당 디렉토리의 절대 경로를 `{ABRA_PLUGIN_DIR}`에 바인딩
+4. 이후 모든 `{ABRA_PLUGIN_DIR}/...` 경로를 절대 경로로 치환하여 파일을 읽음
+5. 현재 프로젝트의 CLAUDE.md에 {ABRA_PLUGIN_DIR}을 기록하여 이후 중복 계산 안하게 함     
+
 ## 에이전트 호출 규칙
 
 ### 에이전트 FQN
@@ -29,8 +41,8 @@ DSL 구조 검증을 통과한 유효한 파일을 산출하며, 에러 발생 �
 
 ### 프롬프트 조립
 
-1. `agents/dsl-architect/` 에서 3파일 로드 (AGENT.md + agentcard.yaml + tools.yaml)
-2. `gateway/runtime-mapping.yaml` 참조하여 구체화:
+1. `{ABRA_PLUGIN_DIR}/agents/dsl-architect/` 에서 3파일 로드 (AGENT.md + agentcard.yaml + tools.yaml)
+2. `{ABRA_PLUGIN_DIR}/gateway/runtime-mapping.yaml` 참조하여 구체화:
    - **모델 구체화**: agentcard.yaml의 `tier: HIGH` → `tier_mapping`에서 `claude-opus-4-6` 결정
    - **툴 구체화**: tools.yaml의 추상 도구 → `tool_mapping`에서 실제 도구 결정
      - `file_read` → builtin `Read`
@@ -59,8 +71,8 @@ scenario.md 파일 존재 여부를 확인함.
 - **TASK**: 시나리오 문서를 기반으로 Dify Workflow DSL(YAML) 생성 및 사전 검증
 - **EXPECTED OUTCOME**: `validate_dsl` 검증을 통과한 유효한 DSL YAML 파일 + DSL 구조 설명서
 - **MUST DO**:
-  - `references/dsl-generation-prompt.md` 프롬프트 템플릿 활용
-  - `references/dify-workflow-dsl-guide.md` DSL 작성 가이드 준수
+  - `{ABRA_PLUGIN_DIR}/agents/dsl-architect/references/dsl-generation-prompt.md` 프롬프트 템플릿 활용
+  - `{ABRA_PLUGIN_DIR}/agents/dsl-architect/references/dify-workflow-dsl-guide.md` DSL 작성 가이드 준수
   - 생성 후 `{tool:dsl_validation}`으로 반드시 사전 검증
   - 노드 설계 (Start → LLM/Tool/IF-ELSE → End)
   - 엣지 연결 및 변수 흐름 정의
@@ -72,7 +84,7 @@ scenario.md 파일 존재 여부를 확인함.
 - **CONTEXT**:
   - 시나리오 파일: `output/scenario.md` (기본값)
   - 출력 위치: `output/{app-name}.dsl.yaml`
-  - references 경로: `agents/dsl-architect/references/`
+  - references 경로: `{ABRA_PLUGIN_DIR}/agents/dsl-architect/references/`
 
 ### Phase 2: DSL 검증 루프 (`ulw` 활용)
 
@@ -143,8 +155,8 @@ DSL 파일이 이미 존재하는 경우, 검증 단계(Phase 2)부터 재개 �
 | # | 규칙 |
 |---|------|
 | 1 | validate_dsl 검증을 반드시 통과해야 한다 |
-| 2 | references/dsl-generation-prompt.md 프롬프트 템플릿을 활용한다 |
-| 3 | references/dify-workflow-dsl-guide.md DSL 작성 가이드를 준수한다 |
+| 2 | {ABRA_PLUGIN_DIR}/agents/dsl-architect/references/dsl-generation-prompt.md 프롬프트 템플릿을 활용한다 |
+| 3 | {ABRA_PLUGIN_DIR}/agents/dsl-architect/references/dify-workflow-dsl-guide.md DSL 작성 가이드를 준수한다 |
 | 4 | 노드 설계, 엣지 연결, 변수 흐름을 모두 정의한다 |
 | 5 | DSL 구조 설명서를 출력한다 |
 

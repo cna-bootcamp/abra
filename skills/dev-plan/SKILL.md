@@ -19,6 +19,18 @@ type: orchestrator
 - 사용자가 `/abra:dev-plan` 호출 시
 - "개발계획서", "계획서 작성", "개발 계획" 키워드 감지 시
 
+## {ABRA_PLUGIN_DIR} 변수 해석
+오케스트레이터는 실행 시작 시 다음 순서로 `{ABRA_PLUGIN_DIR}`를 결정:
+0. 현재 프로젝트의 CLAUDE.md에 {ABRA_PLUGIN_DIR}변수가 있으면 해당 경로 사용하고 이후 진행 안함  
+1. 아래 후보 경로 중 존재하는 첫 번째를 `PLUGIN_BASE_DIR`로 선택
+   - `/mnt/.local-plugins/cache/unicorn/dmap` (Cowork VM)
+   - `~/.claude/plugins/cache/unicorn/dmap` (Mac/Linux CLI)
+   - `%APPDATA%/Claude/plugins/cache/unicorn/dmap` (Windows CLI)
+2. `PLUGIN_BASE_DIR` 하위의 버전 디렉토리를 시맨틱 버전 비교하여 최신 버전 선택
+3. 해당 디렉토리의 절대 경로를 `{ABRA_PLUGIN_DIR}`에 바인딩
+4. 이후 모든 `{ABRA_PLUGIN_DIR}/...` 경로를 절대 경로로 치환하여 파일을 읽음
+5. 현재 프로젝트의 CLAUDE.md에 {ABRA_PLUGIN_DIR}을 기록하여 이후 중복 계산 안하게 함     
+
 ## 에이전트 호출 규칙
 
 ### 에이전트 FQN
@@ -29,8 +41,8 @@ type: orchestrator
 
 ### 프롬프트 조립
 
-1. `agents/plan-writer/` 에서 3파일 로드 (AGENT.md + agentcard.yaml + tools.yaml)
-2. `gateway/runtime-mapping.yaml` 참조하여 구체화:
+1. `{ABRA_PLUGIN_DIR}/agents/plan-writer/` 에서 3파일 로드 (AGENT.md + agentcard.yaml + tools.yaml)
+2. `{ABRA_PLUGIN_DIR}/gateway/runtime-mapping.yaml` 참조하여 구체화:
    - **모델 구체화**: agentcard.yaml의 `tier: MEDIUM` → `tier_mapping`에서 `claude-sonnet-4-5` 모델 결정
    - **툴 구체화**: tools.yaml의 추상 도구 → `tool_mapping`에서 실제 도구 결정
      - `file_read` → builtin `Read`
@@ -90,13 +102,12 @@ AskUserQuestion으로 비기능요구사항을 수집함.
 1. **기술스택 선호**
    - 질문: "어떤 기술스택을 선호하시나요?"
    - 전체 옵션:
-     - "Option A: Dify 런타임 활용 (DSL을 Dify API로 배포)"
-     - "Option B: 코드 기반 전환 (Python + LangChain/LangGraph)"
-     - "Option C: 코드 기반 전환 (TypeScript + LangChain.js)"
-   - 기본값: "Option B"
+     - "Option A: 코드 기반 전환 (Python + LangChain/LangGraph)"
+     - "Option B: 코드 기반 전환 (TypeScript + LangChain.js)"
+   - 기본값: "Option A"
    - **allowed_options 적용**: ARGS에 `allowed_options`가 제공된 경우,
      해당 목록에 포함된 옵션만 사용자에게 표시함.
-     예: `allowed_options: [B, C]` → Option A(Dify) 제외, Option B/C만 표시
+     예: `allowed_options: [A, B]` → Option A/B만 표시
 
 2. **배포 환경**
    - 질문: "배포 환경은 무엇인가요?"
@@ -132,7 +143,6 @@ AskUserQuestion으로 비기능요구사항을 수집함.
 - **TASK**: 검증된 DSL과 시나리오를 기반으로 기술스택, 아키텍처, 모듈 설계, 테스트 전략, 배포 계획을 포함하는 개발계획서 작성
 - **EXPECTED OUTCOME**: 완성된 개발계획서 마크다운 파일 (`{project_dir}/dev-plan.md`)
 - **MUST DO**:
-  - `references/develop-plan-generate.md` 프롬프트 템플릿 활용
   - DSL 구조와 계획의 일관성 확보
   - Phase 1에서 수집한 비기능요구사항 반영
   - 9개 섹션(개요, 기술스택, 아키텍처, 모듈 설계, 프롬프트 최적화, API 설계서, 데이터 모델, 테스트 전략, 배포 계획) 모두 포함
@@ -247,8 +257,7 @@ review를 통해 최종 리뷰 포인트를 체계적으로 검증함.
 |---|------|
 | 1 | 개발계획서에 9개 섹션(개요, 기술스택, 아키텍처, 모듈 설계, 프롬프트 최적화, API 설계서, 데이터 모델, 테스트 전략, 배포 계획)을 모두 포함한다 |
 | 2 | Phase 1에서 수집한 비기능요구사항을 반드시 반영한다 |
-| 3 | references/develop-plan-generate.md 프롬프트 템플릿을 활용한다 |
-| 4 | DSL 구조와 개발계획서의 모듈 설계 일관성을 확보한다 |
+| 3 | DSL 구조와 개발계획서의 모듈 설계 일관성을 확보한다 |
 
 ## MUST NOT 규칙
 

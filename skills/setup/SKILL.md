@@ -21,6 +21,18 @@ Abra 플러그인의 초기 설정을 수행함:
 
 사용자가 `/abra:setup` 명령을 호출하거나 "초기 설정", "setup", "플러그인 설정" 키워드 감지 시.
 
+## {ABRA_PLUGIN_DIR} 변수 해석
+오케스트레이터는 실행 시작 시 다음 순서로 `{ABRA_PLUGIN_DIR}`를 결정:
+0. 현재 프로젝트의 CLAUDE.md에 {ABRA_PLUGIN_DIR}변수가 있으면 해당 경로 사용하고 이후 진행 안함  
+1. 아래 후보 경로 중 존재하는 첫 번째를 `PLUGIN_BASE_DIR`로 선택
+   - `/mnt/.local-plugins/cache/unicorn/dmap` (Cowork VM)
+   - `~/.claude/plugins/cache/unicorn/dmap` (Mac/Linux CLI)
+   - `%APPDATA%/Claude/plugins/cache/unicorn/dmap` (Windows CLI)
+2. `PLUGIN_BASE_DIR` 하위의 버전 디렉토리를 시맨틱 버전 비교하여 최신 버전 선택
+3. 해당 디렉토리의 절대 경로를 `{ABRA_PLUGIN_DIR}`에 바인딩
+4. 이후 모든 `{ABRA_PLUGIN_DIR}/...` 경로를 절대 경로로 치환하여 파일을 읽음
+5. 현재 프로젝트의 CLAUDE.md에 {ABRA_PLUGIN_DIR}을 기록하여 이후 중복 계산 안하게 함     
+
 ## 선행 조건
 
 `/abra:dify-setup` 완료 (Dify 실행 중)
@@ -29,7 +41,7 @@ Abra 플러그인의 초기 설정을 수행함:
 
 ### Step 1: install.yaml 로드 (`ulw` 활용)
 
-`gateway/install.yaml`을 읽어 설치 대상 파악.
+`{ABRA_PLUGIN_DIR}/gateway/install.yaml`을 읽어 설치 대상 파악.
 
 ### Step 2: Dify 접속 정보 수집 (`ulw` 활용)
 
@@ -63,9 +75,9 @@ source .venv/bin/activate && pip install -r requirements.txt
 
 ```bash
 # Windows
-gateway\.venv\Scripts\python gateway\tools\dify_cli.py list
+{ABRA_PLUGIN_DIR}\gateway\.venv\Scripts\python {ABRA_PLUGIN_DIR}\gateway\tools\dify_cli.py list
 # macOS/Linux
-gateway/.venv/bin/python gateway/tools/dify_cli.py list
+{ABRA_PLUGIN_DIR}/gateway/.venv/bin/python {ABRA_PLUGIN_DIR}/gateway/tools/dify_cli.py list
 ```
 
 Dify 연결 테스트 (앱 목록 조회 성공 여부 확인).

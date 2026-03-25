@@ -19,6 +19,18 @@ Docker 설치 확인 → Dify 소스 클론 → 환경 변수 파일 생성 → 
 
 사용자가 `/abra:dify-setup` 명령을 호출하거나 "Dify 설치", "Docker 실행", "Dify 환경" 키워드 감지 시.
 
+## {ABRA_PLUGIN_DIR} 변수 해석
+오케스트레이터는 실행 시작 시 다음 순서로 `{ABRA_PLUGIN_DIR}`를 결정:
+0. 현재 프로젝트의 CLAUDE.md에 {ABRA_PLUGIN_DIR}변수가 있으면 해당 경로 사용하고 이후 진행 안함  
+1. 아래 후보 경로 중 존재하는 첫 번째를 `PLUGIN_BASE_DIR`로 선택
+   - `/mnt/.local-plugins/cache/unicorn/dmap` (Cowork VM)
+   - `~/.claude/plugins/cache/unicorn/dmap` (Mac/Linux CLI)
+   - `%APPDATA%/Claude/plugins/cache/unicorn/dmap` (Windows CLI)
+2. `PLUGIN_BASE_DIR` 하위의 버전 디렉토리를 시맨틱 버전 비교하여 최신 버전 선택
+3. 해당 디렉토리의 절대 경로를 `{ABRA_PLUGIN_DIR}`에 바인딩
+4. 이후 모든 `{ABRA_PLUGIN_DIR}/...` 경로를 절대 경로로 치환하여 파일을 읽음
+5. 현재 프로젝트의 CLAUDE.md에 {ABRA_PLUGIN_DIR}을 기록하여 이후 중복 계산 안하게 함     
+
 ## 사전 요구사항
 
 | 항목 | 최소 사양 |
@@ -103,13 +115,83 @@ docker compose up -d
 Dify 관리자 계정 생성 안내:
 - 접속 URL: `http://localhost/install`
 - 브라우저에서 위 URL로 접속하여 관리자 계정 생성 필요
-- 계정 생성 후 `/abra:setup` 명령으로 플러그인 설정 진행
+- 계정 생성 완료 후 다음 단계(Step 7)로 진행
 
-### Step 7: 결과 보고
+### Step 7: Groq 모델 설정 (`ulw` 활용)
+
+관리자 계정 생성 완료 후, Groq 모델 프로바이더를 자동 설정한다.
+
+**7-1. Dify 로그인 정보 확인**
+
+`gateway/.env` 파일에서 `DIFY_EMAIL`, `DIFY_PASSWORD`를 읽는다.
+값이 없으면 AskUserQuestion으로 Dify 관리자 이메일과 비밀번호를 입력받아 `gateway/.env`에 저장한다.
+
+**7-2. Groq API Key 입력**
+
+AskUserQuestion으로 사용자에게 Groq API Key를 입력받는다:
+- 안내 메시지: "Groq API Key를 입력해주세요. (https://console.groq.com/keys 에서 발급 가능)"
+- 입력값이 `gsk_`로 시작하는지 기본 형식 검증
+- 사용자가 건너뛰기를 원하면 (빈 값 또는 "skip" 입력) Step 8로 이동
+
+**7-3. Dify Console API 로그인**
+
+`{ABRA_PLUGIN_DIR}/gateway/tools/dify_client.py`의 `DifyClient`를 사용하여 Dify Console API에 로그인한다.
+
+```python
+from config import DifyConfig
+from dify_client import DifyClient
+
+config = DifyConfig()
+client = DifyClient(config)
+# _ensure_authenticated()가 자동 호출됨
+```
+
+**로그인 실패 시:**
+- 에러 메시지 출력 후 Step 8로 이동 (수동 설정 안내)
+
+**7-4. Groq 플러그인 설치**
+
+Groq 마켓플레이스 플러그인이 설치되어 있는지 확인하고, 없으면 설치한다:
+
+```python
+# 설치된 플러그인 목록 조회
+plugins = await client.list_plugins()
+
+# Groq 플러그인이 없으면 설치
+if not any("groq" in p.get("plugin_id", "") for p in plugins.get("plugins", [])):
+    await client.install_marketplace_plugin([
+        "langgenius/groq:0.0.12@38f75b2fd3d5dded2a0fe236dbcfe38a56d1028cc tried2d1cf7ea0e18ba1f4e40"
+    ])
+```
+
+> **참고**: 플러그인 identifier의 해시값은 Dify 버전에 따라 다를 수 있다.
+> 설치 실패 시 "Settings > Model Providers에서 Groq 플러그인을 수동 설치해주세요" 안내 후 계속 진행.
+
+**7-5. Groq Credentials 검증 및 저장**
+
+```python
+credentials = {"api_key": "{사용자_입력_API_KEY}"}
+
+# 1) credentials 검증
+await client.validate_provider_credentials("langgenius/groq/groq", credentials)
+
+# 2) 검증 성공 시 저장
+await client.save_provider_credentials("langgenius/groq/groq", credentials)
+```
+
+**검증 실패 시:**
+- "Groq API Key가 유효하지 않습니다. 키를 확인 후 Settings > Model Providers에서 수동 설정해주세요" 안내
+- Step 8로 이동
+
+**검증 성공 시:**
+- "Groq 모델 프로바이더 설정 완료" 메시지 출력
+
+### Step 8: 결과 보고
 
 설치 결과 요약:
 - 컨테이너 상태 (실행 중인 서비스 목록)
-- Dify 접속 URL (`http://localhost/install`)
+- Dify 접속 URL (`http://localhost`)
+- Groq 모델 설정 상태 (성공/건너뜀/실패)
 - 다음 단계 안내: `/abra:setup` 명령으로 플러그인 초기 설정
 
 **출력 형식:**
@@ -121,12 +203,12 @@ Dify 관리자 계정 생성 안내:
 - {서비스명2}: Running
 ...
 
-🌐 Dify 접속 URL: http://localhost/install
+🤖 Groq 모델 설정: {완료 ✅ / 건너뜀 ⏭️ / 실패 ❌}
+
+🌐 Dify 접속 URL: http://localhost
 
 📌 다음 단계:
-1. 브라우저에서 http://localhost/install 접속
-2. 관리자 계정 생성 (이메일, 비밀번호 설정)
-3. /abra:setup 명령으로 플러그인 초기 설정 진행
+1. /abra:setup 명령으로 플러그인 초기 설정 진행
 
 🔑 비밀번호 초기화:
 cd {설치_위치}/docker && docker compose exec api flask reset-password
@@ -134,7 +216,8 @@ cd {설치_위치}/docker && docker compose exec api flask reset-password
 
 ## 사용자 상호작용
 
-AskUserQuestion으로 Dify 설치 위치 확인 (Step 2).
+- AskUserQuestion으로 Dify 설치 위치 확인 (Step 2)
+- AskUserQuestion으로 Groq API Key 입력받기 (Step 7-2, 건너뛰기 가능)
 
 ## 문제 해결
 
@@ -144,6 +227,9 @@ AskUserQuestion으로 Dify 설치 위치 확인 (Step 2).
 | 포트 충돌 (80, 443) | 다른 서비스가 포트 사용 중 | 기존 서비스 중지 또는 Dify 포트 변경 안내 |
 | 컨테이너 시작 실패 | 메모리 부족, 설정 오류 | `docker compose logs` 확인 안내 |
 | 헬스체크 실패 | 컨테이너 부팅 지연 | 60초 대기 후 재시도 안내 |
+| Dify 로그인 실패 | 이메일/비밀번호 불일치 | gateway/.env 확인 또는 비밀번호 초기화 명령 안내 |
+| Groq 플러그인 설치 실패 | 네트워크 또는 Dify 버전 이슈 | Settings > Model Providers에서 수동 설치 안내 |
+| Groq API Key 검증 실패 | 잘못된 API Key | https://console.groq.com/keys 에서 키 재발급 안내 |
 
 ## 스킬 부스팅
 
@@ -151,7 +237,7 @@ AskUserQuestion으로 Dify 설치 위치 확인 (Step 2).
 
 | 단계 | OMC 스킬 | 목적 |
 |------|----------|------|
-| Step 1~6 | `ulw` 매직 키워드 | 각 단계의 완료 보장 |
+| Step 1~7 | `ulw` 매직 키워드 | 각 단계의 완료 보장 |
 
 ## MUST 규칙
 
@@ -178,3 +264,6 @@ AskUserQuestion으로 Dify 설치 위치 확인 (Step 2).
 - [ ] Docker Compose 컨테이너가 정상 실행 중인가
 - [ ] 헬스체크(HTTP)가 통과했는가
 - [ ] 초기 설정 URL이 안내되었는가
+- [ ] Groq API Key가 입력되었는가 (건너뛰기 허용)
+- [ ] Groq 플러그인이 설치되었는가
+- [ ] Groq credentials가 검증 및 저장되었는가

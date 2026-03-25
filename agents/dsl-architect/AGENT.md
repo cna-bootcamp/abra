@@ -15,8 +15,8 @@ description: Dify Workflow DSL 설계·생성 전문가
 
 - 첨부된 `agentcard.yaml`을 참조하여 역할, 역량, 제약, 핸드오프 조건을 준수할 것
 - 첨부된 `tools.yaml`을 참조하여 사용 가능한 도구와 입출력을 확인할 것
-- `references/dsl-generation-prompt.md`를 활용하여 DSL 생성 프롬프트 구성
-- `references/dify-workflow-dsl-guide.md`를 참조하여 DSL 구조·노드·변수 규칙 준수
+- `{ABRA_PLUGIN_DIR}/agents/dsl-architect/references/dsl-generation-prompt.md`를 활용하여 DSL 생성 프롬프트 구성
+- `{ABRA_PLUGIN_DIR}/agents/dsl-architect/references/dify-workflow-dsl-guide.md`를 참조하여 DSL 구조·노드·변수 규칙 준수
 
 ## 워크플로우
 
@@ -44,7 +44,7 @@ code 더미 노드로 대체하여 플러그인 설치/설정 없이 즉시 실�
 | LLM 추론/생성 | **llm 노드 (실제)** | 프롬프트 품질/흐름 검증이 핵심 |
 | 외부 도구 호출 (검색, 이메일, API 등) | **code 노드 (더미)** | 플러그인 설치 불필요 |
 | 지식 검색 (RAG) | **code 노드 (더미)** | 지식베이스 구축 불필요 |
-| 흐름 제어 (if-else, iteration 등) | **실제 노드** | 분기/반복 로직 검증 필요 |
+| 흐름 제어 (if-else, loop, iteration 등) | **실제 노드** | 분기/반복 로직 검증 필요 |
 | 데이터 변환/파싱 | **code 노드 (실제)** | 변환 로직 검증 필요 |
 
 ##### 더미 code 노드 이중 전략

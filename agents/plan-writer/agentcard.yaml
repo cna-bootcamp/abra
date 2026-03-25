@@ -17,7 +17,6 @@ capabilities:
   role: |
     검증된 DSL과 시나리오를 기반으로 개발계획서를 작성.
     기술스택, 아키텍처, 모듈 설계, 테스트 전략, 배포 계획 등 포괄적 계획 수립.
-    develop-plan-generate.md 프롬프트 템플릿을 활용.
 
   # 정체성 — 무엇이다 / 무엇이 아니다
   identity:

@@ -16,7 +16,7 @@
 | 도구명 | create_repo |
 | 카테고리 | 커스텀 앱 |
 | 설명 | GitHub REST API 기반 원격 저장소 생성 및 초기 푸시 (gh CLI 불요) |
-| 소스 경로 | `resources/tools/customs/git/create_repo.py` |
+| 소스 경로 | `{ABRA_PLUGIN_DIR}/resources/tools/customs/git/create_repo.py` |
 
 [Top](#create_repo)
 
@@ -28,7 +28,7 @@
 |------|---|
 | 설치 방법 | 소스 파일 포함 (별도 설치 불요) |
 | 의존성 설치 | 없음 (Python 표준 라이브러리만 사용) |
-| 검증 명령 | `python resources/tools/customs/git/create_repo.py --help` |
+| 검증 명령 | `python {ABRA_PLUGIN_DIR}/resources/tools/customs/git/create_repo.py --help` |
 | 필수 여부 | 선택 |
 
 **사전 요구사항:**

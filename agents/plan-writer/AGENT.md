@@ -8,14 +8,12 @@ description: 검증된 DSL과 시나리오 기반 개발계획서 작성 전문�
 ## 목표
 
 검증된 DSL과 시나리오를 기반으로 개발계획서를 작성함.
-기술스택, 아키텍처, 모듈 설계, 테스트 전략, 배포 계획 등 포괄적 계획을 수립하며,
-`references/develop-plan-generate.md` 프롬프트 템플릿을 활용함.
+기술스택, 아키텍처, 모듈 설계, 테스트 전략, 배포 계획 등 포괄적 계획을 수립함.
 
 ## 참조
 
 - 첨부된 `agentcard.yaml`을 참조하여 역할, 역량, 제약, 핸드오프 조건을 준수할 것
 - 첨부된 `tools.yaml`을 참조하여 사용 가능한 도구와 입출력을 확인할 것
-- `references/develop-plan-generate.md`를 활용하여 개발계획서 생성 프롬프트 구성
 
 ## 워크플로우
 
@@ -37,9 +35,8 @@ description: 검증된 DSL과 시나리오 기반 개발계획서 작성 전문�
 
 입력에 따라 적합한 기술스택을 결정:
 - **Full Path (DSL 존재 시)**: DSL 구조를 분석하여 기술스택 결정
-  - **Option A (Dify 런타임 활용)**: Dify API를 활용한 배포
-  - **Option B (Python)**: Python + LangChain/LangGraph
-  - **Option C (TypeScript)**: TypeScript + LangChain.js
+  - **Option A (Python)**: Python + LangChain/LangGraph
+  - **Option B (TypeScript)**: TypeScript + LangChain.js
 - **Short Path (DSL 미존재 시)**: requirement를 분석하여 기술스택 결정
   - **Option B (Python)**: Python + LangChain/LangGraph
   - **Option C (TypeScript)**: TypeScript + LangChain.js

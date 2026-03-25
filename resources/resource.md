@@ -20,4 +20,4 @@
 
 | 도구명 | 소스 경로 | 의존성 |
 |--------|----------|--------|
-| create_repo | `resources/tools/customs/git/create_repo.py` | 없음 (Python 표준 라이브러리만 사용) |
+| create_repo | `{ABRA_PLUGIN_DIR}/resources/tools/customs/git/create_repo.py` | 없음 (Python 표준 라이브러리만 사용) |

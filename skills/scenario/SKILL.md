@@ -22,6 +22,18 @@ STEP 1: 시나리오 생성 및 선택 단계를 담당.
 
 또는 `/abra:scenario` 명령 호출 시.
 
+## {ABRA_PLUGIN_DIR} 변수 해석
+오케스트레이터는 실행 시작 시 다음 순서로 `{ABRA_PLUGIN_DIR}`를 결정:
+0. 현재 프로젝트의 CLAUDE.md에 {ABRA_PLUGIN_DIR}변수가 있으면 해당 경로 사용하고 이후 진행 안함  
+1. 아래 후보 경로 중 존재하는 첫 번째를 `PLUGIN_BASE_DIR`로 선택
+   - `/mnt/.local-plugins/cache/unicorn/dmap` (Cowork VM)
+   - `~/.claude/plugins/cache/unicorn/dmap` (Mac/Linux CLI)
+   - `%APPDATA%/Claude/plugins/cache/unicorn/dmap` (Windows CLI)
+2. `PLUGIN_BASE_DIR` 하위의 버전 디렉토리를 시맨틱 버전 비교하여 최신 버전 선택
+3. 해당 디렉토리의 절대 경로를 `{ABRA_PLUGIN_DIR}`에 바인딩
+4. 이후 모든 `{ABRA_PLUGIN_DIR}/...` 경로를 절대 경로로 치환하여 파일을 읽음
+5. 현재 프로젝트의 CLAUDE.md에 {ABRA_PLUGIN_DIR}을 기록하여 이후 중복 계산 안하게 함     
+
 ## 에이전트 호출 규칙
 
 ### 에이전트 FQN
@@ -32,8 +44,8 @@ STEP 1: 시나리오 생성 및 선택 단계를 담당.
 
 ### 프롬프트 조립
 
-1. `agents/scenario-analyst/` 에서 3파일 로드 (AGENT.md + agentcard.yaml + tools.yaml)
-2. `gateway/runtime-mapping.yaml` 참조하여 구체화:
+1. `{ABRA_PLUGIN_DIR}/agents/scenario-analyst/` 에서 3파일 로드 (AGENT.md + agentcard.yaml + tools.yaml)
+2. `{ABRA_PLUGIN_DIR}/gateway/runtime-mapping.yaml` 참조하여 구체화:
    - **모델 구체화**: agentcard.yaml의 `tier: MEDIUM` → `tier_mapping`에서 `claude-sonnet-4-5` 결정
    - **툴 구체화**: tools.yaml의 추상 도구 → `tool_mapping`에서 실제 도구 결정
      - `file_read` → builtin `Read` 도구
@@ -113,7 +125,7 @@ scenario-analyst 에이전트에 위임:
 
 - **TASK**: 서비스 목적을 기반으로 N개의 요구사항 시나리오 자동 생성. 각 시나리오는 서로 다른 관점(업무자동화, 고객경험, 비용절감, 의사결정 지원, 협업효율화)으로 작성
 - **EXPECTED OUTCOME**: 각 시나리오에 8개 섹션(서비스개요, 사용자시나리오, 에이전트역할, 워크플로우설계, 외부도구, AI지시사항, 품질요구사항, 검증시나리오) 포함 + 버전 간 비교표 포함한 마크다운 문서
-- **MUST DO**: `references/requirement-generater.md` 프롬프트 템플릿 활용, 다양한 관점(업무자동화, 고객경험, 비용절감, 의사결정, 협업효율화) 반영, 비즈니스 용어 사용(기술 용어 최소화), 각 시나리오 차별화(서비스명, 우선순위, 품질 지표), 사용자 제공 외부 기능 요구사항을 시나리오에 우선 반영, 각 기능에 대해 구현 방식은 명시하지 않고 기능 수준으로만 기술
+- **MUST DO**: `{ABRA_PLUGIN_DIR}/agents/scenario-analyst/references/requirement-generater.md` 프롬프트 템플릿 활용, 다양한 관점(업무자동화, 고객경험, 비용절감, 의사결정, 협업효율화) 반영, 비즈니스 용어 사용(기술 용어 최소화), 각 시나리오 차별화(서비스명, 우선순위, 품질 지표), 사용자 제공 외부 기능 요구사항을 시나리오에 우선 반영, 각 기능에 대해 구현 방식은 명시하지 않고 기능 수준으로만 기술
 - **MUST NOT DO**: 사용자에게 직접 질문 금지, 시나리오 선택 금지, DSL 생성 금지
 - **CONTEXT**: 서비스 목적: `{service_purpose}`, 생성 갯수: `{count}`, 출력 디렉토리: `{project_dir}`, 외부 기능 요구사항: `{external_capabilities}`, 도메인 컨텍스트: `{domain_context}` (사전 제공 시), 요구사항: `{requirement}` (사전 제공 시), 참고 자료: `{references}` (사전 제공 시)
 
@@ -189,7 +201,7 @@ scenario.md 파일이 이미 존재하는 경우, 사용자에게 재사용 여�
 
 | # | 규칙 |
 |---|------|
-| 1 | references/requirement-generater.md 프롬프트 템플릿을 활용한다 |
+| 1 | {ABRA_PLUGIN_DIR}/agents/scenario-analyst/references/requirement-generater.md 프롬프트 템플릿을 활용한다 |
 | 2 | N개 시나리오 모두 8개 섹션(서비스개요, 사용자시나리오, 에이전트역할, 워크플로우설계, 외부도구, AI지시사항, 품질요구사항, 검증시나리오)을 포함한다 |
 | 3 | 다양한 관점(업무자동화, 고객경험, 비용절감, 의사결정, 협업효율화)을 반영한다 |
 | 4 | 버전 간 비교표를 포함한다 |

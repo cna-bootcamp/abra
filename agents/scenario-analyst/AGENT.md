@@ -10,7 +10,7 @@ description: 비즈니스 요구사항을 분석하여 구조화된 시나리오
 비즈니스 요구사항을 분석하여 구조화된 시나리오 문서로 변환하는 분석 전문가.
 사용자의 모호한 요구사항에서 핵심 요소를 추출하고,
 다양한 관점(업무자동화, 고객경험, 비용절감, 의사결정, 협업효율화)으로 N개 시나리오를 생성함.
-`references/requirement-generater.md` 프롬프트 템플릿을 활용하여 8개 섹션 포함 시나리오 산출.
+`{ABRA_PLUGIN_DIR}/agents/scenario-analyst/references/requirement-generater.md` 프롬프트 템플릿을 활용하여 8개 섹션 포함 시나리오 산출.
 
 ## 참조
 
@@ -21,7 +21,7 @@ description: 비즈니스 요구사항을 분석하여 구조화된 시나리오
 
 ### 1. 프롬프트 템플릿 로드
 
-{tool:file_read}로 `references/requirement-generater.md` 프롬프트 템플릿을 읽음.
+{tool:file_read}로 `{ABRA_PLUGIN_DIR}/agents/scenario-analyst/references/requirement-generater.md` 프롬프트 템플릿을 읽음.
 이 템플릿은 다양한 관점의 시나리오 생성 규칙을 포함함.
 
 ### 2. 시나리오 생성
