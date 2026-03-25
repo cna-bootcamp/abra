@@ -19,17 +19,8 @@ DSL을 Dify에 Import → Publish → Run → Export하여 프로토타이핑을
 다음 키워드 감지 시 또는 `/abra:prototype` 호출 시:
 - "프로토타이핑", "프로토타입", "Dify 업로드", "Dify 실행", "Dify 테스트"
 
-## {ABRA_PLUGIN_DIR} 변수 해석
-오케스트레이터는 실행 시작 시 다음 순서로 `{ABRA_PLUGIN_DIR}`를 결정:
-0. 현재 프로젝트의 CLAUDE.md에 {ABRA_PLUGIN_DIR}변수가 있으면 해당 경로 사용하고 이후 진행 안함  
-1. 아래 후보 경로 중 존재하는 첫 번째를 `PLUGIN_BASE_DIR`로 선택
-   - `/mnt/.local-plugins/cache/unicorn/dmap` (Cowork VM)
-   - `~/.claude/plugins/cache/unicorn/dmap` (Mac/Linux CLI)
-   - `%APPDATA%/Claude/plugins/cache/unicorn/dmap` (Windows CLI)
-2. `PLUGIN_BASE_DIR` 하위의 버전 디렉토리를 시맨틱 버전 비교하여 최신 버전 선택
-3. 해당 디렉토리의 절대 경로를 `{ABRA_PLUGIN_DIR}`에 바인딩
-4. 이후 모든 `{ABRA_PLUGIN_DIR}/...` 경로를 절대 경로로 치환하여 파일을 읽음
-5. 현재 프로젝트의 CLAUDE.md에 {ABRA_PLUGIN_DIR}을 기록하여 이후 중복 계산 안하게 함     
+## {ABRA_PLUGIN_DIR} 변수 셋팅  
+`./resources/guides/set-plugin-dir.md` 또는 `**/resources/guides/set-plugin-dir.md` 파일 참조하여 `{ABRA_PLUGIN_DIR}`변수 셋팅
 
 ## 에이전트 호출 규칙
 

@@ -154,6 +154,70 @@ class DifyClient:
         """워크플로우 버전 목록"""
         return await self._request("GET", f"/apps/{app_id}/workflows", params={"page": page, "limit": limit})
 
+    # ========== Plugin Management ==========
+
+    async def install_marketplace_plugin(self, plugin_unique_identifiers: list[str]) -> dict:
+        """마켓플레이스 플러그인 설치"""
+        return await self._request(
+            "POST",
+            "/workspaces/current/plugin/install/marketplace",
+            json={"plugin_unique_identifiers": plugin_unique_identifiers},
+        )
+
+    async def list_plugins(self) -> dict:
+        """설치된 플러그인 목록 조회"""
+        return await self._request("GET", "/workspaces/current/plugin/list")
+
+    # ========== Model Provider Management ==========
+
+    async def list_model_providers(self) -> dict:
+        """모델 프로바이더 목록 조회"""
+        return await self._request("GET", "/workspaces/current/model-providers")
+
+    async def validate_provider_credentials(self, provider: str, credentials: dict[str, str]) -> dict:
+        """모델 프로바이더 credentials 유효성 검증
+
+        Args:
+            provider: 프로바이더 경로 (예: langgenius/groq/groq)
+            credentials: 인증 정보 (예: {"api_key": "gsk_xxx"})
+        """
+        return await self._request(
+            "POST",
+            f"/workspaces/current/model-providers/{provider}/credentials/validate",
+            json={"credentials": credentials},
+        )
+
+    async def save_provider_credentials(self, provider: str, credentials: dict[str, str], name: str | None = None) -> dict:
+        """모델 프로바이더 credentials 저장
+
+        Args:
+            provider: 프로바이더 경로 (예: langgenius/groq/groq)
+            credentials: 인증 정보 (예: {"api_key": "gsk_xxx"})
+            name: credentials 이름 (기본값: provider 이름)
+        """
+        body: dict[str, Any] = {"credentials": credentials}
+        if name:
+            body["name"] = name
+        return await self._request(
+            "POST",
+            f"/workspaces/current/model-providers/{provider}/credentials",
+            json=body,
+        )
+
+    async def get_provider_credentials(self, provider: str) -> dict:
+        """모델 프로바이더 credentials 조회"""
+        return await self._request(
+            "GET",
+            f"/workspaces/current/model-providers/{provider}/credentials",
+        )
+
+    async def delete_provider_credentials(self, provider: str) -> dict:
+        """모델 프로바이더 credentials 삭제"""
+        return await self._request(
+            "DELETE",
+            f"/workspaces/current/model-providers/{provider}/credentials",
+        )
+
     async def close(self):
         """HTTP 클라이언트 종료"""
         if self._client:

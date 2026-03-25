@@ -37,11 +37,13 @@ DSL(YAML) 파일을 생성합니다.
 
 **서비스 유형 → app.mode 매핑:**
 
-| 서비스 유형 | app.mode |
-|-------------|----------|
-| Workflow | workflow |
-| Chatflow | advanced-chat |
-| Agent | advanced-chat (agent 노드 활용) |
+| 서비스 유형 | app.mode | 비고 |
+|-------------|----------|------|
+| Workflow | workflow | **기본값** — 단일 턴, End 노드로 결과 반환 |
+| Chatflow | advanced-chat | 다중 턴 대화형 |
+| Agent | advanced-chat | agent 노드 활용 |
+
+> **기본 앱 유형은 `workflow`**. 요구사항에 명시된 경우에만 다른 유형 사용.
 
 ## STEP 2: 추가 기술 설정 확인 (대화형)
 
@@ -62,10 +64,10 @@ DSL(YAML) 파일을 생성합니다.
 > 워크플로우에서 텍스트 분석, 분류, 생성 등을 처리할 AI 엔진을 선택합니다.
 > 제공자마다 성능, 비용, 지원 언어가 다르므로 서비스 목적에 맞는 제공자를 선택해 주세요.
 >
-> 1. OpenAI - GPT-4o, GPT-4o-mini 등 (기본값)
-> 2. Anthropic - Claude Sonnet 4, Claude Haiku 4 등
-> 3. Google - Gemini 2.0 Flash, Gemini 2.0 Flash Lite 등
-> 4. Groq - Llama 3.1 70B, Llama 3.1 8B 등
+> 1. Groq - Llama 3.1 70B, Llama 3.1 8B 등 **(기본값)**
+> 2. OpenAI - GPT-4o, GPT-4o-mini 등
+> 3. Anthropic - Claude Sonnet 4, Claude Haiku 4 등
+> 4. Google - Gemini 2.0 Flash, Gemini 2.0 Flash Lite 등
 > 5. 직접 입력: ___
 > 0. 취소 - DSL 생성을 중단합니다
 
@@ -97,9 +99,9 @@ DSL(YAML) 파일을 생성합니다.
 > 3. 직접 입력: ___
 > 0. 취소 - DSL 생성을 중단합니다
 
-> [Groq 선택 시]
-> 1. Llama 3.1 70B - 고성능, 오픈소스 대형 모델 (기본값)
-> 2. Llama 3.1 8B - 경량, 오픈소스 소형 모델
+> [Groq 선택 시] **(기본 제공자)**
+> 1. llama-3.1-70b-versatile - 고성능, 오픈소스 대형 모델 **(기본값)**
+> 2. llama-3.1-8b-instant - 경량, 빠른 응답, 비용 절감
 > 3. 직접 입력: ___
 > 0. 취소 - DSL 생성을 중단합니다
 
@@ -305,7 +307,8 @@ def main(city: str, mock_preset: str, mock_override: str) -> dict:
 | tool | provider_id, tool_name, tool_parameters |
 | template | template, variables |
 | iteration | iterator_selector, output_selector |
-| loop | loop_variables, break_condition, max_iterations |
+| loop | loop_count, break_conditions[], loop_variables[], start_node_id, logical_operator |
+| loop-start | data.isInLoop:true 필수, **node.type: custom-loop-start** (custom 아님!), draggable/selectable:false, zIndex:1002, w:44 h:48 |
 | variable-aggregator | variables, output_type |
 | document-extractor | variable_selector |
 | parameter-extractor | extraction_parameters, model, query_variable_selector |

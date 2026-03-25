@@ -36,8 +36,6 @@ Abra 플러그인의 사용 가능한 명령, 자동 라우팅 규칙, 주요 �
 | `/abra:prototype` | Dify 프로토타이핑 자동화 |
 | `/abra:dev-plan` | 개발계획서 작성 |
 | `/abra:develop` | AI Agent 개발 및 배포 |
-| `/abra:add-ext-skill` | 외부호출 스킬(ext-{대상플러그인}) 추가 |
-| `/abra:remove-ext-skill` | 외부호출 스킬(ext-{대상플러그인}) 제거 |
 | `/abra:help` | 본 사용 안내 |
 
 **자동 라우팅:**

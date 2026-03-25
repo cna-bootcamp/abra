@@ -20,17 +20,8 @@ DSL 구조를 참조하여 LangChain/LangGraph 등으로 코드 구현하며,
 - "코드 개발해줘", "Agent 구현", "구현해줘" 키워드 감지 시
 - 사용자가 `/abra:develop` 명령 호출 시
 
-## {ABRA_PLUGIN_DIR} 변수 해석
-오케스트레이터는 실행 시작 시 다음 순서로 `{ABRA_PLUGIN_DIR}`를 결정:
-0. 현재 프로젝트의 CLAUDE.md에 {ABRA_PLUGIN_DIR}변수가 있으면 해당 경로 사용하고 이후 진행 안함  
-1. 아래 후보 경로 중 존재하는 첫 번째를 `PLUGIN_BASE_DIR`로 선택
-   - `/mnt/.local-plugins/cache/unicorn/dmap` (Cowork VM)
-   - `~/.claude/plugins/cache/unicorn/dmap` (Mac/Linux CLI)
-   - `%APPDATA%/Claude/plugins/cache/unicorn/dmap` (Windows CLI)
-2. `PLUGIN_BASE_DIR` 하위의 버전 디렉토리를 시맨틱 버전 비교하여 최신 버전 선택
-3. 해당 디렉토리의 절대 경로를 `{ABRA_PLUGIN_DIR}`에 바인딩
-4. 이후 모든 `{ABRA_PLUGIN_DIR}/...` 경로를 절대 경로로 치환하여 파일을 읽음
-5. 현재 프로젝트의 CLAUDE.md에 {ABRA_PLUGIN_DIR}을 기록하여 이후 중복 계산 안하게 함     
+## {ABRA_PLUGIN_DIR} 변수 셋팅  
+`./resources/guides/set-plugin-dir.md` 또는 `**/resources/guides/set-plugin-dir.md` 파일 참조하여 `{ABRA_PLUGIN_DIR}`변수 셋팅 
 
 ## 에이전트 호출 규칙
 
@@ -78,6 +69,7 @@ DSL 구조를 참조하여 LangChain/LangGraph 등으로 코드 구현하며,
   - `{ABRA_PLUGIN_DIR}/agents/agent-developer/references/develop.md` 프롬프트 템플릿 활용
   - 개발계획서의 기술스택·아키텍처·모듈 설계 준수
   - DSL 구조를 참조하여 노드별 모듈 구현 (LLM 호출, 도구 연동, 조건 분기, 상태 관리)
+  - 개발계획서에 정의된 모든 디렉토리·모듈을 빠짐없이 구현 (Mock과 Real 모두 포함)
   - 에러 핸들링 및 보안 요구사항 구현
   - 테스트 코드 작성 (단위·통합 테스트)
   - README.md 작성 (아키텍처 다이어그램, 디렉토리 구조, 실행 방법)
@@ -165,6 +157,7 @@ DSL 구조를 참조하여 LangChain/LangGraph 등으로 코드 구현하며,
 | 2 | 빌드 성공 및 테스트 통과를 확인한다 |
 | 3 | README.md를 작성한다 (아키텍처, 디렉토리 구조, 실행 방법 포함) |
 | 4 | {ABRA_PLUGIN_DIR}/agents/agent-developer/references/develop.md 프롬프트 템플릿을 활용한다 |
+| 5 | 개발계획서에 정의된 모든 디렉토리·모듈을 빠짐없이 구현한다 (Mock과 Real 모두 포함, 외부 API 미확보 시 stub 구현) |
 
 ## MUST NOT 규칙
 
@@ -181,3 +174,5 @@ DSL 구조를 참조하여 LangChain/LangGraph 등으로 코드 구현하며,
 - [ ] README.md가 작성되었는가
 - [ ] 개발계획서의 기술스택/아키텍처와 구현이 일치하는가
 - [ ] 산출물 목록이 보고되었는가
+- [ ] 개발계획서의 디렉토리 구조와 실제 생성 파일이 1:1 대응하는가
+- [ ] Mock 전용이 아닌 Real API 모듈도 구현되었는가 (stub 포함)

@@ -127,16 +127,18 @@ app:
 
 ```yaml
 dependencies:
+# 기본값: Groq 플러그인
 - current_identifier: null
   type: marketplace
   value:
-    marketplace_plugin_unique_identifier: langgenius/openai:0.2.8@aae2be09...
+    marketplace_plugin_unique_identifier: langgenius/groq:0.0.12@38f75b2f...  # Groq (기본값)
     version: null
-- current_identifier: null
-  type: marketplace
-  value:
-    marketplace_plugin_unique_identifier: langgenius/groq:0.0.12@38f75b2f...
-    version: null
+# OpenAI 사용 시:
+# - current_identifier: null
+#   type: marketplace
+#   value:
+#     marketplace_plugin_unique_identifier: langgenius/openai:0.2.8@aae2be09...
+#     version: null
 ```
 
 > 플러그인을 사용하지 않는 경우 빈 배열 `[]`로 설정 가능
@@ -609,8 +611,8 @@ Workflow에서 User Input 대신 사용할 수 있는 자동 실행 시작 노�
         max_tokens: 2048         # 최대 토큰
         temperature: 0.1         # 0=결정론적, 1=창의적
       mode: chat                 # chat 또는 completion
-      name: gpt-4o               # 모델명
-      provider: langgenius/openai/openai  # 프로바이더 경로
+      name: llama-3.1-70b-versatile  # 모델명 (기본값: Groq llama-3.1-70b-versatile)
+      provider: langgenius/groq/groq  # 프로바이더 경로 (기본값: Groq)
     prompt_template:
     - id: system-prompt
       role: system               # system, user, assistant
@@ -1185,23 +1187,152 @@ Workflow의 최종 출력 정의:
 
 ### 5.14 loop (루프 노드)
 
-반복적으로 결과를 개선하는 루프:
+반복적으로 결과를 개선하는 루프 (조건 기반 while-loop).
+
+> ⚠️ **Dify 1.12.1 검증 완료 — 아래 포맷을 정확히 따를 것**
+
+#### loop 노드 (컨테이너)
 
 ```yaml
 - data:
-    desc: '품질 점수가 0.9 이상이 될 때까지 반복'
-    loop_variables:                 # 루프 변수 (주기 간 상태 유지)
-    - name: quality_score
+    break_conditions:               # 조기 종료 조건 배열 (없으면 [] 빈 배열)
+    - comparison_operator: ≥        # 비교 연산자: ≥, ≤, >, <, =, ≠  (Unicode 사용)
+      value: '90'                   # 비교값 (문자열)
+      variable_selector:            # 비교 대상 변수 (루프 내부 노드 ID 사용)
+      - '노드ID'
+      - output_key
+    logical_operator: and           # 복수 조건 연산: and | or
+    loop_count: 5                   # 최대 반복 횟수 (필수)
+    loop_variables:                 # 루프 변수 (반복 간 상태 유지)
+    - label: 품질 점수
+      name: quality_score
       type: number
-      value: 0
-    - name: draft
+      value: 0                      # 초기값
+      value_type: constant          # 반드시 constant (variable 사용 불가)
+      var_type: number
+    - label: 초안
+      name: draft
       type: string
       value: ''
-    break_condition: 'quality_score > 0.9'  # 종료 조건
-    max_iterations: 10              # 안전 제한
+      value_type: constant
+      var_type: string
+    start_node_id: loop-1-start     # loop-start 노드 ID
     title: 품질 개선 루프
     type: loop
-  id: '6'
+  height: 400
+  id: loop-1
+  position:
+    x: 400
+    y: 200
+  positionAbsolute:
+    x: 400
+    y: 200
+  selected: false
+  sourcePosition: right             # 필수
+  targetPosition: left              # 필수
+  type: custom
+  width: 900
+  zIndex: 1                         # 필수
+```
+
+#### loop-start 노드 (루프 내부 — 필수 포함)
+
+> ⚠️ **가장 중요한 규칙**: 외부 타입을 `type: custom-loop-start`로 설정해야 함.
+> `type: custom`으로 설정하면 Dify 프론트엔드가 React #130 에러로 크래시됨.
+
+```yaml
+- data:
+    desc: ''
+    isInLoop: true                  # 필수
+    selected: false
+    title: 루프 시작                 # 빈 문자열 불가, 반드시 값 있어야 함
+    type: loop-start
+  draggable: false                  # 필수
+  height: 48                        # 고정값 (변경 금지)
+  id: loop-1-start                  # 관례: {loop-id}-start 또는 {loop-id}start
+  parentId: loop-1                  # 루프 노드 ID와 일치
+  position:
+    x: 24                           # 루프 컨테이너 기준 상대 좌표
+    y: 68
+  positionAbsolute:
+    x: 424                          # loop.position.x + position.x
+    y: 268                          # loop.position.y + position.y
+  selectable: false                 # 필수
+  selected: false
+  sourcePosition: right
+  targetPosition: left
+  type: custom-loop-start           # ← 반드시 custom-loop-start (custom 아님!)
+  width: 44                         # 고정값 (변경 금지)
+  zIndex: 1002                      # 필수
+```
+
+#### loop-end 노드
+
+> ✅ **DSL에 포함하지 않는다.** Dify가 자동으로 처리한다.
+> loop-end를 명시적으로 추가하면 렌더링 문제가 발생할 수 있다.
+
+#### 루프 내부 노드
+
+- `parentId: loop-1` 필수
+- `positionAbsolute` = loop의 position + 노드의 position
+- 일반 노드와 동일하게 `type: custom` 사용
+
+#### 루프 내부 변수 참조
+
+루프 변수는 LLM 프롬프트에서 `{{#loop-1.variable_name#}}` 형식으로 참조:
+
+```
+[이전 피드백] {{#loop-1.improvement_suggestions#}}
+```
+
+루프 외부에서 루프 내부 노드 결과 참조 시 노드 ID 직접 사용:
+
+```yaml
+value_selector:
+  - '루프내부노드ID'     # 예: '4' (loop-1 내부의 LLM 노드)
+  - text
+```
+
+#### 완전한 엣지 예시
+
+```yaml
+# 루프 진입 엣지 (외부 → 루프)
+- data:
+    isInIteration: false
+    isInLoop: false
+    sourceType: code
+    targetType: loop
+  id: edge-3-loop1
+  source: '3'
+  sourceHandle: source
+  target: loop-1
+  targetHandle: target
+  type: custom
+  zIndex: 0
+
+# 루프 내부 첫 엣지 (loop-start → 첫 번째 노드)
+- data:
+    isInLoop: true
+    sourceType: loop-start
+    targetType: llm
+  id: edge-loopstart-4
+  source: loop-1-start
+  sourceHandle: source
+  target: '4'
+  targetHandle: target
+  type: custom
+
+# 루프 탈출 엣지 (루프 → 다음 노드)
+- data:
+    isInLoop: false
+    sourceType: loop
+    targetType: code
+  id: edge-loop1-5
+  source: loop-1
+  sourceHandle: source
+  target: '5'
+  targetHandle: target
+  type: custom
 ```
 
 **Loop vs Iteration 차이:**
@@ -1210,8 +1341,9 @@ Workflow의 최종 출력 정의:
 |------|------|-----------|
 | 처리 방식 | 순차적, 이전 결과에 의존 | 독립적, 각 항목 별도 처리 |
 | 상태 유지 | 변수가 주기 간 누적 | 각 항목 독립 |
+| 조기 종료 | `break_conditions`로 가능 | 불가 |
 | 병렬 실행 | 불가 | 가능 (최대 10개) |
-| 사용 사례 | 콘텐츠 개선, 수렴 | 일괄 처리, 대량 변환 |
+| 사용 사례 | 콘텐츠 품질 개선, 수렴 | 일괄 처리, 대량 변환 |
 
 ### 5.15 template-transform (템플릿 노드)
 
