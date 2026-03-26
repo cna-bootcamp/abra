@@ -160,12 +160,34 @@ plugins = await client.list_plugins()
 
 # Groq 플러그인이 없으면 설치
 if not any("groq" in p.get("plugin_id", "") for p in plugins.get("plugins", [])):
-    await client.install_marketplace_plugin([
-        "langgenius/groq:0.0.12@38f75b2fd3d5dded2a0fe236dbcfe38a56d1028cc tried2d1cf7ea0e18ba1f4e40"
-    ])
+    # 1) 마켓플레이스 API에서 최신 identifier 동적 조회
+    import httpx
+    async with httpx.AsyncClient(timeout=15.0) as http:
+        resp = await http.post(
+            "https://marketplace.dify.ai/api/v1/plugins/batch",
+            json={"plugin_ids": ["langgenius/groq"]},
+        )
+        uid = resp.json()["data"]["plugins"][0]["latest_package_identifier"]
+
+    # 2) 플러그인 설치 요청
+    result = await client.install_marketplace_plugin([uid])
+
+    # 3) 비동기 설치 완료 대기 (최대 120초, 10초 간격 폴링)
+    import asyncio
+    for _ in range(12):
+        await asyncio.sleep(10)
+        resp = await client._request("GET", "/workspaces/current/plugin/tasks")
+        tasks = resp.get("tasks", [])
+        if not tasks:
+            break  # 태스크가 비어있으면 설치 완료
+        plugin_status = tasks[0]["plugins"][0]["status"]
+        if plugin_status == "success":
+            break
+        if plugin_status == "failed":
+            raise Exception(f"Groq 플러그인 설치 실패: {tasks[0]['plugins'][0].get('message', '')}")
 ```
 
-> **참고**: 플러그인 identifier의 해시값은 Dify 버전에 따라 다를 수 있다.
+> **참고**: identifier를 하드코딩하지 않고 마켓플레이스 batch API로 동적 조회해야 해시값 불일치를 방지할 수 있다.
 > 설치 실패 시 "Settings > Model Providers에서 Groq 플러그인을 수동 설치해주세요" 안내 후 계속 진행.
 
 **8-5. Groq Credentials 검증 및 저장**
