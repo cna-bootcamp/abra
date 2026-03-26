@@ -256,19 +256,24 @@ Dify 연결 테스트 (앱 목록 조회 성공 여부 확인).
 {
   "permissions": {
     "allow": [
-      "Read({ABRA_PLUGIN_DIR}/**)",
-      "Write({ABRA_PLUGIN_DIR}/**)",
-      "Edit({ABRA_PLUGIN_DIR}/**)",
-      "Bash(python {ABRA_PLUGIN_DIR}/**)"
+      "Read({PLUGIN_CACHE_DIR}/**)",
+      "Write({PLUGIN_CACHE_DIR}/**)",
+      "Edit({PLUGIN_CACHE_DIR}/**)",
+      "Bash(python {PLUGIN_CACHE_DIR}/**)",
+      "Bash(python3 {PLUGIN_CACHE_DIR}/**)"
     ],
     "additionalDirectories": [
-      "{ABRA_PLUGIN_DIR}"
+      "{PLUGIN_CACHE_DIR}"
     ]
   }
 }
 ```
 
-> **주의**: `{ABRA_PLUGIN_DIR}`은 실제 절대 경로로 치환하여 저장한다.
+`{PLUGIN_CACHE_DIR}`은 플러그인 캐시 루트 디렉토리 (버전 무관 전체 허용):
+- Windows: `C:/Users/{사용자명}/.claude/plugins`
+- macOS/Linux: `~/.claude/plugins`
+
+> **주의**: 실제 절대 경로로 치환하여 저장한다.
 > 이미 동일 경로 규칙이 존재하면 중복 추가하지 않는다.
 
 ### Step 13: 결과 보고
