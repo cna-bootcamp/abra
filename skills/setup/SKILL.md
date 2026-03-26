@@ -15,7 +15,7 @@ type: setup
 Dify 로컬 환경 구축부터 Abra 플러그인 초기 설정까지 전 과정을 하나의 워크플로우로 완료함:
 - Docker 환경 확인 및 Dify 컨테이너 실행
 - Groq 모델 프로바이더 자동 설정
-- Dify 접속 정보 수집 및 gateway `.env` 파일 생성
+- Dify 접속 정보 수집 
 - Python 가상환경 생성 및 의존성 설치
 - Dify 연결 테스트
 
@@ -70,11 +70,11 @@ cd {설치_위치}/docker
 cp .env.example .env
 ```
 
-`.env` 파일이 이미 있으면 복사를 건너뜀 (기존 설정 보존).
+`{설치_위치}/docker/.env` 파일이 이미 있으면 복사를 건너뜀 (기존 설정 보존).
 
 **필수 환경변수 설정:**
 
-`.env` 파일 생성 후(또는 기존 파일이 있는 경우), 아래 항목이 비어 있으면 설정:
+`{설치_위치}/docker/.env` 파일 생성 후(또는 기존 파일이 있는 경우), 아래 항목이 비어 있으면 설정:
 
 | 변수명 | 설정값 | 용도 |
 |--------|--------|------|
@@ -127,10 +127,12 @@ Dify 관리자 계정 생성 안내:
 
 **8-2. Groq API Key 입력**
 
-AskUserQuestion으로 사용자에게 Groq API Key를 입력받는다:
+{설치_위치}/docker/.env 파일에서 GROQ_API_KEY 읽음.  
+없으면 AskUserQuestion으로 사용자에게 Groq API Key를 입력받는다:
 - 안내 메시지: "Groq API Key를 입력해주세요. (https://console.groq.com/keys 에서 발급 가능)"
 - 입력값이 `gsk_`로 시작하는지 기본 형식 검증
 - 사용자가 건너뛰기를 원하면 (빈 값 또는 "skip" 입력) Step 9로 이동
+- {설치_위치}/docker/.env 파일에 GROQ_API_KEY={사용자_입력_API_KEY} 형식으로 저장
 
 **8-3. Dify Console API 로그인**
 
@@ -185,14 +187,14 @@ await client.save_provider_credentials("langgenius/groq/groq", credentials)
 **검증 성공 시:**
 - "Groq 모델 프로바이더 설정 완료" 메시지 출력
 
-### Step 9: Dify 접속 정보 수집 및 gateway/.env 생성 (`ulw` 활용)
+### Step 9: Dify 접속 정보 수집 (`ulw` 활용)
 
-AskUserQuestion으로 Dify 접속 정보 수집:
-- `DIFY_API_BASE_URL` (기본값: `http://localhost/console/api`)
+`{설치_위치}/docker/.env` 파일에서 Dify 접속 정보 읽음.   
+없으면 AskUserQuestion으로 Dify 접속 정보 수집:
 - `DIFY_EMAIL`
 - `DIFY_PASSWORD`
 
-`.env` 파일 생성 또는 갱신:
+`{설치_위치}/docker/.env` 파일 생성 또는 갱신:
 
 ```env
 DIFY_API_BASE_URL=http://localhost/console/api
@@ -245,7 +247,7 @@ Dify 연결 테스트 (앱 목록 조회 성공 여부 확인).
 
 🌐 Dify 접속 URL: http://localhost
 
-⚙️  gateway/.env 설정: 완료
+⚙️ `{설치_위치}/docker/.env` 설정: 완료
 🐍 Python 가상환경: 완료
 🔗 Dify 연결 테스트: {성공 ✅ / 실패 ❌}
 
@@ -273,7 +275,7 @@ cd {설치_위치}/docker && docker compose exec api flask reset-password
 | Dify 로그인 실패 | 이메일/비밀번호 불일치 | `{설치_위치}/docker/.env` 확인 또는 비밀번호 초기화 명령 안내 |
 | Groq 플러그인 설치 실패 | 네트워크 또는 Dify 버전 이슈 | Settings > Model Providers에서 수동 설치 안내 |
 | Groq API Key 검증 실패 | 잘못된 API Key | https://console.groq.com/keys 에서 키 재발급 안내 |
-| Dify 연결 실패 | 접속 정보 불일치 | `{ABRA_PLUGIN_DIR}/gateway/.env` 확인 또는 비밀번호 초기화 안내 |
+| Dify 연결 실패 | 접속 정보 불일치 | ``{설치_위치}/docker/.env` 확인 또는 비밀번호 초기화 안내 |
 
 ## 스킬 부스팅
 
@@ -304,7 +306,7 @@ cd {설치_위치}/docker && docker compose exec api flask reset-password
 | 2 | 기존 Dify docker/.env 파일을 덮어쓰지 않는다 (이미 존재하면 건너뜀) |
 | 3 | 헬스체크 실패를 무시하고 다음 단계로 진행하지 않는다 |
 | 4 | install.yaml에 정의되지 않은 도구를 설치하지 않는다 |
-| 5 | 기존 gateway/.env 파일을 사용자 확인 없이 덮어쓰지 않는다 |
+| 5 | 기존 `{설치_위치}/docker/.env` 파일을 사용자 확인 없이 덮어쓰지 않는다 |
 | 6 | Dify 연결 테스트 실패 시 무시하고 진행하지 않는다 |
 
 ## 검증 체크리스트
@@ -319,7 +321,7 @@ cd {설치_위치}/docker && docker compose exec api flask reset-password
 - [ ] Groq API Key가 입력되었는가 (건너뛰기 허용)
 - [ ] Groq 플러그인이 설치되었는가
 - [ ] Groq credentials가 검증 및 저장되었는가
-- [ ] gateway/.env 파일이 올바른 위치에 생성되었는가
+- [ ] `{설치_위치}/docker/.env` 파일이 올바른 위치에 생성되었는가
 - [ ] Python 가상환경이 생성되었는가
 - [ ] requirements.txt 의존성이 설치되었는가
 - [ ] Dify 연결 테스트(앱 목록 조회)가 성공했는가
