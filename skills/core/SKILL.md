@@ -42,8 +42,8 @@ type: core
 | "프로토타이핑", "Dify 업로드", "Dify 실행", "Dify 배포", "STEP 3" | → Skill: prototype | Dify 프로토타이핑 자동화 |
 | "개발계획서", "계획서 작성", "개발 계획", "STEP 4" | → Skill: dev-plan | 개발계획서 작성 |
 | "코드 개발", "Agent 구현", "구현해줘", "STEP 5" | → Skill: develop | AI Agent 개발 및 배포 |
-| "Dify 설치", "Docker 실행", "Dify 환경", "Dify Docker" | → Skill: dify-setup | Dify 로컬 환경 구축 |
-| "초기 설정", "setup", "설정", "플러그인 설정" | → Skill: setup | 플러그인 초기 설정 |
+| "Dify 설치", "Docker 실행", "Dify 환경", "Dify Docker" | → Skill: setup | Dify 환경 구축 및 플러그인 설정 |
+| "초기 설정", "setup", "설정", "플러그인 설정" | → Skill: setup | Dify 환경 구축 및 플러그인 설정 |
 
 ### Step 3: 위임
 

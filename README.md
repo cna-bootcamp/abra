@@ -70,38 +70,25 @@ claude plugin marketplace add unicorn-plugins/abra
 claude plugin install abra@abra
 ```
 
-**3단계: Dify 환경 구축**
+**3단계: Dify 환경 구축 및 플러그인 초기 설정**
 
 ```bash
-/abra:dify-setup
+/abra:setup
 ```
 
-Dify 로컬 환경을 자동으로 구축합니다:
+Dify 환경 구축부터 플러그인 설정까지 자동으로 진행합니다:
 1. Docker & Docker Compose 설치 여부 자동 확인
 2. Dify 소스 다운로드 (기본: `~/workspace/dify`)
 3. 환경 변수 파일 생성 (`.env`)
 4. Docker Compose 컨테이너 실행
 5. 컨테이너 상태 확인 및 헬스체크
 6. 관리자 계정 생성 안내 (`http://localhost/install`)
-
-**Dify 접속 확인:**
-
-```bash
-curl http://localhost/console/api/health
-```
-
-**4단계: 플러그인 초기 설정**
-
-```bash
-/abra:setup
-```
-
-플러그인 설정을 진행합니다:
-1. Dify 접속 정보 입력 (Base URL, Email, Password)
-2. `.env` 파일 생성 (`gateway/.env`)
-3. Python 가상환경 생성
-4. 의존성 설치 (`httpx`, `python-dotenv`, `pyyaml`)
-5. Dify 연결 테스트
+7. Groq 모델 프로바이더 자동 설정
+8. Dify 접속 정보 입력 (Base URL, Email, Password)
+9. `gateway/.env` 파일 생성
+10. Python 가상환경 생성
+11. 의존성 설치 (`httpx`, `python-dotenv`, `pyyaml`)
+12. Dify 연결 테스트
 
 설정 완료 후 다음 명령어로 사용 가능합니다:
 
@@ -136,10 +123,9 @@ claude plugin install abra@abra
 
 **4단계: Dify 환경 구축 및 초기 설정**
 
-방법 1의 3-4단계와 동일하게 진행합니다:
+방법 1의 3단계와 동일하게 진행합니다:
 
 ```bash
-/abra:dify-setup
 /abra:setup
 ```
 
@@ -198,8 +184,7 @@ claude plugin install abra@abra
 | `/abra:prototype` | STEP 3: Dify 프로토타이핑 (Import/Publish/Run) |
 | `/abra:dev-plan` | STEP 4: 개발계획서 작성 |
 | `/abra:develop` | STEP 5: AI Agent 개발 (Dify 또는 코드 기반) |
-| `/abra:dify-setup` | Dify 로컬 환경 구축 |
-| `/abra:setup` | 플러그인 초기 설정 |
+| `/abra:setup` | Dify 환경 구축 및 플러그인 초기 설정 |
 | `/abra:help` | 사용 안내 |
 
 ### 사용 예시
@@ -329,7 +314,7 @@ Abra는 자동으로 core 스킬을 통해 의도를 분류하고 `scenario` 스
 | "프로토타이핑", "Dify 업로드" | STEP 3: `/abra:prototype` |
 | "개발계획서 써줘" | STEP 4: `/abra:dev-plan` |
 | "코드 개발", "Agent 구현" | STEP 5: `/abra:develop` |
-| "Dify 설치", "Docker 실행" | `/abra:dify-setup` |
+| "Dify 설치", "Docker 실행" | `/abra:setup` |
 | "설정해줘", "초기 설정" | `/abra:setup` |
 
 #### 결과 산출물
@@ -408,8 +393,7 @@ Error: pip install failed
 | 스킬 | 유형 | 역할 |
 |------|------|------|
 | **core** | 핵심스킬 | 의도 분류 및 라우팅 |
-| **setup** | 설정스킬 | 플러그인 초기 설정 |
-| **dify-setup** | 설정스킬 | Dify 환경 구축 |
+| **setup** | 설정스킬 | Dify 환경 구축 및 플러그인 설정 |
 | **help** | 유틸리티스킬 | 사용 안내 |
 | **scenario** | 지휘자스킬 | STEP 1 시나리오 생성 |
 | **dsl-generate** | 지휘자스킬 | STEP 2 DSL 자동생성 |
@@ -474,10 +458,9 @@ abra/
 │   ├── prototype-runner/          # 프로토타이핑 실행
 │   ├── plan-writer/               # 개발계획서 작성
 │   └── agent-developer/           # Agent 개발
-├── skills/                         # 9개 스킬
+├── skills/                         # 8개 스킬
 │   ├── core/                      # 의도 분류 및 라우팅
-│   ├── setup/                     # 플러그인 초기 설정
-│   ├── dify-setup/                # Dify 환경 구축
+│   ├── setup/                     # Dify 환경 구축 및 플러그인 설정
 │   ├── help/                      # 사용 안내
 │   ├── scenario/                  # STEP 1
 │   ├── dsl-generate/              # STEP 2
@@ -496,7 +479,6 @@ abra/
 │       └── validate_dsl.py
 ├── commands/                       # 슬래시 명령 진입점
 │   ├── setup.md
-│   ├── dify-setup.md
 │   ├── help.md
 │   ├── scenario.md
 │   ├── dsl-generate.md

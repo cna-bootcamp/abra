@@ -29,8 +29,7 @@ Abra 플러그인의 사용 가능한 명령, 자동 라우팅 규칙, 주요 �
 
 | 명령 | 설명 |
 |------|------|
-| `/abra:dify-setup` | Dify Docker 환경 구축 |
-| `/abra:setup` | 플러그인 초기 설정 (.env, 가상환경, 연결 테스트) |
+| `/abra:setup` | Dify 환경 구축 및 플러그인 초기 설정 (.env, 가상환경, 연결 테스트) |
 | `/abra:scenario` | 요구사항 시나리오 생성 및 선택 |
 | `/abra:dsl-generate` | Dify DSL 자동 생성 |
 | `/abra:prototype` | Dify 프로토타이핑 자동화 |
@@ -47,7 +46,7 @@ Abra 플러그인의 사용 가능한 명령, 자동 라우팅 규칙, 주요 �
 - "프로토타이핑 해줘", "Dify 업로드" → /abra:prototype
 - "개발계획서 써줘" → /abra:dev-plan
 - "코드 개발해줘", "Agent 구현" → /abra:develop
-- "Dify 설치", "Docker 실행" → /abra:dify-setup
+- "Dify 설치", "Docker 실행" → /abra:setup
 
 ## 명령어
 
