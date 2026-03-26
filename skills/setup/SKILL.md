@@ -246,7 +246,32 @@ source .venv/bin/activate && pip install -r requirements.txt
 
 Dify 연결 테스트 (앱 목록 조회 성공 여부 확인).
 
-### Step 12: 결과 보고
+### Step 12: Claude Code 권한 설정 (`ulw` 활용)
+
+`{ABRA_PLUGIN_DIR}` 경로 하위 파일을 승인 없이 읽기/쓰기/실행할 수 있도록 `~/.claude/settings.json`에 권한을 추가한다.
+
+`~/.claude/settings.json`을 읽어 `permissions` 항목에 아래 내용을 병합(기존 항목 보존):
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "Read({ABRA_PLUGIN_DIR}/**)",
+      "Write({ABRA_PLUGIN_DIR}/**)",
+      "Edit({ABRA_PLUGIN_DIR}/**)",
+      "Bash(python {ABRA_PLUGIN_DIR}/**)"
+    ],
+    "additionalDirectories": [
+      "{ABRA_PLUGIN_DIR}"
+    ]
+  }
+}
+```
+
+> **주의**: `{ABRA_PLUGIN_DIR}`은 실제 절대 경로로 치환하여 저장한다.
+> 이미 동일 경로 규칙이 존재하면 중복 추가하지 않는다.
+
+### Step 13: 결과 보고
 
 설치 결과 요약:
 - 컨테이너 상태 (실행 중인 서비스 목록)
@@ -272,9 +297,14 @@ Dify 연결 테스트 (앱 목록 조회 성공 여부 확인).
 ⚙️ `{설치_위치}/docker/.env` 설정: 완료
 🐍 Python 가상환경: 완료
 🔗 Dify 연결 테스트: {성공 ✅ / 실패 ❌}
+🔐 Claude Code 권한 설정: 완료
+
+⚠️  Claude Code를 재시작해야 권한 설정이 적용됩니다.
+   재시작 후 /abra:scenario 명령으로 시작하세요.
 
 📌 다음 단계:
-1. /abra:scenario 명령으로 시나리오 생성 시작
+1. Claude Code 재시작
+2. /abra:scenario 명령으로 시나리오 생성 시작
 
 🔑 비밀번호 초기화:
 cd {설치_위치}/docker && docker compose exec api flask reset-password
@@ -305,7 +335,7 @@ cd {설치_위치}/docker && docker compose exec api flask reset-password
 
 | 단계 | OMC 스킬 | 목적 |
 |------|----------|------|
-| Step 1~11 | `ulw` 매직 키워드 | 각 단계의 완료 보장 |
+| Step 1~12 | `ulw` 매직 키워드 | 각 단계의 완료 보장 |
 
 ## MUST 규칙
 
@@ -347,3 +377,5 @@ cd {설치_위치}/docker && docker compose exec api flask reset-password
 - [ ] Python 가상환경이 생성되었는가
 - [ ] requirements.txt 의존성이 설치되었는가
 - [ ] Dify 연결 테스트(앱 목록 조회)가 성공했는가
+- [ ] ~/.claude/settings.json에 ABRA_PLUGIN_DIR 권한이 추가되었는가
+- [ ] Claude Code 재시작 안내가 사용자에게 전달되었는가
