@@ -121,7 +121,7 @@ scenario-analyst 에이전트에 위임:
 - **EXPECTED OUTCOME**: 각 시나리오에 8개 섹션(서비스개요, 사용자시나리오, 에이전트역할, 워크플로우설계, 외부도구, AI지시사항, 품질요구사항, 검증시나리오) 포함 + 버전 간 비교표 포함한 마크다운 문서
 - **MUST DO**: `{ABRA_PLUGIN_DIR}/agents/scenario-analyst/references/requirement-generater.md` 프롬프트 템플릿 활용, 다양한 관점(업무자동화, 고객경험, 비용절감, 의사결정, 협업효율화) 반영, 비즈니스 용어 사용(기술 용어 최소화), 각 시나리오 차별화(서비스명, 우선순위, 품질 지표), 사용자 제공 외부 기능 요구사항을 시나리오에 우선 반영, 각 기능에 대해 구현 방식은 명시하지 않고 기능 수준으로만 기술
 - **MUST NOT DO**: 사용자에게 직접 질문 금지, 시나리오 선택 금지, DSL 생성 금지
-- **CONTEXT**: 서비스 목적: `{service_purpose}`, 생성 갯수: `{count}`, 출력 디렉토리: `{project_dir}`, 외부 기능 요구사항: `{external_capabilities}`, 도메인 컨텍스트: `{domain_context}` (사전 제공 시), 요구사항: `{requirement}` (사전 제공 시), 참고 자료: `{references}` (사전 제공 시)
+- **CONTEXT**: 서비스 목적: `{service_purpose}`, 생성 갯수: `{count}`, 출력 파일: `{project_dir}/output/scenario-candidates.md`, 외부 기능 요구사항: `{external_capabilities}`, 도메인 컨텍스트: `{domain_context}` (사전 제공 시), 요구사항: `{requirement}` (사전 제공 시), 참고 자료: `{references}` (사전 제공 시)
 
 ### Phase 2: 사용자 선택
 
@@ -140,7 +140,8 @@ AskUserQuestion 도구로 시나리오 선택:
 
 ### Phase 3: 결과 저장 및 완료
 
-선택된 시나리오를 `{project_dir}/scenario.md`로 저장.
+선택된 시나리오를 `{project_dir}/output/scenario.md`로 저장.
+후보 파일(`{project_dir}/output/scenario-candidates.md`)은 참조용으로 보존.
 
 사용자에게 완료 보고:
 ```
@@ -148,7 +149,8 @@ AskUserQuestion 도구로 시나리오 선택:
 
 - 생성된 시나리오 수: {count}개
 - 선택된 버전: 버전 {selected_version} ({관점})
-- 저장 위치: {project_dir}/scenario.md
+- 후보 파일: {project_dir}/output/scenario-candidates.md
+- 최종 파일: {project_dir}/output/scenario.md
 
 다음 단계: `/abra:dsl-generate`로 Dify DSL 생성
 ```
@@ -216,4 +218,5 @@ scenario.md 파일이 이미 존재하는 경우, 사용자에게 재사용 여�
 - [ ] 각 시나리오에 8개 필수 섹션이 포함되어 있는가
 - [ ] 버전 간 비교표가 존재하는가
 - [ ] 사용자가 시나리오를 선택했는가
-- [ ] scenario.md 파일이 지정 위치에 저장되었는가
+- [ ] scenario-candidates.md 파일이 output/ 디렉토리에 저장되었는가
+- [ ] scenario.md (선택된 최종본)가 output/ 디렉토리에 저장되었는가

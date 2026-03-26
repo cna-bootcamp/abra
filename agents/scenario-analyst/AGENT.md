@@ -88,7 +88,8 @@ description: 비즈니스 요구사항을 분석하여 구조화된 시나리오
 
 ### 5. 시나리오 파일 저장
 
-{tool:file_write}로 생성된 시나리오를 지정된 디렉토리에 마크다운 파일로 저장.
+{tool:file_write}로 생성된 N개 후보 시나리오를 `{출력_파일}` (scenario-candidates.md)에 저장.
+최종 선택은 스킬(scenario)에서 수행하며, 선택된 시나리오는 별도로 scenario.md에 저장됨.
 
 ## 출력 형식
 
