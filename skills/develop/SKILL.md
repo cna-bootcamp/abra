@@ -113,12 +113,92 @@ DSL 구조를 참조하여 LangChain/LangGraph 등으로 코드 구현하며,
 - 실행 방법 (가상환경 설정, 의존성 설치, 실행 명령)
 - README.md 파일 경로
 
+### Phase 5: 테스트 챗봇 생성
+
+구현된 AI Agent의 API를 호출하는 Streamlit 테스트 챗봇을 자동 생성함.
+
+#### 실행 조건
+- Phase 4 완료 후 자동 진행
+- `app/main.py` 및 `app/api/routes.py` 존재 확인
+
+#### 실행 내용
+1. API 엔드포인트 구조 분석 (`routes.py` 파싱)
+2. `chatbot.py` 생성 (Streamlit + SSE 스트리밍)
+   - `{ABRA_PLUGIN_DIR}/skills/develop/references/chatbot-template.py` 참조
+   - 템플릿 미존재 시 `routes.py`를 분석하여 LLM 기반 동적 생성
+3. 의존성 설치 (`streamlit`, `httpx`)
+4. 문법 검증 (`python -m py_compile chatbot.py`)
+
+#### 실패 시 조치
+- `py_compile` 실패 → 자동 수정 (최대 3회)
+- 3회 초과 실패 → Phase 5 스킵, Phase 6도 스킵하여 Phase 7로 이동
+
+### Phase 6: E2E 테스트 + 스크린샷 (Playwright MCP)
+
+API 서버와 Streamlit을 백그라운드 기동한 후 Playwright MCP로 E2E 테스트를 수행함.
+
+#### 실행 조건
+- Phase 5 완료 (`chatbot.py` 존재)
+- Playwright MCP 도구 사용 가능 (진입 시 `browser_navigate` 호출로 감지, 실패 시 Phase 6 스킵)
+
+#### 실행 내용
+1. API 서버 + Streamlit 백그라운드 기동
+2. 헬스체크 대기 (최대 30초)
+3. `scenario.md` 기반 테스트 시나리오 자동 생성
+   - 자동 응답 테스트: FAQ 질문 1건 이상
+   - 이관 테스트: 비FAQ 질문 1건 이상
+   - `scenario.md`에 질문 없으면 기본 질문 사용
+4. Playwright MCP E2E 테스트 실행
+   - `browser_navigate` → `browser_wait_for` → `browser_type` → `browser_take_screenshot`
+   - 초기 화면 + 자동 응답 + 이관 스크린샷 저장
+5. 테스트 결과 판정 (PASS/FAIL)
+6. 서버 종료 (포트 기반 PID 탐색 → `taskkill`/`kill`)
+
+#### 스크린샷 저장 규칙
+- 디렉토리: `{project_root}/screenshots/`
+- 파일명: `{순번2자리}_{테스트유형}.png` (예: `01_initial.png`, `02_auto_answer.png`, `03_escalation.png`)
+
+#### 실패 시 조치
+- 핫픽스 루프 (최대 2회): 에러 분석 → 코드 수정 → 서버 재기동 → 재테스트
+- 2회 초과 시 FAIL 상태로 보고, Phase 7로 진행
+
+### Phase 7: Git 원격 저장소 배포
+
+완성된 프로젝트를 GitHub에 배포함.
+
+#### 실행 조건
+- `gh auth status` 인증 확인
+- `git --version` 설치 확인
+- 미인증 시 Phase 7 스킵, 수동 배포 안내
+
+#### 실행 내용
+1. `.gitignore` 설정 (필수 제외: `.env`, `.omc/`, `.claude/`, `__pycache__/`, `.venv/`)
+2. `git init` (미초기화 시)
+3. `gh repo create` (원격 저장소 생성)
+4. `git add -A` → `git commit` (한글 메시지) → `git push -u origin main`
+5. 배포 확인 (원격 저장소 URL + 스크린샷 이미지 URL 보고)
+
+#### 실패 시 조치
+- `gh` 미인증 → Phase 7 스킵, 수동 배포 안내 출력
+
+### Phase 8: 최종 보고
+
+Phase 5~7 결과를 종합 보고.
+
+- chatbot.py 생성 여부
+- E2E 테스트 결과 (PASS/FAIL, 스크린샷 URL)
+- GitHub 저장소 URL
+- 전체 산출물 목록
+
 ## 완료 조건
 
 - [ ] 코드 빌드 성공
 - [ ] 테스트 통과
 - [ ] README.md 작성 완료
 - [ ] 산출물 목록 보고 완료
+- [ ] chatbot.py 생성 및 문법 검증 통과 (Phase 5)
+- [ ] E2E 테스트 PASS 및 스크린샷 저장 (Phase 6)
+- [ ] GitHub 원격 저장소 배포 완료 (Phase 7)
 
 ## 검증 프로토콜
 
@@ -127,6 +207,8 @@ DSL 구조를 참조하여 LangChain/LangGraph 등으로 코드 구현하며,
 1. **빌드 검증**: 빌드 성공 + lsp_diagnostics 에러 0 확인
 2. **테스트 검증**: 단위·통합 테스트 통과
 3. **문서 검증**: README.md 필수 섹션 포함 확인
+4. **E2E 검증**: API 서버 기동 + 챗봇 테스트 + 스크린샷 존재 확인
+5. **배포 검증**: `gh repo view`로 원격 저장소 접근 가능 확인
 
 ## 상태 정리
 
@@ -140,6 +222,8 @@ DSL 구조를 참조하여 LangChain/LangGraph 등으로 코드 구현하며,
 ## 재개
 
 구현 코드 존재 시 QA 단계(Phase 3)부터 재개 가능.
+chatbot.py 존재 시 Phase 6부터 재개 가능.
+screenshots/ 존재 시 Phase 7부터 재개 가능.
 
 ## 스킬 부스팅
 
@@ -148,6 +232,7 @@ DSL 구조를 참조하여 LangChain/LangGraph 등으로 코드 구현하며,
 | Phase 1: 코드 기반 구현 | `/oh-my-claudecode:ralph` | 완료 보장 실행 워크플로우 |
 | Phase 2: 빌드 오류 수정 | `/oh-my-claudecode:build-fix` | 최소 수정 원칙 |
 | Phase 3: QA/검증 | `/oh-my-claudecode:ultraqa` | QA 순환 워크플로우 |
+| Phase 6: E2E 테스트 | Playwright MCP | 브라우저 자동화 E2E 테스트 |
 
 ## MUST 규칙
 
@@ -176,3 +261,6 @@ DSL 구조를 참조하여 LangChain/LangGraph 등으로 코드 구현하며,
 - [ ] 산출물 목록이 보고되었는가
 - [ ] 개발계획서의 디렉토리 구조와 실제 생성 파일이 1:1 대응하는가
 - [ ] Mock 전용이 아닌 Real API 모듈도 구현되었는가 (stub 포함)
+- [ ] chatbot.py가 생성되고 py_compile을 통과했는가 (Phase 5)
+- [ ] E2E 테스트가 PASS이고 screenshots/ 에 스크린샷이 존재하는가 (Phase 6)
+- [ ] GitHub 원격 저장소에 코드가 푸시되었는가 (Phase 7)
