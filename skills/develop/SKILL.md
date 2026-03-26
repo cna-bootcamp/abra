@@ -81,7 +81,7 @@ DSL 구조를 참조하여 LangChain/LangGraph 등으로 코드 구현하며,
   - 개발계획서: `{output_dir}/dev-plan.md`
   - DSL: `{output_dir}/{app-name}.dsl.yaml`
   - 시나리오: `{output_dir}/scenario.md`
-  - 출력 디렉토리: `{output_dir}/`
+  - 출력 디렉토리: `{project_root}/`
   - 가상환경: `gateway/.venv` (Python 도구 실행 시 사용)
 
 ### Phase 2: 빌드 오류 수정 (`/oh-my-claudecode:build-fix` 활용)

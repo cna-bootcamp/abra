@@ -69,8 +69,9 @@ AskUserQuestion으로 프로젝트 루트 디렉토리를 설정:
 
 3. **디렉토리 생성**
    - 지정된 경로에 프로젝트 디렉토리 생성
-   - `output/` 서브디렉토리 생성 (산출물 저장용)
+   - `output/` 서브디렉토리 생성 (scenario/DSL/dev-plan 산출물 저장용)
    - 이후 모든 STEP의 `{output_dir}`는 이 프로젝트 디렉토리의 `output/`을 가리킴
+   - 개발 산출물(앱 소스코드)은 `{project_root}/` 바로 아래에 생성
 
 **Step 3-1: 시나리오 생성 → Skill: scenario**
 - **INTENT**: 비즈니스 요구사항을 구조화된 시나리오 문서로 변환

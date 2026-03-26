@@ -97,8 +97,8 @@ AskUserQuestion으로 확인:
 - 옵션:
   - `{project_root}/` (권장)
   - "직접 입력"
-- 디렉토리 생성 후 `output/` 서브디렉토리도 함께 생성
-- 이후 모든 `{project_dir}`는 `{project_root}/output/`을 가리킴
+- 디렉토리 생성 후 `output/` 서브디렉토리 생성 (scenario/DSL/dev-plan 산출물 저장용)
+- 이후 모든 `{project_dir}`는 `{project_root}/`을 가리킴
 
 #### CLAUDE.md 생성  
 프로젝트 디렉토리에 CLAUDE.md 파일이 없으면 `{ABRA_PLUGIN_DIR}/resources/guides/create-claude.md`을 참조하여 생성   
