@@ -2102,13 +2102,13 @@ DSL 파일을 Dify에 Import하기 전에 오프라인으로 검증할 수 있�
 
 ```bash
 # DSL 파일 검증
-python validate_dsl.py <yaml_file>
+python {ABRA_PLUGIN_DIR}/gateway/tools/validate_dsl.py <yaml_file>
 
 # 예시
-python validate_dsl.py smart-inquiry-routing.yml
+python {ABRA_PLUGIN_DIR}/gateway/tools/validate_dsl.py smart-inquiry-routing.yml
 ```
 
-**위치:** `develop-agent/examples/dify/dsl/validation/validate_dsl.py`
+**위치:** `{ABRA_PLUGIN_DIR}/gateway/tools/validate_dsl.py`
 
 **검증 항목:**
 - YAML 구문 및 기본 구조 (dict 타입)

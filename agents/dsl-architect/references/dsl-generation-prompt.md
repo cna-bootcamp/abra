@@ -368,7 +368,7 @@ STEP 4 체크리스트 검증 후, DSL 검증 도구를 실행하여 자동 검�
 ### 실행 방법
 
 ```bash
-python develop-agent/examples/dify/dsl/validation/validate_dsl.py {생성된 DSL 파일 경로}
+python {ABRA_PLUGIN_DIR}/gateway/tools/validate_dsl.py {생성된 DSL 파일 경로}
 ```
 
 ### 검증 결과 처리
