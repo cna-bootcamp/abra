@@ -113,7 +113,7 @@ AskUserQuestion으로 확인:
 #### ABRA 플러그인 디렉토리 접근 권한 셋팅 
 
 플러그인 디렉토리에 대한 에이전트의 Read/Write/Edit/Bash 권한을 설정하여 개발 및 검증 과정에서 파일 생성/수정/실행 가능하도록 함.
-`~/.claude/settings.json` 파일의 "permissions" 섹션에 아래 권한 추가:  
+`{project_root}/.claude/settings.local.json` 파일의 "permissions" 섹션에 아래 권한 추가:  
 ```
 "permissions": {
   "allow": [
