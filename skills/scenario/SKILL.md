@@ -101,6 +101,8 @@ AskUserQuestion으로 확인:
 프로젝트 디렉토리에 CLAUDE.md 파일이 없으면 `{ABRA_PLUGIN_DIR}/resources/guides/create-claude.md`을 참조하여 생성   
 
 #### ABRA 플러그인 디렉토리 경로 설정
+`{project_root}/CLAUDE.md` 파일에 `{ABRA_PLUGIN_DIR}` 변수가 설정되어 있는지 확인함.
+미설정 시 아래 수행 
 사용자에게 ABRA 플러그인 디렉토리 경로를 입력받아 생성하는 `{project_root}/CLAUDE.md`의 `{ABRA_PLUGIN_DIR}` 변수에 설정
 <!--ASK_USER-->
 {"title":"ABRA 플러그인 디렉토리","questions":[
