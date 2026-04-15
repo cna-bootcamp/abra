@@ -22,9 +22,6 @@ STEP 1: 시나리오 생성 및 선택 단계를 담당.
 
 또는 `/abra:scenario` 명령 호출 시.
 
-## {ABRA_PLUGIN_DIR} 변수 셋팅  
-`./resources/guides/set-plugin-dir.md` 또는 `**/resources/guides/set-plugin-dir.md` 파일 참조하여 `{ABRA_PLUGIN_DIR}`변수 셋팅
-
 ## 에이전트 호출 규칙
 
 ### 에이전트 FQN
@@ -102,6 +99,33 @@ AskUserQuestion으로 확인:
 
 #### CLAUDE.md 생성  
 프로젝트 디렉토리에 CLAUDE.md 파일이 없으면 `{ABRA_PLUGIN_DIR}/resources/guides/create-claude.md`을 참조하여 생성   
+
+#### ABRA 플러그인 디렉토리 경로 설정
+사용자에게 ABRA 플러그인 디렉토리 경로를 입력받아 생성하는 `{project_root}/CLAUDE.md`의 `{ABRA_PLUGIN_DIR}` 변수에 설정
+<!--ASK_USER-->
+{"title":"ABRA 플러그인 디렉토리","questions":[
+  {"question":"ABRA 플러그인 디렉토리 경로를 입력해주세요.","type":"text"}
+]}
+<!--/ASK_USER-->
+  
+#### ABRA 플러그인 디렉토리 접근 권한 셋팅 
+
+플러그인 디렉토리에 대한 에이전트의 Read/Write/Edit/Bash 권한을 설정하여 개발 및 검증 과정에서 파일 생성/수정/실행 가능하도록 함.
+`~/.claude/settings.json` 파일의 "permissions" 섹션에 아래 권한 추가:  
+```
+"permissions": {
+  "allow": [
+    "Read({ABRA_PLUGIN_DIR}/**)",
+    "Write({ABRA_PLUGIN_DIR}/**)",
+    "Edit({ABRA_PLUGIN_DIR}/**)",
+    "Bash(python {ABRA_PLUGIN_DIR}/**)",
+    "Bash(python3 {ABRA_PLUGIN_DIR}/**)"
+  ],
+  "additionalDirectories": [
+    "{ABRA_PLUGIN_DIR}"
+  ]
+}
+```
 
 #### 외부 기능 요구사항 수집
 

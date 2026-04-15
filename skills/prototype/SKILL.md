@@ -19,8 +19,9 @@ DSL을 Dify에 Import → Publish → Run → Export하여 프로토타이핑을
 다음 키워드 감지 시 또는 `/abra:prototype` 호출 시:
 - "프로토타이핑", "프로토타입", "Dify 업로드", "Dify 실행", "Dify 테스트"
 
-## {ABRA_PLUGIN_DIR} 변수 셋팅  
-`./resources/guides/set-plugin-dir.md` 또는 `**/resources/guides/set-plugin-dir.md` 파일 참조하여 `{ABRA_PLUGIN_DIR}`변수 셋팅
+## 작업 환경 변수 로드 
+CLAUDE.md에서 {ABRA_PLUGIN_DIR} 변수 로드함. 없으면 '/abra:scenario'를 먼저 수행하도록 안내하고 종료.   
+
 
 ## 에이전트 호출 규칙
 

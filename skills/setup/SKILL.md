@@ -23,8 +23,8 @@ Dify 로컬 환경 구축부터 Abra 플러그인 초기 설정까지 전 과정
 
 사용자가 `/abra:setup` 명령을 호출하거나 "초기 설정", "setup", "플러그인 설정", "Dify 설치", "Docker 실행", "Dify 환경" 키워드 감지 시.
 
-## {ABRA_PLUGIN_DIR} 변수 셋팅
-`./resources/guides/set-plugin-dir.md` 또는 `**/resources/guides/set-plugin-dir.md` 파일 참조하여 `{ABRA_PLUGIN_DIR}`변수 셋팅
+## 작업 환경 변수 로드 
+CLAUDE.md에서 {ABRA_PLUGIN_DIR} 변수 로드함. 없으면 '/abra:scenario'를 먼저 수행하도록 안내하고 종료.   
 
 ## 사전 요구사항
 

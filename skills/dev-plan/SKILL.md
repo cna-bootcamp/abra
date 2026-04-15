@@ -19,8 +19,8 @@ type: orchestrator
 - 사용자가 `/abra:dev-plan` 호출 시
 - "개발계획서", "계획서 작성", "개발 계획" 키워드 감지 시
 
-## {ABRA_PLUGIN_DIR} 변수 셋팅  
-`./resources/guides/set-plugin-dir.md` 또는 `**/resources/guides/set-plugin-dir.md` 파일 참조하여 `{ABRA_PLUGIN_DIR}`변수 셋팅
+## 작업 환경 변수 로드 
+CLAUDE.md에서 {ABRA_PLUGIN_DIR} 변수 로드함. 없으면 '/abra:scenario'를 먼저 수행하도록 안내하고 종료.   
 
 ## 에이전트 호출 규칙
 

@@ -20,8 +20,8 @@ DSL 구조를 참조하여 LangChain/LangGraph 등으로 코드 구현하며,
 - "코드 개발해줘", "Agent 구현", "구현해줘" 키워드 감지 시
 - 사용자가 `/abra:develop` 명령 호출 시
 
-## {ABRA_PLUGIN_DIR} 변수 셋팅  
-`./resources/guides/set-plugin-dir.md` 또는 `**/resources/guides/set-plugin-dir.md` 파일 참조하여 `{ABRA_PLUGIN_DIR}`변수 셋팅 
+## 작업 환경 변수 로드 
+CLAUDE.md에서 {ABRA_PLUGIN_DIR} 변수 로드함. 없으면 '/abra:scenario'를 먼저 수행하도록 안내하고 종료.   
 
 ## 에이전트 호출 규칙
 

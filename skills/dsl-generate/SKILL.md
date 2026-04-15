@@ -19,8 +19,9 @@ DSL 구조 검증을 통과한 유효한 파일을 산출하며, 에러 발생 �
 - "DSL 생성", "워크플로우 DSL", "YAML 만들어", "dsl-generate" 키워드 감지 시
 - `/abra:dsl-generate` 명령 호출 시
 
-## {ABRA_PLUGIN_DIR} 변수 셋팅  
-`./resources/guides/set-plugin-dir.md` 또는 `**/resources/guides/set-plugin-dir.md` 파일 참조하여 `{ABRA_PLUGIN_DIR}`변수 셋팅 
+## 작업 환경 변수 로드 
+CLAUDE.md에서 {ABRA_PLUGIN_DIR} 변수 로드함. 없으면 '/abra:scenario'를 먼저 수행하도록 안내하고 종료.   
+
 
 ## 에이전트 호출 규칙
 

@@ -93,6 +93,9 @@ SKILL.md 또는 대화에서 아래 키워드가 나오면 **반드시 Skill 도
 | `/security-review`, `security-review 모드` | `Skill("oh-my-claudecode:security-review")` |
 | `ulw` | `Skill("oh-my-claudecode:ultrawork")` |
 
+## 플러그인 변수 
+- ABRA_PLUGIN_DIR: {ABRA_PLUGIN_DIR}
+
 ```
 
 ````
