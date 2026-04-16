@@ -45,7 +45,7 @@ STEP 1: 시나리오 생성 및 선택 단계를 담당.
    - **최종 도구** = (builtin: Read, Write) - (제외 도구)
 3. 프롬프트 조립: AGENT.md + agentcard.yaml + tools.yaml을 합쳐 하나의 프롬프트로 구성
    - **구성 순서**: 공통 정적(runtime-mapping) → 에이전트별 정적(3파일) → 동적(작업 지시)
-4. `Task(subagent_type="abra:scenario-analyst:scenario-analyst", model="sonnet", prompt=조립된 프롬프트)` 호출
+4. `Agent(subagent_type="abra:scenario-analyst:scenario-analyst", model="sonnet", prompt=조립된 프롬프트)` 호출
 
 ## 워크플로우
 

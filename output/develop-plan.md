@@ -954,7 +954,7 @@ user-invocable: true
    - tier: MEDIUM → claude-sonnet-4-5
    - tools.yaml → builtin(Read, Write) + 금지액션 제외
 3. 프롬프트 구성: 공통 정적(runtime-mapping) → 에이전트별 정적(3파일) → 동적(작업 지시)
-4. `Task(subagent_type="abra:scenario-analyst:scenario-analyst", model="sonnet", prompt=조립된 프롬프트)` 호출
+4. `Agent(subagent_type="abra:scenario-analyst:scenario-analyst", model="sonnet", prompt=조립된 프롬프트)` 호출
 
 **워크플로우:**
 

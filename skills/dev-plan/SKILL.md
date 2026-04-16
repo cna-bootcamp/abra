@@ -44,7 +44,7 @@ CLAUDE.md에서 {ABRA_PLUGIN_DIR} 변수 로드함. 없으면 '/abra:scenario'�
    - **최종 도구** = (Read, Write) - (Bash)
 3. 3파일을 합쳐 하나의 프롬프트로 조립
    - **프롬프트 구성 순서**: 공통 정적(runtime-mapping) → 에이전트별 정적(3파일) → 동적(작업 지시)
-4. `Task(subagent_type="abra:plan-writer:plan-writer", model="sonnet", prompt=조립된 프롬프트)` 호출
+4. `Agent(subagent_type="abra:plan-writer:plan-writer", model="sonnet", prompt=조립된 프롬프트)` 호출
 
 ## 워크플로우
 
