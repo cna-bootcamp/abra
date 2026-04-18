@@ -124,3 +124,10 @@ SKILL.md 또는 대화에서 아래 키워드가 나오면 **반드시 Skill 도
 | `/code-review`, `code-review 모드` | `Skill("oh-my-claudecode:code-review")` |
 | `/security-review`, `security-review 모드` | `Skill("oh-my-claudecode:security-review")` |
 | `ulw` | `Skill("oh-my-claudecode:ultrawork")` |
+
+## Advisor 활용 규칙
+- Advisor 모델은 Opus 가장 최신 버전으로 설정  
+- 실제 작업을 시작하기 전에 먼저 Advisor를 호출
+- 작업 진행 중 Advisor의 자문이 필요하면 호출. 단, 최대 3번까지만 호출
+- 작업 완료 후 한번 더 Advisor를 호출
+- Advisor의 응답은 최대 200자를 초과하지 않게 함
