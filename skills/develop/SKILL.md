@@ -51,6 +51,14 @@ CLAUDE.md에서 {ABRA_PLUGIN_DIR} 변수 로드함. 없으면 '/abra:scenario'�
    - **구성 순서**: 공통 정적(runtime-mapping) → 에이전트별 정적(AGENT.md + agentcard.yaml + tools.yaml) → 동적(작업 지시)
 4. `Agent(subagent_type="abra:agent-developer:agent-developer", model="opus", prompt=조립된 프롬프트)` 호출
 
+### 서브 에이전트 호출
+워크플로우 단계에 `Agent: {agent-name}`이 명시된 경우,
+메인 에이전트는 해당 단계를 직접 수행하지 않고,
+반드시 위 프롬프트 조립 규칙에 따라 해당 에이전트를 호출하여 결과를 받아야 함.
+
+서브에이전트 호출 없이 메인 에이전트가 해당 산출물을 직접 작성하면
+스킬 미준수로 간주함.
+
 ## 워크플로우
 
 ### Phase 0: 입력 확인
