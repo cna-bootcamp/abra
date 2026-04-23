@@ -22,6 +22,16 @@ STEP 1: 시나리오 생성 및 선택 단계를 담당.
 
 또는 `/abra:scenario` 명령 호출 시.
 
+## 작업 환경 변수 로드 
+AGENTS.md 파일에서 환경변수를 로딩. 로딩 실패 시 사용자에게 `/abra:setup`을 먼저 수행하라고 안내하고 종료.     
+```
+## 환경변수
+- AI_RUNTIME: 현재 구동중인 런타임
+- PROJECT_DIR: 현재 프로젝트 경로
+- ABRA_PLUGIN_DIR: ABRA 플러그인 경로
+- DIFY_DIR: DIFY 설치 경로
+```
+
 ## 에이전트 호출 규칙
 
 ### 에이전트 FQN
@@ -31,21 +41,9 @@ STEP 1: 시나리오 생성 및 선택 단계를 담당.
 | scenario-analyst | `abra:scenario-analyst:scenario-analyst` |
 
 ### 프롬프트 조립
-
-1. `{ABRA_PLUGIN_DIR}/agents/scenario-analyst/` 에서 3파일 로드 (AGENT.md + agentcard.yaml + tools.yaml)
-2. `{ABRA_PLUGIN_DIR}/gateway/runtime-mapping.yaml` 참조하여 구체화:
-   - **모델 구체화**: agentcard.yaml의 `tier: MEDIUM` → `tier_mapping`에서 `claude-sonnet-4-5` 결정
-   - **툴 구체화**: tools.yaml의 추상 도구 → `tool_mapping`에서 실제 도구 결정
-     - `file_read` → builtin `Read` 도구
-     - `file_write` → builtin `Write` 도구
-   - **금지액션 구체화**: agentcard.yaml의 `forbidden_actions: ["file_delete", "code_execute", "network_access"]` → `action_mapping`에서 제외할 실제 도구 결정
-     - `file_delete` → `Bash` 도구 중 삭제 명령 제외
-     - `code_execute` → `Bash` 도구 제외
-     - `network_access` → `WebFetch`, `WebSearch` 도구 제외
-   - **최종 도구** = (builtin: Read, Write) - (제외 도구)
-3. 프롬프트 조립: AGENT.md + agentcard.yaml + tools.yaml을 합쳐 하나의 프롬프트로 구성
-   - **구성 순서**: 공통 정적(runtime-mapping) → 에이전트별 정적(3파일) → 동적(작업 지시)
-4. `Agent(subagent_type="abra:scenario-analyst:scenario-analyst", model="sonnet", prompt=조립된 프롬프트)` 호출
+- `{ABRA_PLUGIN_DIR}/resources/guides/combine-prompt.md`에 따라 AGENT.md + agentcard.yaml + tools.yaml 합치기
+- `Agent(subagent_type=FQN, model=tier_mapping 결과, prompt=조립된 프롬프트)` 호출
+- tier → 모델 매핑은 `{ABRA_PLUGIN_DIR}/gateway/runtime-mapping.yaml` 참조
 
 ### 서브 에이전트 호출
 워크플로우 단계에 `Agent: {agent-name}`이 명시된 경우,
@@ -57,105 +55,38 @@ STEP 1: 시나리오 생성 및 선택 단계를 담당.
 
 ## 워크플로우
 
-### Phase 0: 입력 수집 (`ulw` 활용)
+### Phase 0: 입력 수집 
 
 #### Skill→Skill 사전 입력 처리
+사용자에게 아래 양식을 제공하고 입력 요청   
+```
+# 사용자 정보 제공
+## 서비스 목적(필수) 
 
-`ARGS` 루트 키 존재 시 plugin-to-plugin 호출로 판별하고, 내부 값을 사용:
+## 사업 배경 및 맥락(선택)
 
-| ARGS 내부 키 | 대응 Phase 0 항목 | 동작 |
-|-------------|-------------------|------|
-| `source_plugin` | — | 호출자 플러그인 식별 |
-| `service_purpose` | 서비스 목적 | 질문 스킵, 제공된 값 사용 |
-| `count` | 생성 갯수 | 질문 스킵, 제공된 값 사용 |
-| `project_dir` | 프로젝트 디렉토리 | 질문 스킵, 제공된 경로 사용 |
-| `domain_context` | — | 시나리오 생성 시 컨텍스트로 전달 |
-| `requirement` | — | 시나리오 생성 시 요구사항으로 전달 |
-| `references` | — | 시나리오 생성 시 참고 자료로 전달 |
+## 세부 요구사항(선택)
 
-`ARGS` 키 미존재 시 사용자 직접 호출로 판별하고, AskUserQuestion으로 입력 수집.
-모든 필수 항목이 `ARGS`에 포함된 경우 Phase 0 전체를 스킵하고 Phase 1로 직행.
+## 외부 기능 연동 요건(선택)
 
-AskUserQuestion 도구로 핵심 정보를 사용자로부터 수집:
+## 참고 자료(선택: 파일 경로 입력) 
+```
+
+AskUserQuestion 생성할 비즈니스 시나리오 갯수 요청:
 
 | 항목 | 필수 | 기본값 | 설명 |
 |------|:----:|--------|------|
-| 서비스 목적 | ✅ | - | AI 에이전트가 해결할 비즈니스 문제 또는 목적 |
 | 생성 갯수 | 선택 | 3 | 생성할 시나리오 버전 수 (1~5 권장) |
-| 프로젝트 디렉토리 | ✅ | 서비스 목적 기반 추천 | 프로젝트 루트 디렉토리 (아래 "프로젝트 디렉토리 설정" 참조) |
-| 외부 기능 요구사항 | ✅ | - | 서비스에 필요한 외부 기능 (아래 참조) |
 
-AskUserQuestion 형식:
-- 질문 유형: Requirement
-- 선택지: 단일 입력(서비스 목적), 숫자 입력(생성 갯수), 경로 입력(디렉토리)
-
-#### 프로젝트 디렉토리 설정
-
-서비스 목적에서 핵심 키워드를 추출하여 프로젝트 디렉토리명을 추천:
-- 추천명은 영문 kebab-case 형식
-- 예: "고객 문의 자동 응답" → `customer-inquiry-agent`
-- 예: "사내 문서 검색 챗봇" → `doc-search-chatbot`
-- 예: "일일 보고서 자동 생성" → `daily-report-generator`
-
-AskUserQuestion으로 확인:
-- 질문: "프로젝트를 생성할 경로를 선택해 주세요"
-- 옵션:
-  - `{project_root}/` (권장)
-  - "직접 입력"
-- 디렉토리 생성 후 `output/` 서브디렉토리 생성 (scenario/DSL/dev-plan 산출물 저장용)
-- 이후 모든 `{project_dir}`는 `{project_root}/`을 가리킴
-
-#### CLAUDE.md 생성  
-프로젝트 디렉토리에 CLAUDE.md 파일이 없으면 `{ABRA_PLUGIN_DIR}/resources/guides/create-claude.md`을 참조하여 생성   
-
-#### ABRA 플러그인 디렉토리 경로 설정
-`{project_root}/CLAUDE.md` 파일에 `{ABRA_PLUGIN_DIR}` 변수가 설정되어 있는지 확인함.
-미설정 시 아래 수행 
-사용자에게 ABRA 플러그인 디렉토리 경로를 입력받아 생성하는 `{project_root}/CLAUDE.md`의 `{ABRA_PLUGIN_DIR}` 변수에 설정
-<!--ASK_USER-->
-{"title":"ABRA 플러그인 디렉토리","questions":[
-  {"question":"ABRA 플러그인 디렉토리 경로를 입력해주세요.","type":"text"}
-]}
-<!--/ASK_USER-->
-  
-#### ABRA 플러그인 디렉토리 접근 권한 셋팅 
-
-플러그인 디렉토리에 대한 에이전트의 Read/Write/Edit/Bash 권한을 설정하여 개발 및 검증 과정에서 파일 생성/수정/실행 가능하도록 함.
-`{project_root}/.claude/settings.local.json` 파일의 "permissions" 섹션에 아래 권한 추가:  
-```
-"permissions": {
-  "allow": [
-    "Read({ABRA_PLUGIN_DIR}/**)",
-    "Write({ABRA_PLUGIN_DIR}/**)",
-    "Edit({ABRA_PLUGIN_DIR}/**)",
-    "Bash(python {ABRA_PLUGIN_DIR}/**)",
-    "Bash(python3 {ABRA_PLUGIN_DIR}/**)"
-  ],
-  "additionalDirectories": [
-    "{ABRA_PLUGIN_DIR}"
-  ]
-}
-```
-
-#### 외부 기능 요구사항 수집
-
-시나리오에 반영할 외부 기능 요구사항을 사전에 파악:
-
-1. **필요 기능 질문**
-   - 질문: "이 서비스에 필요한 외부 기능이 있나요?"
-   - 옵션:
-     - "있음 (직접 입력)" — 사용자가 필요한 기능을 자유 텍스트로 입력 (예: "웹 검색", "이메일 발송", "사내 DB 조회")
-     - "모르겠음 — 시나리오에서 판단" — 에이전트가 서비스 목적에서 필요 기능을 자동 도출
-
-### Phase 1: 시나리오 생성 → Agent: scenario-analyst (`ulw` 활용)
+### Phase 1: 시나리오 생성 → Agent: scenario-analyst
 
 scenario-analyst 에이전트에 위임:
 
 - **TASK**: 서비스 목적을 기반으로 N개의 요구사항 시나리오 자동 생성. 각 시나리오는 서로 다른 관점(업무자동화, 고객경험, 비용절감, 의사결정 지원, 협업효율화)으로 작성
 - **EXPECTED OUTCOME**: 각 시나리오에 8개 섹션(서비스개요, 사용자시나리오, 에이전트역할, 워크플로우설계, 외부도구, AI지시사항, 품질요구사항, 검증시나리오) 포함 + 버전 간 비교표 포함한 마크다운 문서
-- **MUST DO**: `{ABRA_PLUGIN_DIR}/agents/scenario-analyst/references/requirement-generater.md` 프롬프트 템플릿 활용, 다양한 관점(업무자동화, 고객경험, 비용절감, 의사결정, 협업효율화) 반영, 비즈니스 용어 사용(기술 용어 최소화), 각 시나리오 차별화(서비스명, 우선순위, 품질 지표), 사용자 제공 외부 기능 요구사항을 시나리오에 우선 반영, 각 기능에 대해 구현 방식은 명시하지 않고 기능 수준으로만 기술
+- **MUST DO**: 다양한 관점(업무자동화, 고객경험, 비용절감, 의사결정, 협업효율화) 반영, 비즈니스 용어 사용(기술 용어 최소화), 각 시나리오 차별화(서비스명, 우선순위, 품질 지표), 사용자 제공 외부 기능 요구사항을 시나리오에 우선 반영, 각 기능에 대해 구현 방식은 명시하지 않고 기능 수준으로만 기술
 - **MUST NOT DO**: 사용자에게 직접 질문 금지, 시나리오 선택 금지, DSL 생성 금지
-- **CONTEXT**: 서비스 목적: `{service_purpose}`, 생성 갯수: `{count}`, 출력 파일: `{project_dir}/output/scenario-candidates.md`, 외부 기능 요구사항: `{external_capabilities}`, 도메인 컨텍스트: `{domain_context}` (사전 제공 시), 요구사항: `{requirement}` (사전 제공 시), 참고 자료: `{references}` (사전 제공 시)
+- **CONTEXT**: 서비스 목적: `{service_purpose}`, 생성 갯수: `{count}`, 외부 기능 요구사항: `{external_capabilities}`, 도메인 컨텍스트: `{domain_context}` 세부 요구사항: `{requirement}`, 참고 자료: `{references}`
 
 ### Phase 2: 사용자 선택
 
@@ -172,10 +103,31 @@ AskUserQuestion 도구로 시나리오 선택:
 - 질문 유형: Preference
 - 선택지: 1 ~ N (버전 번호)
 
-### Phase 3: 결과 저장 및 완료
+### Phase 3: AGENTS.md 생성  
+선택된 시나리오를 바탕으로  
+`{ABRA_PLUGIN_DIR}/resources/guides/create-agents.md`을 참조하여 `{PROJECT_DIR}/AGENTS.md`에 추가  
 
-선택된 시나리오를 `{project_dir}/output/scenario.md`로 저장.
-후보 파일(`{project_dir}/output/scenario-candidates.md`)은 참조용으로 보존.
+멤버 구성 규칙:  
+선택된 시나리오를 구현에 필요한 팀원의 프로필을 작성함  
+- 예제와 같이 역할, 이름, 닉네임, 성별, 나이, 성향, 경력을 적절히 생성  
+- 별명은 한국어로 하며 4자를 넘지 않도록 함 
+
+**예시: **    
+```
+PO
+- 프로파일: 이해경 "갑빠" (남성, 54세)
+- 성향: Value Oriented, Interactive, Iterative를 중시하며 친화적인 성격
+- 경력:
+  - IBM에서 5년간 애자일 코치로 근무
+  - 네이버, 쿠팡, 카카오에서 PO로 10년간 근무
+  - 애자일 컨설팅 회사 창업 및 5년간 운영
+  - 국제 애자일 연합회 인증 트레이너
+```
+
+### Phase 4: 결과 저장 및 완료
+
+선택된 시나리오를 `{PROJECT_DIR}/output/scenario.md`로 저장.
+후보 파일(`{PROJECT_DIR}/output/scenario-candidates.md`)은 참조용으로 보존.
 
 사용자에게 완료 보고:
 ```
@@ -183,8 +135,8 @@ AskUserQuestion 도구로 시나리오 선택:
 
 - 생성된 시나리오 수: {count}개
 - 선택된 버전: 버전 {selected_version} ({관점})
-- 후보 파일: {project_dir}/output/scenario-candidates.md
-- 최종 파일: {project_dir}/output/scenario.md
+- 후보 파일: {PROJECT_DIR}/output/scenario-candidates.md
+- 최종 파일: {PROJECT_DIR}/output/scenario.md
 
 다음 단계: `/abra:dsl-generate`로 Dify DSL 생성
 ```
@@ -205,37 +157,23 @@ AskUserQuestion 도구로 시나리오 선택:
 3. 비즈니스 용어로 작성되었는지 확인 (기술 용어 최소화)
 
 ## 상태 정리
-
-완료 시 임시 파일 없음 (상태 파일 미사용).
-
-## 취소
-
-사용자 요청 시 즉시 중단. "cancelomc" 또는 "stopomc" 키워드 감지.
+`{PROJECT_DIR}/AGENTS.md`에 각 Phase 완료 시 저장. 최종 완료 시 'Done'으로 표기
+```
+## 워크플로우 진행상황
+- scenario: Phase2
+```
 
 ## 재개
-
-scenario.md 파일이 이미 존재하는 경우, 사용자에게 재사용 여부 질문:
-- 재사용: Phase 2 선택 단계로 진입
-- 새로 생성: Phase 0부터 재시작
-
-## 스킬 부스팅
-
-이 스킬은 다음 OMC 스킬을 활용하여 검증된 워크플로우를 적용함:
-
-| 단계 | OMC 스킬 | 목적 |
-|------|----------|------|
-| Phase 0 | `ulw` 매직 키워드 | 입력 수집 + 프로젝트 설정 + 외부 기능 요구사항 수집의 병렬 실행 보장 |
-| Phase 1 | `ulw` 매직 키워드 | 시나리오 생성의 완료 보장 + 병렬 실행 |
+AGENTS.md에 마지막 완료 단계 이후 자동 재개 
 
 ## MUST 규칙
 
 | # | 규칙 |
 |---|------|
-| 1 | {ABRA_PLUGIN_DIR}/agents/scenario-analyst/references/requirement-generater.md 프롬프트 템플릿을 활용한다 |
-| 2 | N개 시나리오 모두 8개 섹션(서비스개요, 사용자시나리오, 에이전트역할, 워크플로우설계, 외부도구, AI지시사항, 품질요구사항, 검증시나리오)을 포함한다 |
-| 3 | 다양한 관점(업무자동화, 고객경험, 비용절감, 의사결정, 협업효율화)을 반영한다 |
-| 4 | 버전 간 비교표를 포함한다 |
-| 5 | 사용자 제공 외부 기능 요구사항을 시나리오에 우선 반영한다 |
+| 1 | N개 시나리오 모두 8개 섹션(서비스개요, 사용자시나리오, 에이전트역할, 워크플로우설계, 외부도구, AI지시사항, 품질요구사항, 검증시나리오)을 포함한다 |
+| 2 | 다양한 관점(업무자동화, 고객경험, 비용절감, 의사결정, 협업효율화)을 반영한다 |
+| 3 | 버전 간 비교표를 포함한다 |
+| 4 | 사용자 제공 외부 기능 요구사항을 시나리오에 우선 반영한다 |
 
 ## MUST NOT 규칙
 

@@ -1,6 +1,6 @@
-# CLAUDE.md 생성 가이드 
+# AGENTS.md 생성 가이드 
 
-## CLAUDE.md 구조
+## AGENTS.md 구조
 ````markdown
 # 스쿼드 소개
 ## 목표
@@ -71,48 +71,11 @@
 ### 기록 규칙
 - 실행 중 시행착오 발생 시 Notepad Working Memory에 즉시 기록한다 (`notepad_write_working` 도구 호출)
   - 형식: `{agent명}: {문제 요약}. {해결 방법}. {관련 파일}`
-- 반복 검증된 핵심 교훈만 이 섹션(CLAUDE.md)에 승격한다 (Edit 도구로 추가)
+- 반복 검증된 핵심 교훈만 이 섹션(AGENTS.md)에 승격한다 (Edit 도구로 추가)
   - 형식: `- [HIGH/MED] {교훈 한 줄} — {출처: agent명/단계명}`
 - 최대 20항목 유지, 넘으면 오래된 MED부터 정리
 - 기존 항목과 중복되는 내용은 기록하지 않음
 
-### 스킬부스팅 규칙
-SKILL.md 또는 대화에서 아래 키워드가 나오면 **반드시 Skill 도구를 호출**하여 해당 스킬을 실행한다.
-텍스트 출력으로 대체하거나, 키워드를 무시하는 것은 금지한다.
-
-| 키워드 (어느 형태든 매칭) | Skill 도구 호출 |
-|--------------------------|----------------|
-| `/plan`, `plan 모드`, `plan 스킬` | `Skill("oh-my-claudecode:plan")` |
-| `/ralplan`, `ralplan 모드`, `ralplan 스킬` | `Skill("oh-my-claudecode:ralplan")` |
-| `/ralph`, `ralph 모드`, `ralph 스킬` | `Skill("oh-my-claudecode:ralph")` |
-| `/build-fix`, `build-fix 모드` | `Skill("oh-my-claudecode:build-fix")` |
-| `/ultraqa`, `ultraqa 모드`, `ultraqa 스킬` | `Skill("oh-my-claudecode:ultraqa")` |
-| `/review`, `review 모드` | `Skill("oh-my-claudecode:review")` |
-| `/analyze`, `analyze 모드` | `Skill("oh-my-claudecode:analyze")` |
-| `/code-review`, `code-review 모드` | `Skill("oh-my-claudecode:code-review")` |
-| `/security-review`, `security-review 모드` | `Skill("oh-my-claudecode:security-review")` |
-| `ulw` | `Skill("oh-my-claudecode:ultrawork")` |
-
-## 플러그인 변수 
-- ABRA_PLUGIN_DIR: {ABRA_PLUGIN_DIR}
-
 ```
 
 ````
-
-## 멤버 구성 규칙 
-'{서비스 목적}'에 필요한 팀원의 프로필을 작성함  
-- 예제와 같이 역할, 이름, 닉네임, 성별, 나이, 성향, 경력을 적절히 생성  
-- 별명은 한국어로 하며 4자를 넘지 않도록 함 
-
-**예시: **    
-```
-PO
-- 프로파일: 이해경 "갑빠" (남성, 54세)
-- 성향: Value Oriented, Interactive, Iterative를 중시하며 친화적인 성격
-- 경력:
-  - IBM에서 5년간 애자일 코치로 근무
-  - 네이버, 쿠팡, 카카오에서 PO로 10년간 근무
-  - 애자일 컨설팅 회사 창업 및 5년간 운영
-  - 국제 애자일 연합회 인증 트레이너
-```

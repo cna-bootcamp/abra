@@ -23,9 +23,6 @@ Dify 로컬 환경 구축부터 Abra 플러그인 초기 설정까지 전 과정
 
 사용자가 `/abra:setup` 명령을 호출하거나 "초기 설정", "setup", "플러그인 설정", "Dify 설치", "Docker 실행", "Dify 환경" 키워드 감지 시.
 
-## 작업 환경 변수 로드 
-CLAUDE.md에서 {ABRA_PLUGIN_DIR} 변수 로드함. 없으면 '/abra:scenario'를 먼저 수행하도록 안내하고 종료.   
-
 ## 사전 요구사항
 
 | 항목 | 최소 사양 |
@@ -37,11 +34,37 @@ CLAUDE.md에서 {ABRA_PLUGIN_DIR} 변수 로드함. 없으면 '/abra:scenario'�
 
 ## 워크플로우
 
-### Step 1: install.yaml 로드 (`ulw` 활용)
+### Step 0: 환경변수 셋팅
+
+- 프로젝트 디렉토리 생성 확인
+  사용자에게 AskUserQuestion으로 현재 디렉토리가 프로젝트 루트인지 물어보고 아닌 경우    
+  프로젝트 디렉토리를 생성하고 그 디렉토리로 이동 후 다시 수행하라고 안내하고 종료     
+
+  사용자가 'YES'로 답한 경우 현재 디렉토리 경로를 변수 `{PROJECT_DIR}`에 셋팅   
+
+- ABRA 플러그인 디렉토리 경로 설정 
+`{PROJECT_DIR}/AGENTS.md` 파일에 `{ABRA_PLUGIN_DIR}` 변수가 설정되어 있는지 확인함.
+미설정 시 아래 수행 
+사용자에게 ABRA 플러그인 디렉토리 경로를 입력받음(경로명은 `~/path1/path2` 형식으로 안내)   
+<!--ASK_USER-->
+{"title":"ABRA 플러그인 디렉토리","questions":[
+  {"question":"ABRA 플러그인 디렉토리 경로를 입력해주세요.","type":"text"}
+]}
+<!--/ASK_USER-->
+
+- AGENTS.md에 환경변수 저장
+  ```
+  ## 환경변수
+  - AI_RUNTIME: 현재 구동중인 런타임(Claude Code, Claude Cowork, Cursor, Antigravity, Codex 등)
+  - PROJECT_DIR: `{PROJECT_DIR}`
+  - ABRA_PLUGIN_DIR: `{ABRA_PLUGIN_DIR}`
+  ```
+
+### Step 1: install.yaml 로드 
 
 `{ABRA_PLUGIN_DIR}/gateway/install.yaml`을 읽어 설치 대상 파악.
 
-### Step 2: Docker 확인 (`ulw` 활용)
+### Step 2: Docker 확인 
 
 `docker --version`과 `docker compose version` 명령으로 Docker 설치 여부 확인.
 
@@ -51,30 +74,36 @@ CLAUDE.md에서 {ABRA_PLUGIN_DIR} 변수 로드함. 없으면 '/abra:scenario'�
   - Linux: https://docs.docker.com/engine/install/
 - 설치 안내 후 즉시 중단 (사용자가 설치 완료 후 재실행 필요)
 
-### Step 3: Dify 소스 확인 (`ulw` 활용)
+### Step 3: Dify 소스 확인
 
 AskUserQuestion으로 Dify 설치 위치 확인 (기본값: `~/workspace/dify`).
 
 **설치 위치가 없는 경우:**
 ```bash
-git clone https://github.com/langgenius/dify.git {설치_위치}
+git clone https://github.com/langgenius/dify.git {DIFY_DIR}
+```
+`{PROJECT_DIR}/AGENTS.md`의 '## 환경변수'섹션에 DIFY 경로 추가: `~/path1/path2` 형식으로 저장  
+```
+## 환경변수
+(다른 환경변수)
+- DIFY_DIR: `{DIFY_DIR}`
 ```
 
 **이미 설치된 경우:**
 - 기존 디렉토리 사용
 
-### Step 4: Dify Docker 환경 변수 파일 생성 (`ulw` 활용)
+### Step 4: Dify Docker 환경 변수 파일 생성
 
 ```bash
-cd {설치_위치}/docker
+cd {DIFY_DIR}/docker
 cp .env.example .env
 ```
 
-`{설치_위치}/docker/.env` 파일이 이미 있으면 복사를 건너뜀 (기존 설정 보존).
+`{DIFY_DIR}/docker/.env` 파일이 이미 있으면 복사를 건너뜀 (기존 설정 보존).
 
 **필수 환경변수 설정:**
 
-`{설치_위치}/docker/.env` 파일 생성 후(또는 기존 파일이 있는 경우), 아래 항목이 비어 있으면 설정:
+`{DIFY_DIR}/docker/.env` 파일 생성 후(또는 기존 파일이 있는 경우), 아래 항목이 비어 있으면 설정:
 
 | 변수명 | 설정값 | 용도 |
 |--------|--------|------|
@@ -86,14 +115,14 @@ cp .env.example .env
 > `redirect_uri` 오류(400 invalid_request)가 발생한다.
 > 외부 도메인으로 접속하는 경우 `http://localhost` 대신 해당 도메인으로 설정.
 
-### Step 5: Docker Compose 실행 (`ulw` 활용)
+### Step 5: Docker Compose 실행
 
 ```bash
-cd {설치_위치}/docker
+cd {DIFY_DIR}/docker
 docker compose up -d
 ```
 
-### Step 6: 컨테이너 상태 확인 및 헬스체크 (`ulw` 활용)
+### Step 6: 컨테이너 상태 확인 및 헬스체크
 
 1. `docker compose ps` 명령으로 컨테이너 상태 확인
 2. HTTP 헬스체크 (최대 60초 대기):
@@ -109,30 +138,30 @@ docker compose up -d
   - Docker 데몬 미실행
 - 사용자에게 에러 내용 보고 후 중단
 
-### Step 7: 초기 설정 안내 (`ulw` 활용)
+### Step 7: 초기 설정 안내 
 
 Dify 관리자 계정 생성 안내:
 - 접속 URL: `http://localhost/install`
 - 브라우저에서 위 URL로 접속하여 관리자 계정 생성 필요
 - 계정 생성 완료 후 다음 단계(Step 8)로 진행
 
-### Step 8: Groq 모델 설정 (`ulw` 활용)
+### Step 8: Groq 모델 설정 
 
 관리자 계정 생성 완료 후, Groq 모델 프로바이더를 자동 설정한다.
 
 **8-1. Dify 로그인 정보 확인**
 
-`{설치_위치}/docker/.env` 파일에서 `DIFY_EMAIL`, `DIFY_PASSWORD`를 읽는다.
-값이 없으면 AskUserQuestion으로 Dify 관리자 이메일과 비밀번호를 입력받아 `{설치_위치}/docker/.env`에 저장한다.
+`{DIFY_DIR}/docker/.env` 파일에서 `DIFY_EMAIL`, `DIFY_PASSWORD`를 읽는다.
+값이 없으면 AskUserQuestion으로 Dify 관리자 이메일과 비밀번호를 입력받아 `{DIFY_DIR}/docker/.env`에 저장한다.
 
 **8-2. Groq API Key 입력**
 
-{설치_위치}/docker/.env 파일에서 GROQ_API_KEY 읽음.  
+`{DIFY_DIR}/docker/.env` 파일에서 GROQ_API_KEY 읽음.  
 없으면 AskUserQuestion으로 사용자에게 Groq API Key를 입력받는다:
 - 안내 메시지: "Groq API Key를 입력해주세요. (https://console.groq.com/keys 에서 발급 가능)"
 - 입력값이 `gsk_`로 시작하는지 기본 형식 검증
 - 사용자가 건너뛰기를 원하면 (빈 값 또는 "skip" 입력) Step 9로 이동
-- {설치_위치}/docker/.env 파일에 GROQ_API_KEY={사용자_입력_API_KEY} 형식으로 저장
+- `{DIFY_DIR}/docker/.env` 파일에 GROQ_API_KEY={사용자_입력_API_KEY} 형식으로 저장
 
 **8-3. Dify Console API 로그인**
 
@@ -209,14 +238,14 @@ await client.save_provider_credentials("langgenius/groq/groq", credentials)
 **검증 성공 시:**
 - "Groq 모델 프로바이더 설정 완료" 메시지 출력
 
-### Step 9: Dify 접속 정보 수집 (`ulw` 활용)
+### Step 9: Dify 접속 정보 수집 
 
-`{설치_위치}/docker/.env` 파일에서 Dify 접속 정보 읽음.   
+`{DIFY_DIR}/docker/.env` 파일에서 Dify 접속 정보 읽음.   
 없으면 AskUserQuestion으로 Dify 접속 정보 수집:
 - `DIFY_EMAIL`
 - `DIFY_PASSWORD`
 
-`{설치_위치}/docker/.env` 파일 생성 또는 갱신:
+`{DIFY_DIR}/docker/.env` 파일 생성 또는 갱신:
 
 ```env
 DIFY_API_BASE_URL=http://localhost/console/api
@@ -224,7 +253,7 @@ DIFY_EMAIL=admin@example.com
 DIFY_PASSWORD=your_password
 ```
 
-### Step 10: Python 가상환경 생성 및 의존성 설치 (`ulw` 활용)
+### Step 10: Python 가상환경 생성 및 의존성 설치
 
 ```bash
 cd {ABRA_PLUGIN_DIR}/gateway
@@ -235,7 +264,7 @@ python -m venv .venv
 source .venv/bin/activate && pip install -r requirements.txt
 ```
 
-### Step 11: 도구 동작 확인 (`ulw` 활용)
+### Step 11: 도구 동작 확인 
 
 ```bash
 # Windows
@@ -246,35 +275,23 @@ source .venv/bin/activate && pip install -r requirements.txt
 
 Dify 연결 테스트 (앱 목록 조회 성공 여부 확인).
 
-### Step 12: Claude Code 권한 설정 (`ulw` 활용)
-
-`{ABRA_PLUGIN_DIR}` 경로 하위 파일을 승인 없이 읽기/쓰기/실행할 수 있도록 `~/.claude/settings.json`에 권한을 추가한다.
-
-`~/.claude/settings.json`을 읽어 `permissions` 항목에 아래 내용을 병합(기존 항목 보존):
-
-```json
-{
-  "permissions": {
-    "allow": [
-      "Read({PLUGIN_CACHE_DIR}/**)",
-      "Write({PLUGIN_CACHE_DIR}/**)",
-      "Edit({PLUGIN_CACHE_DIR}/**)",
-      "Bash(python {PLUGIN_CACHE_DIR}/**)",
-      "Bash(python3 {PLUGIN_CACHE_DIR}/**)"
-    ],
-    "additionalDirectories": [
-      "{PLUGIN_CACHE_DIR}"
-    ]
-  }
+#### Step 12: ABRA 플러그인 디렉토리 접근 권한 셋팅 
+플러그인 디렉토리에 대한 에이전트의 Read/Write/Edit/Bash 권한을 설정하여 개발 및 검증 과정에서 파일 생성/수정/실행 가능하도록 함.
+`{PROJECT_DIR}/.claude/settings.local.json` 파일의 "permissions" 섹션에 아래 권한 추가:  
+```
+"permissions": {
+  "allow": [
+    "Read({ABRA_PLUGIN_DIR}/**)",
+    "Write({ABRA_PLUGIN_DIR}/**)",
+    "Edit({ABRA_PLUGIN_DIR}/**)",
+    "Bash(python {ABRA_PLUGIN_DIR}/**)",
+    "Bash(python3 {ABRA_PLUGIN_DIR}/**)"
+  ],
+  "additionalDirectories": [
+    "{ABRA_PLUGIN_DIR}"
+  ]
 }
 ```
-
-`{PLUGIN_CACHE_DIR}`은 플러그인 캐시 루트 디렉토리 (버전 무관 전체 허용):
-- Windows: `C:/Users/{사용자명}/.claude/plugins`
-- macOS/Linux: `~/.claude/plugins`
-
-> **주의**: 실제 절대 경로로 치환하여 저장한다.
-> 이미 동일 경로 규칙이 존재하면 중복 추가하지 않는다.
 
 ### Step 13: 결과 보고
 
@@ -299,24 +316,19 @@ Dify 연결 테스트 (앱 목록 조회 성공 여부 확인).
 
 🌐 Dify 접속 URL: http://localhost
 
-⚙️ `{설치_위치}/docker/.env` 설정: 완료
+⚙️ `{DIFY_DIR}/docker/.env` 설정: 완료
 🐍 Python 가상환경: 완료
 🔗 Dify 연결 테스트: {성공 ✅ / 실패 ❌}
-🔐 Claude Code 권한 설정: 완료
-
-⚠️  Claude Code를 재시작해야 권한 설정이 적용됩니다.
-   재시작 후 /abra:scenario 명령으로 시작하세요.
 
 📌 다음 단계:
-1. Claude Code 재시작
+1. AI Runtime(Claude Code, Cursor 등) 재시작
 2. /abra:scenario 명령으로 시나리오 생성 시작
 
 🔑 비밀번호 초기화:
-cd {설치_위치}/docker && docker compose exec api flask reset-password
+cd {DIFY_DIR}/docker && docker compose exec api flask reset-password
 ```
 
 ## 사용자 상호작용
-
 - AskUserQuestion으로 Dify 설치 위치 확인 (Step 3)
 - AskUserQuestion으로 Groq API Key 입력받기 (Step 8-2, 건너뛰기 가능)
 - AskUserQuestion으로 Dify 접속 정보 수집 (Step 9)
@@ -329,18 +341,10 @@ cd {설치_위치}/docker && docker compose exec api flask reset-password
 | 포트 충돌 (80, 443) | 다른 서비스가 포트 사용 중 | 기존 서비스 중지 또는 Dify 포트 변경 안내 |
 | 컨테이너 시작 실패 | 메모리 부족, 설정 오류 | `docker compose logs` 확인 안내 |
 | 헬스체크 실패 | 컨테이너 부팅 지연 | 60초 대기 후 재시도 안내 |
-| Dify 로그인 실패 | 이메일/비밀번호 불일치 | `{설치_위치}/docker/.env` 확인 또는 비밀번호 초기화 명령 안내 |
+| Dify 로그인 실패 | 이메일/비밀번호 불일치 | `{DIFY_DIR}/docker/.env` 확인 또는 비밀번호 초기화 명령 안내 |
 | Groq 플러그인 설치 실패 | 네트워크 또는 Dify 버전 이슈 | Settings > Model Providers에서 수동 설치 안내 |
 | Groq API Key 검증 실패 | 잘못된 API Key | https://console.groq.com/keys 에서 키 재발급 안내 |
-| Dify 연결 실패 | 접속 정보 불일치 | ``{설치_위치}/docker/.env` 확인 또는 비밀번호 초기화 안내 |
-
-## 스킬 부스팅
-
-이 스킬은 다음 OMC 스킬을 활용하여 검증된 워크플로우를 적용함:
-
-| 단계 | OMC 스킬 | 목적 |
-|------|----------|------|
-| Step 1~12 | `ulw` 매직 키워드 | 각 단계의 완료 보장 |
+| Dify 연결 실패 | 접속 정보 불일치 | `{DIFY_DIR}/docker/.env` 확인 또는 비밀번호 초기화 안내 |
 
 ## MUST 규칙
 
@@ -363,7 +367,7 @@ cd {설치_위치}/docker && docker compose exec api flask reset-password
 | 2 | 기존 Dify docker/.env 파일을 덮어쓰지 않는다 (이미 존재하면 건너뜀) |
 | 3 | 헬스체크 실패를 무시하고 다음 단계로 진행하지 않는다 |
 | 4 | install.yaml에 정의되지 않은 도구를 설치하지 않는다 |
-| 5 | 기존 `{설치_위치}/docker/.env` 파일을 사용자 확인 없이 덮어쓰지 않는다 |
+| 5 | 기존 `{DIFY_DIR}/docker/.env` 파일을 사용자 확인 없이 덮어쓰지 않는다 |
 | 6 | Dify 연결 테스트 실패 시 무시하고 진행하지 않는다 |
 
 ## 검증 체크리스트
@@ -378,9 +382,8 @@ cd {설치_위치}/docker && docker compose exec api flask reset-password
 - [ ] Groq API Key가 입력되었는가 (건너뛰기 허용)
 - [ ] Groq 플러그인이 설치되었는가
 - [ ] Groq credentials가 검증 및 저장되었는가
-- [ ] `{설치_위치}/docker/.env` 파일이 올바른 위치에 생성되었는가
+- [ ] `{DIFY_DIR}/docker/.env` 파일이 올바른 위치에 생성되었는가
 - [ ] Python 가상환경이 생성되었는가
 - [ ] requirements.txt 의존성이 설치되었는가
 - [ ] Dify 연결 테스트(앱 목록 조회)가 성공했는가
-- [ ] ~/.claude/settings.json에 ABRA_PLUGIN_DIR 권한이 추가되었는가
-- [ ] Claude Code 재시작 안내가 사용자에게 전달되었는가
+

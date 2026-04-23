@@ -20,8 +20,14 @@ DSL을 Dify에 Import → Publish → Run → Export하여 프로토타이핑을
 - "프로토타이핑", "프로토타입", "Dify 업로드", "Dify 실행", "Dify 테스트"
 
 ## 작업 환경 변수 로드 
-CLAUDE.md에서 {ABRA_PLUGIN_DIR} 변수 로드함. 없으면 '/abra:scenario'를 먼저 수행하도록 안내하고 종료.   
-
+AGENTS.md 파일에서 환경변수를 로딩. 로딩 실패 시 사용자에게 `/abra:setup`을 먼저 수행하라고 안내하고 종료.     
+```
+## 환경변수
+- AI_RUNTIME: 현재 구동중인 런타임
+- PROJECT_DIR: 현재 프로젝트 경로
+- ABRA_PLUGIN_DIR: ABRA 플러그인 경로
+- DIFY_DIR: DIFY 설치 경로
+```
 
 ## 에이전트 호출 규칙
 
@@ -32,25 +38,9 @@ CLAUDE.md에서 {ABRA_PLUGIN_DIR} 변수 로드함. 없으면 '/abra:scenario'�
 | prototype-runner | `abra:prototype-runner:prototype-runner` |
 
 ### 프롬프트 조립
-
-1. `{ABRA_PLUGIN_DIR}/agents/prototype-runner/` 에서 3파일 로드 (AGENT.md + agentcard.yaml + tools.yaml)
-2. `{ABRA_PLUGIN_DIR}/gateway/runtime-mapping.yaml` 참조하여 구체화:
-   - **모델 구체화**: agentcard.yaml의 `tier: MEDIUM` → `tier_mapping`에서 `claude-sonnet-4-5` 결정
-   - **툴 구체화**: tools.yaml의 추상 도구 → `tool_mapping`에서 실제 도구 결정
-     - `file_read` → builtin `Read`
-     - `file_write` → builtin `Write`
-     - `dsl_validation` → custom `validate_dsl`
-     - `dify_app_management` → custom `dify_cli.py` (list, export)
-     - `dify_dsl_management` → custom `dify_cli.py` (import, update, export)
-     - `dify_workflow_management` → custom `dify_cli.py` (publish, run)
-   - **금지액션 구체화**: agentcard.yaml의 `forbidden_actions: [file_delete, network_access, user_interact]` → `action_mapping`에서 제외할 실제 도구 결정
-     - `file_delete` → `Bash(rm)` 제외
-     - `network_access` → `WebFetch`, `WebSearch` 제외
-     - `user_interact` → `AskUserQuestion` 제외
-   - **최종 도구** = (구체화된 도구) - (제외 도구)
-3. 3파일을 합쳐 하나의 프롬프트로 조립
-   - **프롬프트 구성 순서**: 공통 정적(runtime-mapping) → 에이전트별 정적(3파일) → 동적(작업 지시)
-4. `Agent(subagent_type="abra:prototype-runner:prototype-runner", model="sonnet", prompt=조립된 프롬프트)` 호출
+- `{ABRA_PLUGIN_DIR}/resources/guides/combine-prompt.md`에 따라 AGENT.md + agentcard.yaml + tools.yaml 합치기
+- `Agent(subagent_type=FQN, model=tier_mapping 결과, prompt=조립된 프롬프트)` 호출
+- tier → 모델 매핑은 `{ABRA_PLUGIN_DIR}/gateway/runtime-mapping.yaml` 참조
 
 ### 서브 에이전트 호출
 워크플로우 단계에 `Agent: {agent-name}`이 명시된 경우,

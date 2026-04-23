@@ -36,7 +36,7 @@
       - [Step 3: .env 파일 생성](#step-3-env-파일-생성)
       - [Step 4: Python 가상환경 생성 및 의존성 설치](#step-4-python-가상환경-생성-및-의존성-설치)
       - [Step 5: 도구 동작 확인](#step-5-도구-동작-확인)
-      - [Step 6: CLAUDE.md 라우팅 테이블 등록](#step-6-claudemd-라우팅-테이블-등록)
+      - [Step 6: AGENTS.md 라우팅 테이블 등록](#step-6-claudemd-라우팅-테이블-등록)
       - [Step 7: 결과 보고](#step-7-결과-보고)
     - [8.3 dify-setup (설정스킬)](#83-dify-setup-설정스킬)
       - [Step 1: Docker 확인](#step-1-docker-확인)
@@ -74,7 +74,7 @@
   - [9. Gateway 상세 설계](#9-gateway-상세-설계)
     - [9.1 install.yaml](#91-installyaml)
     - [9.2 runtime-mapping.yaml](#92-runtime-mappingyaml)
-  - [10. CLAUDE.md 라우팅 테이블](#10-claudemd-라우팅-테이블)
+  - [10. AGENTS.md 라우팅 테이블](#10-claudemd-라우팅-테이블)
   - [11. 개발 순서](#11-개발-순서)
     - [산출물 목록 및 생성 순서](#산출물-목록-및-생성-순서)
     - [병렬 가능 작업](#병렬-가능-작업)
@@ -843,11 +843,11 @@ gateway/.venv/bin/python gateway/tools/dify_cli.py list
 
 Dify 연결 테스트 (앱 목록 조회 성공 여부 확인).
 
-#### Step 6: CLAUDE.md 라우팅 테이블 등록
+#### Step 6: AGENTS.md 라우팅 테이블 등록
 
 AskUserQuestion으로 적용 범위 질문:
-- 모든 프로젝트: `~/.claude/CLAUDE.md`
-- 이 프로젝트만: `./CLAUDE.md`
+- 모든 프로젝트: `~/.claude/AGENTS.md`
+- 이 프로젝트만: `./AGENTS.md`
 
 선택된 파일에 라우팅 테이블 추가 (기존 내용 유지, 끝에 추가).
 
@@ -1387,9 +1387,9 @@ action_mapping:
 
 ---
 
-## 10. CLAUDE.md 라우팅 테이블
+## 10. AGENTS.md 라우팅 테이블
 
-setup 스킬이 설치 시 런타임 상주 파일(CLAUDE.md)에 추가하는 라우팅 테이블.
+setup 스킬이 설치 시 런타임 상주 파일(AGENTS.md)에 추가하는 라우팅 테이블.
 
 ```markdown
 # abra 플러그인

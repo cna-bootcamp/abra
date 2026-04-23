@@ -20,8 +20,14 @@ DSL 구조 검증을 통과한 유효한 파일을 산출하며, 에러 발생 �
 - `/abra:dsl-generate` 명령 호출 시
 
 ## 작업 환경 변수 로드 
-CLAUDE.md에서 {ABRA_PLUGIN_DIR} 변수 로드함. 없으면 '/abra:scenario'를 먼저 수행하도록 안내하고 종료.   
-
+AGENTS.md 파일에서 환경변수를 로딩. 로딩 실패 시 사용자에게 `/abra:setup`을 먼저 수행하라고 안내하고 종료.     
+```
+## 환경변수
+- AI_RUNTIME: 현재 구동중인 런타임
+- PROJECT_DIR: 현재 프로젝트 경로
+- ABRA_PLUGIN_DIR: ABRA 플러그인 경로
+- DIFY_DIR: DIFY 설치 경로
+```
 
 ## 에이전트 호출 규칙
 
@@ -32,22 +38,9 @@ CLAUDE.md에서 {ABRA_PLUGIN_DIR} 변수 로드함. 없으면 '/abra:scenario'�
 | dsl-architect | `abra:dsl-architect:dsl-architect` |
 
 ### 프롬프트 조립
-
-1. `{ABRA_PLUGIN_DIR}/agents/dsl-architect/` 에서 3파일 로드 (AGENT.md + agentcard.yaml + tools.yaml)
-2. `{ABRA_PLUGIN_DIR}/gateway/runtime-mapping.yaml` 참조하여 구체화:
-   - **모델 구체화**: agentcard.yaml의 `tier: HIGH` → `tier_mapping`에서 `claude-opus-4-6` 결정
-   - **툴 구체화**: tools.yaml의 추상 도구 → `tool_mapping`에서 실제 도구 결정
-     - `file_read` → builtin `Read`
-     - `file_write` → builtin `Write`
-     - `dsl_validation` → custom `validate_dsl.py`
-   - **금지액션 구체화**: agentcard.yaml의 `forbidden_actions: ["code_execute", "network_access", "file_delete"]` → `action_mapping`에서 제외할 도구 결정
-     - `code_execute` → `Bash` 제외
-     - `network_access` → `WebFetch`, `WebSearch` 제외
-     - `file_delete` → `Bash(rm)` 제외
-   - **최종 도구** = (Read, Write, validate_dsl) - (제외 도구)
-3. 프롬프트 조립: AGENT.md + agentcard.yaml + tools.yaml을 합쳐 하나의 프롬프트로 구성
-   - **구성 순서**: 공통 정적(runtime-mapping) → 에이전트별 정적(3파일) → 동적(작업 지시)
-4. `Agent(subagent_type="abra:dsl-architect:dsl-architect", model="opus", prompt=조립된 프롬프트)` 호출
+- `{ABRA_PLUGIN_DIR}/resources/guides/combine-prompt.md`에 따라 AGENT.md + agentcard.yaml + tools.yaml 합치기
+- `Agent(subagent_type=FQN, model=tier_mapping 결과, prompt=조립된 프롬프트)` 호출
+- tier → 모델 매핑은 `{ABRA_PLUGIN_DIR}/gateway/runtime-mapping.yaml` 참조
 
 ### 서브 에이전트 호출
 워크플로우 단계에 `Agent: {agent-name}`이 명시된 경우,
