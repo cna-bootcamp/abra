@@ -12,6 +12,7 @@ Usage:
 
 import sys
 import io
+import ast
 import json
 import re
 
@@ -132,6 +133,39 @@ COMPARISON_OPERATOR_FIXES = {
     "!=": "≠",
 }
 
+# ── 노드 ID / UUID / 모델 정책 ───────────────────────────────────────
+# Dify VariableTemplateParser 정규식과 동일. 하이픈 불허.
+NODE_ID_PATTERN = re.compile(r"^[a-zA-Z0-9_]{1,50}$")
+
+# PostgreSQL uuid 컬럼 스키마 — conversation_variables[].id 필수 형식
+UUID_PATTERN = re.compile(
+    r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+    re.IGNORECASE,
+)
+
+# Reasoning 모델 — question-classifier에 사용 시 JSON 출력 불안정
+REASONING_MODELS = {
+    "openai/gpt-oss-120b",
+    "openai/gpt-oss-20b",
+    "deepseek-r1",
+    "deepseek-r1-distill-llama-70b",
+    "deepseek-r1-distill-llama-70b-specdec",
+    "deepseek-r1-distill-qwen-32b",
+    "qwen-qwq-32b",
+    "llama-3.1-405b-reasoning",
+}
+
+# classifier 권장 모델 (instruction-tuned, JSON 출력 안정)
+RECOMMENDED_CLASSIFIER_MODELS = [
+    "meta-llama/llama-4-scout-17b-16e-instruct",
+    "llama-3.3-70b-versatile",
+    "llama-3.1-8b-instant",
+    "gemma2-9b-it",
+]
+
+# value_selector 첫 요소로 허용되는 특수 스코프 (노드 ID 아님)
+RESERVED_SELECTOR_SCOPES = {"sys", "env", "conversation", "environment"}
+
 
 # ── 검증 함수 ──────────────────────────────────────────────────────
 
@@ -245,7 +279,7 @@ def validate_workflow_section(data: dict, app_mode: str, result: ValidationResul
     return workflow
 
 
-def validate_graph(workflow: dict, result: ValidationResult):
+def validate_graph(workflow: dict, result: ValidationResult, app_mode: str = ""):
     """5단계: 그래프 구조 검증"""
     graph = workflow.get("graph")
     if graph is None or not isinstance(graph, dict):
@@ -294,7 +328,7 @@ def validate_graph(workflow: dict, result: ValidationResult):
         result.error("GRAPH", "START 노드 또는 트리거 노드가 없음",
                      suggestion="start 타입 노드 추가 필요")
 
-    if not has_end:
+    if not has_end and app_mode != "advanced-chat":
         result.warning("GRAPH", "END 노드가 없음 — 워크플로우 종료점 없음",
                        suggestion="end 타입 노드 추가 권장")
 
@@ -320,6 +354,14 @@ def _validate_node(node: dict, index: int, node_ids: set, node_types: set,
         result.error("NODE", f"중복 노드 id: '{node_id}'", path=path)
     else:
         node_ids.add(node_id)
+        # V1: 노드 ID 정규식 — Dify VariableTemplateParser 규칙 (하이픈 불허)
+        if not NODE_ID_PATTERN.match(str(node_id)):
+            result.error("NODE_ID",
+                         f"노드 id '{node_id}'가 Dify VariableTemplateParser 규칙 위반",
+                         path=f"{path}.id",
+                         suggestion="정규식 ^[a-zA-Z0-9_]{1,50}$ 준수 — "
+                                    "하이픈(-) 금지, 언더스코어(_)로 교체. "
+                                    "위반 시 {{#id.x#}} 템플릿이 런타임에 해석되지 않음")
 
     # data 검증
     data = node.get("data")
@@ -363,6 +405,8 @@ def _validate_node(node: dict, index: int, node_ids: set, node_types: set,
         _validate_end_node(data, path, result)
     elif node_type == "variable-aggregator":
         _validate_variable_aggregator_node(data, path, result)
+    elif node_type == "question-classifier":
+        _validate_classifier_node(data, path, result)
 
 
 def _validate_llm_node(data: dict, path: str, result: ValidationResult):
@@ -531,6 +575,40 @@ def _validate_variable_aggregator_node(data: dict, path: str, result: Validation
                              path=f"{path}.data.variables[{j}]")
 
 
+def _validate_classifier_node(data: dict, path: str, result: ValidationResult):
+    """V4: Question-Classifier 노드 — reasoning 모델 사용 감지"""
+    model = data.get("model")
+    if not isinstance(model, dict):
+        return
+
+    model_name = str(model.get("name") or "")
+    if model_name in REASONING_MODELS:
+        rec = ", ".join(RECOMMENDED_CLASSIFIER_MODELS[:3])
+        result.warning(
+            "CLASSIFIER_MODEL",
+            f"classifier에 reasoning 모델 '{model_name}' 사용 — "
+            "JSON 출력에 reasoning 토큰 혼입되어 간헐적 파싱 실패 가능",
+            path=f"{path}.data.model.name",
+            suggestion=f"instruction-tuned 권장: {rec}. "
+                       "파라미터는 temperature=0, max_tokens≤256 고정",
+        )
+
+    params = model.get("completion_params") or {}
+    if isinstance(params, dict):
+        temp = params.get("temperature")
+        if temp is not None:
+            try:
+                if float(temp) > 0.0:
+                    result.info(
+                        "CLASSIFIER_TEMP",
+                        f"classifier temperature={temp} > 0 — 비결정론적 분류 결과",
+                        path=f"{path}.data.model.completion_params.temperature",
+                        suggestion="classifier는 temperature: 0 권장",
+                    )
+            except (TypeError, ValueError):
+                pass
+
+
 def _validate_edge(edge: dict, index: int, node_ids: set, result: ValidationResult):
     """엣지 검증"""
     path = f"workflow.graph.edges[{index}]"
@@ -653,7 +731,19 @@ def _check_var_refs_in_dict(obj: Any, node_ids: set, pattern: re.Pattern,
     if isinstance(obj, str):
         for match in pattern.finditer(obj):
             ref_node_id = match.group(1)
-            if ref_node_id not in node_ids and ref_node_id not in ("sys", "env"):
+            # V1: 템플릿 참조의 노드 ID가 정규식을 위반하면 런타임에 해석 안 됨 (조용한 실패)
+            if ref_node_id in ("sys", "env"):
+                continue
+            if not NODE_ID_PATTERN.match(ref_node_id):
+                result.error(
+                    "NODE_ID",
+                    f"템플릿 참조 '{{{{#{ref_node_id}...#}}}}'가 "
+                    "Dify VariableTemplateParser 규칙 위반 — 하이픈 포함",
+                    path=path,
+                    suggestion="노드 ID와 이 참조의 '-'를 '_'로 교체. "
+                               "위반 시 Answer 노드가 템플릿 원문을 그대로 반환",
+                )
+            elif ref_node_id not in node_ids:
                 result.warning("VAR_REF",
                                f"변수 참조 '{{{{#{ref_node_id}...#}}}}'의 노드가 존재하지 않음",
                                path=path)
@@ -689,15 +779,178 @@ def _check_selectors_in_dict(obj: Any, node_ids: set, path: str,
             selector = obj["value_selector"]
             if isinstance(selector, list) and len(selector) >= 1:
                 ref_id = selector[0]
-                if isinstance(ref_id, str) and ref_id not in node_ids:
-                    result.warning("SELECTOR",
-                                   f"value_selector [{ref_id}, ...] 의 노드가 존재하지 않음",
-                                   path=f"{path}.value_selector")
+                if isinstance(ref_id, str):
+                    # V1: 특수 스코프가 아닌데 정규식 위반 → 하이픈 포함 노드 ID 참조
+                    if (ref_id not in RESERVED_SELECTOR_SCOPES
+                            and not NODE_ID_PATTERN.match(ref_id)):
+                        result.error(
+                            "NODE_ID",
+                            f"value_selector 첫 요소 '{ref_id}'가 "
+                            "Dify 노드 ID 규칙 위반 — 하이픈 포함",
+                            path=f"{path}.value_selector",
+                            suggestion="노드 ID와 이 참조의 '-'를 '_'로 교체",
+                        )
+                    elif (ref_id not in node_ids
+                            and ref_id not in RESERVED_SELECTOR_SCOPES):
+                        result.warning("SELECTOR",
+                                       f"value_selector [{ref_id}, ...] 의 노드가 존재하지 않음",
+                                       path=f"{path}.value_selector")
         for key, value in obj.items():
             _check_selectors_in_dict(value, node_ids, f"{path}.{key}", result)
     elif isinstance(obj, list):
         for j, item in enumerate(obj):
             _check_selectors_in_dict(item, node_ids, f"{path}[{j}]", result)
+
+
+def validate_conversation_variables_uuid(workflow: dict, app_mode: str,
+                                          result: ValidationResult):
+    """V2: advanced-chat 모드에서 conversation_variables[].id는 UUID 필수.
+    Dify가 PostgreSQL uuid 컬럼에 직접 바인딩하므로 UUID가 아니면 import 500."""
+    if app_mode != "advanced-chat":
+        return
+
+    conv_vars = workflow.get("conversation_variables")
+    if not isinstance(conv_vars, list):
+        return
+
+    for i, var in enumerate(conv_vars):
+        if not isinstance(var, dict):
+            continue
+        path = f"workflow.conversation_variables[{i}].id"
+        var_id = var.get("id")
+        if not var_id:
+            result.error(
+                "CONV_VAR_ID",
+                "conversation_variables[].id 누락",
+                path=path,
+                suggestion="Python uuid.uuid4()로 UUID v4 생성",
+            )
+            continue
+        if not UUID_PATTERN.match(str(var_id)):
+            result.error(
+                "CONV_VAR_ID",
+                f"conversation_variables[].id '{var_id}'가 UUID 형식 아님",
+                path=path,
+                suggestion="PostgreSQL uuid 컬럼 스키마 필수 — "
+                           "UUID v4 (예: 34b5e6a7-8c9d-4ef1-9a0b-1234567890ab). "
+                           "위반 시 import가 500 InvalidTextRepresentation으로 실패",
+            )
+
+
+def _collect_dict_literal_keys(tree: ast.AST) -> list[set[str]]:
+    """AST에서 문자열-키 dict 리터럴을 모두 수집 (code 노드 branch 출력 후보)"""
+    collected = []
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Dict):
+            continue
+        keys: set[str] = set()
+        non_str = False
+        for k in node.keys:
+            if isinstance(k, ast.Constant) and isinstance(k.value, str):
+                keys.add(k.value)
+            else:
+                non_str = True
+                break
+        if non_str or not keys:
+            continue
+        collected.append(keys)
+    return collected
+
+
+def validate_code_branch_outputs(workflow: dict, result: ValidationResult):
+    """V3: Code 노드 branch별 출력 완전성 검사 (AST 정적 분석 — 휴리스틱).
+    선언된 outputs의 부분집합인 dict 리터럴(branch 반환 후보)을 수집해서
+    선언 키보다 부족한 branch가 있으면 경고."""
+    graph = workflow.get("graph") or {}
+    nodes = graph.get("nodes") or []
+
+    for i, node in enumerate(nodes):
+        if not isinstance(node, dict):
+            continue
+        data = node.get("data") or {}
+        if data.get("type") != "code":
+            continue
+        if data.get("code_language") != "python3":
+            continue
+
+        code = data.get("code") or ""
+        outputs = data.get("outputs") or {}
+        if not code or not isinstance(outputs, dict) or not outputs:
+            continue
+        declared = set(outputs.keys())
+        if len(declared) < 2:
+            continue  # 키 1개면 누락 판별 무의미
+
+        try:
+            tree = ast.parse(code)
+        except SyntaxError:
+            continue
+
+        title = data.get("title", f"node[{i}]")
+        path = f"workflow.graph.nodes[{i}].data.code"
+        reported: set[frozenset[str]] = set()
+
+        for keys in _collect_dict_literal_keys(tree):
+            # 선언된 outputs의 부분집합이면서 누락이 있으면 branch 후보
+            if not keys.issubset(declared):
+                continue
+            if keys == declared:
+                continue
+            missing = declared - keys
+            # 선언의 과반수 이상이 존재하는 경우에만 branch로 간주 (휴리스틱)
+            if len(keys) * 2 < len(declared):
+                continue
+            sig = frozenset(keys)
+            if sig in reported:
+                continue
+            reported.add(sig)
+            result.warning(
+                "CODE_BRANCH",
+                f"code 노드 '{title}': dict 리터럴 {sorted(keys)}에 "
+                f"선언된 outputs {sorted(missing)} 누락",
+                path=path,
+                suggestion="main() 마지막에 setdefault 루프로 누락 필드 보충 권장. "
+                           "예: for _k, _v in [(\"x\", \"\"), ...]: result.setdefault(_k, _v)",
+            )
+
+
+def validate_advanced_chat_specific(workflow: dict, app_mode: str,
+                                     result: ValidationResult):
+    """V5: advanced-chat(chatflow) 모드 전용 구조 검증."""
+    if app_mode != "advanced-chat":
+        return
+
+    graph = workflow.get("graph") or {}
+    nodes = graph.get("nodes") or []
+
+    answer_count = 0
+    end_count = 0
+    for node in nodes:
+        if not isinstance(node, dict):
+            continue
+        t = (node.get("data") or {}).get("type")
+        if t == "answer":
+            answer_count += 1
+        elif t == "end":
+            end_count += 1
+
+    if answer_count == 0:
+        result.error(
+            "CHATFLOW",
+            "advanced-chat(chatflow) 모드는 answer 노드 ≥1개 필수",
+            path="workflow.graph.nodes",
+            suggestion="terminal 노드를 type: answer로 교체. "
+                       "end 노드는 workflow 전용 — chatflow 대화 응답은 answer에서 생성",
+        )
+
+    if end_count > 0:
+        result.warning(
+            "CHATFLOW",
+            f"advanced-chat 모드에 end 노드 {end_count}개 존재 — "
+            "chatflow는 answer 노드를 종료점으로 사용",
+            path="workflow.graph.nodes",
+            suggestion="end 노드를 answer 노드로 교체 검토",
+        )
 
 
 # ── 메인 검증 오케스트레이터 ────────────────────────────────────────
@@ -751,11 +1004,14 @@ def validate_dsl(file_path: str) -> ValidationResult:
 
     if workflow:
         # 6. 그래프 검증
-        validate_graph(workflow, result)
+        validate_graph(workflow, result, app_mode=app_mode)
 
         # 7. 변수 검증
         validate_variables(workflow, "environment", result)
         validate_variables(workflow, "conversation", result)
+
+        # 7-A. conversation_variables UUID 검증 (advanced-chat)
+        validate_conversation_variables_uuid(workflow, app_mode, result)
 
         # 8. 피처 검증
         validate_features(workflow, app_mode, result)
@@ -765,6 +1021,12 @@ def validate_dsl(file_path: str) -> ValidationResult:
 
         # 10. value_selector 참조 검증
         validate_value_selectors(workflow, result)
+
+        # 10-A. code 노드 branch 출력 완전성 검증
+        validate_code_branch_outputs(workflow, result)
+
+        # 10-B. advanced-chat 전용 구조 검증 (answer 노드 등)
+        validate_advanced_chat_specific(workflow, app_mode, result)
 
     # 11. 의존성 검증
     validate_dependencies(data, result)

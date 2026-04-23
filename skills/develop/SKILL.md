@@ -21,14 +21,7 @@ DSL 구조를 참조하여 LangChain/LangGraph 등으로 코드 구현하며,
 - 사용자가 `/abra:develop` 명령 호출 시
 
 ## 작업 환경 변수 로드 
-AGENTS.md 파일에서 환경변수를 로딩. 로딩 실패 시 사용자에게 `/abra:setup`을 먼저 수행하라고 안내하고 종료.     
-```
-## 환경변수
-- AI_RUNTIME: 현재 구동중인 런타임
-- PROJECT_DIR: 현재 프로젝트 경로
-- ABRA_PLUGIN_DIR: ABRA 플러그인 경로
-- DIFY_DIR: DIFY 설치 경로
-```  
+AGENTS.md 파일에서 `## 환경변수`섹션의 환경변수 로딩. 로딩 실패 시 사용자에게 `/abra:setup`을 먼저 수행하라고 안내하고 종료.     
 
 ## 에이전트 호출 규칙
 
@@ -51,6 +44,14 @@ AGENTS.md 파일에서 환경변수를 로딩. 로딩 실패 시 사용자에게
 서브에이전트 호출 없이 메인 에이전트가 해당 산출물을 직접 작성하면
 스킬 미준수로 간주함.
 
+## 진행상황 업데이트 및 재개
+`{PROJECT_DIR}/AGENTS.md`에 각 Phase 완료 시 저장. 최종 완료 시 'Done'으로 표기.   
+```
+## 워크플로우 진행상황
+- {skill-name}: Phase3
+```
+진행상황 정보가 있는 경우 마지막 완료 단계 이후부터 자동 재개
+
 ## 워크플로우
 
 ### Phase 0: 입력 확인
@@ -61,7 +62,7 @@ AGENTS.md 파일에서 환경변수를 로딩. 로딩 실패 시 사용자에게
 - dev-plan.md 없음 → `/abra:dev-plan` 스킬로 위임
 - DSL 파일 없음 → `/abra:dsl-generate` 스킬로 위임
 
-### Phase 1: 코드 기반 구현 → Agent: agent-developer (`/oh-my-claudecode:ralph` 활용)
+### Phase 1: 코드 기반 구현 → Agent: agent-developer (`ralph` 활용)
 
 - **TASK**: 개발계획서에 따라 AI Agent 프로덕션 코드 구현 (LangChain/LangGraph 등)
 - **EXPECTED OUTCOME**: 빌드 성공 + 테스트 통과 + README.md 포함 완성 코드
@@ -84,7 +85,7 @@ AGENTS.md 파일에서 환경변수를 로딩. 로딩 실패 시 사용자에게
   - 출력 디렉토리: `{project_root}/`
   - 가상환경: `gateway/.venv` (Python 도구 실행 시 사용)
 
-### Phase 2: 빌드 오류 수정 (`/oh-my-claudecode:build-fix` 활용)
+### Phase 2: 빌드 오류 수정 
 
 빌드 에러 발생 시 최소 수정 원칙으로 해결.
 
@@ -95,7 +96,7 @@ AGENTS.md 파일에서 환경변수를 로딩. 로딩 실패 시 사용자에게
 #### 실패 시 조치
 - 에러 원인 분석 → 코드 수정 → 재빌드 → 재검증 (반복)
 
-### Phase 3: QA/검증 (`/oh-my-claudecode:ultraqa` 활용)
+### Phase 3: QA/검증 (`ultraqa` 활용)
 
 - [ ] 모든 파일 lsp_diagnostics 통과 (에러 0)
 - [ ] 빌드 성공 (컴파일/트랜스파일 에러 없음)
@@ -124,7 +125,7 @@ AGENTS.md 파일에서 환경변수를 로딩. 로딩 실패 시 사용자에게
 - `py_compile` 실패 → 자동 수정 (최대 3회)
 - 3회 초과 실패 → Phase 4 스킵, Phase 5도 스킵하여 Phase 6으로 이동
 
-### Phase 5: E2E 테스트 + 스크린샷 (Playwright MCP)
+### Phase 5: E2E 테스트 + 스크린샷 (Playwright MCP 이용)
 
 API 서버와 Streamlit을 백그라운드 기동한 후 Playwright MCP로 E2E 테스트를 수행함.
 
@@ -219,26 +220,6 @@ Phase 1~7 결과를 종합 보고.
 ## 상태 정리
 
 완료 시 임시 파일 정리 (상태 파일 미사용).
-
-## 취소
-
-사용자 요청 시 즉시 중단.
-- 생성된 코드 파일은 유지 (사용자가 수동 삭제 가능)
-
-## 재개
-
-구현 코드 존재 시 QA 단계(Phase 3)부터 재개 가능.
-chatbot.py 존재 시 Phase 5부터 재개 가능.
-screenshots/ 존재 시 Phase 6부터 재개 가능.
-
-## 스킬 부스팅
-
-| 단계 | OMC 스킬 | 효과 |
-|------|----------|------|
-| Phase 1: 코드 기반 구현 | `/oh-my-claudecode:ralph` | 완료 보장 실행 워크플로우 |
-| Phase 2: 빌드 오류 수정 | `/oh-my-claudecode:build-fix` | 최소 수정 원칙 |
-| Phase 3: QA/검증 | `/oh-my-claudecode:ultraqa` | QA 순환 워크플로우 |
-| Phase 5: E2E 테스트 | Playwright MCP | 브라우저 자동화 E2E 테스트 |
 
 ## MUST 규칙
 

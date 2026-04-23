@@ -19,7 +19,6 @@ capabilities:
     비즈니스 시나리오를 Dify YAML DSL로 변환.
     노드 설계(Start, LLM, Knowledge Retrieval, Tool, IF-ELSE, End 등),
     엣지 연결, 변수/파라미터 설정, 프롬프트 템플릿 작성 수행.
-    dsl-generation-prompt.md 프롬프트 템플릿과
     dify-workflow-dsl-guide.md DSL 가이드를 참조하여 유효한 DSL 생성.
 
   # 정체성 — 무엇이다 / 무엇이 아니다

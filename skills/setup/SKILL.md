@@ -23,14 +23,13 @@ Dify 로컬 환경 구축부터 Abra 플러그인 초기 설정까지 전 과정
 
 사용자가 `/abra:setup` 명령을 호출하거나 "초기 설정", "setup", "플러그인 설정", "Dify 설치", "Docker 실행", "Dify 환경" 키워드 감지 시.
 
-## 사전 요구사항
-
-| 항목 | 최소 사양 |
-|------|----------|
-| CPU | 2 Core 이상 |
-| RAM | 4 GiB 이상 |
-| Docker | 설치 필요 |
-| Docker Compose | 설치 필요 |
+## 진행상황 업데이트 및 재개
+`{PROJECT_DIR}/AGENTS.md`에 각 Step 완료 시 저장. 최종 완료 시 'Done'으로 표기.   
+```
+## 워크플로우 진행상황
+- setup: Step3
+```
+진행상황 정보가 있는 경우 마지막 완료 단계 이후부터 자동 재개 
 
 ## 워크플로우
 
@@ -42,13 +41,13 @@ Dify 로컬 환경 구축부터 Abra 플러그인 초기 설정까지 전 과정
 
   사용자가 'YES'로 답한 경우 현재 디렉토리 경로를 변수 `{PROJECT_DIR}`에 셋팅   
 
-- ABRA 플러그인 디렉토리 경로 설정 
-`{PROJECT_DIR}/AGENTS.md` 파일에 `{ABRA_PLUGIN_DIR}` 변수가 설정되어 있는지 확인함.
+- ABRA 플러그인, DMAP 플러그인 디렉토리 경로 설정 
+`{PROJECT_DIR}/AGENTS.md` 파일에 `{ABRA_PLUGIN_DIR}`, `{DMAP_PLUGIN_DIR}` 변수가 설정되어 있는지 확인함.
 미설정 시 아래 수행 
-사용자에게 ABRA 플러그인 디렉토리 경로를 입력받음(경로명은 `~/path1/path2` 형식으로 안내)   
+사용자에게 ABRA 플러그인, DMAP 플러그인 디렉토리 경로를 입력받음(경로명은 `~/path1/path2` 형식으로 안내)   
 <!--ASK_USER-->
-{"title":"ABRA 플러그인 디렉토리","questions":[
-  {"question":"ABRA 플러그인 디렉토리 경로를 입력해주세요.","type":"text"}
+{"title":"{플러그인 이름} 플러그인 디렉토리","questions":[
+  {"question":"{플러그인 이름} 플러그인 디렉토리 경로를 입력해주세요.","type":"text"}
 ]}
 <!--/ASK_USER-->
 
@@ -58,6 +57,11 @@ Dify 로컬 환경 구축부터 Abra 플러그인 초기 설정까지 전 과정
   - AI_RUNTIME: 현재 구동중인 런타임(Claude Code, Claude Cowork, Cursor, Antigravity, Codex 등)
   - PROJECT_DIR: `{PROJECT_DIR}`
   - ABRA_PLUGIN_DIR: `{ABRA_PLUGIN_DIR}`
+  - DMAP_PLUGIN_DIR: `{DMAP_PLUGIN_DIR}`
+  ```
+- AI Runtime이 Claude Code 또는 Claude Cowork인 경우 `{PROJECT_DIR}/CLAUDE.md` 생성하고 아래 내용 저장  
+  ```
+  @AGENTS.md
   ```
 
 ### Step 1: install.yaml 로드 
@@ -137,6 +141,8 @@ docker compose up -d
   - 메모리 부족
   - Docker 데몬 미실행
 - 사용자에게 에러 내용 보고 후 중단
+
+(중요) 컨테이너 헬스 체크하여 정상일때까지 다음 단계 진행 하지 말것   
 
 ### Step 7: 초기 설정 안내 
 
@@ -328,11 +334,6 @@ Dify 연결 테스트 (앱 목록 조회 성공 여부 확인).
 cd {DIFY_DIR}/docker && docker compose exec api flask reset-password
 ```
 
-## 사용자 상호작용
-- AskUserQuestion으로 Dify 설치 위치 확인 (Step 3)
-- AskUserQuestion으로 Groq API Key 입력받기 (Step 8-2, 건너뛰기 가능)
-- AskUserQuestion으로 Dify 접속 정보 수집 (Step 9)
-
 ## 문제 해결
 
 | 문제 | 원인 | 해결 방법 |
@@ -341,6 +342,8 @@ cd {DIFY_DIR}/docker && docker compose exec api flask reset-password
 | 포트 충돌 (80, 443) | 다른 서비스가 포트 사용 중 | 기존 서비스 중지 또는 Dify 포트 변경 안내 |
 | 컨테이너 시작 실패 | 메모리 부족, 설정 오류 | `docker compose logs` 확인 안내 |
 | 헬스체크 실패 | 컨테이너 부팅 지연 | 60초 대기 후 재시도 안내 |
+| API 컨테이너 unhealthy (워커 미부팅) | Docker Desktop 첫 실행 시 gunicorn 워커가 "Booting worker" 로그 없이 멈춤 (CPU 0%, 메모리 ~87MiB) | `docker compose restart api` 후 "Booting worker with pid" 로그 확인 |
+| Groq 플러그인 설치 120초 초과 후 실패 보고 | Python 소스 pre-compile 등 실제 설치에 2분 이상 소요되어 120초 타임아웃 초과 | 폴링 대기를 240초(24회×10초)로 늘리거나, 타임아웃 후 task 상태를 별도 조회하여 success 여부 확인 |
 | Dify 로그인 실패 | 이메일/비밀번호 불일치 | `{DIFY_DIR}/docker/.env` 확인 또는 비밀번호 초기화 명령 안내 |
 | Groq 플러그인 설치 실패 | 네트워크 또는 Dify 버전 이슈 | Settings > Model Providers에서 수동 설치 안내 |
 | Groq API Key 검증 실패 | 잘못된 API Key | https://console.groq.com/keys 에서 키 재발급 안내 |

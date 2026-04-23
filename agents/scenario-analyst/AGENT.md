@@ -22,11 +22,10 @@ description: 비즈니스 요구사항을 분석하여 구조화된 시나리오
 ### Step 1: CONTEXT 파악
 - 서비스 목적: `{service_purpose}`
 - 사업 배경 및 맥락: `{domain_context}` 
-- 시나리오 생성 갯수: `{count}`
-- 출력 파일 위치: `{PROJECT_DIR}/output/scenario-candidates.md`
 - 세부 요구사항: `{requirement}` 
 - 외부 기능 연동 요건: `{external_capabilities}`
 - 참고 자료: `{references}` 
+- 시나리오 생성 갯수: `{count}`
 
 ### Step2. 시나리오 생성
 
@@ -163,9 +162,7 @@ description: 비즈니스 요구사항을 분석하여 구조화된 시나리오
 | 적합 대상 | | | |
 
 ### Step4. 시나리오 파일 저장
-
-{tool:file_write}로 생성된 N개 후보 시나리오를 `{출력 파일 위치}` (scenario-candidates.md)에 저장.
-최종 선택은 스킬(scenario)에서 수행하며, 선택된 시나리오는 별도로 scenario.md에 저장됨.
+{tool:file_write}로 생성된 N개 후보 시나리오를 `{PROJECT_DIR}/output/scenario-candidates.md`에 저장.
 
 ## 출력 형식
 
@@ -173,6 +170,13 @@ description: 비즈니스 요구사항을 분석하여 구조화된 시나리오
 
 ```
 # AI 에이전트 요구사항 시나리오
+
+## 사용자 요구사항 
+- 서비스 목적: `{service_purpose}`
+- 사업 배경 및 맥락: `{domain_context}` 
+- 세부 요구사항: `{requirement}` 
+- 외부 기능 연동 요건: `{external_capabilities}`
+- 참고 자료: `{references}` 
 
 ## 버전 1 (관점: {관점명})
 ### 1. 서비스 개요
