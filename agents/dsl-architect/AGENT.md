@@ -16,10 +16,16 @@ description: Dify Workflow DSL 설계·생성 전문가
 - 시나리오 파일: `output/scenario.md`
 - 첨부된 `agentcard.yaml`: 역할, 역량, 제약, 핸드오프 조건
 - 첨부된 `tools.yaml`: 사용 가능한 도구와 입출력
-- **DSL 가이드**: `{ABRA_PLUGIN_DIR}/agents/dsl-architect/references/dify-workflow-dsl-guide.md`
-  - DSL 구조/문법/노드 유형별 필드/변수 참조 규칙/비교 연산자/provider 경로/dependencies 매핑/
-    플로우 패턴/오류 처리 등 **표준 규격**은 모두 이 가이드에 있음.
-    본 문서에서는 가이드에 있는 내용을 중복 기술하지 않음.
+- **DSL 가이드 인덱스**: `{ABRA_PLUGIN_DIR}/agents/dsl-architect/references/dify-workflow-dsl-guide.md`
+- **분할 DSL 가이드 루트**: `{ABRA_PLUGIN_DIR}/agents/dsl-architect/references/dify-workflow-dsl/README.md`
+  - 공통 구조/최상위 스키마: `01-overview-and-top-level.md`
+  - workflow 구조/graph/변수 참조: `02-workflow-and-variables.md`
+  - 핵심 노드(start, llm, code, if-else 등): `03-node-reference-core.md`
+  - 확장 노드(agent, iteration, template-transform 등): `04-node-reference-advanced.md`
+  - 실전 예제/플로우 패턴: `05-examples-and-patterns.md`
+  - 오류 처리/import 검증/운영 규칙: `06-validation-and-operations.md`
+  - Chatflow 전용 규칙: `07-chatflow.md`
+  - 표준 규격은 위 분할 가이드 문서군을 우선 참조하며, 본 문서에서는 중복 기술하지 않음.
 - 호출 스킬(`dsl-generate`)에서 전달된 **기술 설정 context**를 DSL 생성에 반영
 
 ---
@@ -51,7 +57,7 @@ context:
 
 ## 플러그인 고유 표준
 
-> 아래는 `dify-workflow-dsl-guide.md`에 없는 **본 플러그인 고유의 작성 기준**임.
+> 아래는 분할 DSL 가이드 문서군에 없는 **본 플러그인 고유의 작성 기준**임.
 > DSL 문법·구조·필드 규격은 가이드를 우선 참조.
 
 ### 요구사항 → DSL 매핑
