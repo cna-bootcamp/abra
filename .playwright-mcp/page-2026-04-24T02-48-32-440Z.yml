@@ -1,0 +1,637 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - heading "문화일보" [level=1] [ref=e5]:
+        - link [ref=e6] [cursor=pointer]:
+          - /url: //daum.net
+          - img [ref=e7]
+        - link "문화일보" [ref=e17] [cursor=pointer]:
+          - /url: https://v.daum.net/channel/15/home
+      - generic [ref=e18]:
+        - button "구독" [ref=e20] [cursor=pointer]: 구독
+        - link "공유하기" [ref=e23] [cursor=pointer]:
+          - /url: ""
+          - generic [ref=e24]: 공유하기
+        - generic [ref=e25]:
+          - heading "검색" [level=2]
+          - link "검색" [ref=e26] [cursor=pointer]:
+            - /url: ""
+            - generic [ref=e27]: 검색
+  - main [ref=e28]:
+    - generic [ref=e29]:
+      - heading "문화" [level=2]
+      - generic [ref=e30]:
+        - article [ref=e31]:
+          - generic [ref=e32]:
+            - heading "춘향전 무대 ‘광한루’ 국보로… 보물지정 63년만에 승격" [level=3] [ref=e33]
+            - generic [ref=e34]:
+              - generic [ref=e35]: 신재우 기자
+              - generic [ref=e36]: 2026. 4. 24. 11:36
+            - generic [ref=e37]:
+              - generic "댓글 0" [ref=e41] [cursor=pointer]:
+                - img [ref=e46]
+              - generic [ref=e55]:
+                - button "요약보기" [ref=e57] [cursor=pointer]:
+                  - generic [ref=e58]: 요약보기
+                - button "음성으로 듣기" [ref=e60] [cursor=pointer]:
+                  - generic [ref=e61]: 음성으로 듣기
+                - button "번역 설정" [ref=e63] [cursor=pointer]:
+                  - generic [ref=e64]: 번역 설정
+                - button "글씨크기 조절하기" [ref=e66] [cursor=pointer]:
+                  - generic [ref=e67]: 글씨크기 조절하기
+                - button "인쇄하기" [ref=e69] [cursor=pointer]:
+                  - generic [ref=e70]: 인쇄하기
+          - generic [ref=e71]:
+            - generic [ref=e73]:
+              - figure [ref=e74]:
+                - paragraph [ref=e75]:
+                  - img [ref=e76]
+              - paragraph [ref=e77]: 춘향과 이몽룡의 사랑이 시작된 전북 남원 광한루(사진)가 국보로 지정된다.
+              - paragraph [ref=e78]: 24일 국가유산청은 남원 광한루를 국가지정문화유산 국보로 지정 예고한다고 밝혔다. 1963년 보물로 지정된 지 약 63년 만이다.
+              - paragraph [ref=e79]: 광한루는 조선 후기 호남지역을 대표하는 누각 건물로 ‘호남제일루(湖南第一樓)’라 불리기도 했다. 관리들이 각종 연회를 열었던 장소로, 조선 초기 황희(1363∼1452)가 남원으로 유배를 와 세운 광통루가 기원으로 알려져 있다. 1597년 정유재란으로 당시 건물이 소실됐으나 1626년 인조 때 지금과 같은 규모로 중건했다.
+              - insertion [ref=e81]:
+                - iframe [ref=e84]:
+                  - generic [ref=f19e3]:
+                    - strong: 광고 링크
+                    - link "광고 관절보궁 최저가 알아보기 관절보궁 이가격 맞아? 가수 김연자, 박지현이 선택한 관절케어 관절보궁 광고 관절보궁 최저가 알아보기 관절보궁" [ref=f19e4] [cursor=pointer]:
+                      - /url: https://tr.ad.daum.net/clk?wa=H1dlQ2KmJzlU_LyCcNmDBvUx8OIc0Co_tkiYLdXF9qU&enc=cUuPBHiHyCnrwvZRrcJkUlJb2tZX_v1GoK51kwzpyafTttFWFfBD2jOtDT4vOi930nLdhq1gMk-HWL0047VCA4Ot8vwRkzkrPy22n2Lsp7QeTw-KXdj26U07_MzKC586i2yu2i_1EqyowQ3XzBUuKNhAV3XNNzdGor9P91slkwUZvJhHOMlqouoVwZkJXfinPYf0A2MQPEjL-EB_utFY6VwlEvai49htPxSMSzVuOoVRRaA6H7tqaKBCFjHXPZpKs5_g4-WjZUhZSWhKaX2tX9eWLdSV4-hUoZ5D7s_F_zLmuLNchdBHxarLl01Lo7kKuIhsBAFfz31PCzGC5PPYFy1rBE5_iWv2rZpiS2HHKxleLHWbQITNh6eQ0JcMihLvYakc_Y6ALnjK9EGgarChRc3RDgh0kW64jiQDx1jxo4DDQfGkvcWcQAVx-cyOrd4Dvf8OGQc8DkH7f3SChNAvpTtsBB41ORgaHPkgMdMvnPJNpsGdy6UQ_jRhtikU-b_JpMbWK6-k5eJlgnM4KN2iDo-pnvaViZgrsI7V6MGN4fmRS9vd4xdpzdAsVacNdRyuc8btUs_UeHIW3kGkAdr_I83wZ52TsOnkLw6jrXg4qZw&signature=886a76a9572ef2294296cb808f324a76&lc=1&rd=%7B%22adunit_type_seq%22%3A142%2C%22banner_adunit_type_seq%22%3A142%2C%22native_adunit_type_seq%22%3A1364%2C%22template_seq%22%3A130%2C%22cp_id%22%3A%2215_pc_media_news%22%2C%22channel_id%22%3A%22harmony%22%7D
+                      - img "광고 관절보궁 최저가 알아보기" [ref=f19e8]
+                      - generic [ref=f19e10]:
+                        - strong [ref=f19e11]: 관절보궁 이가격 맞아?
+                        - generic [ref=f19e12]: 가수 김연자, 박지현이 선택한 관절케어 관절보궁
+                        - strong [ref=f19e13]:
+                          - img "광고 관절보궁 최저가 알아보기" [ref=f19e15]
+                          - generic [ref=f19e16]: 관절보궁
+                    - link "광고 정보" [ref=f19e17] [cursor=pointer]:
+                      - /url: https://info.ds.kakao.com/optout.do
+                      - img "광고 정보" [ref=f19e18]
+              - paragraph [ref=e85]: 조선시대 대표 판소리이자 소설인 ‘춘향가(전)’의 배경이 된 곳이기도 하다. 이몽룡이 그네를 타는 춘향의 모습을 보고 첫눈에 반한 장소가 바로 이곳이다.
+              - paragraph [ref=e86]: 본루와 익루(요선각), 월랑으로 구성된 건축물은 조선 후기 목조건축의 특징인 화려한 장식과 함께 익루의 온돌, 월랑의 계단 등 실용적 요소가 결합돼 있다. 앞서 2023년에 한 차례 국보 승격을 추진했으나 당시 광한루를 이루는 누각과 익루의 건축 시기와 양식이 동일한지 명확하지 않다는 이유로 ‘보류’ 결정이 났다. 이에 남원시에선 두 누각을 구성하는 기둥 등의 나이테를 분석해 1626년에 함께 중건된 사실을 규명했다.
+              - paragraph [ref=e87]: 신재우 기자
+            - paragraph [ref=e88]: Copyright © 문화일보. 무단전재 및 재배포 금지.
+          - generic [ref=e89]:
+            - strong [ref=e91]: 이 기사에 대해 어떻게 생각하시나요?
+            - generic [ref=e93]:
+              - button "추천해요 1" [ref=e94] [cursor=pointer]:
+                - generic [ref=e95]:
+                  - generic [ref=e96]: 추천해요
+                  - generic [ref=e97]: "1"
+                - img [ref=e99]
+              - button "좋아요 1" [ref=e103] [cursor=pointer]:
+                - generic [ref=e104]:
+                  - generic [ref=e105]: 좋아요
+                  - generic [ref=e106]: "1"
+                - img [ref=e108]
+              - button "감동이에요 0" [ref=e112] [cursor=pointer]:
+                - generic [ref=e113]:
+                  - generic [ref=e114]: 감동이에요
+                  - generic [ref=e115]: "0"
+                - img [ref=e117]
+              - button "화나요 0" [ref=e121] [cursor=pointer]:
+                - generic [ref=e122]:
+                  - generic [ref=e123]: 화나요
+                  - generic [ref=e124]: "0"
+                - img [ref=e126]
+              - button "슬퍼요 0" [ref=e130] [cursor=pointer]:
+                - generic [ref=e131]:
+                  - generic [ref=e132]: 슬퍼요
+                  - generic [ref=e133]: "0"
+                - img [ref=e135]
+          - generic [ref=e139]:
+            - generic [ref=e140]:
+              - strong [ref=e141]: 문화일보에서 직접 확인하세요.
+              - generic [ref=e142]: 해당 언론사로 이동합니다.
+            - list [ref=e143]:
+              - listitem [ref=e144]:
+                - link "[속보]이란 “호르무츠 통행료 첫 입금 완료…땡큐” 진짜 30억?" [ref=e145] [cursor=pointer]:
+                  - /url: https://www.munhwa.com/article/11584601?ref=daum
+              - listitem [ref=e146]:
+                - link "“입구 막고 배째?” 이제 과태료 500…주차빌런 퇴치법" [ref=e147] [cursor=pointer]:
+                  - /url: https://www.munhwa.com/article/11584586?ref=daum
+              - listitem [ref=e148]:
+                - link "[속보]차기 대선? 김민석 11.9%·조국 11.3%·한동훈 10.7%-코리아정보리서치" [ref=e149] [cursor=pointer]:
+                  - /url: https://www.munhwa.com/article/11584588?ref=daum
+              - listitem [ref=e150]:
+                - link "이준석 “홍준표 총리? 한마디로 정청래 제압 가능…李의 그런 의도라면”" [ref=e151] [cursor=pointer]:
+                  - /url: https://www.munhwa.com/article/11584611?ref=daum
+              - listitem [ref=e152]:
+                - link "“45조 성과급 달라, 아니면 총파업”…삼성전자 노조 3만 명 집회" [ref=e153] [cursor=pointer]:
+                  - /url: https://www.munhwa.com/article/11584498?ref=daum
+              - listitem [ref=e154]:
+                - link "“수류탄·탄환 440발 견뎌?” 李가 베트남서 탄 차량" [ref=e155] [cursor=pointer]:
+                  - /url: https://www.munhwa.com/article/11584573?ref=daum
+              - listitem [ref=e156]:
+                - link "미국, 아시아 해역서 이란선박 제지 vs 이란, 2척 나포… 휴전속 ‘극한 대치’" [ref=e157] [cursor=pointer]:
+                  - /url: https://www.munhwa.com/article/11584461?ref=daum
+              - listitem [ref=e158]:
+                - link "“5·18은 DJ세력과 北주도 내란” 전한길 발언 논란" [ref=e159] [cursor=pointer]:
+                  - /url: https://www.munhwa.com/article/11584600?ref=daum
+              - listitem [ref=e160]:
+                - link "“영감님들, 張과 싸우듯 했으면 尹 탄핵됐겠나” 김민수의 말" [ref=e161] [cursor=pointer]:
+                  - /url: https://www.munhwa.com/article/11584617?ref=daum
+              - listitem [ref=e162]:
+                - link "‘와인 바꿔치기’ 논란에…안성재 측 “실망 안겨 죄송”" [ref=e163] [cursor=pointer]:
+                  - /url: https://www.munhwa.com/article/11584662?ref=daum
+          - insertion [ref=e165]:
+            - iframe [ref=e168]:
+              - generic [ref=f22e3]:
+                - link "광고 늘품남성의류 1개만 구입해도 전상품 무료배송 광고 늘품남성의류 1개만 구입해도 전상품 무료배송 늘품남성의류 여름까지 쭉~ 편해서 이것만 찾아요! 파격특가 58% SALE! 단돈 2만원대! 구매하기" [ref=f22e4] [cursor=pointer]:
+                  - /url: https://tr.ad.daum.net/clk?wa=SCojNliDrP5McBTQbtlenXbXPh-QXwiKm3o5lkSmixs&enc=WAthu4zUpSB9lsF9Nh53hzs0pzi4L-hZs-R_GN2N2ptplfMolq6q7rI9gqc2_3oLBAghsYfSnh75zHpZm5eC1XFMFKMsGkr9ZjaqKcOJHYT8KAxDz7cUfTDvxm0vWW9PjhEcZ-etXfANcnkTlnUFNZWrat2dUX3DI0Wn0-KQBf_N2zub5U7a8-OKNGfGMzOwKwdsnFEKwFtz8IuYCVpNL1wlEvai49htPxSMSzVuOoXYlI0iSQeRoaN13W5buzirihqCyr6BYhFRMP7Xjw3E6NeWLdSV4-hUoZ5D7s_F_zKkn9Ukf9O-g6GnzolBQaWeuIhsBAFfz31PCzGC5PPYFy1rBE5_iWv2rZpiS2HHKxleLHWbQITNh6eQ0JcMihLvYakc_Y6ALnjK9EGgarChRc3RDgh0kW64jiQDx1jxo4C53xHJjsScPS2iIciox41hMjcmRryCr_NgCNoMwVi5DjtsBB41ORgaHPkgMdMvnPLje8X-cr6DAt3fZm7XCXnopMbWK6-k5eJlgnM4KN2iDu2HAd5mfkvuBQpIVkCWJVYuvPZHnFAPbgYfV2VNAu6-GxTbKqL_rxXPPeksWCRJS4UrSX0bBU9_KX_caDFqAi7dkiW6dzMO4MlSM2votA29-6FvmIfFO5MZachDlHZRmWgAWO2-Y2IUN3idNW2ggMB-mRE8YhWvZ7F9BTJ4kINUUCId2BeVr1Ogt-4BoSI4M3WFOaC9Cs370FiNiWyVFgr1beaIvH9W5t6mnqFDUBIyOVHuqCqQMe086chg8hjcehFmWTurj6uMFL0mnZdbyIDy4PHsNiFQCThYEbrfU513&signature=3c4caacb9d4b01e680a69a44208eba00&lc=1&rd=%7B%22adunit_type_seq%22%3A137%2C%22banner_adunit_type_seq%22%3A137%2C%22native_adunit_type_seq%22%3A1366%2C%22template_seq%22%3A198%2C%22cp_id%22%3A%2215_pc_media_news%22%2C%22channel_id%22%3A%22harmony%22%7D
+                  - img "광고 늘품남성의류 1개만 구입해도 전상품 무료배송" [ref=f22e6]
+                  - generic [ref=f22e9]:
+                    - strong [ref=f22e10]:
+                      - img "광고 늘품남성의류 1개만 구입해도 전상품 무료배송" [ref=f22e12]
+                      - generic [ref=f22e14]: 늘품남성의류
+                    - strong [ref=f22e15]: 여름까지 쭉~ 편해서 이것만 찾아요!
+                    - generic [ref=f22e16]: 파격특가 58% SALE! 단돈 2만원대!
+                  - generic [ref=f22e18]: 구매하기
+                - link "광고 정보" [ref=f22e19] [cursor=pointer]:
+                  - /url: https://info.ds.kakao.com/optout.do
+                  - img "광고 정보" [ref=f22e20]
+        - generic [ref=e172]:
+          - generic [ref=e173]:
+            - generic [ref=e174]:
+              - strong [ref=e175]: 댓글 0
+              - button "새로고침" [ref=e176] [cursor=pointer]:
+                - img [ref=e178]
+            - button "댓글 안내" [ref=e181] [cursor=pointer]:
+              - img [ref=e182]
+          - generic [ref=e184]:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: 댓글로 의견을 남겨주세요.
+                    - textbox "댓글 입력" [disabled]
+          - generic [ref=e186]:
+            - tablist [ref=e187]:
+              - listitem [ref=e188]:
+                - tab "추천순" [selected] [ref=e189] [cursor=pointer]
+              - listitem [ref=e190]:
+                - tab "답글순" [ref=e191] [cursor=pointer]
+              - listitem [ref=e192]:
+                - tab "최신순" [ref=e193] [cursor=pointer]
+            - button "세이프봇 정보" [ref=e195] [cursor=pointer]:
+              - img "세이프봇" [ref=e196]:
+                - img [ref=e197]
+          - generic [ref=e220]:
+            - strong [ref=e221]: 아직 댓글이 없어요
+            - paragraph [ref=e222]: 첫 의견을 남겨보세요
+      - complementary [ref=e223]:
+        - insertion [ref=e225]:
+          - iframe [ref=e228]:
+            - generic [ref=f21e3]:
+              - link "광고 늘품남성의류 1개만 구입해도 전상품 무료배송 늘품남성의류" [ref=f21e4] [cursor=pointer]:
+                - /url: https://tr.ad.daum.net/clk?wa=t2xV4D1uVwvvxOFkHdv8zfh-grmIiwh9QOXiGS9W94A&enc=4OPbsSyRBNwO9PgFC7sATqTsOAL1nqCQhbP2z5Wft3rSf_O0H2bJ6zcRCt5fjJf31aZYz2UFOChpfqrAsa0j3f5GZJ93-kOU3vu6GGqjbiAYVX6-zNmK_dhcpoZQ6bP-6dltiW04ZBxwSjFCCw6-v7i3mJBZDdVC3RDsWpourEydwa2qt2fCqT_fbFaDhGwA-FMFwfk52cmbV_tIzBBzV1wlEvai49htPxSMSzVuOoXgxyiJakadTSRIlEiuWnMZ56gsEwoiJyn6LGBervv5YoFdmRUlFRgGl8fdke4OF4pcSTj1ZuhUm4p9S1QYgbrcXZaAf_pq_lWnIKFzI86PKaioM0Tp_XVhCjxjkYX97ithQgVqj5w01zMTliXjtPaa1oKP6H5_YDJKJyxgcSFHCK6qaOrNeRFyNm-LHoGd2U3NmDR-OeqCdZVIyPknn82nkcFxnMnnpHHitZJZTISfslevEaPVuDMDW4iLTj1VSuCeJuzP5GvAIE1TkkUpCLD65ksVqJtpYP-j2M0hCq4UZo07Ya73Q3WaTseTvDsPEqGcCTMkSJ0t6AiXQJOyLyBgSNi8cMbLNhjoEY0B8p-0JhVD4ASzrWrInx6NL8chgoTZEIK4qWfn0zMVqBDfD_q5m0qJ7CqL9xSX5Xk4gTf637xkU3QCs7u2HZ-_C0Cqp6BA77yt6S5pV_z7FQmSWGBubjLBCLIJsObiOR0ZkvO5MbldpQcolprPHzzoyZ-uR2wLtwp6ALGWUwPhG1_GVs9ItS-EzagC3VCemsBSag8QRZLnicduiOnvkRu3sYfhePc&signature=b43ede1e6fdc39d11d4432fde00e6b88&lc=1&rd=%7B%22adunit_type_seq%22%3A134%2C%22banner_adunit_type_seq%22%3A134%2C%22native_adunit_type_seq%22%3A1618%2C%22template_seq%22%3A310%2C%22cp_id%22%3A%2215_pc_media_news%22%2C%22channel_id%22%3A%22harmony%22%7D
+                - img "광고 늘품남성의류 1개만 구입해도 전상품 무료배송" [ref=f21e6]
+                - generic [ref=f21e8]: 늘품남성의류
+              - link "광고 늘품남성의류 1개만 구입해도 전상품 무료배송 여름까지 쭉~ 편해서 이것만 찾아요! 파격특가 58% SALE! 단돈 2만원대! 바로가기" [ref=f21e9] [cursor=pointer]:
+                - /url: https://tr.ad.daum.net/clk?wa=t2xV4D1uVwvvxOFkHdv8zfh-grmIiwh9QOXiGS9W94A&enc=4OPbsSyRBNwO9PgFC7sATqTsOAL1nqCQhbP2z5Wft3rSf_O0H2bJ6zcRCt5fjJf31aZYz2UFOChpfqrAsa0j3f5GZJ93-kOU3vu6GGqjbiAYVX6-zNmK_dhcpoZQ6bP-6dltiW04ZBxwSjFCCw6-v7i3mJBZDdVC3RDsWpourEydwa2qt2fCqT_fbFaDhGwA-FMFwfk52cmbV_tIzBBzV1wlEvai49htPxSMSzVuOoXgxyiJakadTSRIlEiuWnMZ56gsEwoiJyn6LGBervv5YoFdmRUlFRgGl8fdke4OF4pcSTj1ZuhUm4p9S1QYgbrcXZaAf_pq_lWnIKFzI86PKaioM0Tp_XVhCjxjkYX97ithQgVqj5w01zMTliXjtPaa1oKP6H5_YDJKJyxgcSFHCK6qaOrNeRFyNm-LHoGd2U3NmDR-OeqCdZVIyPknn82nkcFxnMnnpHHitZJZTISfslevEaPVuDMDW4iLTj1VSuCeJuzP5GvAIE1TkkUpCLD65ksVqJtpYP-j2M0hCq4UZo07Ya73Q3WaTseTvDsPEqGcCTMkSJ0t6AiXQJOyLyBgSNi8cMbLNhjoEY0B8p-0JhVD4ASzrWrInx6NL8chgoTZEIK4qWfn0zMVqBDfD_q5m0qJ7CqL9xSX5Xk4gTf637xkU3QCs7u2HZ-_C0Cqp6BA77yt6S5pV_z7FQmSWGBubjLBCLIJsObiOR0ZkvO5MbldpQcolprPHzzoyZ-uR2wLtwp6ALGWUwPhG1_GVs9ItS-EzagC3VCemsBSag8QRZLnicduiOnvkRu3sYfhePc&signature=b43ede1e6fdc39d11d4432fde00e6b88&lc=1&rd=%7B%22adunit_type_seq%22%3A134%2C%22banner_adunit_type_seq%22%3A134%2C%22native_adunit_type_seq%22%3A1618%2C%22template_seq%22%3A310%2C%22cp_id%22%3A%2215_pc_media_news%22%2C%22channel_id%22%3A%22harmony%22%7D
+                - img "광고 늘품남성의류 1개만 구입해도 전상품 무료배송" [ref=f21e11]
+                - generic [ref=f21e14]:
+                  - strong [ref=f21e15]: 여름까지 쭉~ 편해서 이것만 찾아요!
+                  - generic [ref=f21e16]: 파격특가 58% SALE! 단돈 2만원대!
+                - generic [ref=f21e17]: 바로가기
+              - link "광고 정보" [ref=f21e19] [cursor=pointer]:
+                - /url: https://info.ds.kakao.com/optout.do
+                - generic [ref=f21e20]: 광고 정보
+        - generic [ref=e229]:
+          - heading "이 시각 추천뉴스" [level=3] [ref=e231]
+          - list [ref=e232]:
+            - listitem [ref=e233]:
+              - link "女 셋 수영복 입고 엉덩이 흔들흔들…고인 임종 전 유언 따랐다 헤럴드경제 · 14시간 전" [ref=e235] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260423211303059
+                - img [ref=e237]
+                - generic [ref=e240]:
+                  - strong [ref=e241]: 女 셋 수영복 입고 엉덩이 흔들흔들…고인 임종 전 유언 따랐다
+                  - generic [ref=e242]: 헤럴드경제 · 14시간 전
+            - listitem [ref=e243]:
+              - link "수억 기부 문근영 “공무원 부모님, 떵떵거리며 쓰고 싶지 않다고…” 중앙일보 · 39분 전" [ref=e245] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260423164532596
+                - img [ref=e247]
+                - generic [ref=e250]:
+                  - strong [ref=e251]: 수억 기부 문근영 “공무원 부모님, 떵떵거리며 쓰고 싶지 않다고…”
+                  - generic [ref=e252]: 중앙일보 · 39분 전
+            - listitem [ref=e253]:
+              - listitem [ref=e254]:
+                - generic [ref=e255]:
+                  - link "MOMENT 광고 안내 페이지 입니다." [ref=e256] [cursor=pointer]:
+                    - /url: https://info.ds.kakao.com/optout.do
+                    - img "MOMENT 광고 안내 페이지 입니다." [ref=e257]
+                  - link "광고 공스킨 재고 밀려서 어쩔 수 없이 풀었어요. 창고정리 공스킨" [ref=e258] [cursor=pointer]:
+                    - /url: https://tr.ad.daum.net/clk?wa=NO4lxpC9S2S6RNRWjRUMXA&enc=FzTrflJB8s6u-wbvFPm7yz5bWcpM2XlBPjhvYdcIJ3xx9Lf4TYDges96Q1wDqAEDkdhCx-xnWdx5Rpe9BA3Aa5mlPp8HDWdRyKL05SeLfUUphFoXWX-7C9C0fd1Zinvs322_ZOBexyn_a79e5XDK9eQCttIT4O1J0jpW7MyqVM-ZTYfhXfGGaMqKK0-TW2EEWBEp8wdQDtOHMTFxklsThFwlEvai49htPxSMSzVuOoWpvCZm2m6_MAir7hs9ZhCfXn8tKmJWjhJFugwi2xPCjNeWLdSV4-hUoZ5D7s_F_zI-8Ju44V-tyXobAvcI0-sauIhsBAFfz31PCzGC5PPYFy1rBE5_iWv2rZpiS2HHKxleLHWbQITNh6eQ0JcMihLvYakc_Y6ALnjK9EGgarChRc3RDgh0kW64jiQDx1jxo4C53xHJjsScPS2iIciox41hMjcmRryCr_NgCNoMwVi5DjtsBB41ORgaHPkgMdMvnPKiwOocoPImTjjs3R5yRPPypMbWK6-k5eJlgnM4KN2iDpO8WY2l5PJaX2SXJLiKhAr6ubkgVk7BQVW5Qn-bfKUE8ULler_DxDyEFq3w88HK33EMcTohvLG_oxbMiLJJPeWET5ddeWA1OClyfXF6T2sjJzMs4ytRi0mS0yMhiqa1JzezFRxFCd7CFVdkduH_ra0zrJdCyK_xOFsu7x-YUNRwwH3l4On-2Al3VXO5rX-n7vckZxbPMLDyfL7d_nJIeWhsLweVnJtbJxQJ_xjReM6jxWFFziyYgRj8SecSH3X7w5LnicduiOnvkRu3sYfhePc&signature=b6e9b2f806ad391bf6def5d6c3945756&lc=1&rd=%7B%22adunit_type_seq%22%3A1426%2C%22native_adunit_type_seq%22%3A1426%2C%22cp_id%22%3A%2215_pc_media_news%22%2C%22channel_id%22%3A%22harmony%22%7D
+                    - img "광고 공스킨" [ref=e260]
+                    - generic [ref=e263]:
+                      - strong [ref=e264]: 재고 밀려서 어쩔 수 없이 풀었어요. 창고정리
+                      - generic [ref=e265]: 공스킨
+            - listitem [ref=e266]:
+              - link "이진숙 출마 강행? 대구 신문들 \"국힘, 빨리 김부겸 맞설 후보 링에 올려야\" 미디어오늘 · 12시간 전" [ref=e268] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260423230132685
+                - img [ref=e270]
+                - generic [ref=e273]:
+                  - strong [ref=e274]: 이진숙 출마 강행? 대구 신문들 "국힘, 빨리 김부겸 맞설 후보 링에 올려야"
+                  - generic [ref=e275]: 미디어오늘 · 12시간 전
+            - listitem [ref=e276]:
+              - link "정유라 “아들 못 만난다” 호소했는데…알고 보니 “접견 가능해” 헤럴드경제 · 11시간 전" [ref=e278] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260423234903042
+                - img [ref=e280]
+                - generic [ref=e283]:
+                  - strong [ref=e284]: 정유라 “아들 못 만난다” 호소했는데…알고 보니 “접견 가능해”
+                  - generic [ref=e285]: 헤럴드경제 · 11시간 전
+            - listitem [ref=e286]:
+              - link "'이혼' 女스타, 지하철서 포착… 푹 눌러쓴 모자에 '못 알아볼 뻔' MHN스포츠 · 15시간 전" [ref=e288] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260423200132212
+                - img [ref=e290]
+                - generic [ref=e293]:
+                  - strong [ref=e294]: "'이혼' 女스타, 지하철서 포착… 푹 눌러쓴 모자에 '못 알아볼 뻔'"
+                  - generic [ref=e295]: MHN스포츠 · 15시간 전
+            - listitem [ref=e296]:
+              - link "장동혁 \"李, 간첩과 손 잡고 있다고.. 방미 통해 알게 된 미국의 시각\" JIBS · 19시간 전" [ref=e298] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260423161111815
+                - img [ref=e300]
+                - generic [ref=e303]:
+                  - strong [ref=e304]: 장동혁 "李, 간첩과 손 잡고 있다고.. 방미 통해 알게 된 미국의 시각"
+                  - generic [ref=e305]: JIBS · 19시간 전
+            - listitem [ref=e306]:
+              - link "\"제발 도와달라\" 하루벌이마저 무너져…전쟁 직격탄 맞은 中노동자 아시아경제 · 13시간 전" [ref=e308] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260423192407414
+                - img [ref=e310]
+                - generic [ref=e313]:
+                  - strong [ref=e314]: "\"제발 도와달라\" 하루벌이마저 무너져…전쟁 직격탄 맞은 中노동자"
+                  - generic [ref=e315]: 아시아경제 · 13시간 전
+            - listitem [ref=e316]:
+              - link "우원식 \"대통령 임기 개헌할 방법 없어…참여 않겠다는 핑계 불과\" 연합인포맥스 · 2시간 전" [ref=e318] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260424094702903
+                - img [ref=e320]
+                - generic [ref=e323]:
+                  - strong [ref=e324]: 우원식 "대통령 임기 개헌할 방법 없어…참여 않겠다는 핑계 불과"
+                  - generic [ref=e325]: 연합인포맥스 · 2시간 전
+            - listitem [ref=e326]:
+              - link "\"만정 떨어져\"…주호영, 지선서 퇴장하며 '장동혁 지도부' 향해 독설 데일리안 · 11시간 전" [ref=e328] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260424001147591
+                - img [ref=e330]
+                - generic [ref=e333]:
+                  - strong [ref=e334]: "\"만정 떨어져\"…주호영, 지선서 퇴장하며 '장동혁 지도부' 향해 독설"
+                  - generic [ref=e335]: 데일리안 · 11시간 전
+            - listitem [ref=e336]:
+              - listitem [ref=e337]:
+                - generic [ref=e338]:
+                  - link "MOMENT 광고 안내 페이지 입니다." [ref=e339] [cursor=pointer]:
+                    - /url: https://info.ds.kakao.com/optout.do
+                    - img "MOMENT 광고 안내 페이지 입니다." [ref=e340]
+                  - link "광고 관절보궁 최저가 알아보기 관절보궁 이가격 맞아? 관절보궁" [ref=e341] [cursor=pointer]:
+                    - /url: https://tr.ad.daum.net/clk?wa=jGV_XHHkBK9H5q-BZnBCkCqCwERiFQ5UgdMjh2BbKR0&enc=FzTrflJB8s6u-wbvFPm7yz5bWcpM2XlBPjhvYdcIJ3xx9Lf4TYDges96Q1wDqAEDkdhCx-xnWdx5Rpe9BA3Aa5mlPp8HDWdRyKL05SeLfUUphFoXWX-7C9C0fd1Zinvs322_ZOBexyn_a79e5XDK9eQCttIT4O1J0jpW7MyqVM-ZTYfhXfGGaMqKK0-TW2EEWBEp8wdQDtOHMTFxklsThFwlEvai49htPxSMSzVuOoWpvCZm2m6_MAir7hs9ZhCfXn8tKmJWjhJFugwi2xPCjNeWLdSV4-hUoZ5D7s_F_zLmuLNchdBHxarLl01Lo7kKuIhsBAFfz31PCzGC5PPYFy1rBE5_iWv2rZpiS2HHKxleLHWbQITNh6eQ0JcMihLvYakc_Y6ALnjK9EGgarChRc3RDgh0kW64jiQDx1jxo4DDQfGkvcWcQAVx-cyOrd4Dvf8OGQc8DkH7f3SChNAvpTtsBB41ORgaHPkgMdMvnPJNpsGdy6UQ_jRhtikU-b_JpMbWK6-k5eJlgnM4KN2iDo-pnvaViZgrsI7V6MGN4fmRS9vd4xdpzdAsVacNdRyuc8btUs_UeHIW3kGkAdr_I83wZ52TsOnkLw6jrXg4qZw&signature=aa90a2423938628600068eb2a06c7745&lc=2&rd=%7B%22adunit_type_seq%22%3A1426%2C%22native_adunit_type_seq%22%3A1426%2C%22cp_id%22%3A%2215_pc_media_news%22%2C%22channel_id%22%3A%22harmony%22%7D
+                    - img "광고 관절보궁 최저가 알아보기" [ref=e343]
+                    - generic [ref=e346]:
+                      - strong [ref=e347]: 관절보궁 이가격 맞아?
+                      - generic [ref=e348]: 관절보궁
+            - listitem [ref=e349]:
+              - link "“손 베였다” 신고에 출동하니, 흉기 찔려 숨진 여성이… 동아일보 · 13시간 전" [ref=e351] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260423191310179
+                - img [ref=e353]
+                - generic [ref=e356]:
+                  - strong [ref=e357]: “손 베였다” 신고에 출동하니, 흉기 찔려 숨진 여성이…
+                  - generic [ref=e358]: 동아일보 · 13시간 전
+            - listitem [ref=e359]:
+              - link "국힘 김민수, \"곱게 크신 영감님들이 사사건건 당대표 발목\" MBC · 16시간 전" [ref=e361] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260423185818770
+                - img [ref=e363]
+                - generic [ref=e366]:
+                  - strong [ref=e367]: 국힘 김민수, "곱게 크신 영감님들이 사사건건 당대표 발목"
+                  - generic [ref=e368]: MBC · 16시간 전
+            - listitem [ref=e369]:
+              - link "‘국힘 빨강’ 대신 녹색 점퍼 입은 오세훈-김태흠 동아일보 · 7시간 전" [ref=e371] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260424043431306
+                - img [ref=e373]
+                - generic [ref=e376]:
+                  - strong [ref=e377]: ‘국힘 빨강’ 대신 녹색 점퍼 입은 오세훈-김태흠
+                  - generic [ref=e378]: 동아일보 · 7시간 전
+            - listitem [ref=e379]:
+              - link "\"꽃길만 걷길\"…유승준, 태진아 응원에 '눈물' 한국경제 · 2시간 전" [ref=e381] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260424092634912
+                - img [ref=e383]
+                - generic [ref=e386]:
+                  - strong [ref=e387]: "\"꽃길만 걷길\"…유승준, 태진아 응원에 '눈물'"
+                  - generic [ref=e388]: 한국경제 · 2시간 전
+            - listitem [ref=e389]:
+              - link "황교익 서승만 보은인사 논란에 한겨레 \"국민 모두 납득할 수 있는 원칙 세워야\" 미디어오늘 · 3시간 전" [ref=e391] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260424082107862
+                - img [ref=e393]
+                - generic [ref=e396]:
+                  - strong [ref=e397]: 황교익 서승만 보은인사 논란에 한겨레 "국민 모두 납득할 수 있는 원칙 세워야"
+                  - generic [ref=e398]: 미디어오늘 · 3시간 전
+            - listitem [ref=e399]:
+              - link "차태현 \"첫사랑 아내, 고2 때 만나..다시 태어나면 다른 나라에서\"[26학번 지원이요] 스타뉴스 · 16시간 전" [ref=e401] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260423185934811
+                - img [ref=e403]
+                - generic [ref=e406]:
+                  - strong [ref=e407]: 차태현 "첫사랑 아내, 고2 때 만나..다시 태어나면 다른 나라에서"[26학번 지원이요]
+                  - generic [ref=e408]: 스타뉴스 · 16시간 전
+            - listitem [ref=e409]:
+              - link "“아빠, 여기 금 있어요” 중국 8세 소년 말에 전문가 “가능성 있다” [여기는 중국] 서울신문 · 20시간 전" [ref=e411] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260423145834619
+                - img [ref=e413]
+                - generic [ref=e416]:
+                  - strong [ref=e417]: “아빠, 여기 금 있어요” 중국 8세 소년 말에 전문가 “가능성 있다” [여기는 중국]
+                  - generic [ref=e418]: 서울신문 · 20시간 전
+            - listitem [ref=e419]:
+              - link "\"연기 왜 저래?\" 논란 일더니…'시청률 대박' 반전의 비밀 [덕질경제학] 한국경제 · 13시간 전" [ref=e421] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260423200234254
+                - img [ref=e423]
+                - generic [ref=e426]:
+                  - strong [ref=e427]: "\"연기 왜 저래?\" 논란 일더니…'시청률 대박' 반전의 비밀 [덕질경제학]"
+                  - generic [ref=e428]: 한국경제 · 13시간 전
+            - listitem [ref=e429]:
+              - link "소송 무서웠나…장성규, 변우석 메이크업 후 “그냥 변입니다” 셀프 사과 스포츠서울 · 16시간 전" [ref=e431] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260423191735268
+                - img [ref=e433]
+                - generic [ref=e436]:
+                  - strong [ref=e437]: 소송 무서웠나…장성규, 변우석 메이크업 후 “그냥 변입니다” 셀프 사과
+                  - generic [ref=e438]: 스포츠서울 · 16시간 전
+            - listitem [ref=e439]:
+              - link "\"도대체 왜\"…중국서 '가로등 챌린지'에 경찰까지 출동 MBN · 13시간 전" [ref=e441] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260423220108944
+                - img [ref=e443]
+                - generic [ref=e446]:
+                  - strong [ref=e447]: "\"도대체 왜\"…중국서 '가로등 챌린지'에 경찰까지 출동"
+                  - generic [ref=e448]: MBN · 13시간 전
+        - generic [ref=e450]:
+          - generic [ref=e451]:
+            - heading "실시간 트렌드 오늘 11:42 기준" [level=3] [ref=e452]:
+              - text: 실시간 트렌드
+              - emphasis [ref=e453]: 오늘 11:42 기준
+            - button "툴팁보기" [ref=e455] [cursor=pointer]:
+              - generic [ref=e456]: 툴팁보기
+          - list [ref=e458]:
+            - listitem [ref=e459]:
+              - link "1 위, 모수 ,상승" [ref=e460] [cursor=pointer]:
+                - /url: https://search.daum.net/search?w=tot&DA=NDT&rtmaxcoll=AIO%2CNNS%2CDNS&q=%EB%AA%A8%EC%88%98
+                - generic [ref=e461]:
+                  - emphasis [ref=e462]:
+                    - text: "1"
+                    - generic: 위,
+                  - strong: 모수
+                  - generic [ref=e463]: ",상승"
+            - listitem [ref=e464]:
+              - link "2 위, 붐 둘째 득녀 ,신규" [ref=e465] [cursor=pointer]:
+                - /url: https://search.daum.net/search?w=tot&DA=NDT&rtmaxcoll=AIO%2CNNS%2CDNS&q=%EB%B6%90+%EB%91%98%EC%A7%B8+%EB%93%9D%EB%85%80
+                - generic [ref=e466]:
+                  - emphasis [ref=e467]:
+                    - text: "2"
+                    - generic: 위,
+                  - strong: 붐 둘째 득녀
+                  - generic [ref=e468]: ",신규"
+            - listitem [ref=e469]:
+              - link "3 위, 삼성 ,신규" [ref=e470] [cursor=pointer]:
+                - /url: https://search.daum.net/search?w=tot&DA=NDT&rtmaxcoll=AIO%2CNNS%2CDNS&q=%EC%82%BC%EC%84%B1
+                - generic [ref=e471]:
+                  - emphasis [ref=e472]:
+                    - text: "3"
+                    - generic: 위,
+                  - strong: 삼성
+                  - generic [ref=e473]: ",신규"
+            - listitem [ref=e474]:
+              - link "4 위, 아동수당 ,신규" [ref=e475] [cursor=pointer]:
+                - /url: https://search.daum.net/search?w=tot&DA=NDT&rtmaxcoll=AIO%2CNNS%2CDNS&q=%EC%95%84%EB%8F%99%EC%88%98%EB%8B%B9
+                - generic [ref=e476]:
+                  - emphasis [ref=e477]:
+                    - text: "4"
+                    - generic: 위,
+                  - strong: 아동수당
+                  - generic [ref=e478]: ",신규"
+            - listitem [ref=e479]:
+              - link "5 위, 살목지 ,신규" [ref=e480] [cursor=pointer]:
+                - /url: https://search.daum.net/search?w=tot&DA=NDT&rtmaxcoll=AIO%2CNNS%2CDNS&q=%EC%82%B4%EB%AA%A9%EC%A7%80
+                - generic [ref=e481]:
+                  - emphasis [ref=e482]:
+                    - text: "5"
+                    - generic: 위,
+                  - strong: 살목지
+                  - generic [ref=e483]: ",신규"
+            - listitem [ref=e484]:
+              - link "6 위, 구윤철 소비·관광 붐업 ,신규" [ref=e485] [cursor=pointer]:
+                - /url: https://search.daum.net/search?w=tot&DA=NDT&rtmaxcoll=AIO%2CNNS%2CDNS&q=%EA%B5%AC%EC%9C%A4%EC%B2%A0+%EC%86%8C%EB%B9%84%C2%B7%EA%B4%80%EA%B4%91+%EB%B6%90%EC%97%85
+                - generic [ref=e486]:
+                  - emphasis [ref=e487]:
+                    - text: "6"
+                    - generic: 위,
+                  - strong: 구윤철 소비·관광 붐업
+                  - generic [ref=e488]: ",신규"
+            - listitem [ref=e489]:
+              - link "7 위, 이숙캠 ,신규" [ref=e490] [cursor=pointer]:
+                - /url: https://search.daum.net/search?w=tot&DA=NDT&rtmaxcoll=AIO%2CNNS%2CDNS&q=%EC%9D%B4%EC%88%99%EC%BA%A0
+                - generic [ref=e491]:
+                  - emphasis [ref=e492]:
+                    - text: "7"
+                    - generic: 위,
+                  - strong: 이숙캠
+                  - generic [ref=e493]: ",신규"
+            - listitem [ref=e494]:
+              - link "8 위, 고양 꽃박람회 ,신규" [ref=e495] [cursor=pointer]:
+                - /url: https://search.daum.net/search?w=tot&DA=NDT&rtmaxcoll=AIO%2CNNS%2CDNS&q=%EA%B3%A0%EC%96%91+%EA%BD%83%EB%B0%95%EB%9E%8C%ED%9A%8C
+                - generic [ref=e496]:
+                  - emphasis [ref=e497]:
+                    - text: "8"
+                    - generic: 위,
+                  - strong: 고양 꽃박람회
+                  - generic [ref=e498]: ",신규"
+            - listitem [ref=e499]:
+              - link "9 위, 헤일메리 ,신규" [ref=e500] [cursor=pointer]:
+                - /url: https://search.daum.net/search?w=tot&DA=NDT&rtmaxcoll=AIO%2CNNS%2CDNS&q=%ED%97%A4%EC%9D%BC%EB%A9%94%EB%A6%AC
+                - generic [ref=e501]:
+                  - emphasis [ref=e502]:
+                    - text: "9"
+                    - generic: 위,
+                  - strong: 헤일메리
+                  - generic [ref=e503]: ",신규"
+            - listitem [ref=e504]:
+              - link "10 위, 서울숲나들목 개방 ,신규" [ref=e505] [cursor=pointer]:
+                - /url: https://search.daum.net/search?w=tot&DA=NDT&rtmaxcoll=AIO%2CNNS%2CDNS&q=%EC%84%9C%EC%9A%B8%EC%88%B2%EB%82%98%EB%93%A4%EB%AA%A9+%EA%B0%9C%EB%B0%A9
+                - generic [ref=e506]:
+                  - emphasis [ref=e507]:
+                    - text: "10"
+                    - generic: 위,
+                  - strong: 서울숲나들목 개방
+                  - generic [ref=e508]: ",신규"
+        - generic [ref=e509]:
+          - heading "문화일보 PICK" [level=3] [ref=e511]
+          - tablist [ref=e512]:
+            - tab "오늘 이슈 & 뉴스" [selected] [ref=e513] [cursor=pointer]
+          - list [ref=e514]:
+            - listitem [ref=e515]:
+              - link "美 특수부대원, ‘마두로 체포 작전’ 베팅해 40만달러…군 기밀 유출 논란 1시간 전" [ref=e517] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260424101346160
+                - generic [ref=e521]:
+                  - strong [ref=e522]: 美 특수부대원, ‘마두로 체포 작전’ 베팅해 40만달러…군 기밀 유출 논란
+                  - generic [ref=e523]: 1시간 전
+            - listitem [ref=e524]:
+              - link "[속보]“美국방부, 호르무즈 기뢰 제거에 반년은 걸린다…종전 후 판단” 1일 전" [ref=e526] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260423064946216
+                - generic [ref=e530]:
+                  - strong [ref=e531]: "[속보]“美국방부, 호르무즈 기뢰 제거에 반년은 걸린다…종전 후 판단”"
+                  - generic [ref=e532]: 1일 전
+            - listitem [ref=e533]:
+              - link "발달 더딘 3살 아들 살해하고 아버지까지 해친 30대 1일 전" [ref=e535] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260423061034487
+                - generic [ref=e539]:
+                  - strong [ref=e540]: 발달 더딘 3살 아들 살해하고 아버지까지 해친 30대
+                  - generic [ref=e541]: 1일 전
+            - listitem [ref=e542]:
+              - link "이스라엘, 美와 이란 타격 계획 조율 “종전협상 타결 회의적” 1일 전" [ref=e544] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260423054034993
+                - generic [ref=e548]:
+                  - strong [ref=e549]: 이스라엘, 美와 이란 타격 계획 조율 “종전협상 타결 회의적”
+                  - generic [ref=e550]: 1일 전
+          - link "오늘 이슈 & 뉴스 더보기" [ref=e552] [cursor=pointer]:
+            - /url: https://v.daum.net/channel/15/series/651768841b7964786eea689e
+            - generic [ref=e553]: 오늘 이슈 & 뉴스
+            - text: 더보기
+        - generic [ref=e555]:
+          - generic [ref=e556]:
+            - heading "문화일보 랭킹 뉴스" [level=3] [ref=e557]
+            - paragraph [ref=e558]: 최근 3시간 집계 결과입니다.
+          - tablist [ref=e559]:
+            - tab "많이 본 뉴스" [selected] [ref=e560] [cursor=pointer]
+            - tab "탐독한 뉴스" [ref=e561] [cursor=pointer]
+          - list [ref=e562]:
+            - listitem [ref=e563]:
+              - link "1 위 [속보]이란 “호르무츠 통행료 첫 입금 완료…땡큐” 진짜 30억? 14시간 전" [ref=e565] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260423205532631
+                - img [ref=e567]
+                - generic [ref=e570]:
+                  - strong [ref=e571]:
+                    - generic [ref=e572]:
+                      - text: "1"
+                      - generic: 위
+                    - text: "[속보]이란 “호르무츠 통행료 첫 입금 완료…땡큐” 진짜 30억?"
+                  - generic [ref=e573]: 14시간 전
+            - listitem [ref=e574]:
+              - link "2 위 목화처럼 희고 아름다운… 튀르키예 파묵칼레 온천[도시풍경] 2시간 전" [ref=e576] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260424092637919
+                - img [ref=e578]
+                - generic [ref=e581]:
+                  - strong [ref=e582]:
+                    - generic [ref=e583]:
+                      - text: "2"
+                      - generic: 위
+                    - text: 목화처럼 희고 아름다운… 튀르키예 파묵칼레 온천[도시풍경]
+                  - generic [ref=e584]: 2시간 전
+            - listitem [ref=e585]:
+              - link "3 위 [단독]국민의힘, 특별감찰관 후보 강지식 전 검사 추천 2시간 전" [ref=e587] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260424091732539
+                - img [ref=e589]
+                - generic [ref=e592]:
+                  - strong [ref=e593]:
+                    - generic [ref=e594]:
+                      - text: "3"
+                      - generic: 위
+                    - text: "[단독]국민의힘, 특별감찰관 후보 강지식 전 검사 추천"
+                  - generic [ref=e595]: 2시간 전
+            - listitem [ref=e596]:
+              - link "4 위 홍준표 “장동혁 사퇴? 보수 몰락시킨 장본인이 누군데” 조선일보 저격 12시간 전" [ref=e598] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260423233058912
+                - img [ref=e600]
+                - generic [ref=e603]:
+                  - strong [ref=e604]:
+                    - generic [ref=e605]:
+                      - text: "4"
+                      - generic: 위
+                    - text: 홍준표 “장동혁 사퇴? 보수 몰락시킨 장본인이 누군데” 조선일보 저격
+                  - generic [ref=e606]: 12시간 전
+            - listitem [ref=e607]:
+              - link "5 위 “영감님들, 張과 싸우듯 했으면 尹 탄핵됐겠나” 김민수의 말 10시간 전" [ref=e609] [cursor=pointer]:
+                - /url: https://v.daum.net/v/20260424010732162
+                - img [ref=e611]
+                - generic [ref=e614]:
+                  - strong [ref=e615]:
+                    - generic [ref=e616]:
+                      - text: "5"
+                      - generic: 위
+                    - text: “영감님들, 張과 싸우듯 했으면 尹 탄핵됐겠나” 김민수의 말
+                  - generic [ref=e617]: 10시간 전
+        - generic [ref=e618]:
+          - heading "서비스 바로가기" [level=3] [ref=e620]
+          - tablist [ref=e621]:
+            - tab "뉴스 선택됨" [ref=e622] [cursor=pointer]:
+              - text: 뉴스
+              - generic: 선택됨
+            - tab "연예" [ref=e623] [cursor=pointer]
+            - tab "스포츠" [ref=e624] [cursor=pointer]
+          - generic [ref=e626]:
+            - strong: 뉴스
+            - list [ref=e627]:
+              - listitem [ref=e628]:
+                - link "뉴스 홈" [ref=e629] [cursor=pointer]:
+                  - /url: //news.daum.net/home
+              - listitem [ref=e630]:
+                - link "기후/환경" [ref=e631] [cursor=pointer]:
+                  - /url: //news.daum.net/climate
+              - listitem [ref=e632]:
+                - link "사회" [ref=e633] [cursor=pointer]:
+                  - /url: //news.daum.net/society
+              - listitem [ref=e634]:
+                - link "경제" [ref=e635] [cursor=pointer]:
+                  - /url: //news.daum.net/economy
+              - listitem [ref=e636]:
+                - link "정치" [ref=e637] [cursor=pointer]:
+                  - /url: //news.daum.net/politics
+              - listitem [ref=e638]:
+                - link "국제" [ref=e639] [cursor=pointer]:
+                  - /url: //news.daum.net/world
+              - listitem [ref=e640]:
+                - link "문화" [ref=e641] [cursor=pointer]:
+                  - /url: //news.daum.net/culture
+              - listitem [ref=e642]:
+                - link "IT/과학" [ref=e643] [cursor=pointer]:
+                  - /url: //news.daum.net/tech
+              - listitem [ref=e644]:
+                - link "인물" [ref=e645] [cursor=pointer]:
+                  - /url: //news.daum.net/people
+              - listitem [ref=e646]:
+                - link "지식/칼럼" [ref=e647] [cursor=pointer]:
+                  - /url: //news.daum.net/understanding
+              - listitem [ref=e648]:
+                - link "연재" [ref=e649] [cursor=pointer]:
+                  - /url: //news.daum.net/series
+              - listitem [ref=e650]:
+                - link "배열설명서" [ref=e651] [cursor=pointer]:
+                  - /url: //focus.daum.net/daum/m/algorithm
+        - insertion [ref=e653]:
+          - iframe [ref=e656]:
+            - generic [ref=f20e3]:
+              - link "광고 늘품남성의류 1개만 구입해도 전상품 무료배송 늘품남성의류" [ref=f20e4] [cursor=pointer]:
+                - /url: https://tr.ad.daum.net/clk?wa=t-Nj8Vj7GrHQYMRca8MrPmjLhGSwDYABVMB3WhC-dz4&enc=e_-dL2o3ABe-KDgyamUEgTbws9nauGuqKGgzRtLlpfA09e1OouyAZcT7I5Tfu2K0Awik5B_QEsm1aeWUX6j5GU3k3D6g6VyqDeC0xM5WElPaNRHSVrIQUPLuRCcsgfeZji7G02ae4j7U1xQipC7273XBrz_JhDQh1JNdf6ORxqtgLZWAxvTnYvR0H82Bk1otRkeMFDoEuGWeEhxEkE7EXFwlEvai49htPxSMSzVuOoXLPWKmuWg_SbtS2ur_9Xd056gsEwoiJyn6LGBervv5YoFdmRUlFRgGl8fdke4OF4pcSTj1ZuhUm4p9S1QYgbrcXZaAf_pq_lWnIKFzI86PKaioM0Tp_XVhCjxjkYX97ithQgVqj5w01zMTliXjtPaa1oKP6H5_YDJKJyxgcSFHCK6qaOrNeRFyNm-LHoGd2U3NmDR-OeqCdZVIyPknn82nkcFxnMnnpHHitZJZTISfslevEaPVuDMDW4iLTj1VSuCeJuzP5GvAIE1TkkUpCLD65ksVqJtpYP-j2M0hCq4UZo07Ya73Q3WaTseTvDsPEqGcCTMkSJ0t6AiXQJOyLyBgqb1F-WhgVckqS17FTxFuOYVy3WGGM3Vcqd_Lw9Sm0rzDtAXgmJbHtcJPPO3SJurbGwy8mxnCJwL6HOLTpdmt-qgy8WECGgwgpzKuJwEidRJa_YzDGuXQXZpD3rk3HZ3Rfa3LTXsx56kFVl7sz4ITbnSPkgJ8wKCB5IbHvHjtvkt-GMZGDTLrayaclJ8Fb03-kieAMzfmMWBxUdXseQaHV5LnicduiOnvkRu3sYfhePc&signature=3a5383e57ee7133981872a512cbaf28b&lc=1&rd=%7B%22adunit_type_seq%22%3A1562%2C%22banner_adunit_type_seq%22%3A1562%2C%22native_adunit_type_seq%22%3A1618%2C%22template_seq%22%3A310%2C%22cp_id%22%3A%2215_pc_media_news%22%2C%22channel_id%22%3A%22harmony%22%7D
+                - img "광고 늘품남성의류 1개만 구입해도 전상품 무료배송" [ref=f20e6]
+                - generic [ref=f20e8]: 늘품남성의류
+              - link "광고 늘품남성의류 1개만 구입해도 전상품 무료배송 여름까지 쭉~ 편해서 이것만 찾아요! 파격특가 58% SALE! 단돈 2만원대! 바로가기" [ref=f20e9] [cursor=pointer]:
+                - /url: https://tr.ad.daum.net/clk?wa=t-Nj8Vj7GrHQYMRca8MrPmjLhGSwDYABVMB3WhC-dz4&enc=e_-dL2o3ABe-KDgyamUEgTbws9nauGuqKGgzRtLlpfA09e1OouyAZcT7I5Tfu2K0Awik5B_QEsm1aeWUX6j5GU3k3D6g6VyqDeC0xM5WElPaNRHSVrIQUPLuRCcsgfeZji7G02ae4j7U1xQipC7273XBrz_JhDQh1JNdf6ORxqtgLZWAxvTnYvR0H82Bk1otRkeMFDoEuGWeEhxEkE7EXFwlEvai49htPxSMSzVuOoXLPWKmuWg_SbtS2ur_9Xd056gsEwoiJyn6LGBervv5YoFdmRUlFRgGl8fdke4OF4pcSTj1ZuhUm4p9S1QYgbrcXZaAf_pq_lWnIKFzI86PKaioM0Tp_XVhCjxjkYX97ithQgVqj5w01zMTliXjtPaa1oKP6H5_YDJKJyxgcSFHCK6qaOrNeRFyNm-LHoGd2U3NmDR-OeqCdZVIyPknn82nkcFxnMnnpHHitZJZTISfslevEaPVuDMDW4iLTj1VSuCeJuzP5GvAIE1TkkUpCLD65ksVqJtpYP-j2M0hCq4UZo07Ya73Q3WaTseTvDsPEqGcCTMkSJ0t6AiXQJOyLyBgqb1F-WhgVckqS17FTxFuOYVy3WGGM3Vcqd_Lw9Sm0rzDtAXgmJbHtcJPPO3SJurbGwy8mxnCJwL6HOLTpdmt-qgy8WECGgwgpzKuJwEidRJa_YzDGuXQXZpD3rk3HZ3Rfa3LTXsx56kFVl7sz4ITbnSPkgJ8wKCB5IbHvHjtvkt-GMZGDTLrayaclJ8Fb03-kieAMzfmMWBxUdXseQaHV5LnicduiOnvkRu3sYfhePc&signature=3a5383e57ee7133981872a512cbaf28b&lc=1&rd=%7B%22adunit_type_seq%22%3A1562%2C%22banner_adunit_type_seq%22%3A1562%2C%22native_adunit_type_seq%22%3A1618%2C%22template_seq%22%3A310%2C%22cp_id%22%3A%2215_pc_media_news%22%2C%22channel_id%22%3A%22harmony%22%7D
+                - img "광고 늘품남성의류 1개만 구입해도 전상품 무료배송" [ref=f20e11]
+                - generic [ref=f20e14]:
+                  - strong [ref=f20e15]: 여름까지 쭉~ 편해서 이것만 찾아요!
+                  - generic [ref=f20e16]: 파격특가 58% SALE! 단돈 2만원대!
+                - generic [ref=f20e17]: 바로가기
+              - link "광고 정보" [ref=f20e19] [cursor=pointer]:
+                - /url: https://info.ds.kakao.com/optout.do
+                - generic [ref=f20e20]: 광고 정보
+  - contentinfo [ref=e657]:
+    - contentinfo [ref=e658]:
+      - generic [ref=e659]:
+        - list [ref=e660]:
+          - listitem [ref=e661]:
+            - link "다음뉴스 서비스안내" [ref=e662] [cursor=pointer]:
+              - /url: https://news.daum.net/edit
+          - listitem [ref=e663]:
+            - link "24시간 뉴스센터" [ref=e664] [cursor=pointer]:
+              - /url: https://news.daum.net/newscenter24
+          - listitem [ref=e665]:
+            - link "공지사항" [ref=e666] [cursor=pointer]:
+              - /url: https://brunch.co.kr/@daumnews
+          - listitem [ref=e667]:
+            - link "서비스 약관/정책" [ref=e668] [cursor=pointer]:
+              - /url: https://policy.daum.net/policy/info
+        - generic [ref=e669]:
+          - text: "기사배열책임자 : 임광욱"
+          - text: "청소년보호책임자 : 이호원"
+        - generic [ref=e671]: 뉴스 기사에 대한 저작권 및 법적 책임은 자료제공사 또는 글쓴이에 있으며, axz의 입장과 다를 수 있습니다.
+        - link "© AXZ Corp." [ref=e673] [cursor=pointer]:
+          - /url: https://axzcorp.com

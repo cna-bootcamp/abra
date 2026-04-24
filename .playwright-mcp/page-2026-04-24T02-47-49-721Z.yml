@@ -1,0 +1,1586 @@
+- generic [ref=e1]:
+  - generic:
+    - link "주요 서비스 바로가기" [ref=e2] [cursor=pointer]:
+      - /url: "#mainServiceTitle"
+    - link "전체 서비스 바로가기" [ref=e3] [cursor=pointer]:
+      - /url: "#gnbTitle"
+    - link "홈 화면 설정 바로가기" [ref=e4] [cursor=pointer]:
+      - /url: "#pagSetting"
+    - link "로그인 & MY정보 바로가기" [ref=e5] [cursor=pointer]:
+      - /url: "#loginMy"
+    - link "뉴스 본문 바로가기" [ref=e6] [cursor=pointer]:
+      - /url: "#newsTitle"
+    - link "연예 본문 바로가기" [ref=e7] [cursor=pointer]:
+      - /url: "#enterTitle"
+    - link "스포츠 본문 바로가기" [ref=e8] [cursor=pointer]:
+      - /url: "#sportsTitle"
+    - link "카페・스토리 본문 바로가기" [ref=e9] [cursor=pointer]:
+      - /url: "#cafeTitle"
+    - link "관심사 본문 바로가기" [ref=e10] [cursor=pointer]:
+      - /url: "#interestTitle"
+    - link "쇼핑 본문 바로가기" [ref=e11] [cursor=pointer]:
+      - /url: "#shoppingTitle"
+    - link "웹 접근성 안내" [ref=e12] [cursor=pointer]:
+      - /url: https://focus.daum.net/daum/pc/accessibility.html
+  - generic [ref=e13]:
+    - banner [ref=e14]:
+      - generic [ref=e16]:
+        - heading [level=1] [ref=e17]:
+          - link [ref=e18] [cursor=pointer]:
+            - /url: https://www.daum.net
+            - img [ref=e20]
+        - generic [ref=e29]:
+          - heading "검색" [level=2]
+          - search [ref=e30]:
+            - group "통합 검색" [ref=e31]:
+              - generic: 통합 검색
+              - generic [ref=e33]:
+                - textbox "검색어를 입력해 주세요." [active] [ref=e34]
+                - button "입력 도구" [ref=e35] [cursor=pointer]:
+                  - generic: 입력 도구
+                  - img [ref=e37]
+                - button "검색" [ref=e52] [cursor=pointer]:
+                  - generic: 검색
+                  - img [ref=e54]
+      - generic [ref=e58]:
+        - heading "주요 서비스" [level=2]
+        - list [ref=e59]:
+          - listitem [ref=e60]:
+            - link "지도" [ref=e61] [cursor=pointer]:
+              - /url: https://map.kakao.com/?referrer=daumtop
+              - text: 지도
+          - listitem [ref=e63]:
+            - link "금융" [ref=e64] [cursor=pointer]:
+              - /url: https://finance.daum.net
+              - text: 금융
+          - listitem [ref=e66]:
+            - link "메일" [ref=e67] [cursor=pointer]:
+              - /url: https://mail.daum.net
+              - text: 메일
+          - listitem [ref=e69]:
+            - link "스포츠" [ref=e70] [cursor=pointer]:
+              - /url: https://sports.daum.net/
+              - text: 스포츠
+          - listitem [ref=e72]:
+            - link "날씨" [ref=e73] [cursor=pointer]:
+              - /url: https://weather.daum.net/
+              - text: 날씨
+          - listitem [ref=e75]:
+            - link "게임" [ref=e76] [cursor=pointer]:
+              - /url: https://game.daum.net
+              - text: 게임
+          - listitem [ref=e78]:
+            - link "환율" [ref=e79] [cursor=pointer]:
+              - /url: https://search.daum.net/search?w=tot&q=%ED%99%98%EC%9C%A8
+              - text: 환율
+        - button "전체 서비스" [ref=e81] [cursor=pointer]:
+          - generic [ref=e82]: 전체 서비스
+    - main [ref=e83]:
+      - generic [ref=e84]:
+        - main [ref=e85]:
+          - generic [ref=e87]:
+            - insertion [ref=e91]:
+              - iframe [ref=e94]:
+                - generic [ref=f4e3]:
+                  - link "광고 관절보궁 최저가 알아보기 광고 관절보궁 최저가 알아보기 관절보궁 관절보궁 이가격 맞아? 가수 김연자, 박지현이 선택한 관절케어 관절보궁 구매하기" [ref=f4e4] [cursor=pointer]:
+                    - /url: https://tr.ad.daum.net/clk?wa=dpN0IbmzJF9ZuWNtLgrwF3MTqU8boEB8hAGv9IU9Cm0&enc=JrIcp7-p7pZIo8Lb4nZFIhh4Cqt8Q9T2gbsaKUdXgHMdpB8ryhV3IWxtdsTMdi_XQhPq0faXGAyrKIo6fTb2UWE8nOVd0r03P-a0KJuKWOSou_Y8ms4Ndiy2-XSRCbHoWkZ7DYSTB79KMEhd8vzwY0xmRKs_AKytG5pwT2EatSQa2vvh78BV_x3rN42IuOckRrQOZnaxe7X7NPEnxypZEFwlEvai49htPxSMSzVuOoVUCVpSCuuB4VtW3cBoNCRlV4GoQdvipWXNpfhnVQ8k_deWLdSV4-hUoZ5D7s_F_zLmuLNchdBHxarLl01Lo7kKuIhsBAFfz31PCzGC5PPYFy1rBE5_iWv2rZpiS2HHKxleLHWbQITNh6eQ0JcMihLvYakc_Y6ALnjK9EGgarChRc3RDgh0kW64jiQDx1jxo4DDQfGkvcWcQAVx-cyOrd4Dvf8OGQc8DkH7f3SChNAvpTtsBB41ORgaHPkgMdMvnPJNpsGdy6UQ_jRhtikU-b_JpMbWK6-k5eJlgnM4KN2iDo-pnvaViZgrsI7V6MGN4fmRS9vd4xdpzdAsVacNdRyuc8btUs_UeHIW3kGkAdr_I83wZ52TsOnkLw6jrXg4qZw&signature=bd4528585a960e64e81e7f299af68dc1&lc=1&rd=%7B%22adunit_type_seq%22%3A137%2C%22banner_adunit_type_seq%22%3A137%2C%22native_adunit_type_seq%22%3A1366%2C%22template_seq%22%3A198%7D
+                    - img "광고 관절보궁 최저가 알아보기" [ref=f4e6]
+                    - generic [ref=f4e9]:
+                      - strong [ref=f4e10]:
+                        - img "광고 관절보궁 최저가 알아보기" [ref=f4e12]
+                        - generic [ref=f4e14]: 관절보궁
+                      - strong [ref=f4e15]: 관절보궁 이가격 맞아?
+                      - generic [ref=f4e16]: 가수 김연자, 박지현이 선택한 관절케어 관절보궁
+                    - generic [ref=f4e18]: 구매하기
+                  - link "광고 정보" [ref=f4e19] [cursor=pointer]:
+                    - /url: https://info.ds.kakao.com/optout.do
+                    - img "광고 정보" [ref=f4e20]
+            - generic [ref=e95]:
+              - heading [level=2]
+              - list [ref=e99]:
+                - listitem [ref=e100]:
+                  - link "LIVE KCTV제주방송 라이브" [ref=e101] [cursor=pointer]:
+                    - /url: https://live.v.daum.net/83wIQtQiQ4
+                    - emphasis [ref=e106]: LIVE
+                    - strong: KCTV제주방송 라이브
+                - listitem [ref=e107]:
+                  - link "LIVE 🔴 LIVE | 머니풀투데이 | 경인방송 90.7MHz 라디오 생방송" [ref=e108] [cursor=pointer]:
+                    - /url: https://live.v.daum.net/Eqj6KN7yrT
+                    - emphasis [ref=e113]: LIVE
+                    - strong: 🔴 LIVE | 머니풀투데이 | 경인방송 90.7MHz 라디오 생방송
+                - listitem [ref=e114]:
+                  - link "LIVE [🔴뉴스포커스] 트럼프 \"이란에 핵무기 사용 안해\"ㅣ'100만 배럴' 유조선, 호르무즈 뚫고 한국행" [ref=e115] [cursor=pointer]:
+                    - /url: https://live.v.daum.net/IhQsUHkZAt
+                    - emphasis [ref=e120]: LIVE
+                    - strong: "[🔴뉴스포커스] 트럼프 \"이란에 핵무기 사용 안해\"ㅣ'100만 배럴' 유조선, 호르무즈 뚫고 한국행"
+            - generic [ref=e121]:
+              - heading "뉴스" [level=2]
+              - generic [ref=e122]:
+                - strong [ref=e124]:
+                  - button "뉴스" [ref=e125] [cursor=pointer]:
+                    - generic [ref=e127]: 뉴스
+                - tablist [ref=e131]:
+                  - generic [ref=e132]:
+                    - tab "선택됨, 주요 뉴스 , 정렬 기준 선택" [ref=e133]:
+                      - button "선택됨, 주요 뉴스 , 정렬 기준 선택" [ref=e134] [cursor=pointer]:
+                        - generic: 선택됨,
+                        - text: 주요 뉴스
+                        - strong: ", 정렬 기준 선택"
+                    - tab "추천" [ref=e137] [cursor=pointer]
+                    - tab "언론사" [ref=e139] [cursor=pointer]
+                    - tab "심층탐사" [ref=e141] [cursor=pointer]
+                    - tab "경제" [ref=e143] [cursor=pointer]
+                    - tab "라이브" [ref=e145] [cursor=pointer]
+              - generic [ref=e146]:
+                - list [ref=e149]:
+                  - listitem [ref=e150]:
+                    - link "춘향전 무대 ‘광한루’ 국보로… 보물지정 63년만에 승격 문화일보" [ref=e151] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424113642030
+                      - generic [ref=e155]:
+                        - strong [ref=e156]: 춘향전 무대 ‘광한루’ 국보로… 보물지정 63년만에 승격
+                        - generic [ref=e158]: 문화일보
+                  - listitem [ref=e159]:
+                    - link "일본 국회 앞에 울려퍼진 위안부 피해자 이름 “배봉기·김복동·곽금녀”[현장] 한겨레" [ref=e160] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424113612000
+                      - generic [ref=e164]:
+                        - strong [ref=e165]: 일본 국회 앞에 울려퍼진 위안부 피해자 이름 “배봉기·김복동·곽금녀”[현장]
+                        - generic [ref=e167]: 한겨레
+                  - listitem [ref=e168]:
+                    - link "\"국제유가 내리는데 왜 오르나\"…'최고가격 동결'에 시민들 '한숨'[현장] 뉴시스" [ref=e169] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424112209364
+                      - generic [ref=e173]:
+                        - strong [ref=e174]: "\"국제유가 내리는데 왜 오르나\"…'최고가격 동결'에 시민들 '한숨'[현장]"
+                        - generic [ref=e176]: 뉴시스
+                  - listitem [ref=e177]:
+                    - link "수술 한 건당 주사기 10개씩 쓰는데..\"재고 없어요\" 병원들 '한숨'[르포] 머니투데이" [ref=e178] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424093214240
+                      - generic [ref=e182]:
+                        - strong [ref=e183]: 수술 한 건당 주사기 10개씩 쓰는데.."재고 없어요" 병원들 '한숨'[르포]
+                        - generic [ref=e185]: 머니투데이
+                - list [ref=e188]:
+                  - listitem [ref=e189]:
+                    - link "트럼프 \"이스라엘-레바논 휴전 3주 연장\"…이란戰 협상동력 살릴까" [ref=e190] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424070616604?x_imp=Y29udHJvbA==&x_hk=NzU1ZmVmMDU4NjZmZjJlMDdm
+                      - strong [ref=e192]: 트럼프 "이스라엘-레바논 휴전 3주 연장"…이란戰 협상동력 살릴까
+                  - listitem [ref=e193]:
+                    - link "소프트웨어 급락·유가 급등에 뉴욕증시 하루 만에 하락[뉴욕 is]" [ref=e194] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424051401004?x_imp=Y29udHJvbA==&x_hk=NzU1ZmVmMDU4NjZmZjJlMDdm
+                      - strong [ref=e196]: 소프트웨어 급락·유가 급등에 뉴욕증시 하루 만에 하락[뉴욕 is]
+                  - listitem [ref=e197]:
+                    - link "\"모든 기뢰선박 격침 명령\"…인도양서 또 나포" [ref=e198] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424061205836?x_imp=Y29udHJvbA==&x_hk=NzU1ZmVmMDU4NjZmZjJlMDdm
+                      - strong [ref=e200]: "\"모든 기뢰선박 격침 명령\"…인도양서 또 나포"
+                  - listitem [ref=e201]:
+                    - link "하노이에 재계 총수 집결…한-베 '첨단·공급망 동맹' 시동" [ref=e202] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424081257691?x_imp=Y29udHJvbA==&x_hk=NzU1ZmVmMDU4NjZmZjJlMDdm
+                      - strong [ref=e204]: 하노이에 재계 총수 집결…한-베 '첨단·공급망 동맹' 시동
+                  - listitem [ref=e205]:
+                    - link "재계 총수들 하노이 집결…AI·에너지·인재로 한·베 협력 확대" [ref=e206] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424102347577?x_imp=Y29udHJvbA==&x_hk=NzU1ZmVmMDU4NjZmZjJlMDdm
+                      - strong [ref=e208]: 재계 총수들 하노이 집결…AI·에너지·인재로 한·베 협력 확대
+                  - listitem [ref=e209]:
+                    - link "트럼프, 대이란 협상에 \"서두르지 않겠다…훌륭한 합의 원해\"" [ref=e210] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424065418378?x_imp=Y29udHJvbA==&x_hk=NzU1ZmVmMDU4NjZmZjJlMDdm
+                      - strong [ref=e212]: 트럼프, 대이란 협상에 "서두르지 않겠다…훌륭한 합의 원해"
+                  - listitem [ref=e213]:
+                    - link "李 대통령 \"첨단산업 씨앗 함께\" 이재용 \"베트남의 성공은 삼성의 성공\"…한-베트남 기업 74개 MOU" [ref=e214] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424060834802?x_imp=Y29udHJvbA==&x_hk=NzU1ZmVmMDU4NjZmZjJlMDdm
+                      - strong [ref=e216]: 李 대통령 "첨단산업 씨앗 함께" 이재용 "베트남의 성공은 삼성의 성공"…한-베트남 기업 74개 MOU
+                  - listitem [ref=e217]:
+                    - link "이재명 대통령 \"살지도 않는 집 양도소득세 깎아주는 건 투기 권장\"" [ref=e218] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424110732668?x_imp=Y29udHJvbA==&x_hk=NzU1ZmVmMDU4NjZmZjJlMDdm
+                      - strong [ref=e220]: 이재명 대통령 "살지도 않는 집 양도소득세 깎아주는 건 투기 권장"
+              - generic [ref=e222]:
+                - generic [ref=e223]:
+                  - generic [ref=e224]:
+                    - generic [ref=e225]: 주요 뉴스
+                    - text: 더보기
+                  - generic [ref=e226]:
+                    - generic: 현재 페이지
+                    - emphasis [ref=e227]: "1"
+                    - generic [ref=e228]: /
+                    - generic: 전체 페이지
+                    - generic [ref=e229]: "4"
+                - button "이전페이지 보기" [ref=e230] [cursor=pointer]:
+                  - generic [ref=e231]: 이전페이지 보기
+                - button "다음페이지 보기" [ref=e232] [cursor=pointer]:
+                  - generic [ref=e233]: 다음페이지 보기
+            - insertion [ref=e237]:
+              - iframe [ref=e240]:
+                - generic [ref=f7e3]:
+                  - link "광고 관절보궁 최저가 알아보기 광고 관절보궁 최저가 알아보기 관절보궁 관절보궁 이가격 맞아? 가수 김연자, 박지현이 선택한 관절케어 관절보궁 구매하기" [ref=f7e4] [cursor=pointer]:
+                    - /url: https://tr.ad.daum.net/clk?wa=lGMgPiI43Z6aRuAcwAz8w0e6IvDIGBtgCmCtBj4Fxvs&enc=51gzdArQ5YoWr65jF9zJQkPrCmjtnzAq7-Hf--QsjKEUUWSyS3NnXjl4f2rcgfhBBDKWYhDmrNmf9lCQFI1xJX0LJOcafLcu_jYN2eRHBztz_w0RiZcRVo8ft5rRzNEB9KkZC7qNXcDeokaLz2cifrJJJL1wZRC2LFTGQPMQhNr72VbFOi_NjVJDy2qjKZRe-doXhW0axtFBZUQFvlWRNFwlEvai49htPxSMSzVuOoXy7x3oBzIx9ycIk0azzzhOl2-a_1iHEuhso-eYpSAtwteWLdSV4-hUoZ5D7s_F_zLmuLNchdBHxarLl01Lo7kKuIhsBAFfz31PCzGC5PPYFy1rBE5_iWv2rZpiS2HHKxleLHWbQITNh6eQ0JcMihLvYakc_Y6ALnjK9EGgarChRc3RDgh0kW64jiQDx1jxo4DDQfGkvcWcQAVx-cyOrd4Dvf8OGQc8DkH7f3SChNAvpTtsBB41ORgaHPkgMdMvnPJNpsGdy6UQ_jRhtikU-b_JpMbWK6-k5eJlgnM4KN2iDo-pnvaViZgrsI7V6MGN4fmRS9vd4xdpzdAsVacNdRyuc8btUs_UeHIW3kGkAdr_I83wZ52TsOnkLw6jrXg4qZw&signature=b3612e74d7092b6524ea3949bb4239e0&lc=1&rd=%7B%22adunit_type_seq%22%3A137%2C%22banner_adunit_type_seq%22%3A137%2C%22native_adunit_type_seq%22%3A1366%2C%22template_seq%22%3A198%7D
+                    - img "광고 관절보궁 최저가 알아보기" [ref=f7e6]
+                    - generic [ref=f7e9]:
+                      - strong [ref=f7e10]:
+                        - img "광고 관절보궁 최저가 알아보기" [ref=f7e12]
+                        - generic [ref=f7e14]: 관절보궁
+                      - strong [ref=f7e15]: 관절보궁 이가격 맞아?
+                      - generic [ref=f7e16]: 가수 김연자, 박지현이 선택한 관절케어 관절보궁
+                    - generic [ref=f7e18]: 구매하기
+                  - link "광고 정보" [ref=f7e19] [cursor=pointer]:
+                    - /url: https://info.ds.kakao.com/optout.do
+                    - img "광고 정보" [ref=f7e20]
+            - generic [ref=e241]:
+              - heading "연예" [level=2]
+              - generic [ref=e242]:
+                - strong [ref=e243]:
+                  - link "연예" [ref=e244] [cursor=pointer]:
+                    - /url: https://entertain.daum.net/
+                    - generic [ref=e246]: 연예
+                - tablist [ref=e250]:
+                  - generic [ref=e251]:
+                    - tab "종합" [selected] [ref=e253] [cursor=pointer]
+                    - tab "TV하이라이트" [ref=e255] [cursor=pointer]
+                    - tab "연예스토리" [ref=e257] [cursor=pointer]
+                    - tab "영화소식" [ref=e259] [cursor=pointer]
+                    - tab "많이 본" [ref=e261] [cursor=pointer]
+              - generic [ref=e262]:
+                - list [ref=e265]:
+                  - listitem [ref=e266]:
+                    - link "'20년째 영화 실패?' 그가 불안에 찌들 수밖에 없던 이유 볼따구" [ref=e267] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/pksPJPWI66
+                      - generic [ref=e271]:
+                        - strong [ref=e272]: "'20년째 영화 실패?' 그가 불안에 찌들 수밖에 없던 이유"
+                        - generic [ref=e274]: 볼따구
+                  - listitem [ref=e275]:
+                    - link "4월 25일 빌보드 차트 내 K-팝 한눈에 보기 Billboard Korea" [ref=e276] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/PIvFL8TsXk
+                      - generic [ref=e280]:
+                        - strong [ref=e281]: 4월 25일 빌보드 차트 내 K-팝 한눈에 보기
+                        - generic [ref=e283]: Billboard Korea
+                  - listitem [ref=e284]:
+                    - link "긴 기다림 끝 귀환한 방탄소년단과 블랙핑크 컴백 톺아보기 아이돌레" [ref=e285] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/pwSV6Wd81u
+                      - generic [ref=e289]:
+                        - strong [ref=e290]: 긴 기다림 끝 귀환한 방탄소년단과 블랙핑크 컴백 톺아보기
+                        - generic [ref=e292]: 아이돌레
+                  - listitem [ref=e293]:
+                    - 'link "재생시간 00:31 \"어린 여자랑 결혼 비결 뭔가요?\"..''띠동갑❤️''최연수, 선 넘는 질문에 발끈 #newsen 뉴스엔" [ref=e294] [cursor=pointer]':
+                      - /url: https://video.daum.net/s/462733289
+                      - generic [ref=e296]:
+                        - generic: 재생시간
+                        - generic [ref=e298]: 00:31
+                      - generic [ref=e299]:
+                        - strong [ref=e300]: "\"어린 여자랑 결혼 비결 뭔가요?\"..'띠동갑❤️'최연수, 선 넘는 질문에 발끈 #newsen"
+                        - generic [ref=e302]: 뉴스엔
+                - list [ref=e305]:
+                  - listitem [ref=e306]:
+                    - link "김태균, 호날두와 슈퍼카 경쟁…\"연봉 10억인데 차에 8억 투자\" (옥문아)[전일야화]" [ref=e307] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424065215351
+                      - strong [ref=e309]: 김태균, 호날두와 슈퍼카 경쟁…"연봉 10억인데 차에 8억 투자" (옥문아)[전일야화]
+                  - listitem [ref=e310]:
+                    - link "'불륜 의혹' 홍서범 子, \"어떤 벌 받으려고\" 전처 분노 속 항소심 내달 21일 속행" [ref=e311] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424100211651
+                      - strong [ref=e313]: "'불륜 의혹' 홍서범 子, \"어떤 벌 받으려고\" 전처 분노 속 항소심 내달 21일 속행"
+                  - listitem [ref=e314]:
+                    - link "25기 영자, 15기 영철 '직진 플러팅'에 푹 빠졌다…\"20기 영식 다음으로 호감\" (나솔사계)[전일야화]" [ref=e315] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424071132667
+                      - strong [ref=e317]: 25기 영자, 15기 영철 '직진 플러팅'에 푹 빠졌다…"20기 영식 다음으로 호감" (나솔사계)[전일야화]
+                  - listitem [ref=e318]:
+                    - link "유깻잎 \"'이혼' 최고기 연인 이주은, 너무 선하고 맑아..꼭 행복하길\"(인터뷰②)" [ref=e319] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424081334712
+                      - strong [ref=e321]: 유깻잎 "'이혼' 최고기 연인 이주은, 너무 선하고 맑아..꼭 행복하길"(인터뷰②)
+                  - listitem [ref=e322]:
+                    - link "조현철, SBS '악몽' 출연 확정…김남길·이유미 만난다" [ref=e323] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424080302467
+                      - strong [ref=e325]: 조현철, SBS '악몽' 출연 확정…김남길·이유미 만난다
+                  - listitem [ref=e326]:
+                    - link "'왕사남' 대박난 전미도, '승산 있습니다' 특별출연…힘 보탠다" [ref=e327] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424101412184
+                      - strong [ref=e329]: "'왕사남' 대박난 전미도, '승산 있습니다' 특별출연…힘 보탠다"
+                  - listitem [ref=e330]:
+                    - link "'흥행 물오른' 박해수, 차기작은 '페이퍼맨'" [ref=e331] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424070146500
+                      - strong [ref=e333]: "'흥행 물오른' 박해수, 차기작은 '페이퍼맨'"
+                  - listitem [ref=e334]:
+                    - link "MOMENT 광고 안내 페이지 입니다." [ref=e335] [cursor=pointer]:
+                      - /url: https://info.ds.kakao.com/optout.do
+                      - img "MOMENT 광고 안내 페이지 입니다." [ref=e336]
+                    - link "재고 밀려서 어쩔 수 없이 풀었어요. 창고정리 AD" [ref=e337] [cursor=pointer]:
+                      - /url: https://tr.ad.daum.net/clk?wa=sZ18KyXv9b6DxC8thYlJ5I8d76CnxnlK7_DylHSQHdQ&enc=yf2kB7PLfmUY0gn3P9UOOW8aQx-0V2ZW4N4_Zz_xw--jUyjbOx5ipsD-lk5V9a9KUSMRXGj4zRb9dTIlq-LNDJ5M_sWe3CO3f4diRDQRyNfRSTOVyF_mSuyZFc6UMHjnQi3tB5ZjwOXLA1MqAD8yCjQNrb1sh-YaM_G-8uRjg6pewfh5l6IRVJUMuLcJPJJsEuASjGPeWBA88-hy_tezSVwlEvai49htPxSMSzVuOoWLQxc6zuqpwPDPgOuivDvHePCIGn47v7TeJGppZ4xd5deWLdSV4-hUoZ5D7s_F_zI-8Ju44V-tyXobAvcI0-sauIhsBAFfz31PCzGC5PPYFy1rBE5_iWv2rZpiS2HHKxleLHWbQITNh6eQ0JcMihLvYakc_Y6ALnjK9EGgarChRc3RDgh0kW64jiQDx1jxo4C53xHJjsScPS2iIciox41hMjcmRryCr_NgCNoMwVi5DjtsBB41ORgaHPkgMdMvnPKeGwaXNWoYPb5YlLQ2daLIpMbWK6-k5eJlgnM4KN2iDpO8WY2l5PJaX2SXJLiKhAr6ubkgVk7BQVW5Qn-bfKUEx9WsIDlEsMk5m5XNDy7zzQjrUGN-MmJvhxC_q7t9WgJT5oPR_ToU78e0m43VchVw90GzztHyZf4dJNfg4B-dwkvnsXOn6fEGjMoGnAwVjUQMZOZACyIHZAI0x0k853mE1rV8dcLnlUtdWPdxqQGxEuH9jwUv15JIcx7arwgTn2DAdBfFOUcakuBtxjkBj1tX2id25Lmwxru9wgOdYj4liZLnicduiOnvkRu3sYfhePc&signature=c0bdc63813a1c89fea7a79fb5e338a20&lc=1&rd=%7B%22adunit_type_seq%22%3A1275%2C%22native_adunit_type_seq%22%3A1275%7D
+                      - generic [ref=e338]:
+                        - strong [ref=e339]: 재고 밀려서 어쩔 수 없이 풀었어요. 창고정리
+                        - generic [ref=e340]: AD
+              - generic [ref=e342]:
+                - generic [ref=e343]:
+                  - generic [ref=e344]:
+                    - generic [ref=e345]: 연예 종합
+                    - text: 더보기
+                  - generic [ref=e346]:
+                    - generic: 현재 페이지
+                    - emphasis [ref=e347]: "1"
+                    - generic [ref=e348]: /
+                    - generic: 전체 페이지
+                    - generic [ref=e349]: "3"
+                - button "이전페이지 보기" [ref=e350] [cursor=pointer]:
+                  - generic [ref=e351]: 이전페이지 보기
+                - button "다음페이지 보기" [ref=e352] [cursor=pointer]:
+                  - generic [ref=e353]: 다음페이지 보기
+            - generic [ref=e354]:
+              - heading "스포츠" [level=2]
+              - generic [ref=e355]:
+                - strong [ref=e357]:
+                  - button "스포츠" [ref=e358] [cursor=pointer]:
+                    - generic [ref=e360]: 스포츠
+                - generic [ref=e363]:
+                  - tablist [ref=e364]:
+                    - generic [ref=e365]:
+                      - tab "종합" [selected] [ref=e367] [cursor=pointer]
+                      - tab "축구" [ref=e369] [cursor=pointer]
+                      - tab "해외축구" [ref=e371] [cursor=pointer]
+                      - tab "야구" [ref=e373] [cursor=pointer]
+                      - tab "해외야구" [ref=e375] [cursor=pointer]
+                      - tab "골프" [ref=e377] [cursor=pointer]
+                      - tab "농구" [ref=e379] [cursor=pointer]
+                      - tab "배구" [ref=e381] [cursor=pointer]
+                      - tab "일반" [ref=e383] [cursor=pointer]
+                      - tab "e스포츠" [ref=e385] [cursor=pointer]
+                      - tab "많이 본" [ref=e387] [cursor=pointer]
+                  - link "다음" [ref=e389] [cursor=pointer]:
+                    - /url: "#none"
+                    - generic [ref=e390]: 다음
+              - generic [ref=e391]:
+                - generic [ref=e392]:
+                  - list [ref=e394]:
+                    - listitem [ref=e395]:
+                      - link "재생시간 02:40 '코리안 더비 3차전' 김혜성, 2안타 1타점 맹활약..이정후는 침묵 [스포타임#뉴스] 스포타임_MLB" [ref=e396] [cursor=pointer]:
+                        - /url: https://newslink.media.daum.net/v/462734227
+                        - generic [ref=e398]:
+                          - generic: 재생시간
+                          - generic [ref=e400]: 02:40
+                        - generic [ref=e401]:
+                          - strong [ref=e402]: "'코리안 더비 3차전' 김혜성, 2안타 1타점 맹활약..이정후는 침묵 [스포타임#뉴스]"
+                          - generic [ref=e404]: 스포타임_MLB
+                    - listitem [ref=e405]:
+                      - link "재생시간 01:52 비행기 원정단' 응원 타고…소노, 1차전 '대역전승 SBS" [ref=e406] [cursor=pointer]:
+                        - /url: https://newslink.media.daum.net/v/462731854
+                        - generic [ref=e408]:
+                          - generic: 재생시간
+                          - generic [ref=e410]: 01:52
+                        - generic [ref=e411]:
+                          - strong [ref=e412]: 비행기 원정단' 응원 타고…소노, 1차전 '대역전승
+                          - generic [ref=e414]: SBS
+                  - generic [ref=e415]:
+                    - heading "스코어보드" [level=3]
+                    - list [ref=e416]:
+                      - generic [ref=e417]:
+                        - listitem [ref=e418]:
+                          - link "H/L 종료 MLB LA다저스 3 점 샌프란시스코 0 점" [ref=e419] [cursor=pointer]:
+                            - /url: https://sports.daum.net/match/80103661
+                            - generic [ref=e420]:
+                              - generic [ref=e421]:
+                                - generic [ref=e423]: H/L
+                                - generic [ref=e424]: 종료
+                                - generic [ref=e426]: MLB
+                              - generic [ref=e427]:
+                                - generic [ref=e429]: LA다저스
+                                - emphasis [ref=e430]: "3"
+                                - generic: 점
+                              - generic [ref=e431]:
+                                - generic [ref=e433]: 샌프란시스코
+                                - emphasis [ref=e434]: "0"
+                                - generic: 점
+                          - link "문자 2쿼터 NBA 미네소타 61 점 덴버 39 점" [ref=e435] [cursor=pointer]:
+                            - /url: https://sports.daum.net/game/80105836
+                            - generic [ref=e436]:
+                              - generic [ref=e437]:
+                                - generic [ref=e439]: 문자
+                                - generic [ref=e440]: 2쿼터
+                                - generic [ref=e442]: NBA
+                              - generic [ref=e443]:
+                                - generic [ref=e445]: 미네소타
+                                - emphasis [ref=e446]: "61"
+                                - generic: 점
+                              - generic [ref=e447]:
+                                - generic [ref=e449]: 덴버
+                                - emphasis [ref=e450]: "39"
+                                - generic: 점
+                        - listitem [ref=e451]:
+                          - link [ref=e452] [cursor=pointer]:
+                            - /url: https://sports.daum.net/game/80103273
+                            - generic [ref=e454]:
+                              - generic [ref=e456]: 기록
+                              - generic [ref=e457]: 2026 우리금융챔피언십
+                              - generic [ref=e458]:
+                                - generic [ref=e459]: 2라운드
+                                - generic [ref=e460]: KPGA
+                          - link [ref=e461] [cursor=pointer]:
+                            - /url: https://sports.daum.net/game/80101201
+                            - generic [ref=e463]:
+                              - generic [ref=e465]: 기록
+                              - generic [ref=e466]: 제2회 덕신EPC 챔피언십
+                              - generic [ref=e467]:
+                                - generic [ref=e468]: 1라운드
+                                - generic [ref=e469]: KLPGA
+                        - listitem [ref=e470]:
+                          - link [ref=e471] [cursor=pointer]:
+                            - /url: https://sports.daum.net/game/80105837
+                            - generic [ref=e472]:
+                              - generic [ref=e473]:
+                                - generic [ref=e475]: 기록
+                                - generic [ref=e476]: 종료
+                                - generic [ref=e478]: NBA
+                              - generic [ref=e479]:
+                                - generic [ref=e481]: 토론토
+                                - emphasis [ref=e482]: "126"
+                              - generic [ref=e483]:
+                                - generic [ref=e485]: 클리블랜드
+                                - emphasis [ref=e486]: "104"
+                          - link [ref=e487] [cursor=pointer]:
+                            - /url: https://search.daum.net/search?nil_suggest=btn&w=tot&DA=XEO&rtmaxcoll=Z9T&q=%EC%98%A4%EB%8A%98+%EA%B2%BD%EA%B8%B0%EC%9D%BC%EC%A0%95
+                            - text: 오늘의 경기일정 보기
+                      - generic:
+                        - link "이전페이지 보기" [ref=e489] [cursor=pointer]:
+                          - /url: "#none"
+                          - generic [ref=e490]: 이전페이지 보기
+                        - link "다음페이지 보기" [ref=e491] [cursor=pointer]:
+                          - /url: "#none"
+                          - generic [ref=e492]: 다음페이지 보기
+                - list [ref=e495]:
+                  - listitem [ref=e496]:
+                    - link "\"열심히 노력했는데...\" 달감독도 탄식, '시즌 아웃' 78억 FA 엄상백 시련 이렇게 끝이 없다니 [MD잠실]" [ref=e497] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424063857176
+                      - strong [ref=e499]: "\"열심히 노력했는데...\" 달감독도 탄식, '시즌 아웃' 78억 FA 엄상백 시련 이렇게 끝이 없다니 [MD잠실]"
+                  - listitem [ref=e500]:
+                    - link "축구협회 직접 '정몽규 중징계' 내릴까, 법원 판단에도 '실효성'이 문제" [ref=e501] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424060503736
+                      - strong [ref=e503]: 축구협회 직접 '정몽규 중징계' 내릴까, 법원 판단에도 '실효성'이 문제
+                  - listitem [ref=e504]:
+                    - link "\"이란 월드컵 출전 확정\"..FIFA, 이탈리아 대체설 일축" [ref=e505] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424063811172
+                      - strong [ref=e507]: "\"이란 월드컵 출전 확정\"..FIFA, 이탈리아 대체설 일축"
+                  - listitem [ref=e508]:
+                    - link "삼성 왜 뜬금없는 결정을 했나.. 신인상 레이스 대형 후보 등장? 선발 빅뱅 일으키나" [ref=e509] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424060214584
+                      - strong [ref=e511]: 삼성 왜 뜬금없는 결정을 했나.. 신인상 레이스 대형 후보 등장? 선발 빅뱅 일으키나
+                  - listitem [ref=e512]:
+                    - link "메이저 첫날 동반한 전인지·황유민, 1R 경기 어땠나? [LPGA 셰브론 챔피언십]" [ref=e513] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424084146367
+                      - strong [ref=e515]: 메이저 첫날 동반한 전인지·황유민, 1R 경기 어땠나? [LPGA 셰브론 챔피언십]
+                  - listitem [ref=e516]:
+                    - link "그는 백업이 아니다, 컨택 능력 뛰어난 '주전급' 타자다![비더레전드 오늘의 Pick]" [ref=e517] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/q0l2d6yOpo
+                      - strong [ref=e519]: 그는 백업이 아니다, 컨택 능력 뛰어난 '주전급' 타자다![비더레전드 오늘의 Pick]
+                  - listitem [ref=e520]:
+                    - link "오현규 1골 1도움..베식타스, 알란야스포르 완파하고 4강행" [ref=e521] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/20260424060210565
+                      - strong [ref=e523]: 오현규 1골 1도움..베식타스, 알란야스포르 완파하고 4강행
+                  - listitem [ref=e524]:
+                    - link "MOMENT 광고 안내 페이지 입니다." [ref=e525] [cursor=pointer]:
+                      - /url: https://info.ds.kakao.com/optout.do
+                      - img "MOMENT 광고 안내 페이지 입니다." [ref=e526]
+                    - link "손등 검버섯 옅어지니 아무도 60대로 안봐요~ AD" [ref=e527] [cursor=pointer]:
+                      - /url: https://tr.ad.daum.net/clk?wa=muV3xT0HkEVhuOnPr3SLy-k5IrnnEsymjbaaGI6S278&enc=yFvlggsq4tKHGv1mMaa68VdFX8Goci9-O1tG6nhRccVFapj2f7s_eVDSDA7dW2Tn3KaSpJ072dKI3WHi6-XY1N18UktNF-VtWucKKNoqbDyxzZvL9vwJmOjgHkvA0KbDQLjXgsIPSpjqv7lk0Kc1rz5VsbWXgTDL2XcilbpLBO15Qo2xDW7_43RwtVaINaUg6MLRJ68cZ6ybGB2f3ylylFwlEvai49htPxSMSzVuOoWpEdMAwgn9AqZfgnsHg9BFVoJzNcYoY-IYIhC3nRROd9eWLdSV4-hUoZ5D7s_F_zJEAX-zWZP_Uy47GsNxgX0quIhsBAFfz31PCzGC5PPYFy1rBE5_iWv2rZpiS2HHKxleLHWbQITNh6eQ0JcMihLvYakc_Y6ALnjK9EGgarChRc3RDgh0kW64jiQDx1jxo4DQ5FLwNoGKSG2GvrHjGC5ZHa7ahkbHnq13UdfT-QpJKTtsBB41ORgaHPkgMdMvnPJCOxCOj2iEwsGqBTcblhqkpMbWK6-k5eJlgnM4KN2iDsDYx2spUmbH8GUgrB2Ky5WRS9vd4xdpzdAsVacNdRyu0CzdwcicY0XIfw9FySsey83wZ52TsOnkLw6jrXg4qZw&signature=8d162a1b55d7ba2323d7fc7370794b01&lc=1&rd=%7B%22adunit_type_seq%22%3A1275%2C%22native_adunit_type_seq%22%3A1275%7D
+                      - generic [ref=e528]:
+                        - strong [ref=e529]: 손등 검버섯 옅어지니 아무도 60대로 안봐요~
+                        - generic [ref=e530]: AD
+              - generic [ref=e531]:
+                - generic [ref=e532]:
+                  - generic [ref=e533]:
+                    - generic [ref=e534]:
+                      - generic [ref=e535]: 스포츠 종합
+                      - text: 더보기
+                    - generic [ref=e536]:
+                      - generic: 현재 페이지
+                      - emphasis [ref=e537]: "1"
+                      - generic [ref=e538]: /
+                      - generic: 전체 페이지
+                      - generic [ref=e539]: "2"
+                  - button "이전페이지 보기" [ref=e540] [cursor=pointer]:
+                    - generic [ref=e541]: 이전페이지 보기
+                  - button "다음페이지 보기" [ref=e542] [cursor=pointer]:
+                    - generic [ref=e543]: 다음페이지 보기
+                - button "스포츠 홈" [ref=e544] [cursor=pointer]:
+                  - generic [ref=e545]: 스포츠 홈
+            - generic [ref=e547]:
+              - heading "쇼핑" [level=2]
+              - generic [ref=e548]:
+                - strong [ref=e549]:
+                  - link "쇼핑" [ref=e550] [cursor=pointer]:
+                    - /url: https://shoppinghow.kakao.com/
+                    - generic [ref=e552]: 쇼핑
+                - tablist [ref=e556]:
+                  - generic [ref=e557]:
+                    - tab "쇼핑 트렌드" [selected] [ref=e559] [cursor=pointer]
+                    - tab "맨즈 트렌드" [ref=e561] [cursor=pointer]
+                    - tab "CAR&LIFE" [ref=e563] [cursor=pointer]
+              - list [ref=e567]:
+                - listitem [ref=e568]:
+                  - link "귀여워서 여러개 사요 선물용으로도 딱인 마켓백 23,000원 아티쉬" [ref=e569] [cursor=pointer]:
+                    - /url: https://smartstore.naver.com/artish/search?q=%EB%A7%88%EC%BC%93%EB%B0%B1
+                    - generic [ref=e573]:
+                      - strong [ref=e574]: 귀여워서 여러개 사요 선물용으로도 딱인 마켓백
+                      - generic [ref=e576]: 23,000원
+                      - generic [ref=e578]: 아티쉬
+                - listitem [ref=e579]:
+                  - link "이걸 왜 이제 알았지? 음식물 버릴 필요 없어요 정상가 46,000원 할인률 50% 할인가 23,000원 더프레쉬모어" [ref=e580] [cursor=pointer]:
+                    - /url: https://smartstore.naver.com/thefreshmore/products/11979520870
+                    - generic [ref=e584]:
+                      - strong [ref=e585]: 이걸 왜 이제 알았지? 음식물 버릴 필요 없어요
+                      - generic [ref=e586]:
+                        - generic: 정상가
+                        - generic [ref=e587]: 46,000원
+                      - generic [ref=e588]:
+                        - generic: 할인률
+                        - generic [ref=e589]: 50%
+                        - generic: 할인가
+                        - generic [ref=e590]: 23,000원
+                      - generic [ref=e592]: 더프레쉬모어
+                - listitem [ref=e593]:
+                  - link "호텔 디너룩~ 우아한 크리스탈 뮬 정상가 59,900원 할인률 12% 할인가 52,900원 할리샵" [ref=e594] [cursor=pointer]:
+                    - /url: http://www.hollyshop.co.kr/?da_ref=Yz1RZ0l4bXY=
+                    - generic [ref=e598]:
+                      - strong [ref=e599]: 호텔 디너룩~ 우아한 크리스탈 뮬
+                      - generic [ref=e600]:
+                        - generic: 정상가
+                        - generic [ref=e601]: 59,900원
+                      - generic [ref=e602]:
+                        - generic: 할인률
+                        - generic [ref=e603]: 12%
+                        - generic: 할인가
+                        - generic [ref=e604]: 52,900원
+                      - generic [ref=e606]: 할리샵
+                - listitem [ref=e607]:
+                  - link "하나만 입어도 예쁜 코디~ 올리자마자 인기상승~ 38,000원 안나리치" [ref=e608] [cursor=pointer]:
+                    - /url: https://www.annarich.co.kr/shop/shopdetail.html?branduid=11886399&utm_medium=display&utm_source=naver&utm_campaign=naverhotitemtoday_pc_conv&utm_content=pc_1%20account&da_ref=Yz13T21wZGw=
+                    - generic [ref=e612]:
+                      - strong [ref=e613]: 하나만 입어도 예쁜 코디~ 올리자마자 인기상승~
+                      - generic [ref=e615]: 38,000원
+                      - generic [ref=e617]: 안나리치
+                - listitem [ref=e618]:
+                  - link "작지만 강력한 바람으로 어디서든 시원한 바람! 정상가 64,800원 할인률 52% 할인가 30,800원 클래파 공식스토어" [ref=e619] [cursor=pointer]:
+                    - /url: https://brand.naver.com/clapa/products/11574521856
+                    - generic [ref=e623]:
+                      - strong [ref=e624]: 작지만 강력한 바람으로 어디서든 시원한 바람!
+                      - generic [ref=e625]:
+                        - generic: 정상가
+                        - generic [ref=e626]: 64,800원
+                      - generic [ref=e627]:
+                        - generic: 할인률
+                        - generic [ref=e628]: 52%
+                        - generic: 할인가
+                        - generic [ref=e629]: 30,800원
+                      - generic [ref=e631]: 클래파 공식스토어
+                - listitem [ref=e632]:
+                  - link "맨날 반찬투정 우리아기? 투뿔한우곰탕이면 이제 끝 정상가 38,000원 할인률 40% 할인가 22,900원 백육공" [ref=e633] [cursor=pointer]:
+                    - /url: https://baekyukgong.com/product/detail.html?product_no=23&nt_source=naver_shoppingbox&nt_medium=CPT&nt_detail=곰탕_가정집&nt_keyword=26_04_23_11시
+                    - generic [ref=e637]:
+                      - strong [ref=e638]: 맨날 반찬투정 우리아기? 투뿔한우곰탕이면 이제 끝
+                      - generic [ref=e639]:
+                        - generic: 정상가
+                        - generic [ref=e640]: 38,000원
+                      - generic [ref=e641]:
+                        - generic: 할인률
+                        - generic [ref=e642]: 40%
+                        - generic: 할인가
+                        - generic [ref=e643]: 22,900원
+                      - generic [ref=e645]: 백육공
+              - generic [ref=e647]:
+                - generic [ref=e648]:
+                  - generic [ref=e649]:
+                    - generic [ref=e650]: 쇼핑 트렌드
+                    - text: 더보기
+                  - generic [ref=e651]:
+                    - generic: 현재 페이지
+                    - emphasis [ref=e652]: "1"
+                    - generic [ref=e653]: /
+                    - generic: 전체 페이지
+                    - generic [ref=e654]: "12"
+                - button "이전페이지 보기" [ref=e655] [cursor=pointer]:
+                  - generic [ref=e656]: 이전페이지 보기
+                - button "다음페이지 보기" [ref=e657] [cursor=pointer]:
+                  - generic [ref=e658]: 다음페이지 보기
+              - generic [ref=e660]: 광고
+            - generic [ref=e661]:
+              - heading "카페・스토리" [level=2]
+              - generic [ref=e662]:
+                - strong [ref=e664]:
+                  - button "카페 ・ 스토리 카페 홈으로 이동" [ref=e665] [cursor=pointer]:
+                    - generic [ref=e667]:
+                      - text: 카페
+                      - generic [ref=e668]: ・
+                      - text: 스토리
+                    - generic [ref=e669]: 카페 홈으로 이동
+                - tablist [ref=e672]:
+                  - generic [ref=e673]:
+                    - tab "카페" [selected] [ref=e675] [cursor=pointer]
+                    - tab "티스토리" [ref=e677] [cursor=pointer]
+              - generic [ref=e678]:
+                - list [ref=e681]:
+                  - listitem [ref=e682]:
+                    - link "1 위, 카놀라유 당근에 올렸는데 키우는 닭이 낳은 달걀이랑 물물교환하자고 메시지 옴 댓글 48" [ref=e683] [cursor=pointer]:
+                      - /url: https://cafe.daum.net/subdued20club/ReHf/5633080?svc=daumapp
+                      - emphasis [ref=e684]:
+                        - text: "1"
+                        - generic: 위,
+                      - generic [ref=e685]:
+                        - strong [ref=e686]: 카놀라유 당근에 올렸는데 키우는 닭이 낳은 달걀이랑 물물교환하자고 메시지 옴
+                        - generic [ref=e688]: 댓글 48
+                  - listitem [ref=e692]:
+                    - link "2 위, 결혼하는 손금 결혼 못하는 손금 댓글 83" [ref=e693] [cursor=pointer]:
+                      - /url: https://cafe.daum.net/subdued20club/ReHf/5633038?svc=daumapp
+                      - emphasis [ref=e694]:
+                        - text: "2"
+                        - generic: 위,
+                      - generic [ref=e695]:
+                        - strong [ref=e696]: 결혼하는 손금 결혼 못하는 손금
+                        - generic [ref=e698]: 댓글 83
+                  - listitem [ref=e702]:
+                    - link "3 위, 양상국이 방송에서 일부러 故 박지선 이야기를 하는 이유 댓글 9" [ref=e703] [cursor=pointer]:
+                      - /url: https://cafe.daum.net/subdued20club/ReHf/5633083?svc=daumapp
+                      - emphasis [ref=e704]:
+                        - text: "3"
+                        - generic: 위,
+                      - generic [ref=e705]:
+                        - strong [ref=e706]: 양상국이 방송에서 일부러 故 박지선 이야기를 하는 이유
+                        - generic [ref=e708]: 댓글 9
+                  - listitem [ref=e712]:
+                    - link "4 위, 해리 스타일스 & 조 크라비츠 약혼 댓글 16" [ref=e713] [cursor=pointer]:
+                      - /url: https://cafe.daum.net/subdued20club/ReHf/5633058?svc=daumapp
+                      - emphasis [ref=e714]:
+                        - text: "4"
+                        - generic: 위,
+                      - generic [ref=e715]:
+                        - strong [ref=e716]: 해리 스타일스 & 조 크라비츠 약혼
+                        - generic [ref=e718]: 댓글 16
+                - list [ref=e724]:
+                  - listitem [ref=e725]:
+                    - link "5 위, [유퀴즈] 극단적인 행동까지 했었던 서인영 댓글 226" [ref=e726] [cursor=pointer]:
+                      - /url: https://cafe.daum.net/subdued20club/ReHf/5632887?svc=daumapp
+                      - emphasis [ref=e727]:
+                        - text: "5"
+                        - generic: 위,
+                      - generic [ref=e728]:
+                        - strong [ref=e729]: "[유퀴즈] 극단적인 행동까지 했었던 서인영"
+                        - generic [ref=e731]: 댓글 226
+                  - listitem [ref=e735]:
+                    - link "6 위, 아침 공복에 먹으면 독 또는 약이 되는 음식 댓글 23" [ref=e736] [cursor=pointer]:
+                      - /url: https://cafe.daum.net/subdued20club/ReHf/5633106?svc=daumapp
+                      - emphasis [ref=e737]:
+                        - text: "6"
+                        - generic: 위,
+                      - generic [ref=e738]:
+                        - strong [ref=e739]: 아침 공복에 먹으면 독 또는 약이 되는 음식
+                        - generic [ref=e741]: 댓글 23
+                  - listitem [ref=e745]:
+                    - link "7 위, 블루클럽 월 수입 댓글 4" [ref=e746] [cursor=pointer]:
+                      - /url: https://cafe.daum.net/subdued20club/ReHf/5633096?svc=daumapp
+                      - emphasis [ref=e747]:
+                        - text: "7"
+                        - generic: 위,
+                      - generic [ref=e748]:
+                        - strong [ref=e749]: 블루클럽 월 수입
+                        - generic [ref=e751]: 댓글 4
+                  - listitem [ref=e755]:
+                    - link "8 위, 내일이 나온지 10주년인 노래 댓글 11" [ref=e756] [cursor=pointer]:
+                      - /url: https://cafe.daum.net/subdued20club/ReHf/5633074?svc=daumapp
+                      - emphasis [ref=e757]:
+                        - text: "8"
+                        - generic: 위,
+                      - generic [ref=e758]:
+                        - strong [ref=e759]: 내일이 나온지 10주년인 노래
+                        - generic [ref=e761]: 댓글 11
+              - generic [ref=e766]:
+                - generic [ref=e767]:
+                  - generic [ref=e768]:
+                    - generic [ref=e769]: 카페 인기글
+                    - text: 더보기
+                  - generic [ref=e770]:
+                    - generic: 현재 페이지
+                    - emphasis [ref=e771]: "1"
+                    - generic [ref=e772]: /
+                    - generic: 전체 페이지
+                    - generic [ref=e773]: "3"
+                - button "이전페이지 보기" [ref=e774] [cursor=pointer]:
+                  - generic [ref=e775]: 이전페이지 보기
+                - button "다음페이지 보기" [ref=e776] [cursor=pointer]:
+                  - generic [ref=e777]: 다음페이지 보기
+            - generic [ref=e778]:
+              - heading "관심 키워드" [level=2]
+              - generic [ref=e779]:
+                - strong [ref=e780]:
+                  - generic [ref=e783]: 관심 키워드
+                - generic [ref=e785]:
+                  - tablist [ref=e786]:
+                    - generic [ref=e787]:
+                      - tab "추천" [selected] [ref=e789] [cursor=pointer]
+                      - tab "FUN" [ref=e791] [cursor=pointer]
+                      - tab "푸드" [ref=e793] [cursor=pointer]
+                      - tab "여행" [ref=e795] [cursor=pointer]
+                      - tab "자동차" [ref=e797] [cursor=pointer]
+                      - tab "IT테크" [ref=e799] [cursor=pointer]
+                      - tab "동물" [ref=e801] [cursor=pointer]
+                      - tab "건강" [ref=e803] [cursor=pointer]
+                      - tab "리빙" [ref=e805] [cursor=pointer]
+                      - tab "패션 뷰티" [ref=e807] [cursor=pointer]
+                      - tab "지식교양" [ref=e809] [cursor=pointer]
+                  - link "다음" [ref=e811] [cursor=pointer]:
+                    - /url: "#none"
+                    - generic [ref=e812]: 다음
+              - generic [ref=e813]:
+                - list [ref=e816]:
+                  - listitem [ref=e817]:
+                    - link "\"지붕 위에서 포착된 기절초풍할 역대급 광경\" 고양이 세 마리를 자세히보니.... 펫인사이트" [ref=e818] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/81Vm8bOcVL?x_imp=dG9yb3NfY2xvdWRfYmFzZQ==&x_hk=OThhZDk4OTczYWMzYjc5MjI5
+                      - generic [ref=e822]:
+                        - strong [ref=e823]: "\"지붕 위에서 포착된 기절초풍할 역대급 광경\" 고양이 세 마리를 자세히보니...."
+                        - generic [ref=e825]: 펫인사이트
+                - list [ref=e828]:
+                  - listitem [ref=e829]:
+                    - link "믿기 힘든 포즈의 고양이들 포착 ＊여성시대＊ 차분한 20대들의 알흠다운 공간" [ref=e830] [cursor=pointer]:
+                      - /url: https://cafe.daum.net/subdued20club/ReHf/5632607?svc=daumapp
+                      - strong [ref=e835]: 믿기 힘든 포즈의 고양이들 포착
+                      - generic [ref=e837]: ＊여성시대＊ 차분한 20대들의 알흠다운 공간
+                  - listitem [ref=e838]:
+                    - link "MOMENT 광고 안내 페이지 입니다." [ref=e839] [cursor=pointer]:
+                      - /url: https://info.ds.kakao.com/optout.do
+                      - img "MOMENT 광고 안내 페이지 입니다." [ref=e840]
+                    - link "광고 전국농부들 활 쭈꾸미 광고 입니다 특 A급 알배기 활쭈꾸미 35% 특가중! 전국농부들 AD" [ref=e841] [cursor=pointer]:
+                      - /url: https://tr.ad.daum.net/clk?wa=ZJFw_4ms76IpcaZaWyzszmqUtD7LTSRxFfScuye01Gg&enc=57Vl_phakpoMEFB5Lqo6hQ7zlYWo5rRX6iI2-K6UvDvcP-uZyHlDtnEUzj5I_SOU9bOksJxRRkdWosBL-2VyBAg3s32T_pBSzj3CGYm-poSoylSqKpQDdZh40N5U5T-cKBrQPIrqoR-dcz9W00shx67HNnuPgzvJJ4hLDfvwL8akaR64idhhwf-xRPTwRZ19bN6oiutxfdmI5I9MZIxMW1wlEvai49htPxSMSzVuOoUK2_HCcC3eYROzIeUNVk7Gsb590-5OOVu7kzGQ1ZSNt9eWLdSV4-hUoZ5D7s_F_zIv8L9WcmU0yWNUY1dO4l8_uIhsBAFfz31PCzGC5PPYFy1rBE5_iWv2rZpiS2HHKxleLHWbQITNh6eQ0JcMihLvYakc_Y6ALnjK9EGgarChRc3RDgh0kW64jiQDx1jxo4AK6xcVETQ_GZOnDEP4RyqkSYKDR4yFpucJZ0D4NIkAwkj12O8M4oehxe2JLkWBzenHKnen_9cKHIHZ_puEZl6hrte90T6SqBixtMG-X9x8HLWk5BBgbmnFN3HwLVmK6O6zcrzUTfhSsyilUJBuMJzk91ksUqyjvO6PGyh8ezAf5DEKzX7vEdukaAIadyW4Dn76Sb6pub1Q8_oWVb5Xlr9A9THw4hzQKj-2SJgt1cX2pQ&signature=51f00a8c28cbafd77a94a8c0cd19b3c0&lc=1&rd=%7B%22adunit_type_seq%22%3A1560%2C%22native_adunit_type_seq%22%3A1560%7D
+                      - img "광고 전국농부들 활 쭈꾸미 광고 입니다" [ref=e845]
+                      - generic [ref=e846]:
+                        - strong [ref=e847]: 특 A급 알배기 활쭈꾸미 35% 특가중!
+                        - generic [ref=e848]:
+                          - generic [ref=e849]: 전국농부들
+                          - generic [ref=e850]: AD
+                - list [ref=e853]:
+                  - listitem [ref=e854]:
+                    - link "\"이런 색으로 꾸민 집은 처음 봐요\" 색감 특이한 40평 아파트 인테리어 살림테리어" [ref=e855] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/UPgDditWFo?x_imp=dG9yb3NfY2xvdWRfYmFzZQ==&x_hk=OThhZDk4OTczYWMzYjc5MjI5
+                      - strong [ref=e860]: "\"이런 색으로 꾸민 집은 처음 봐요\" 색감 특이한 40평 아파트 인테리어"
+                      - generic [ref=e862]: 살림테리어
+                  - listitem [ref=e863]:
+                    - link "숨만 쉬어도 나가는 생활비.jpg 이종격투기" [ref=e864] [cursor=pointer]:
+                      - /url: https://cafe.daum.net/ssaumjil/LnOm/3324589?svc=daumapp
+                      - strong [ref=e869]: 숨만 쉬어도 나가는 생활비.jpg
+                      - generic [ref=e871]: 이종격투기
+                  - listitem [ref=e872]:
+                    - link "\"저는 평생 친구가 한 명도 없어요\" 마흔 넘으면 공감간다는 유해진의 이 말 90초 에세이" [ref=e873] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/0v9z8bOczJ?x_imp=dG9yb3NfY2xvdWRfYmFzZQ==&x_hk=OThhZDk4OTczYWMzYjc5MjI5
+                      - strong [ref=e878]: "\"저는 평생 친구가 한 명도 없어요\" 마흔 넘으면 공감간다는 유해진의 이 말"
+                      - generic [ref=e880]: 90초 에세이
+                  - listitem [ref=e881]:
+                    - link "\"부부가 포착한 역대급 광경\" 사진 속 불청객의 놀라운 정체... 애니멀포스트" [ref=e882] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/bAfdS6yO2j?x_imp=dG9yb3NfY2xvdWRfYmFzZQ==&x_hk=OThhZDk4OTczYWMzYjc5MjI5
+                      - strong [ref=e887]: "\"부부가 포착한 역대급 광경\" 사진 속 불청객의 놀라운 정체..."
+                      - generic [ref=e889]: 애니멀포스트
+                - list [ref=e892]:
+                  - listitem [ref=e893]:
+                    - link "건강한 삶의 전성기 도탁스 (DOTAX)" [ref=e894] [cursor=pointer]:
+                      - /url: https://cafe.daum.net/dotax/Elgq/4727763?svc=daumapp
+                      - strong [ref=e899]: 건강한 삶의 전성기
+                      - generic [ref=e901]: 도탁스 (DOTAX)
+                  - listitem [ref=e902]:
+                    - link "\"소파 벽에 이렇게 큰 벽화는 좀 촌스럽지 않나요?\" 열대우림 감성, 39평 아파트 살림테리어" [ref=e903] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/3Kk2Q2hDxQ?x_imp=dG9yb3NfY2xvdWRfYmFzZQ==&x_hk=OThhZDk4OTczYWMzYjc5MjI5
+                      - strong [ref=e908]: "\"소파 벽에 이렇게 큰 벽화는 좀 촌스럽지 않나요?\" 열대우림 감성, 39평 아파트"
+                      - generic [ref=e910]: 살림테리어
+                  - listitem [ref=e911]:
+                    - link "쿠킹호일 진짜 용도는 따로 있습니다.. 한국 주부 90%는 모르는 호일 \"평생 꿀팁\" 텐꿀팁" [ref=e912] [cursor=pointer]:
+                      - /url: https://v.daum.net/v/fA56wzrNG3?x_imp=dG9yb3NfY2xvdWRfYmFzZQ==&x_hk=OThhZDk4OTczYWMzYjc5MjI5
+                      - strong [ref=e917]: 쿠킹호일 진짜 용도는 따로 있습니다.. 한국 주부 90%는 모르는 호일 "평생 꿀팁"
+                      - generic [ref=e919]: 텐꿀팁
+                  - listitem [ref=e920]:
+                    - link "일본이 자국 여행으로 만족 하는 이유.jpg 도탁스 (DOTAX)" [ref=e921] [cursor=pointer]:
+                      - /url: https://cafe.daum.net/dotax/Elgq/4730132?svc=daumapp
+                      - strong [ref=e926]: 일본이 자국 여행으로 만족 하는 이유.jpg
+                      - generic [ref=e928]: 도탁스 (DOTAX)
+              - generic [ref=e930]:
+                - generic [ref=e931]:
+                  - generic [ref=e932]:
+                    - generic [ref=e933]: 추천
+                    - text: 더보기
+                  - generic [ref=e934]:
+                    - generic: 현재 페이지
+                    - emphasis [ref=e935]: "1"
+                    - generic [ref=e936]: /
+                    - generic: 전체 페이지
+                    - generic [ref=e937]: "2"
+                - button "이전페이지 보기" [ref=e938] [cursor=pointer]:
+                  - generic [ref=e939]: 이전페이지 보기
+                - button "다음페이지 보기" [ref=e940] [cursor=pointer]:
+                  - generic [ref=e941]: 다음페이지 보기
+          - generic [ref=e943]:
+            - generic [ref=e944]:
+              - heading "로그인 정보" [level=2]
+              - generic [ref=e945]:
+                - link "카카오계정으로 로그인" [ref=e946] [cursor=pointer]:
+                  - /url: https://logins.daum.net/accounts/loginform.do?url=https%3A%2F%2Fwww.daum.net
+                  - text: 카카오계정으로 로그인
+                - generic [ref=e948]:
+                  - link "계정 찾기" [ref=e949] [cursor=pointer]:
+                    - /url: https://member.daum.net/find/account/home
+                  - link "회원가입" [ref=e950] [cursor=pointer]:
+                    - /url: https://logins.daum.net/accounts/oauth/join
+            - heading "위젯 모음" [level=2]
+            - region [ref=e952]:
+              - heading "실시간" [level=3] [ref=e954]:
+                - generic [ref=e955]: 실시간
+              - list [ref=e957]:
+                - listitem [ref=e958]:
+                  - link "1 위 모수 상승" [ref=e959] [cursor=pointer]:
+                    - /url: https://search.daum.net/search?w=tot&DA=RT1&rtmaxcoll=AIO,NNS,DNS&q=%EB%AA%A8%EC%88%98
+                    - generic [ref=e960]:
+                      - emphasis [ref=e961]:
+                        - text: "1"
+                        - generic: 위
+                      - strong [ref=e962]: 모수
+                      - generic [ref=e963]: 상승
+              - button "실시간 트렌드 펼치기" [ref=e964] [cursor=pointer]:
+                - generic [ref=e965]: 실시간 트렌드 펼치기
+            - generic [ref=e967]:
+              - heading "날씨" [level=3]
+              - list [ref=e969]:
+                - listitem [ref=e970]:
+                  - link "아현동 맑음 , 현재기온 19.2 °C 최고 기온 24 ˚C / 최저 기온 11 ˚C 미세 보통 초미세 좋음" [ref=e971] [cursor=pointer]:
+                    - /url: https://weather.daum.net/home?location-regionId=AI10121600
+                    - generic [ref=e974]:
+                      - strong [ref=e975]:
+                        - text: 아현동 맑음
+                        - generic: ", 현재기온"
+                        - emphasis [ref=e976]:
+                          - text: "19.2"
+                          - generic [ref=e977]: °C
+                      - generic [ref=e978]:
+                        - generic: 최고 기온
+                        - text: "24"
+                        - generic [ref=e979]: ˚C
+                        - generic [ref=e980]: /
+                        - generic: 최저 기온
+                        - text: "11"
+                        - generic [ref=e981]: ˚C
+                      - generic [ref=e982]:
+                        - generic [ref=e983]:
+                          - text: 미세
+                          - emphasis [ref=e984]: 보통
+                        - generic [ref=e985]:
+                          - text: 초미세
+                          - emphasis [ref=e986]: 좋음
+            - generic [ref=e987]:
+              - generic [ref=e988]:
+                - tablist [ref=e989]:
+                  - tab "쇼핑" [selected] [ref=e991] [cursor=pointer]:
+                    - strong [ref=e992]: 쇼핑
+                  - tab "맨즈" [ref=e994] [cursor=pointer]:
+                    - strong [ref=e995]: 맨즈
+                - generic [ref=e996]:
+                  - button "이전" [ref=e997] [cursor=pointer]:
+                    - generic [ref=e998]: 이전
+                  - button "다음" [ref=e999] [cursor=pointer]:
+                    - generic [ref=e1000]: 다음
+              - list [ref=e1002]:
+                - listitem [ref=e1003]:
+                  - link "쿠팡" [ref=e1004] [cursor=pointer]:
+                    - /url: https://adcr.shopping.naver.com/adclk.nhn?x=wKxLTMo8QOwuAh08YPdk1P%2F%2F%2Fw%3D%3DsBNhh49xnKJpRW5FLaN5XQFBNupVmaqgs6ltFXhx2%2FeXii7VHBDtbEaH6FWMZXkdCCZ7mUWfizgvZW0f9q1iHwbr4vvm1fdml3oFgFv2KBhYiOXAVbLHBeor6KHgu9MEGf2bY105fKugzy2Us0ffzRmlVnz0iBGgOR7NH0TMnoxZRH5nw3C5uwEgsGbJ8tcM5dMf%2Fy8XpBsKj8EEm1bzMQLXexqvGue9Gba8WZzmoKCu3JjnRYAXfqj%2BvkPhoEcZ1el%2F4fbdzAOyiY6WlL41CzkVE5QyLfhopVDiKzDWxC10Sx9EAIbzGZRa87k%2BbissGxh7X8gE0IVhqaEbxo5qxW1%2FyLBTyefC98PBKBjzNj9a79%2F0IKiamtWvkb9KDvzDy
+                - listitem [ref=e1005]:
+                  - link "G마켓" [ref=e1006] [cursor=pointer]:
+                    - /url: https://adcr.shopping.naver.com/adclk.nhn?x=HnR%2B8cDsC4%2BEHZVlvbDigP%2F%2F%2Fw%3D%3DsBNhh49xnKJpRW5FLaN5XQFBNupVmaqgs6ltFXhx2%2FeXii7VHBDtbEaH6FWMZXkdCCZ7mUWfizgvZW0f9q1iHwbr4vvm1fdml3oFgFv2KBhYiOXAVbLHBeor6KHgu9MEGf2bY105fKugzy2Us0ffzRmlVnz0iBGgOR7NH0TMnoxZRH5nw3C5uwEgsGbJ8tcM5dMf%2Fy8XpBsKj8EEm1bzMQLXexqvGue9Gba8WZzmoKCvKJumW7hc31IlaJthk4zU4el%2F4fbdzAOyiY6WlL41CzmWqVYDfPPu6nDUoG6aLJme0wMCQaSQCG45DeHXCjSOKqcvuewwmIR2xESklZZW4T3FyxP9dN2xQ%2Fn8lBTK7NAG79%2F0IKiamtWvkb9KDvzDy
+                - listitem [ref=e1007]:
+                  - link "옥션" [ref=e1008] [cursor=pointer]:
+                    - /url: https://adcr.shopping.naver.com/adclk.nhn?x=WtSz2EGPUPbZ5BqTeg5HM%2F%2F%2F%2Fw%3D%3DsBNhh49xnKJpRW5FLaN5XQFBNupVmaqgs6ltFXhx2%2FeXii7VHBDtbEaH6FWMZXkdCCZ7mUWfizgvZW0f9q1iHwbr4vvm1fdml3oFgFv2KBhYiOXAVbLHBeor6KHgu9MEGf2bY105fKugzy2Us0ffzRmlVnz0iBGgOR7NH0TMnoxZRH5nw3C5uwEgsGbJ8tcM5dMf%2Fy8XpBsKj8EEm1bzMQLXexqvGue9Gba8WZzmoKCviHt3%2BxQ1pjFkEux9OZ5EGel%2F4fbdzAOyiY6WlL41CztvpDPy%2F7EjQKTseOSCwOPcv%2BMILr4mDZPErIeflY9FpedeWKr0rf4wydulBrT8%2BpbyC75J%2F%2BHQN2AyYZxBXyBO79%2F0IKiamtWvkb9KDvzDy
+                - listitem [ref=e1009]:
+                  - link "11번가" [ref=e1010] [cursor=pointer]:
+                    - /url: https://adcr.shopping.naver.com/adclk.nhn?x=ZJrs4t%2B1G%2B%2Fa5qfVM4RMff%2F%2F%2Fw%3D%3DsBNhh49xnKJpRW5FLaN5XQFBNupVmaqgs6ltFXhx2%2FeXii7VHBDtbEaH6FWMZXkdCCZ7mUWfizgvZW0f9q1iHwbr4vvm1fdml3oFgFv2KBhYiOXAVbLHBeor6KHgu9MEGf2bY105fKugzy2Us0ffzRmlVnz0iBGgOR7NH0TMnoxZRH5nw3C5uwEgsGbJ8tcM5dMf%2Fy8XpBsKj8EEm1bzMQLXexqvGue9Gba8WZzmoKCuM02W%2FKd31rz%2BI%2Fc8KMykWel%2F4fbdzAOyiY6WlL41Czpe9kJnHkIsprrYFIw1nr8BHMkk2fd4df%2FRblVXmH3bPott7zT3xQreHaqPo18FHORmzvsv%2BLtK4983WZoQavTe79%2F0IKiamtWvkb9KDvzDy
+                - listitem [ref=e1011]:
+                  - link "올리브영" [ref=e1012] [cursor=pointer]:
+                    - /url: https://adcr.shopping.naver.com/adclk.nhn?x=%2B8C4nUMEhooLR%2FOTZ2%2BID%2F%2F%2F%2Fw%3D%3DsBNhh49xnKJpRW5FLaN5XQFBNupVmaqgs6ltFXhx2%2FeXii7VHBDtbEaH6FWMZXkdCCZ7mUWfizgvZW0f9q1iHwbr4vvm1fdml3oFgFv2KBhYiOXAVbLHBeor6KHgu9MEGf2bY105fKugzy2Us0ffzRmlVnz0iBGgOR7NH0TMnoxZRH5nw3C5uwEgsGbJ8tcM5dMf%2Fy8XpBsKj8EEm1bzMQLXexqvGue9Gba8WZzmoKCuoSR%2B52ScLvAOk9dF%2FylNfel%2F4fbdzAOyiY6WlL41CzoixJzCOh8maKrwatyIwviuzkkX4c8iGxfjTkj4vqsRKcC8SF6J9crU2fVru4AMmQtyy2ChHitZLWMYkfg3ql4m79%2F0IKiamtWvkb9KDvzDy
+                - listitem [ref=e1013]:
+                  - link "SSG닷컴" [ref=e1014] [cursor=pointer]:
+                    - /url: https://adcr.shopping.naver.com/adclk.nhn?x=sU1MXnwAEeg7KMozGbRsrv%2F%2F%2Fw%3D%3DsBNhh49xnKJpRW5FLaN5XQFBNupVmaqgs6ltFXhx2%2FeXii7VHBDtbEaH6FWMZXkdCCZ7mUWfizgvZW0f9q1iHwbr4vvm1fdml3oFgFv2KBhYiOXAVbLHBeor6KHgu9MEGf2bY105fKugzy2Us0ffzRmlVnz0iBGgOR7NH0TMnoxZRH5nw3C5uwEgsGbJ8tcM5dMf%2Fy8XpBsKj8EEm1bzMQLXexqvGue9Gba8WZzmoKCs26TUoJDcZ1yAXcJMpUfCTel%2F4fbdzAOyiY6WlL41CzsFfIxDR00FQH0G23%2Fj91acJSNa6MRo%2FzQiq6i5wK%2Fuex7bQgg364i9iiGnB%2BHTs8r4KSM835lv1J9LRN9s1wHS79%2F0IKiamtWvkb9KDvzDy
+                - listitem [ref=e1015]:
+                  - link "하프클럽" [ref=e1016] [cursor=pointer]:
+                    - /url: https://adcr.shopping.naver.com/adclk.nhn?x=YNMhsQaVlb%2BEEffKd5L8Gv%2F%2F%2Fw%3D%3DsBNhh49xnKJpRW5FLaN5XQFBNupVmaqgs6ltFXhx2%2FeXii7VHBDtbEaH6FWMZXkdCCZ7mUWfizgvZW0f9q1iHwbr4vvm1fdml3oFgFv2KBhYiOXAVbLHBeor6KHgu9MEGf2bY105fKugzy2Us0ffzRmlVnz0iBGgOR7NH0TMnoxZRH5nw3C5uwEgsGbJ8tcM5dMf%2Fy8XpBsKj8EEm1bzMQLXexqvGue9Gba8WZzmoKCv1l0zeVfd94F8bwIG8dbMpel%2F4fbdzAOyiY6WlL41CzjPD%2B1dvaIsj8udRn0VFY62PoDOzZkyaT0fF4zIfKnNgbGuZnvShC1bV7lhWTSZ10VS6ghS5T%2BL4xj7ZYKYka%2Ba79%2F0IKiamtWvkb9KDvzDy
+                - listitem [ref=e1017]:
+                  - link "이마트몰" [ref=e1018] [cursor=pointer]:
+                    - /url: https://adcr.shopping.naver.com/adclk.nhn?x=aIoKNmRMTmmmJA44S5%2B0sf%2F%2F%2Fw%3D%3DsBNhh49xnKJpRW5FLaN5XQFBNupVmaqgs6ltFXhx2%2FeXii7VHBDtbEaH6FWMZXkdCCZ7mUWfizgvZW0f9q1iHwbr4vvm1fdml3oFgFv2KBhYiOXAVbLHBeor6KHgu9MEGf2bY105fKugzy2Us0ffzRmlVnz0iBGgOR7NH0TMnoxZRH5nw3C5uwEgsGbJ8tcM5dMf%2Fy8XpBsKj8EEm1bzMQLXexqvGue9Gba8WZzmoKCuR%2BnV5UQMDZyxEMtN5zQ8bel%2F4fbdzAOyiY6WlL41CzupuEOl6OrG0PauOXAylC%2Bl7dOXBBmz3QXSmmOgZ5mL86oJYwvgOw4zQ2y6PDteyWb0ovaFLJLJVebgs7cs1qni79%2F0IKiamtWvkb9KDvzDy
+                - listitem [ref=e1019]:
+                  - link "GS SHOP" [ref=e1020] [cursor=pointer]:
+                    - /url: https://adcr.shopping.naver.com/adclk.nhn?x=TYrOeJ2mPpR2qXulgNgZiv%2F%2F%2Fw%3D%3DsBNhh49xnKJpRW5FLaN5XQFBNupVmaqgs6ltFXhx2%2FeXii7VHBDtbEaH6FWMZXkdCCZ7mUWfizgvZW0f9q1iHwbr4vvm1fdml3oFgFv2KBhYiOXAVbLHBeor6KHgu9MEGf2bY105fKugzy2Us0ffzRmlVnz0iBGgOR7NH0TMnoxZRH5nw3C5uwEgsGbJ8tcM5dMf%2Fy8XpBsKj8EEm1bzMQLXexqvGue9Gba8WZzmoKCs5rh77VGKX17DDdJj%2FrvNOel%2F4fbdzAOyiY6WlL41CzsTcKtYVXauy7ntx%2FCf82uhEyaRxkpkOYCR%2FhJP53zap%2BfAzB6KShztBWd8Tq2iFcETIGqMo3%2BwBdC7x%2Boegu4C79%2F0IKiamtWvkb9KDvzDy
+                - listitem [ref=e1021]:
+                  - link "패션플러스" [ref=e1022] [cursor=pointer]:
+                    - /url: https://adcr.shopping.naver.com/adclk.nhn?x=UObbGvnYU4rbd5ENC%2F8upP%2F%2F%2Fw%3D%3DsBNhh49xnKJpRW5FLaN5XQFBNupVmaqgs6ltFXhx2%2FeXii7VHBDtbEaH6FWMZXkdCCZ7mUWfizgvZW0f9q1iHwbr4vvm1fdml3oFgFv2KBhYiOXAVbLHBeor6KHgu9MEGf2bY105fKugzy2Us0ffzRmlVnz0iBGgOR7NH0TMnoxZRH5nw3C5uwEgsGbJ8tcM5dMf%2Fy8XpBsKj8EEm1bzMQLXexqvGue9Gba8WZzmoKCsJ%2Bp9C0b586QRcSbtkElw2el%2F4fbdzAOyiY6WlL41Czn5n4ERpKYEQo6fx7moO3aB0qm6tY8WLLI7GMtwMgUGDKR55l548BTTAZ%2BF2MulRiBFVqFr1CAGZAQs3etTGK%2FW79%2F0IKiamtWvkb9KDvzDy
+                - listitem [ref=e1023]:
+                  - link "트렌드패션" [ref=e1024] [cursor=pointer]:
+                    - /url: https://cologger.shopping.naver.com/api/v1/icGate?bizCd=1420&ic=K07219
+              - tabpanel [ref=e1025]:
+                - list [ref=e1026]:
+                  - listitem [ref=e1027]:
+                    - link "하늘~러블리무드 지금 반응최고야" [ref=e1028] [cursor=pointer]:
+                      - /url: https://www.justone.co.kr/?ref=naverPC2&da_ref=Yz0zcHFQSlQ=
+                      - strong [ref=e1033]: 하늘~러블리무드 지금 반응최고야
+                  - listitem [ref=e1034]:
+                    - link "브이밴드 에디션 지금 한정 특가!" [ref=e1035] [cursor=pointer]:
+                      - /url: https://www.beaund.com/product/detail.html?product_no=252&utm_source=naver&utm_medium=shopping&utm_campaign=nv_shop_box_hot_a&utm_content=nvs_hot06&cafe_mkt=nvs_hot06
+                      - strong [ref=e1040]: 브이밴드 에디션 지금 한정 특가!
+                  - listitem [ref=e1041]:
+                    - link "전품목30%SALE 나를 더 가볍게!" [ref=e1042] [cursor=pointer]:
+                      - /url: https://www.graychic.co.kr?utm_source=hotitem%EC%B2%BC%EB%A6%AC%EC%8A%A4%ED%8A%B8%EB%A7%81%EB%B0%94%EB%9E%8C%EB%A7%89%EC%9D%B4%EC%A0%90%ED%8D%BC&utm_medium=banner&utm_campaign=hotitem%EC%B2%BC%EB%A6%AC%EC%8A%A4%ED%8A%B8%EB%A7%81%EB%B0%94%EB%9E%8C%EB%A7%89%EC%9D%B4%EC%A0%90%ED%8D%BC
+                      - strong [ref=e1047]: 전품목30%SALE 나를 더 가볍게!
+                  - listitem [ref=e1048]:
+                    - link "한정수량세일! 1만원대 원피스" [ref=e1049] [cursor=pointer]:
+                      - /url: https://www.k-club.co.kr/product/list.html?cate_no=1045?cafe_mkt=ue_naverbox_1
+                      - strong [ref=e1054]: 한정수량세일! 1만원대 원피스
+                  - listitem [ref=e1055]:
+                    - link "최대90%SALE 놓치면손해야" [ref=e1056] [cursor=pointer]:
+                      - /url: https://prostj.com/?utm_source=trendpick&utm_medium=hi&utm_campaign=pc_camp&utm_content=&utm_term=&cafe_mkt=ue_hottem#anchorBoxName_20622
+                      - strong [ref=e1061]: 최대90%SALE 놓치면손해야
+                  - listitem [ref=e1062]:
+                    - link "인기UP제일예뻐! 기획특가1만원대" [ref=e1063] [cursor=pointer]:
+                      - /url: https://mizmiss.com/product/list.html?cate_no=27&cafe_mkt=ue_naveritem01
+                      - strong [ref=e1068]: 인기UP제일예뻐! 기획특가1만원대
+                  - listitem [ref=e1069]:
+                    - link "러블리 무드UP~ 14K 하트목걸이" [ref=e1070] [cursor=pointer]:
+                      - /url: https://bijoupop.co.kr/product/list.html?cate_no=145&utm_source=naver&utm_medium=shopping&utm_campaign=nv_shop_box_hot_a&cafe_mkt=nvs_hot16
+                      - strong [ref=e1075]: 러블리 무드UP~ 14K 하트목걸이
+                  - listitem [ref=e1076]:
+                    - link "팔뚝살~가려주고 허리라인은~쏙!" [ref=e1077] [cursor=pointer]:
+                      - /url: http://www.midasb.co.kr/?&ref=naverhotitem&da_ref=Yz1BUnZ6Q08=
+                      - strong [ref=e1082]: 팔뚝살~가려주고 허리라인은~쏙!
+                  - listitem [ref=e1083]:
+                    - link "역대급극찬BEST 인기 필수소장템" [ref=e1084] [cursor=pointer]:
+                      - /url: https://purplia.com/?cafe_mkt=nvs_hot12&utm_source=naver&utm_medium=shopping&utm_campaign=nv_shop_box_hot_b&utm_content=hot_b12
+                      - strong [ref=e1089]: 역대급극찬BEST 인기 필수소장템
+                  - listitem [ref=e1090]:
+                    - link "로퍼는 역시, 미소페" [ref=e1091] [cursor=pointer]:
+                      - /url: https://www.misope.co.kr/goods/event_sale.php?sno=45
+                      - strong [ref=e1096]: 로퍼는 역시, 미소페
+                  - listitem [ref=e1097]:
+                    - link "가정의 달 준비 최대 63% OFF" [ref=e1098] [cursor=pointer]:
+                      - /url: https://hetras.co.kr/product/premium-diffuser-3ea/63/category/44/display/1/
+                      - strong [ref=e1103]: 가정의 달 준비 최대 63% OFF
+                  - listitem [ref=e1104]:
+                    - link "시원한~린넨소재 2만원대~가디건!" [ref=e1105] [cursor=pointer]:
+                      - /url: http://www.midasb.co.kr/?&ref=naverhotitem&da_ref=Yz1qZk54ZEY=
+                      - strong [ref=e1110]: 시원한~린넨소재 2만원대~가디건!
+              - generic [ref=e1112]:
+                - generic [ref=e1114]:
+                  - generic: 현재 페이지
+                  - emphasis [ref=e1115]: "1"
+                  - generic [ref=e1116]: /
+                  - generic: 전체 페이지
+                  - generic [ref=e1117]: "20"
+                - button "이전페이지 보기" [ref=e1118] [cursor=pointer]:
+                  - generic [ref=e1119]: 이전페이지 보기
+                - button "다음페이지 보기" [ref=e1120] [cursor=pointer]:
+                  - generic [ref=e1121]: 다음페이지 보기
+              - generic [ref=e1123]: 광고
+            - generic [ref=e1125]:
+              - generic [ref=e1126]:
+                - link "증권" [ref=e1127] [cursor=pointer]:
+                  - /url: https://finance.daum.net
+                  - heading "증권" [level=3] [ref=e1128]:
+                    - generic [ref=e1129]: 증권
+                - button "증권 펼치기" [ref=e1131] [cursor=pointer]:
+                  - generic [ref=e1132]: 증권 펼치기
+              - list [ref=e1134]:
+                - generic [ref=e1135]:
+                  - listitem [ref=e1136]:
+                    - link "코스피 현재가 6,460.6 전일대비 -0.23%" [ref=e1137] [cursor=pointer]:
+                      - /url: https://search.daum.net/search?w=tot&DA=TTS&rtmaxcoll=HSU&q=%EC%BD%94%EC%8A%A4%ED%94%BC
+                      - strong [ref=e1138]: 코스피
+                      - paragraph [ref=e1139]:
+                        - generic: 현재가
+                        - text: 6,460.6
+                      - paragraph [ref=e1140]:
+                        - generic [ref=e1141]:
+                          - generic: 전일대비
+                          - text: "-0.23%"
+                    - link "코스닥 현재가 1,196.56 전일대비 +1.89%" [ref=e1142] [cursor=pointer]:
+                      - /url: https://search.daum.net/search?w=tot&DA=TTS&rtmaxcoll=HSU&q=%EC%BD%94%EC%8A%A4%EB%8B%A5
+                      - strong [ref=e1143]: 코스닥
+                      - paragraph [ref=e1144]:
+                        - generic: 현재가
+                        - text: 1,196.56
+                      - paragraph [ref=e1145]:
+                        - generic [ref=e1146]:
+                          - generic: 전일대비
+                          - text: +1.89%
+                    - link "코스피200 현재가 970.41 전일대비 -0.53%" [ref=e1147] [cursor=pointer]:
+                      - /url: https://search.daum.net/search?w=tot&DA=TTS&rtmaxcoll=HSU&q=%EC%BD%94%EC%8A%A4%ED%94%BC+200
+                      - strong [ref=e1148]: 코스피200
+                      - paragraph [ref=e1149]:
+                        - generic: 현재가
+                        - text: "970.41"
+                      - paragraph [ref=e1150]:
+                        - generic [ref=e1151]:
+                          - generic: 전일대비
+                          - text: "-0.53%"
+                  - listitem [ref=e1152]:
+                    - link [ref=e1153] [cursor=pointer]:
+                      - /url: https://search.daum.net/search?w=tot&DA=TTS&rtmaxcoll=HSU&q=%EB%AF%B8%EA%B5%AD+%EB%8B%A4%EC%9A%B0+%EC%82%B0%EC%97%85
+                      - strong [ref=e1154]: 다우존스
+                      - paragraph [ref=e1155]: 49,310.32
+                      - paragraph [ref=e1156]:
+                        - generic [ref=e1157]: "-0.36%"
+                    - link [ref=e1158] [cursor=pointer]:
+                      - /url: https://search.daum.net/search?w=tot&DA=TTS&rtmaxcoll=HSU&q=%EB%AF%B8%EA%B5%AD+%EB%82%98%EC%8A%A4%EB%8B%A5+%EC%A2%85%ED%95%A9
+                      - strong [ref=e1159]: 나스닥 종합
+                      - paragraph [ref=e1160]: 24,438.504
+                      - paragraph [ref=e1161]:
+                        - generic [ref=e1162]: "-0.89%"
+                    - link [ref=e1163] [cursor=pointer]:
+                      - /url: https://search.daum.net/search?w=tot&DA=TTS&rtmaxcoll=HSU&q=%EB%AF%B8%EA%B5%AD+S%26P+500
+                      - strong [ref=e1164]: S&P500
+                      - paragraph [ref=e1165]: 7,108.4
+                      - paragraph [ref=e1166]:
+                        - generic [ref=e1167]: "-0.41%"
+                  - listitem [ref=e1168]:
+                    - link [ref=e1169] [cursor=pointer]:
+                      - /url: https://search.daum.net/search?w=tot&DA=TTS&rtmaxcoll=Z6T&q=%EB%AF%B8%EA%B5%AD+USD
+                      - strong [ref=e1170]: 미국 USD
+                      - paragraph [ref=e1171]: 1,482.9
+                      - paragraph [ref=e1172]:
+                        - generic [ref=e1173]: "-0.07%"
+                    - link [ref=e1174] [cursor=pointer]:
+                      - /url: https://search.daum.net/search?w=tot&DA=TTS&rtmaxcoll=Z6T&q=%EC%9D%BC%EB%B3%B8+JPY100
+                      - strong [ref=e1175]: 일본 JPY
+                      - paragraph [ref=e1176]: "928.15"
+                      - paragraph [ref=e1177]:
+                        - generic [ref=e1178]: "-0.13%"
+                    - link [ref=e1179] [cursor=pointer]:
+                      - /url: https://search.daum.net/search?w=tot&DA=TTS&rtmaxcoll=Z6T&q=%EC%9C%A0%EB%A1%9C+EUR
+                      - strong [ref=e1180]: 유로 EUR
+                      - paragraph [ref=e1181]: 1,732.03
+                      - paragraph [ref=e1182]:
+                        - generic [ref=e1183]: "-0.13%"
+            - generic [ref=e1184]:
+              - generic [ref=e1185]:
+                - heading "실시간 트렌드" [level=3] [ref=e1186]:
+                  - generic [ref=e1187]: 실시간 트렌드
+                - paragraph [ref=e1188]: 오늘 11:42 기준
+                - button "실시간 트렌드 도움말보기" [ref=e1191] [cursor=pointer]:
+                  - generic [ref=e1192]: 실시간 트렌드 도움말보기
+              - list [ref=e1194]:
+                - listitem [ref=e1195]:
+                  - link "1 위, 모수 ,상승" [ref=e1196] [cursor=pointer]:
+                    - /url: https://search.daum.net/search?w=tot&DA=RT2&rtmaxcoll=AIO,NNS,DNS&q=%EB%AA%A8%EC%88%98
+                    - generic [ref=e1197]:
+                      - emphasis [ref=e1198]:
+                        - text: "1"
+                        - generic: 위,
+                      - strong [ref=e1199]: 모수
+                      - generic [ref=e1200]: ",상승"
+                - listitem [ref=e1201]:
+                  - link "2 위, 붐 둘째 득녀 ,신규" [ref=e1202] [cursor=pointer]:
+                    - /url: https://search.daum.net/search?w=tot&DA=RT2&rtmaxcoll=AIO,NNS,DNS&q=%EB%B6%90%20%EB%91%98%EC%A7%B8%20%EB%93%9D%EB%85%80
+                    - generic [ref=e1203]:
+                      - emphasis [ref=e1204]:
+                        - text: "2"
+                        - generic: 위,
+                      - strong [ref=e1205]: 붐 둘째 득녀
+                      - generic [ref=e1206]: ",신규"
+                - listitem [ref=e1207]:
+                  - link "3 위, 삼성 ,신규" [ref=e1208] [cursor=pointer]:
+                    - /url: https://search.daum.net/search?w=tot&DA=RT2&rtmaxcoll=AIO,NNS,DNS&q=%EC%82%BC%EC%84%B1
+                    - generic [ref=e1209]:
+                      - emphasis [ref=e1210]:
+                        - text: "3"
+                        - generic: 위,
+                      - strong [ref=e1211]: 삼성
+                      - generic [ref=e1212]: ",신규"
+                - listitem [ref=e1213]:
+                  - link "4 위, 아동수당 ,신규" [ref=e1214] [cursor=pointer]:
+                    - /url: https://search.daum.net/search?w=tot&DA=RT2&rtmaxcoll=AIO,NNS,DNS&q=%EC%95%84%EB%8F%99%EC%88%98%EB%8B%B9
+                    - generic [ref=e1215]:
+                      - emphasis [ref=e1216]:
+                        - text: "4"
+                        - generic: 위,
+                      - strong [ref=e1217]: 아동수당
+                      - generic [ref=e1218]: ",신규"
+                - listitem [ref=e1219]:
+                  - link "5 위, 살목지 ,신규" [ref=e1220] [cursor=pointer]:
+                    - /url: https://search.daum.net/search?w=tot&DA=RT2&rtmaxcoll=AIO,NNS,DNS&q=%EC%82%B4%EB%AA%A9%EC%A7%80
+                    - generic [ref=e1221]:
+                      - emphasis [ref=e1222]:
+                        - text: "5"
+                        - generic: 위,
+                      - strong [ref=e1223]: 살목지
+                      - generic [ref=e1224]: ",신규"
+                - listitem [ref=e1225]:
+                  - link "6 위, 구윤철 소비·관광 붐업 ,신규" [ref=e1226] [cursor=pointer]:
+                    - /url: https://search.daum.net/search?w=tot&DA=RT2&rtmaxcoll=AIO,NNS,DNS&q=%EA%B5%AC%EC%9C%A4%EC%B2%A0%20%EC%86%8C%EB%B9%84%C2%B7%EA%B4%80%EA%B4%91%20%EB%B6%90%EC%97%85
+                    - generic [ref=e1227]:
+                      - emphasis [ref=e1228]:
+                        - text: "6"
+                        - generic: 위,
+                      - strong [ref=e1229]: 구윤철 소비·관광 붐업
+                      - generic [ref=e1230]: ",신규"
+                - listitem [ref=e1231]:
+                  - link "7 위, 이숙캠 ,신규" [ref=e1232] [cursor=pointer]:
+                    - /url: https://search.daum.net/search?w=tot&DA=RT2&rtmaxcoll=AIO,NNS,DNS&q=%EC%9D%B4%EC%88%99%EC%BA%A0
+                    - generic [ref=e1233]:
+                      - emphasis [ref=e1234]:
+                        - text: "7"
+                        - generic: 위,
+                      - strong [ref=e1235]: 이숙캠
+                      - generic [ref=e1236]: ",신규"
+                - listitem [ref=e1237]:
+                  - link "8 위, 고양 꽃박람회 ,신규" [ref=e1238] [cursor=pointer]:
+                    - /url: https://search.daum.net/search?w=tot&DA=RT2&rtmaxcoll=AIO,NNS,DNS&q=%EA%B3%A0%EC%96%91%20%EA%BD%83%EB%B0%95%EB%9E%8C%ED%9A%8C
+                    - generic [ref=e1239]:
+                      - emphasis [ref=e1240]:
+                        - text: "8"
+                        - generic: 위,
+                      - strong [ref=e1241]: 고양 꽃박람회
+                      - generic [ref=e1242]: ",신규"
+                - listitem [ref=e1243]:
+                  - link "9 위, 헤일메리 ,신규" [ref=e1244] [cursor=pointer]:
+                    - /url: https://search.daum.net/search?w=tot&DA=RT2&rtmaxcoll=AIO,NNS,DNS&q=%ED%97%A4%EC%9D%BC%EB%A9%94%EB%A6%AC
+                    - generic [ref=e1245]:
+                      - emphasis [ref=e1246]:
+                        - text: "9"
+                        - generic: 위,
+                      - strong [ref=e1247]: 헤일메리
+                      - generic [ref=e1248]: ",신규"
+                - listitem [ref=e1249]:
+                  - link "10 위, 서울숲나들목 개방 ,신규" [ref=e1250] [cursor=pointer]:
+                    - /url: https://search.daum.net/search?w=tot&DA=RT2&rtmaxcoll=AIO,NNS,DNS&q=%EC%84%9C%EC%9A%B8%EC%88%B2%EB%82%98%EB%93%A4%EB%AA%A9%20%EA%B0%9C%EB%B0%A9
+                    - generic [ref=e1251]:
+                      - emphasis [ref=e1252]:
+                        - text: "10"
+                        - generic: 위,
+                      - strong [ref=e1253]: 서울숲나들목 개방
+                      - generic [ref=e1254]: ",신규"
+            - generic [ref=e1255]:
+              - link "오늘의 루프" [ref=e1257] [cursor=pointer]:
+                - /url: https://video.daum.net/shorts/middle?slot=video_short_best
+                - heading "오늘의 루프" [level=3] [ref=e1258]:
+                  - generic [ref=e1259]: 오늘의 루프
+              - generic [ref=e1263]:
+                - link "차이나는썰 차이나는썰 슬슬 효도 시작할게요 ㅋㅋ" [ref=e1266] [cursor=pointer]:
+                  - /url: https://video.daum.net/s/462734984?slot=video_short_pcwidget&seedId=toros_shortform_yozm_trend_lints
+                  - generic [ref=e1269]:
+                    - generic [ref=e1270]:
+                      - img "차이나는썰" [ref=e1272]
+                      - strong [ref=e1273]: 차이나는썰
+                    - paragraph [ref=e1274]: 슬슬 효도 시작할게요 ㅋㅋ
+                - link [ref=e1277] [cursor=pointer]:
+                  - /url: https://video.daum.net/s/462707813?slot=video_short_pcwidget&seedId=toros_shortform_yozm_trend_lints
+                  - generic [ref=e1280]:
+                    - generic [ref=e1281]:
+                      - img [ref=e1283]
+                      - strong [ref=e1284]: 깨비불
+                    - paragraph [ref=e1285]: 1초 늦었으면 끝… 강아지 살린 장면
+                - link [ref=e1288] [cursor=pointer]:
+                  - /url: https://video.daum.net/s/462720773?slot=video_short_pcwidget&seedId=toros_shortform_yozm_trend_lints
+                  - generic [ref=e1291]:
+                    - generic [ref=e1292]:
+                      - img [ref=e1294]
+                      - strong [ref=e1295]: 국영수과사_톺아보기
+                    - paragraph [ref=e1296]: "포식자가 사라지면 생기는 일! #늑구#대전#오월드#늑대#생명과학#수능#내신#모의고사#3모#6모#9모#포식자#목동#에이원과학#인후쌤#톺아보기"
+                - link [ref=e1299] [cursor=pointer]:
+                  - /url: https://video.daum.net/s/462715656?slot=video_short_pcwidget&seedId=toros_shortform_yozm_trend_lints
+                  - generic [ref=e1302]:
+                    - generic [ref=e1303]:
+                      - img [ref=e1305]
+                      - strong [ref=e1306]: 애니멀 플래닛
+                    - paragraph [ref=e1307]: 고구마 한입에 무너진 강아지… 침 상태 실화냐
+                - link [ref=e1310] [cursor=pointer]:
+                  - /url: https://video.daum.net/s/462707914?slot=video_short_pcwidget&seedId=toros_shortform_yozm_trend_lints
+                  - generic [ref=e1313]:
+                    - generic [ref=e1314]:
+                      - img [ref=e1316]
+                      - strong [ref=e1317]: 블박모음zip
+                    - paragraph [ref=e1318]: 도로에 물고기가 나타났다… 이게 가능해?
+                - link [ref=e1321] [cursor=pointer]:
+                  - /url: https://video.daum.net/s/462707121?slot=video_short_pcwidget&seedId=toros_shortform_yozm_trend_lints
+                  - generic [ref=e1324]:
+                    - generic [ref=e1325]:
+                      - img [ref=e1327]
+                      - strong [ref=e1328]: 토토의신비로운 이야기
+                    - paragraph [ref=e1329]: 세상에서 가장 특별한 직업
+                - link [ref=e1332] [cursor=pointer]:
+                  - /url: https://video.daum.net/s/462731460?slot=video_short_pcwidget&seedId=toros_shortform_yozm_trend_lints
+                  - generic [ref=e1335]:
+                    - generic [ref=e1336]:
+                      - img [ref=e1338]
+                      - strong [ref=e1339]: 외국어_톺아보기
+                    - paragraph [ref=e1340]: "OX로 끝내는 감정분사! #감정분사#영문법#중등영어#고등영어#모의고사#중간고사#기말고사#수능#내신#인재중심#희재쌤#조희재#톺아보기"
+                - link [ref=e1343] [cursor=pointer]:
+                  - /url: https://video.daum.net/s/462727386?slot=video_short_pcwidget&seedId=toros_shortform_yozm_trend_lints
+                  - generic [ref=e1346]:
+                    - generic [ref=e1347]:
+                      - img [ref=e1349]
+                      - strong [ref=e1350]: 북마크
+                    - paragraph [ref=e1351]: 무언가 잘못된 눈썹문신의 비밀
+                - link [ref=e1354] [cursor=pointer]:
+                  - /url: https://video.daum.net/s/462707382?slot=video_short_pcwidget&seedId=toros_shortform_yozm_trend_lints
+                  - generic [ref=e1357]:
+                    - generic [ref=e1358]:
+                      - img [ref=e1360]
+                      - strong [ref=e1361]: 지식저장소
+                    - paragraph [ref=e1362]: 며느리도 알려주지 않는, 식초 활용꿀팁 3가지 공개
+                - link [ref=e1365] [cursor=pointer]:
+                  - /url: https://video.daum.net/s/462727380?slot=video_short_pcwidget&seedId=toros_shortform_yozm_trend_lints
+                  - generic [ref=e1368]:
+                    - generic [ref=e1369]:
+                      - img [ref=e1371]
+                      - strong [ref=e1372]: 깃털유머
+                    - paragraph [ref=e1373]: 비둘기 지능 겁나 높네 ㅋㅋㅋㅋㅋㅋ
+              - generic [ref=e1375]:
+                - generic [ref=e1377]:
+                  - generic: 현재 페이지
+                  - emphasis [ref=e1378]: "1"
+                  - generic [ref=e1379]: /
+                  - generic: 전체 페이지
+                  - generic [ref=e1380]: "10"
+                - button "이전페이지 보기" [ref=e1381] [cursor=pointer]:
+                  - generic [ref=e1382]: 이전페이지 보기
+                - button "다음페이지 보기" [ref=e1383] [cursor=pointer]:
+                  - generic [ref=e1384]: 다음페이지 보기
+            - iframe [ref=e1386]:
+              - generic [ref=f2e2]:
+                - link "추천 쇼핑 키워드 (새창열림)" [ref=f2e4] [cursor=pointer]:
+                  - /url: https://shoppinghow.kakao.com/
+                  - strong [ref=f2e5]:
+                    - generic [ref=f2e6]: 추천 쇼핑 키워드
+                  - generic: (새창열림)
+                - list [ref=f2e8]:
+                  - listitem [ref=f2e9]:
+                    - link "깊고 진한 맛의 밀크티 홍차의 향긋한 풍미와 우유의 부드러움 (새창열림)" [ref=f2e10] [cursor=pointer]:
+                      - /url: https://shoppinghow.kakao.com/search/%EB%B0%80%ED%81%AC%ED%8B%B0/sort_type:1&tab:normal&view_type:image&image_filter_cnt:200
+                      - generic [ref=f2e14]:
+                        - strong [ref=f2e15]: 깊고 진한 맛의 밀크티
+                        - generic [ref=f2e16]: 홍차의 향긋한 풍미와 우유의 부드러움
+                      - generic: (새창열림)
+                  - listitem [ref=f2e17]:
+                    - link "센스 있는 코디 포인트 다양한 연출이 가능한 쁘띠 스카프 (새창열림)" [ref=f2e18] [cursor=pointer]:
+                      - /url: https://shoppinghow.kakao.com/search/%EC%81%98%EB%9D%A0%20%EC%8A%A4%EC%B9%B4%ED%94%84/sort_type:1&view_type:image&image_filter_cnt:200
+                      - generic [ref=f2e22]:
+                        - strong [ref=f2e23]: 센스 있는 코디 포인트
+                        - generic [ref=f2e24]: 다양한 연출이 가능한 쁘띠 스카프
+                      - generic: (새창열림)
+                  - listitem [ref=f2e25]:
+                    - link "한 잔의 여유를 담은 머그잔 소소한 일상을 특별하게 채워줄 아이템 (새창열림)" [ref=f2e26] [cursor=pointer]:
+                      - /url: https://shoppinghow.kakao.com/search/%EB%A8%B8%EA%B7%B8%EC%9E%94/sort_type:1&view_type:image&image_filter_cnt:200
+                      - generic [ref=f2e30]:
+                        - strong [ref=f2e31]: 한 잔의 여유를 담은 머그잔
+                        - generic [ref=f2e32]: 소소한 일상을 특별하게 채워줄 아이템
+                      - generic: (새창열림)
+                - generic [ref=f2e33]:
+                  - generic: 제휴사 쇼핑뉴스
+                  - link "국내 바다여행 최대 30% + 14% (새창열림)" [ref=f2e34] [cursor=pointer]:
+                    - /url: https://rpp.gmarket.co.kr/?exhib=247501
+                    - img [ref=f2e35]
+                    - paragraph [ref=f2e36]: 국내 바다여행 최대 30% + 14%
+                    - generic: (새창열림)
+                - generic [ref=f2e38]:
+                  - generic [ref=f2e40]:
+                    - generic: 현재 페이지
+                    - emphasis [ref=f2e41]: "1"
+                    - generic [ref=f2e42]: /
+                    - generic: 전체 페이지
+                    - generic [ref=f2e43]: "2"
+                  - button "이전페이지 보기" [ref=f2e44] [cursor=pointer]:
+                    - generic [ref=f2e45]: 이전페이지 보기
+                  - button "다음페이지 보기" [ref=f2e46] [cursor=pointer]:
+                    - generic [ref=f2e47]: 다음페이지 보기
+            - insertion [ref=e1388]:
+              - iframe [ref=e1391]:
+                - generic [ref=f8e3]:
+                  - link "카카오 애드핏 광고입니다 한국토요타자동차 프리우스 프리우스. 구매혜택, 시승신청, 전시장 안내" [ref=f8e4] [cursor=pointer]:
+                    - /url: https://ka.ad.daum.net/click/https%3A%2F%2Fwww.toyota.co.kr%2Fmodels%2Fpriushev%2F%3Futm_source%3Dkakao%26utm_medium%3Dpaidsearch%26utm_campaign%3Dpc%26utm_content%3Dprius_launching%26utm_source%3Dkakao%26utm_medium%3Dkeyword%26utm_campaign%3DPREMIUM_LINK%26k_campaign%3D47747531281641%26k_adgroup%3D13606599%26k_media%3DPREMIUM_LINK_CONTENT%26k_creative%3D768147469264793600%26k_creativelink%3D768147469357068288%26k_rank%3D1%26kclid%3DwEvCAtn3M7nAs6tL_CFaC51n8DUDwDzBhj5dnT6AFcwevz223zwb0pXryb2UpRUionOWLn-yhJEL0vFl6BQ7B5joQQwSEgPNlmENg0ZHAYo/Tpn9jrMaHHPsWmxn2b6D508R3ENnXKHplSuiW4eUMwwxjdErIVhn7Qq1BIsIQ7_ZgIfChn_aEpWp8pAjfRgrP5pp-S3P4OIMom-37NmckxS9Norg5s0GeQFh2bEbDG6-m9s1A2-HQsngk47IYTdQz9-HRXTVrPLvZp05fC6PY2dDmIO4Ta0ahuM6RAXLPE1RHa_h5SEypRw1CgnTJ11OaOtmdktEy8RPKTpL5uiKxj15nfG1JgrlziSUXEY29w_bBjI-PhtlPA0T8ZMZFD7Q_Ez2LwbXrI0m7HhENCHMbdPAEH03g66Th-BJXLwBAIIZyZ6mFMkx936B8eYIrCGMjeHszJ6Ztc5A7N5FjKFGwAxPaoMn29rBwYF2bK5bODTILL1zdnmt26nrc2AbDrmSMBgZINl7oc6XcSRSifRospwXLKi4Z0SQInoaJWheYNPULYKwFdKYN97yf2GsvYCjTyySxwIE5983untGXnUZ6Z1GHjfDOQXAt_2xRuSumS72jo7o_XZUs5xia0FVvf7JlTZspZyGMfNhTZE5DG_zjDxIrHqQZrMzdA12PQy_xP0r0g-ZxAGCrgJ1dzhFfwufpwdXbWI14w==?p=J5d0lnKQHW6Hq1Dn5BKox5Jz89egSoI49ZHMrlENZkk&rd=%7B%22adunit_type_seq%22%3A134%2C%22banner_adunit_type_seq%22%3A134%2C%22native_adunit_type_seq%22%3A1343%2C%22template_seq%22%3A39%7D
+                    - img "카카오 애드핏 광고입니다" [ref=f8e6]
+                    - generic [ref=f8e9]:
+                      - strong [ref=f8e10]: 한국토요타자동차 프리우스
+                      - generic [ref=f8e11]: 프리우스. 구매혜택, 시승신청, 전시장 안내
+                  - link "광고 정보" [ref=f8e12] [cursor=pointer]:
+                    - /url: https://info.ds.kakao.com/optout.do
+                    - img "광고 정보" [ref=f8e13]
+            - generic [ref=e1392]:
+              - link "추천 게임" [ref=e1394] [cursor=pointer]:
+                - /url: https://kakaogames.com/
+                - heading "추천 게임" [level=3] [ref=e1395]:
+                  - generic [ref=e1396]: 추천 게임
+              - list [ref=e1399]:
+                - listitem [ref=e1400]:
+                  - link "크로노 오디세이 멈춰 있던 시간이 흐른다 MMORPG" [ref=e1401] [cursor=pointer]:
+                    - /url: https://chronoodyssey.kakaogames.com/ko/?utm_source=daumgame&utm_medium=display&utm_campaign=kr_co_cbt&utm_content=banner
+                    - generic [ref=e1407]:
+                      - strong [ref=e1408]: 크로노 오디세이
+                      - paragraph [ref=e1409]: 멈춰 있던 시간이 흐른다
+                      - generic [ref=e1410]: MMORPG
+                - listitem [ref=e1411]:
+                  - link "아키에이지 워 시대의 전설을 향해 MMORPG" [ref=e1412] [cursor=pointer]:
+                    - /url: https://archeagewar.sng.link/A2x4d8/r56mg/kwcs
+                    - generic [ref=e1418]:
+                      - strong [ref=e1419]: 아키에이지 워
+                      - paragraph [ref=e1420]: 시대의 전설을 향해
+                      - generic [ref=e1421]: MMORPG
+              - generic [ref=e1423]:
+                - generic [ref=e1425]:
+                  - generic: 현재 페이지
+                  - emphasis [ref=e1426]: "1"
+                  - generic [ref=e1427]: /
+                  - generic: 전체 페이지
+                  - generic [ref=e1428]: "6"
+                - button "이전페이지 보기" [ref=e1429] [cursor=pointer]:
+                  - generic [ref=e1430]: 이전페이지 보기
+                - button "다음페이지 보기" [ref=e1431] [cursor=pointer]:
+                  - generic [ref=e1432]: 다음페이지 보기
+            - generic [ref=e1433]:
+              - generic [ref=e1434]:
+                - heading "엔터테인먼트 랭킹" [level=3] [ref=e1435]:
+                  - generic [ref=e1436]: 엔터테인먼트 랭킹
+                - generic [ref=e1438]:
+                  - generic [ref=e1439]: 카카오엔터테인먼트 제공
+                  - button "도움말보기" [ref=e1440] [cursor=pointer]:
+                    - generic [ref=e1441]: 도움말보기
+              - tablist [ref=e1443]:
+                - tab "멜론 TOP100" [selected] [ref=e1445] [cursor=pointer]
+                - tab "박스오피스" [ref=e1447] [cursor=pointer]
+                - tab "인기 OTT" [ref=e1449] [cursor=pointer]
+              - strong: 멜론 TOP100 목록
+              - tabpanel [ref=e1450]:
+                - list [ref=e1451]:
+                  - generic [ref=e1452]:
+                    - listitem [ref=e1453]:
+                      - link "기쁨, 슬픔, 아름다운 마음, 앨범정보" [ref=e1454] [cursor=pointer]:
+                        - /url: https://m2.melon.com/kakaoGatePage.htm?cType1=content&cType2=album&cId=13312398&ref=W10200
+                        - img "기쁨, 슬픔, 아름다운 마음, 앨범정보" [ref=e1458]
+                      - link "1 위, 기쁨, 슬픔, 아름다운 마음 AKMU (악뮤)" [ref=e1459] [cursor=pointer]:
+                        - /url: https://m2.melon.com/kakaoGatePage.htm?cType1=content&cType2=song&cId=601719416&ref=W10200
+                        - generic [ref=e1460]:
+                          - strong [ref=e1461]:
+                            - emphasis [ref=e1462]:
+                              - text: "1"
+                              - generic: 위,
+                            - text: 기쁨, 슬픔, 아름다운 마음
+                          - generic [ref=e1463]: AKMU (악뮤)
+                    - listitem [ref=e1464]:
+                      - link "소문의 낙원, 앨범정보" [ref=e1465] [cursor=pointer]:
+                        - /url: https://m2.melon.com/kakaoGatePage.htm?cType1=content&cType2=album&cId=13312398&ref=W10200
+                        - img "소문의 낙원, 앨범정보" [ref=e1469]
+                      - link "2 위, 소문의 낙원 AKMU (악뮤)" [ref=e1470] [cursor=pointer]:
+                        - /url: https://m2.melon.com/kakaoGatePage.htm?cType1=content&cType2=song&cId=601719413&ref=W10200
+                        - generic [ref=e1471]:
+                          - strong [ref=e1472]:
+                            - emphasis [ref=e1473]:
+                              - text: "2"
+                              - generic: 위,
+                            - text: 소문의 낙원
+                          - generic [ref=e1474]: AKMU (악뮤)
+                    - listitem [ref=e1475]:
+                      - link "RUDE!, 앨범정보" [ref=e1476] [cursor=pointer]:
+                        - /url: https://m2.melon.com/kakaoGatePage.htm?cType1=content&cType2=album&cId=12869629&ref=W10200
+                        - img "RUDE!, 앨범정보" [ref=e1480]
+                      - link "3 위, RUDE! Hearts2Hearts (하츠투하츠)" [ref=e1481] [cursor=pointer]:
+                        - /url: https://m2.melon.com/kakaoGatePage.htm?cType1=content&cType2=song&cId=601332163&ref=W10200
+                        - generic [ref=e1482]:
+                          - strong [ref=e1483]:
+                            - emphasis [ref=e1484]:
+                              - text: "3"
+                              - generic: 위,
+                            - text: RUDE!
+                          - generic [ref=e1485]: Hearts2Hearts (하츠투하츠)
+                    - listitem [ref=e1486]:
+                      - link "SWIM, 앨범정보" [ref=e1487] [cursor=pointer]:
+                        - /url: https://m2.melon.com/kakaoGatePage.htm?cType1=content&cType2=album&cId=12927820&ref=W10200
+                        - img "SWIM, 앨범정보" [ref=e1491]
+                      - link "4 위, SWIM 방탄소년단" [ref=e1492] [cursor=pointer]:
+                        - /url: https://m2.melon.com/kakaoGatePage.htm?cType1=content&cType2=song&cId=601555642&ref=W10200
+                        - generic [ref=e1493]:
+                          - strong [ref=e1494]:
+                            - emphasis [ref=e1495]:
+                              - text: "4"
+                              - generic: 위,
+                            - text: SWIM
+                          - generic [ref=e1496]: 방탄소년단
+                    - listitem [ref=e1497]:
+                      - link "BANG BANG, 앨범정보" [ref=e1498] [cursor=pointer]:
+                        - /url: https://m2.melon.com/kakaoGatePage.htm?cType1=content&cType2=album&cId=12845274&ref=W10200
+                        - img "BANG BANG, 앨범정보" [ref=e1502]
+                      - link "5 위, BANG BANG IVE (아이브)" [ref=e1503] [cursor=pointer]:
+                        - /url: https://m2.melon.com/kakaoGatePage.htm?cType1=content&cType2=song&cId=601237102&ref=W10200
+                        - generic [ref=e1504]:
+                          - strong [ref=e1505]:
+                            - emphasis [ref=e1506]:
+                              - text: "5"
+                              - generic: 위,
+                            - text: BANG BANG
+                          - generic [ref=e1507]: IVE (아이브)
+                    - listitem [ref=e1508]:
+                      - link "404 (New Era), 앨범정보" [ref=e1509] [cursor=pointer]:
+                        - /url: https://m2.melon.com/kakaoGatePage.htm?cType1=content&cType2=album&cId=12806237&ref=W10200
+                        - img "404 (New Era), 앨범정보" [ref=e1513]
+                      - link "6 위, 404 (New Era) KiiiKiii (키키)" [ref=e1514] [cursor=pointer]:
+                        - /url: https://m2.melon.com/kakaoGatePage.htm?cType1=content&cType2=song&cId=601013499&ref=W10200
+                        - generic [ref=e1515]:
+                          - strong [ref=e1516]:
+                            - emphasis [ref=e1517]:
+                              - text: "6"
+                              - generic: 위,
+                            - text: 404 (New Era)
+                          - generic [ref=e1518]: KiiiKiii (키키)
+                    - listitem [ref=e1519]:
+                      - link "사랑하게 될 거야, 앨범정보" [ref=e1520] [cursor=pointer]:
+                        - /url: https://m2.melon.com/kakaoGatePage.htm?cType1=content&cType2=album&cId=11312872&ref=W10200
+                        - img "사랑하게 될 거야, 앨범정보" [ref=e1524]
+                      - link "7 위, 사랑하게 될 거야 한로로" [ref=e1525] [cursor=pointer]:
+                        - /url: https://m2.melon.com/kakaoGatePage.htm?cType1=content&cType2=song&cId=36730261&ref=W10200
+                        - generic [ref=e1526]:
+                          - strong [ref=e1527]:
+                            - emphasis [ref=e1528]:
+                              - text: "7"
+                              - generic: 위,
+                            - text: 사랑하게 될 거야
+                          - generic [ref=e1529]: 한로로
+                    - listitem [ref=e1530]:
+                      - link "Drowning, 앨범정보" [ref=e1531] [cursor=pointer]:
+                        - /url: https://m2.melon.com/kakaoGatePage.htm?cType1=content&cType2=album&cId=11183506&ref=W10200
+                        - img "Drowning, 앨범정보" [ref=e1535]
+                      - link "8 위, Drowning WOODZ" [ref=e1536] [cursor=pointer]:
+                        - /url: https://m2.melon.com/kakaoGatePage.htm?cType1=content&cType2=song&cId=36397952&ref=W10200
+                        - generic [ref=e1537]:
+                          - strong [ref=e1538]:
+                            - emphasis [ref=e1539]:
+                              - text: "8"
+                              - generic: 위,
+                            - text: Drowning
+                          - generic [ref=e1540]: WOODZ
+                    - listitem [ref=e1541]:
+                      - link "Good Goodbye, 앨범정보" [ref=e1542] [cursor=pointer]:
+                        - /url: https://m2.melon.com/kakaoGatePage.htm?cType1=content&cType2=album&cId=12160000&ref=W10200
+                        - img "Good Goodbye, 앨범정보" [ref=e1546]
+                      - link "9 위, Good Goodbye 화사 (HWASA)" [ref=e1547] [cursor=pointer]:
+                        - /url: https://m2.melon.com/kakaoGatePage.htm?cType1=content&cType2=song&cId=600287375&ref=W10200
+                        - generic [ref=e1548]:
+                          - strong [ref=e1549]:
+                            - emphasis [ref=e1550]:
+                              - text: "9"
+                              - generic: 위,
+                            - text: Good Goodbye
+                          - generic [ref=e1551]: 화사 (HWASA)
+                    - listitem [ref=e1552]:
+                      - link "Ode to Love, 앨범정보" [ref=e1553] [cursor=pointer]:
+                        - /url: https://m2.melon.com/kakaoGatePage.htm?cType1=content&cType2=album&cId=13325501&ref=W10200
+                        - img "Ode to Love, 앨범정보" [ref=e1557]
+                      - link "10 위, Ode to Love NCT WISH" [ref=e1558] [cursor=pointer]:
+                        - /url: https://m2.melon.com/kakaoGatePage.htm?cType1=content&cType2=song&cId=601766233&ref=W10200
+                        - generic [ref=e1559]:
+                          - strong [ref=e1560]:
+                            - emphasis [ref=e1561]:
+                              - text: "10"
+                              - generic: 위,
+                            - text: Ode to Love
+                          - generic [ref=e1562]: NCT WISH
+              - generic:
+                - button "이전페이지 보기" [ref=e1563] [cursor=pointer]:
+                  - generic [ref=e1564]: 이전페이지 보기
+                - button "다음페이지 보기" [ref=e1565] [cursor=pointer]:
+                  - generic [ref=e1566]: 다음페이지 보기
+            - generic [ref=e1567]:
+              - heading "오늘의 포토" [level=3] [ref=e1569]:
+                - generic [ref=e1570]: 오늘의 포토
+              - generic [ref=e1571]:
+                - generic:
+                  - link "이전페이지 보기" [ref=e1572] [cursor=pointer]:
+                    - /url: "#none"
+                    - generic [ref=e1573]: 이전페이지 보기
+                  - link "다음페이지 보기" [ref=e1574] [cursor=pointer]:
+                    - /url: "#none"
+                    - generic [ref=e1575]: 다음페이지 보기
+                - generic [ref=e1576]:
+                  - link "엑스포츠뉴스 이유비, “헤메는 셀프”라더니…청순+슬림 갈수록 어려지는 동안 미모 [★해시태그]" [ref=e1578] [cursor=pointer]:
+                    - /url: https://gallery.v.daum.net/p/viewer/246/20260424054434301
+                    - generic [ref=e1581]:
+                      - strong [ref=e1582]: 엑스포츠뉴스
+                      - paragraph [ref=e1583]: 이유비, “헤메는 셀프”라더니…청순+슬림 갈수록 어려지는 동안 미모 [★해시태그]
+                  - link [ref=e1585] [cursor=pointer]:
+                    - /url: https://gallery.v.daum.net/p/viewer/251/20260423103218611
+                    - generic [ref=e1588]:
+                      - strong [ref=e1589]: 엑스포츠뉴스
+                      - paragraph [ref=e1590]: 아이유, 이연과 제주도 여행도 갔다더니…다리 끌어안고 '절친 인증' [★해시태그]
+                  - link [ref=e1592] [cursor=pointer]:
+                    - /url: https://gallery.v.daum.net/p/viewer/261/20260423180132157
+                    - generic [ref=e1595]:
+                      - strong [ref=e1596]: 엑스포츠뉴스
+                      - paragraph [ref=e1597]: "'새 출발' 권은비, 이렇게 힙했나…분위기 확 바뀐 '보디수트 룩' [★해시태그]"
+                  - link [ref=e1599] [cursor=pointer]:
+                    - /url: https://gallery.v.daum.net/p/viewer/965/20260423134214416
+                    - generic [ref=e1602]:
+                      - strong [ref=e1603]: 티브이데일리
+                      - paragraph [ref=e1604]: "[TD포토] 손종원 셰프 '훈훈한 비주얼~'"
+                  - link [ref=e1606] [cursor=pointer]:
+                    - /url: https://gallery.v.daum.net/p/viewer/253/20260423185635724
+                    - generic [ref=e1609]:
+                      - strong [ref=e1610]: 뉴스엔
+                      - paragraph [ref=e1611]: 프로미스나인 박지원, 신예원 아나운서의 포옹 격려[포토엔HD]
+                  - link [ref=e1613] [cursor=pointer]:
+                    - /url: https://gallery.v.daum.net/p/viewer/5787623/20260423223305423
+                    - generic [ref=e1616]:
+                      - strong [ref=e1617]: OSEN
+                      - paragraph [ref=e1618]: 한화, '기분 좋은 승리 하이파이브' [사진]
+                  - link [ref=e1620] [cursor=pointer]:
+                    - /url: https://gallery.v.daum.net/p/viewer/5111372/20260424112222398
+                    - generic [ref=e1623]:
+                      - strong [ref=e1624]: MHN스포츠
+                      - paragraph [ref=e1625]: "[mhn포토] 김리안, 시원하게 날린다"
+                  - link [ref=e1627] [cursor=pointer]:
+                    - /url: https://gallery.v.daum.net/p/viewer/987/20260422164659783
+                    - generic [ref=e1630]:
+                      - strong [ref=e1631]: MHN스포츠
+                      - paragraph [ref=e1632]: "[포토] 김재환 '물만두 볼하트'"
+                  - link [ref=e1634] [cursor=pointer]:
+                    - /url: https://gallery.v.daum.net/p/viewer/250/20260424095533272
+                    - generic [ref=e1637]:
+                      - strong [ref=e1638]: 뉴스엔
+                      - paragraph [ref=e1639]: 레드벨벳 조이 ‘공항을 화보 촬영장으로 만드는 마법’[포토엔HD]
+                  - link [ref=e1641] [cursor=pointer]:
+                    - /url: https://gallery.v.daum.net/p/viewer/247/20260424071614731
+                    - generic [ref=e1644]:
+                      - strong [ref=e1645]: OSEN
+                      - paragraph [ref=e1646]: ’11kg 감량’ 신봉선, 메이크업 전후 많이 다르네…역시 아이유 닮은꼴
+        - generic [ref=e1647]:
+          - link "홈 화면 설정" [ref=e1648] [cursor=pointer]:
+            - /url: "#none"
+            - generic [ref=e1649]: 홈 화면 설정
+          - text: 가 가 가
+    - contentinfo [ref=e1650]:
+      - generic [ref=e1651]:
+        - heading "공지사항" [level=2] [ref=e1652]:
+          - link "공지사항" [ref=e1653] [cursor=pointer]:
+            - /url: https://brunch.co.kr/@daum
+        - list [ref=e1654]:
+          - listitem [ref=e1655]:
+            - paragraph [ref=e1656]:
+              - link "댓글, 이렇게 달라졌어요." [ref=e1657] [cursor=pointer]:
+                - /url: https://brunch.co.kr/@daum/34
+      - link "서비스 전체 보기" [ref=e1658] [cursor=pointer]:
+        - /url: https://focus.daum.net/daum/pc/sitemap.html
+        - text: 서비스 전체 보기
+      - generic [ref=e1660]:
+        - heading "다음 소개 및 약관" [level=2]
+        - generic [ref=e1661]:
+          - link "회사소개" [ref=e1662] [cursor=pointer]:
+            - /url: https://axzcorp.com
+          - link "맞춤형광고" [ref=e1663] [cursor=pointer]:
+            - /url: https://policy.daum.net/policy/adinfo
+          - link "검색등록" [ref=e1664] [cursor=pointer]:
+            - /url: https://register.search.daum.net/index.daum
+          - link "제휴문의" [ref=e1665] [cursor=pointer]:
+            - /url: mailto:contentpartnership@axzcorp.com
+          - link "인재채용" [ref=e1666] [cursor=pointer]:
+            - /url: https://career.axzcorp.com/recruit
+          - link "내정보" [ref=e1667] [cursor=pointer]:
+            - /url: http://member.daum.net/my
+        - generic [ref=e1668]:
+          - link "이용약관" [ref=e1669] [cursor=pointer]:
+            - /url: https://policy.daum.net/policy/info
+          - link "운영정책" [ref=e1670] [cursor=pointer]:
+            - /url: https://policy.daum.net/policy/oppolicy
+          - link "청소년보호정책" [ref=e1671] [cursor=pointer]:
+            - /url: https://policy.daum.net/policy/youthpolicy
+          - link "위치기반서비스이용약관" [ref=e1672] [cursor=pointer]:
+            - /url: https://policy.daum.net/policy/location
+            - strong [ref=e1673]: 위치기반서비스이용약관
+          - link "개인정보처리방침" [ref=e1674] [cursor=pointer]:
+            - /url: https://policy.daum.net/policy/privacy
+            - strong [ref=e1675]: 개인정보처리방침
+          - link "웹접근성안내" [ref=e1676] [cursor=pointer]:
+            - /url: https://focus.daum.net/daum/pc/accessibility.html
+          - link "고객센터" [ref=e1677] [cursor=pointer]:
+            - /url: https://cs.daum.net/
+        - link "© AXZ Corp." [ref=e1680] [cursor=pointer]:
+          - /url: https://axzcorp.com

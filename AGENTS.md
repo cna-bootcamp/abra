@@ -107,6 +107,8 @@ AI Agent 개발자
 - 최대 20항목 유지, 넘으면 오래된 MED부터 정리
 - 기존 항목과 중복되는 내용은 기록하지 않음
 
+- [HIGH] gh-release 요청은 일반 질의보다 `/{plugin}:{skill}` 플러그인 슬래시 명령으로 우선 해석하고, marketplace 확인 후 해당 `skills/{skill}/SKILL.md`를 바로 읽어 처리 — 출처: gh-release help/create-release
+
 ### 스킬부스팅 규칙
 
 SKILL.md 또는 대화에서 아래 키워드가 나오면 **반드시 Skill 도구를 호출**하여 해당 스킬을 실행한다.

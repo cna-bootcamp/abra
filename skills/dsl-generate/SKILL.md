@@ -104,13 +104,15 @@ AI의 사용 목적은 `{AI 사용 목적}`입니다.
 `{selected_provider}`에서 사용할 모델을 선택합니다.
 
 <제공자별 대표 모델 옵션 동적 생성 — 2026-04 기준, 모두 instruction-tuned 권장 모델>
-- OpenAI     → 1. gpt-5.4 (고성능)             2. gpt-5.4-mini (경량)
-- Anthropic  → 1. claude-opus-4-7 (고성능)      2. claude-haiku-4-5 (경량)
-- Google     → 1. gemini-3.1-pro (고성능)       2. gemini-3.1-flash (경량)
-- Groq       → 1. meta-llama/llama-4-scout-17b-16e-instruct (멀티모달, 권장 기본값)
-               2. llama-3.3-70b-versatile (범용 고성능, 권장)
-               3. llama-3.1-8b-instant (경량, 권장)
-               4. gemma2-9b-it (초경량, 권장)
+- OpenAI     → 1. gpt-5.4 (고성능)               2. gpt-5.4-mini (경량)           3. gpt-5.4-nano (초경량)
+- Anthropic  → 1. claude-opus-4-7 (고성능)        2. claude-sonnet-4-6 (범용)      3. claude-haiku-4-5-20251001 (경량)
+- Google     → 1. Gemini 3.1 Pro Preview (고성능)  2. Gemini 3.1 Flash-Lite Preview (경량)
+- Groq       → 1. gpt-oss-120b (고성능)
+               2. gpt-oss-20b (범용)
+               3. deepseek-r1-distill-llama-70b (추론)
+               4. moonshotai/kimi-k2-instruct (범용)
+               5. qwen3-32b (범용)
+               6. meta-llama/llama-4-scout-17b-16e-instruct (멀티모달, 기본값)
 
 N-1. 최신 모델 추천 — `{selected_provider}`의 최신 모델을 웹 검색으로 조회 후 재선택
 N.   직접 입력 (모델명): ___
@@ -122,8 +124,7 @@ N.   직접 입력 (모델명): ___
 > `selected_model`은 워크플로우 전체 LLM/Classifier 노드 기본값으로 적용되므로 classifier가
 > 하나라도 포함된 DSL에서는 런타임 실패로 이어짐.
 >
-> - Groq: `openai/gpt-oss-120b`, `openai/gpt-oss-20b`, `deepseek-r1-distill-*`, `qwen-qwq-32b`,
->   `llama-3.1-405b-reasoning`
+> - Groq: `qwen-qwq-32b`, `llama-3.1-405b-reasoning`
 > - 기타 provider: `o1-*`, `o3-*`(OpenAI reasoning), `gemini-*-thinking` 계열 등 동일 원리 적용
 >
 > "직접 입력"으로 위 모델이 입력되면 경고를 띄우고 재선택 유도.

@@ -14,39 +14,37 @@ description: 검증된 DSL과 시나리오 기반 개발계획서 작성 전문�
 
 - 첨부된 `agentcard.yaml`을 참조하여 역할, 역량, 제약, 핸드오프 조건을 준수할 것
 - 첨부된 `tools.yaml`을 참조하여 사용 가능한 도구와 입출력을 확인할 것
+- Context:
+  - DSL: `{DSL}`
+  - 시나리오: `{SCENARIO}`
+  - 비기능요구사항: `{NFR}`
 
 ## 워크플로우
 
 ### 1. 입력 분석
 
-{tool:file_read}로 입력 파일을 로드하여 요구사항을 파악함.
+{tool:file_read}로 DSL과 `{DSL_FILE}`을 로드하고 비기능요구사항 `{NFR}`를 읽어 요구사항을 파악함.
 
 **입력 분기:**
 
 | 조건 | 분기 | 사용 입력 |
 |------|------|----------|
-| DSL + 시나리오 존재 | **Full Path** | DSL 파일, 시나리오 문서, references |
+| DSL + 시나리오 존재 | **Full Path** | DSL 파일, 시나리오 문서 |
 | DSL + 시나리오 미존재 | **Short Path** | domain_context, requirement, references |
 
-- **Full Path**: 검증된 DSL 파일과 시나리오 문서를 분석하여 기술스택, 아키텍처, 모듈 설계를 도출
+- **Full Path**: 검증된 DSL 파일, 시나리오, 비기능요구사항을 분석하여 기술스택, 아키텍처, 모듈 설계를 도출
 - **Short Path**: domain_context(팀명, 팀 목적, 에이전트 역할)와 requirement(기본 정보, 핵심기능, 사용자 플로우)를 기반으로 개발계획서 작성. DSL 없이 요구사항 중심으로 기술스택과 아키텍처를 결정
 
 ### 2. 기술스택 및 아키텍처 결정
 
-입력에 따라 적합한 기술스택을 결정:
-- **Full Path (DSL 존재 시)**: DSL 구조를 분석하여 기술스택 결정
-  - **Option A (Python)**: Python + LangChain/LangGraph
-  - **Option B (TypeScript)**: TypeScript + LangChain.js
-- **Short Path (DSL 미존재 시)**: requirement를 분석하여 기술스택 결정
-  - **Option B (Python)**: Python + LangChain/LangGraph
-  - **Option C (TypeScript)**: TypeScript + LangChain.js
+- 기술스택: 비기능요구사항에서 사용자가 선택한 스택으로 결정 
 
-아키텍처 패턴:
-- MCP 서버 구조 (Streaming HTTP)
-- API 엔드포인트 설계
-- 데이터 흐름 구조
+- 아키텍처 패턴:
+  - MCP 서버 구조 (Streaming HTTP)
+  - API 엔드포인트 설계
+  - 데이터 흐름 구조
 
-### 3. 모듈별 개발 범위 및 순서 정의
+### 3. 모듈설계
 
 개발 모듈을 우선순위별로 나열:
 1. 핵심 워크플로우 구현
@@ -83,7 +81,7 @@ API 엔드포인트 정의:
 테스트 레벨별 전략:
 - **단위 테스트**: 개별 노드/함수 검증
 - **통합 테스트**: 워크플로우 전체 검증
-- **시나리오 테스트**: 비즈니스 시나리오 기반 E2E 테스트
+- **E2E 테스트**: 비즈니스 시나리오 기반 E2E 테스트
 
 각 테스트 레벨의 범위, 도구, 자동화 여부를 명시함.
 
@@ -151,7 +149,7 @@ CI/CD 파이프라인 구성:
 ## 8. 테스트 전략
 - 단위 테스트
 - 통합 테스트
-- 시나리오 테스트
+- E2E 테스트
 
 ## 9. 배포 계획
 - 배포 환경
