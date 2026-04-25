@@ -140,7 +140,7 @@ import → publish → [에러?] → DSL 수정 → validate_dsl → update → 
   > Playwright MCP로 Dify UI를 접근하여 id: {본인id}, pw: {본인pw}로 로그인
 - 사용자가 테스트 할 워크플로우 선택하고 '미리보기' 클릭해줌 
 - 테스트 요청
-  > 시나리오(scenario.md)파일을 읽어 검증 시나리오를 테스트하세요.       
+  > DSL 파일을 읽어 테스트 계획을 세우고 테스트하세요.       
 - 에러 발생 시 수정 요청 
   > 프로토타입 에러: {에러 내용}
 

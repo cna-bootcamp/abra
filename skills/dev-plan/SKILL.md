@@ -13,14 +13,17 @@ type: orchestrator
 
 검증된 DSL과 시나리오를 기반으로 개발계획서를 작성함.
 기술스택, 아키텍처, 모듈 설계, 테스트 전략, 배포 계획을 포함하는 포괄적 계획서를 산출함.
+특히 DSL에 없는 시나리오 요구사항까지 식별하여, 개발 착수 전에 누락 범위와 추가 설계를 명확히 드러냄.
 
 ## 활성화 조건
 
 - 사용자가 `/abra:dev-plan` 호출 시
 - "개발계획서", "계획서 작성", "개발 계획" 키워드 감지 시
 
-## 작업 환경 변수 로드 
-AGENTS.md 파일에서 `## 환경변수`섹션의 환경변수 로딩. 로딩 실패 시 사용자에게 `/abra:setup`을 먼저 수행하라고 안내하고 종료.     
+## 작업 환경 변수 로드
+
+AGENTS.md 파일에서 `## 환경변수` 섹션의 환경변수 로딩.
+로딩 실패 시 사용자에게 `/abra:setup`을 먼저 수행하라고 안내하고 종료.
 
 ## 에이전트 호출 규칙
 
@@ -31,11 +34,14 @@ AGENTS.md 파일에서 `## 환경변수`섹션의 환경변수 로딩. 로딩 �
 | plan-writer | `abra:plan-writer:plan-writer` |
 
 ### 프롬프트 조립
-- `{ABRA_PLUGIN_DIR}/resources/guides/combine-prompt.md`에 따라 AGENT.md + agentcard.yaml + tools.yaml 합치기
+
+- `{ABRA_PLUGIN_DIR}/resources/guides/combine-prompt.md`에 따라
+  AGENT.md + agentcard.yaml + tools.yaml 합치기
 - `Agent(subagent_type=FQN, model=tier_mapping 결과, prompt=조립된 프롬프트)` 호출
 - tier → 모델 매핑은 `{ABRA_PLUGIN_DIR}/gateway/runtime-mapping.yaml` 참조
 
 ### 서브 에이전트 호출
+
 워크플로우 단계에 `Agent: {agent-name}`이 명시된 경우,
 메인 에이전트는 해당 단계를 직접 수행하지 않고,
 반드시 위 프롬프트 조립 규칙에 따라 해당 에이전트를 호출하여 결과를 받아야 함.
@@ -44,37 +50,78 @@ AGENTS.md 파일에서 `## 환경변수`섹션의 환경변수 로딩. 로딩 �
 스킬 미준수로 간주함.
 
 ## 진행상황 업데이트 및 재개
-`{PROJECT_DIR}/AGENTS.md`에 각 Phase 완료 시 저장. 최종 완료 시 'Done'으로 표기.   
-```
+
+`{PROJECT_DIR}/AGENTS.md`에 각 Phase 완료 시 저장. 최종 완료 시 `Done`으로 표기.
+
+```md
 ## 워크플로우 진행상황
 - {skill-name}: Phase3
 ```
-진행상황 정보가 있는 경우 마지막 완료 단계 이후부터 자동 재개
+
+진행상황 정보가 있는 경우 마지막 완료 단계 이후부터 자동 재개.
 
 ## 워크플로우
 
 ### Phase 0: 입력 확인
 
-#### no_workflow 모드
-
-`no_workflow: true`가 ARGS로 전달된 경우, DSL/시나리오 존재 검증을 스킵하고
-Phase 1로 직행함. 이는 Short Path (Dify 워크플로우 없이 코드만 개발)에서 사용됨.
-
-#### 기본 모드 (no_workflow 미설정)
-
 검증된 DSL 파일과 scenario.md 파일의 존재 여부를 확인함.
 
-**검증 항목:**
-- DSL 파일: `{PROJECT_DIR}/{app-name}_v{N}.dsl.yaml` 존재 확인. `{app_name}_` 뒤에 버전중 가장 높은 버전 파일 사용
-- 시나리오: `{PROJECT_DIR}/scenario.md` 존재 확인
+**검증 항목**
 
-**미존재 시:**
+- DSL 파일: `{PROJECT_DIR}/output/<app>_v<MAX>.dsl.yaml` 존재 확인
+  `<app>_v*.dsl.yaml` 중 버전 정수 최대값 파일을 로드
+- 시나리오: `{PROJECT_DIR}/output/scenario.md` 존재 확인
+
+**미존재 시**
+
 - DSL 파일 없음 → `dsl-generate` 스킬로 위임
 - 시나리오 파일 없음 → `scenario` 스킬로 위임
 
-### Phase 1: 비기능요구사항 수집 
+### Phase 0.5: 시나리오-DSL 갭 분석
 
-**질문 항목:**
+DSL과 `scenario.md`를 함께 읽고 아래 4개 분류로 요구사항을 정리함.
+
+**분류 항목**
+
+- `dsl_covered`: DSL에 이미 포함된 요구사항
+- `scenario_only`: 시나리오에는 있으나 DSL에는 없는 요구사항
+- `custom_required`: 커스텀 개발이 필요한 요구사항
+- `excluded_this_sprint`: 이번 스프린트 제외 범위와 제외 사유
+
+**필수 점검 대상**
+
+- 이미지/파일 입력 처리 여부
+- 배포 후 3일·7일 성과 알림 등 시간 기반 후속 작업
+- 세션/이벤트/배포/성과 조회를 위한 지속 저장소 필요 여부
+- 인증/권한/감사로그 등 보안 요구사항
+- 외부 API 계약/샌드박스/모킹 상태
+
+**산출 형식**
+
+```yaml
+gap_analysis:
+  dsl_covered:
+    - <요구사항>
+  scenario_only:
+    - <요구사항>
+  custom_required:
+    - <요구사항>
+  excluded_this_sprint:
+    - feature: <요구사항>
+      reason: <제외 사유>
+      impact: <실패하거나 제한되는 시나리오>
+```
+
+`scenario_only` 또는 `custom_required` 항목이 있으면,
+Phase 2 개발계획서에 구현 전략 또는 제외 영향도를 반드시 반영함.
+
+또한 이 분석 결과를 바탕으로 Phase 1B의 특화질문 후보를 생성함.
+
+### Phase 1A: 공통질문 기반 비기능요구사항 수집
+
+모든 프로젝트에 공통으로 적용되는 질문만 수집함.
+
+**질문 항목**
 
 1. **기술스택 선호**
    - 질문: "어떤 기술스택을 선호하시나요?"
@@ -82,9 +129,6 @@ Phase 1로 직행함. 이는 Short Path (Dify 워크플로우 없이 코드만 �
      - "Option A: Python + LangChain/LangGraph"
      - "Option B: TypeScript + LangChain.js"
    - 기본값: "Option A"
-   - **allowed_options 적용**: ARGS에 `allowed_options`가 제공된 경우,
-     해당 목록에 포함된 옵션만 사용자에게 표시함.
-     예: `allowed_options: [A, B]` → Option A/B만 표시
 
 2. **배포 환경**
    - 질문: "배포 환경은 무엇인가요?"
@@ -115,59 +159,167 @@ Phase 1로 직행함. 이는 Short Path (Dify 워크플로우 없이 코드만 �
    - 질문: "추가로 고려해야 할 제약 사항이 있나요? (선택)"
    - 입력: 자유 텍스트
 
-### Phase 2: 개발계획서 작성 → Agent: plan-writer (`ralplan` 활용)
+### Phase 1B: 프로젝트 특화질문 생성 및 수집
 
-- **TASK**: 검증된 DSL과 시나리오를 기반으로 기술스택, 아키텍처, 모듈 설계, 테스트 전략, 배포 계획을 포함하는 개발계획서 작성
-- **EXPECTED OUTCOME**: 완성된 개발계획서 마크다운 파일 (`{PROJECT_DIR}/dev-plan.md`)
+Phase 0.5의 `gap_analysis`, `scenario.md`, DSL 구조를 분석하여
+프로젝트마다 다른 특화질문을 동적으로 생성함.
+
+**원칙**
+
+- 특화질문은 고정 질문 세트를 사용하지 않음
+- 프로젝트와 무관한 질문은 생성하지 않음
+- 질문 수는 0~5개 범위로 제한함
+- 각 질문은 "왜 필요한지"가 명확해야 함
+- 가능하면 2~3개의 상호배타적 옵션과 기본값을 제시함
+
+**주요 생성 대상 예시**
+
+- 파일/이미지/음성/문서 입력 처리 요구
+- 예약 작업, 배치, 후속 알림, 워커 등 시간 기반 처리
+- 외부 API 연동 준비 상태, 샌드박스 여부, 계약 완료 여부
+- 세션/이력/감사로그/검색을 위한 저장소 요구
+- 사용자/운영자/관리자 권한 분리, 멀티테넌시
+- 승인 플로우, 수동 검수, 사람이 개입하는 운영 단계
+- 지역/법규/컴플라이언스/보존기간 요구
+- 고처리량, 병렬성, 지연 허용치 등 특수 성능 조건
+
+**산출 형식**
+
+```yaml
+special_questions:
+  - key: <snake_case_key>
+    source: "scenario" | "dsl" | "gap_analysis"
+    reason: <왜 이 질문이 필요한가>
+    question: <사용자에게 물을 질문>
+    options:
+      - <옵션 1>
+      - <옵션 2>
+      - <옵션 3>
+    default: <기본값>
+```
+
+**응답 정규화 형식**
+
+```yaml
+nfr:
+  common:
+    stack: "Option A" | "Option B"
+    deployment: "로컬" | "Docker" | "Kubernetes" | "서버리스"
+    performance: "빠름(1s)" | "보통(3s)" | "느림(5s+)"
+    security: "높음" | "보통" | "낮음"
+    misc: <자유 텍스트>
+  special:
+    - key: <snake_case_key>
+      source: "scenario" | "dsl" | "gap_analysis"
+      reason: <질문 생성 근거>
+      answer: <선택 또는 자유 입력 결과>
+      impact: <설계에 주는 영향 요약>
+```
+
+### Phase 2: 개발계획서 작성 → Agent: plan-writer
+
+- **TASK**:
+  검증된 DSL과 시나리오를 기반으로 기술스택, 아키텍처, 모듈 설계,
+  테스트 전략, 배포 계획을 포함하는 개발계획서 작성
+- **EXPECTED OUTCOME**:
+  완성된 개발계획서 마크다운 파일 (`{PROJECT_DIR}/output/dev-plan.md`)
 - **MUST DO**:
   - DSL 구조와 계획의 일관성 확보
-  - Phase 1에서 수집한 비기능요구사항 반영
-  - 9개 섹션(개요, 기술스택, 아키텍처, 모듈 설계, 프롬프트 최적화, API 설계서, 데이터 모델, 테스트 전략, 배포 계획) 모두 포함
+  - Phase 0.5의 시나리오-DSL 갭 분석 결과 반영
+  - Phase 1A 공통질문과 Phase 1B 특화질문 결과 반영
+  - 9개 섹션(개요, 기술스택, 아키텍처, 모듈 설계,
+    프롬프트 최적화, API 설계서, 데이터 모델, 테스트 전략, 배포 계획) 모두 포함
+  - §4.0 디렉토리 구조(tree) 포함
+  - §4.1 DSL title↔role 매핑 테이블 포함
+    (DSL 노드 수 == `nodes/` 파일 수)
+  - 특화질문으로 확인된 요구사항을 구현 또는 제외 사유로 명시
+  - 세션/이벤트/배포/성과/알림 저장 모델 포함
+  - 스케줄러/워커/알림 방식 포함
+  - 외부 API 계약 상태에 따른 프로덕션 전환 전략 포함
+  - Dockerfile, compose, CI 단계가 실제 실행 가능한 수준인지 검토
 - **MUST NOT DO**:
   - 코드 작성 금지
   - DSL 파일 수정 금지
   - 시나리오 파일 수정 금지
 - **CONTEXT**:
-  - DSL 파일: `{PROJECT_DIR}/{app-name}_v{N}.dsl.yaml`
-  - 시나리오: `{PROJECT_DIR}/scenario.md`
-  - 비기능요구사항: `{nfr}`
-  - 출력 파일: `{PROJECT_DIR}/dev-plan.md`
+  - DSL 파일: `{PROJECT_DIR}/output/<app>_v<MAX>.dsl.yaml`
+  - 시나리오: `{PROJECT_DIR}/output/scenario.md`
+  - 갭 분석 결과: Phase 0.5의 `gap_analysis` YAML
+  - 공통 비기능요구사항:
+
+    ```yaml
+    nfr:
+      common:
+        stack: "Option A" | "Option B"
+        deployment: "로컬" | "Docker" | "Kubernetes" | "서버리스"
+        performance: "빠름(1s)" | "보통(3s)" | "느림(5s+)"
+        security: "높음" | "보통" | "낮음"
+        misc: <자유 텍스트>
+      special:
+        - key: <snake_case_key>
+          source: "scenario" | "dsl" | "gap_analysis"
+          reason: <질문 생성 근거>
+          answer: <선택 또는 자유 입력 결과>
+          impact: <설계에 주는 영향 요약>
+    ```
+
+  - 출력 파일: `{PROJECT_DIR}/output/dev-plan.md`
 
 ### Phase 3: 리뷰 포인트 체크 및 결과 보고
 
 개발계획서를 사용자에게 보고하고, 다음 리뷰 포인트를 확인함.
 
-**리뷰 포인트:**
+**리뷰 포인트**
 
 1. **DSL-계획 일관성**
    - DSL의 노드 구조와 개발계획서의 모듈 설계가 일치하는가?
    - DSL의 입출력 변수와 API 설계서의 스키마가 일치하는가?
+   - 디렉토리 트리가 `app/` 루트를 사용하고 `app/main.py`·`app/api/routes.py`를 포함하는가?
+     (develop 스킬 Phase 4/5 연결 전제)
 
-2. **비기능요구사항 반영**
-   - Phase 1에서 수집한 모든 비기능요구사항이 계획서에 반영되었는가?
+2. **시나리오 충족성**
+   - 시나리오의 핵심 요구사항이 계획서에 구현 범위로 반영되었는가?
+   - DSL에 없는 요구사항은 커스텀 개발 또는 제외 범위로 명시되었는가?
+
+3. **비기능요구사항 반영**
+   - Phase 1A 공통질문과 Phase 1B 특화질문 결과가 계획서에 반영되었는가?
    - 기술스택 선택이 요구사항을 충족하는가?
 
-3. **프로덕션 전환 전략**
+4. **시간 기반 후속 작업 구현성**
+   - 배포 후 3일·7일 알림 등 스케줄러/워커/저장소 설계가 포함되었는가?
+
+5. **파일/이미지 입력 구현성**
+   - 이미지·파일 입력 처리 방식 또는 제외 사유가 명확한가?
+
+6. **프로덕션 전환 전략**
    - DSL 기반 프로토타입을 프로덕션 코드로 전환하는 전략이 명확한가?
    - 테스트 전략이 품질을 보장할 수 있는가?
 
-4. **배포 실현 가능성**
+7. **배포 실현 가능성**
    - 배포 계획이 선택된 환경에서 실현 가능한가?
-   - CI/CD 파이프라인이 구체적으로 정의되었는가?
+   - CI/CD 파이프라인과 배포 스니펫이 실제 실행 가능한가?
 
-**결과 보고 형식:**
+8. **지속 저장·보안 설계**
+   - 세션/이벤트/배포/성과 데이터 저장 전략이 있는가?
+   - 인증/권한/비밀정보/감사로그 요구가 반영되었는가?
+
+**결과 보고 형식**
 
 ```markdown
 # dev-plan 완료 보고
 
 ## 산출물
-- 개발계획서: `{PROJECT_DIR}/dev-plan.md`
+- 개발계획서: `{PROJECT_DIR}/output/dev-plan.md`
 
 ## 리뷰 포인트
 - [✓/✗] DSL-계획 일관성
+- [✓/✗] 시나리오 충족성
 - [✓/✗] 비기능요구사항 반영
+- [✓/✗] 시간 기반 후속 작업 구현성
+- [✓/✗] 파일/이미지 입력 구현성
 - [✓/✗] 프로덕션 전환 전략
 - [✓/✗] 배포 실현 가능성
+- [✓/✗] 지속 저장·보안 설계
 
 ## 다음 단계
 - 개발계획서 검토 후 `/abra:develop` 호출하여 구현 시작
@@ -177,21 +329,12 @@ Phase 1로 직행함. 이는 Short Path (Dify 워크플로우 없이 코드만 �
 
 - [ ] 검증된 DSL 파일 존재 확인
 - [ ] scenario.md 파일 존재 확인
-- [ ] 비기능요구사항 수집 완료
+- [ ] 시나리오-DSL 갭 분석 완료
+- [ ] 공통질문 기반 비기능요구사항 수집 완료
+- [ ] 프로젝트 특화질문 생성 및 수집 완료
 - [ ] 개발계획서 파일 생성 완료 (`dev-plan.md`)
 - [ ] 개발계획서에 9개 섹션 모두 포함
 - [ ] 리뷰 포인트 체크 완료
-
-## 검증 프로토콜
-
-개발계획서 필수 섹션 존재 확인:
-
-```bash
-# 섹션 존재 여부 확인
-grep -E "^## [0-9]\. (개요|기술스택|아키텍처|모듈 설계|프롬프트 최적화|API 설계서|데이터 모델|테스트 전략|배포 계획)" {PROJECT_DIR}/dev-plan.md
-```
-
-9개 섹션이 모두 출력되어야 검증 통과.
 
 ## 상태 정리
 
@@ -202,8 +345,16 @@ grep -E "^## [0-9]\. (개요|기술스택|아키텍처|모듈 설계|프롬프�
 | # | 규칙 |
 |---|------|
 | 1 | 개발계획서에 9개 섹션(개요, 기술스택, 아키텍처, 모듈 설계, 프롬프트 최적화, API 설계서, 데이터 모델, 테스트 전략, 배포 계획)을 모두 포함한다 |
-| 2 | Phase 1에서 수집한 비기능요구사항을 반드시 반영한다 |
-| 3 | DSL 구조와 개발계획서의 모듈 설계 일관성을 확보한다 |
+| 2 | Phase 0.5의 시나리오-DSL 갭 분석 결과를 반드시 반영한다 |
+| 3 | Phase 1A 공통질문과 Phase 1B 특화질문 결과를 반드시 반영한다 |
+| 4 | DSL 구조와 개발계획서의 모듈 설계 일관성을 확보한다 |
+| 5 | 아키텍처 패턴에 Streaming HTTP MCP 서버를 포함하고 SSE는 사용하지 않는다 |
+| 6 | §2(기술스택)의 LLM 래퍼는 DSL `model.provider` 값에서 도출한다 (OpenAI 하드코딩 금지) |
+| 7 | 시나리오에 시간 기반 후속 작업이 있으면 스케줄러/워커/저장소 설계를 포함한다 |
+| 8 | 시나리오에 파일·이미지 입력이 있으면 처리 전략 또는 제외 사유를 명시한다 |
+| 9 | 보안 요구가 높음 또는 외부 API가 있으면 인증/권한/비밀관리/감사로그 설계를 포함한다 |
+| 10 | 배포 스니펫과 CI 단계는 실제 실행 가능성 기준으로 점검한다 |
+| 11 | 디렉토리 컨트랙트는 `app/` 루트를 사용하며(`app/main.py`, `app/api/routes.py` 포함) develop 스킬과 일관성을 유지한다 |
 
 ## MUST NOT 규칙
 
@@ -215,8 +366,11 @@ grep -E "^## [0-9]\. (개요|기술스택|아키텍처|모듈 설계|프롬프�
 
 ## 검증 체크리스트
 
-- [ ] dev-plan.md 파일이 output/ 디렉토리에 존재하는가
+- [ ] dev-plan.md 파일이 `{PROJECT_DIR}/output/`에 존재하는가
 - [ ] 9개 필수 섹션이 모두 포함되어 있는가
-- [ ] 비기능요구사항이 반영되어 있는가
+- [ ] 시나리오-DSL 갭 분석이 계획서에 반영되었는가
+- [ ] 공통질문과 특화질문 결과가 모두 반영되어 있는가
+- [ ] 특화질문으로 확인된 요구사항이 구현 또는 제외 사유로 정리되었는가
 - [ ] DSL-계획 일관성 리뷰 포인트가 통과했는가
 - [ ] 배포 실현 가능성 리뷰 포인트가 통과했는가
+- [ ] 디렉토리 트리가 `app/` 루트이며 `app/main.py`·`app/api/routes.py`가 포함되었는가

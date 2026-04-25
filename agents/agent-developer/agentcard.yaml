@@ -44,3 +44,6 @@ handoff:
   - target: dsl-architect
     when: "구현 중 DSL 구조적 결함 발견 또는 DSL 수정 필요"
     reason: "DSL 변경은 설계 전문가에게 위임"
+  - target: plan-writer
+    when: "개발계획서 §4.0/§4.1 결함 또는 §4.5 갭 재정의 필요"
+    reason: "계획서 변경은 작성 전문가에게 위임"
