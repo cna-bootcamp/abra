@@ -37,7 +37,8 @@ AGENTS.md 파일에서 `## 환경변수` 섹션의 환경변수 로딩.
 
 | 문서 | 경로 | 용도 |
 |------|------|------|
-| 개발 프롬프트 템플릿 | `{ABRA_PLUGIN_DIR}/agents/agent-developer/references/develop.md` | 구현 위임 시 참조 |
+| 개발 프롬프트 템플릿 | `{ABRA_PLUGIN_DIR}/agents/agent-developer/references/develop.md` | 백엔드 구현 위임 시 참조 |
+| 프론트엔드 프롬프트 템플릿 | `{ABRA_PLUGIN_DIR}/agents/frontend-developer/references/frontend.md` | 프론트엔드 구현 위임 시 참조 |
 
 ## 에이전트 호출 규칙
 
@@ -46,6 +47,7 @@ AGENTS.md 파일에서 `## 환경변수` 섹션의 환경변수 로딩.
 | 에이전트 | FQN |
 |----------|-----|
 | agent-developer | `abra:agent-developer:agent-developer` |
+| frontend-developer | `abra:frontend-developer:frontend-developer` |
 
 ### 프롬프트 조립
 
@@ -220,6 +222,128 @@ agent-developer가 재시도 예산을 소진하고 중단했을 때:
 - 재호출 시 재시도 예산은 4개 카운터(`diagnostics=5`, `build=3`, `test=3`, `total=10`) 모두 재발급
 - 재호출 누적 3회 초과 시 사용자에게 escalation
 
+### Phase 3.5: 프론트엔드 개발
+
+코드 기반 백엔드 구현이 통과한 뒤(Phase 3 완료), 사용자 인터페이스가 필요한 경우
+프론트엔드 SPA를 생성하고 백엔드와 통합함. GitHub 배포(Phase 4) 전에 수행하여
+push 시 프론트·백엔드·통합 패치가 함께 배포되도록 함.
+
+#### Step 1: 프론트엔드 필요 여부 판정 + 사용자 확인
+
+**판정 입력**: `{output_dir}/dev-plan.md`의 `§3 사용자 인터페이스` + `§9 배포 계획`만 사용
+
+**판정 룰**:
+
+| 조건 | 판정 |
+|---|---|
+| dev-plan에 "웹 UI", "모바일 웹", "관리자 화면", "사용자 화면" 등 명시 | **권장** |
+| `MCP 서버 단독`, `API only`, `백엔드 only`, `Streaming HTTP MCP만` 명시 | **미권장** |
+| §3 부재 또는 인터페이스 명세 모호 | **미권장** (사용자 확인 필요) |
+
+**실행 규칙**:
+
+- AskUserQuestion 도구로 판정 결과·근거 제시 후 사용자 승인 요청
+- 사용자 승인 시 Step 2 진입
+- 사용자 거부 시 `run_context_frontend.skip = true` → Phase 4로 직진
+
+#### Step 2: 기술스택 선택
+
+AskUserQuestion 도구로 다음 중 선택:
+
+- `Vue 3 + Vite` (권장 — 검증 완료 스택)
+- `React + Vite`
+- `Skip` (이번 턴에는 프론트 미생성)
+
+선택 결과를 `run_context_frontend.tech_stack`에 저장.
+`Skip` 선택 시 `run_context_frontend.skip = true` → Phase 4로 직진.
+
+#### Step 3: 이미지 자동 생성 옵션 + GEMINI_API_KEY 수집
+
+AskUserQuestion 도구로 이미지 자동 생성 필요 여부 문의:
+
+- `예` 선택 시:
+  1. AskUserQuestion으로 GEMINI_API_KEY 입력 요청
+     - 미보유 안내: `https://aistudio.google.com/apikey`
+  2. 입력값을 `{ABRA_PLUGIN_DIR}/gateway/tools/.env` 파일의 `GEMINI_API_KEY=...` 행에 저장 (없으면 생성)
+
+- `아니오` 선택 시: `image_generation.enabled = false` 로 진행
+
+#### Step 4: frontend-developer 서브에이전트 호출 → Agent: frontend-developer
+
+- **TASK**: 선택된 스택으로 SPA 구현 + 백엔드 통합 패치 + 빌드 검증 수행
+- **EXPECTED OUTCOME**: `frontend/` 디렉토리, 백엔드 패치 3종(CORS/StaticFiles+SPA 라우트/멀티스테이지 Dockerfile), 빌드 성공, `GET /` 200 + HTML 검증, `{output_dir}/develop-frontend-report.md` + `{output_dir}/evidence/frontend/` 4개 증거 파일
+- **MUST DO**:
+  - `{ABRA_PLUGIN_DIR}/agents/frontend-developer/references/frontend.md` 프롬프트 템플릿 활용
+  - 개발계획서·시나리오·DSL 원본 그대로 전달
+  - 최소 실행 컨텍스트(`run_context_frontend`)만 전달 (재시도 한도 + Lessons Learned 5종 강제 주입)
+  - 화면 매핑·컴포넌트 분리·API 클라이언트 설계는 frontend-developer가 수행
+  - 백엔드 통합 패치는 frontend-developer가 직접 적용 (agent-developer 위임 금지)
+- **MUST NOT DO**:
+  - `develop` 스킬이 상세 구현 계약을 임의 작성하지 않음
+  - 백엔드 통합 패치를 develop 스킬·agent-developer가 수행하지 않음 (frontend-developer 책임)
+  - `app.mount("/", StaticFiles(html=True))` 패턴 사용 금지 — `/assets` 마운트 + `GET /` 명시 라우트만 허용
+  - 시스템 `uvicorn` 사용 금지 — 검증은 `uv run uvicorn`으로 수행
+- **CONTEXT**:
+  - 개발계획서: `{output_dir}/dev-plan.md`
+  - 시나리오: `{output_dir}/scenario.md`
+  - DSL: `{output_dir}/<latest>.dsl.yaml`
+  - 백엔드 진입점: `{PROJECT_DIR}/app/main.py`
+  - 백엔드 라우트: `{PROJECT_DIR}/app/api/routes.py`
+  - 선택된 스택 템플릿: `{ABRA_PLUGIN_DIR}/agents/frontend-developer/references/{tech_stack}-template/`
+  - 증거 디렉토리: `{output_dir}/evidence/frontend/`
+
+```yaml
+run_context_frontend:
+  dev_plan_path: "{output_dir}/dev-plan.md"
+  scenario_path: "{output_dir}/scenario.md"
+  dsl_path: "{output_dir}/<latest>.dsl.yaml"
+  backend_source_root: "app"
+  frontend_source_root: "frontend"
+  tech_stack: vue3-vite | react-vite
+  image_generation:
+    enabled: true | false
+    api_key_env: "GEMINI_API_KEY"
+    tool_path: "{ABRA_PLUGIN_DIR}/gateway/tools/generate_image.py"
+  api_key_env: "VITE_API_KEY"
+  retry_budget:
+    diagnostics: 3
+    build: 3
+    test: 2
+    total: 8
+  lessons_learned:
+    - "[HIGH] 시스템 uvicorn(0.34) vs uv run uvicorn(0.46) 버전 차이로 정적 파일 silent 404 → 반드시 `uv run uvicorn` — 출처: develop/Phase3.5"
+    - "[HIGH] FastAPI에서 `app.mount('/', StaticFiles(html=True))` 동작 불안정 → `/assets` 마운트 + `GET /` 라우트로 `FileResponse(static/index.html)` 명시 — 출처: develop/Phase3.5"
+    - "[MED] `os.path.dirname(__file__)` 상대경로 문제 → `Path(__file__).resolve().parent.parent` 사용 — 출처: develop/Phase3.5"
+    - "[MED] Windows에서 포트 점유 프로세스는 PowerShell `Stop-Process -Id <pid> -Force` 필요 — 출처: develop/Phase3.5"
+    - "[MED] Git Bash `curl`의 `/` 경로 변환 문제 → `urllib.request.urlopen` 사용 — 출처: develop/Phase3.5"
+```
+
+#### Step 5: 결과 검토
+
+frontend-developer 결과를 검토하고 다음을 확인:
+
+1. `frontend/` 디렉토리에 source(`src/`, `vite.config.js|ts`, `package.json`) 생성 여부
+2. 백엔드 통합 3종 패치 적용 여부:
+   - `app/main.py` — `CORSMiddleware` + `/assets` 마운트 + `GET /` SPA 라우트
+   - `deploy/Dockerfile` — node:20-slim 빌드 스테이지 + `COPY --from`
+   - `frontend/.env` (`VITE_API_KEY` = 백엔드 `API_KEY`)
+3. `npm install` + `npm run build` 성공 여부 + `static/` 정적 산출물 생성
+4. 통합 검증 결과 (`urllib.request`로 `GET /` 200 + HTML, `GET /health` 200 확인)
+5. `{output_dir}/evidence/frontend/` 4종 증거 파일 (build.log, npm-audit.json, verify-output.txt, commands.md)
+6. `{output_dir}/develop-frontend-report.md` 12개 항목 작성 여부
+7. handoff 보고 여부 (있다면 차단성 확인)
+
+**한도 도달 시 조치** (Phase 3과 동일 패턴):
+
+- **build_exhausted**: 근본원인 가설 3개 사용자 제시 → 사용자 판단 반영하여 재호출
+- **verify_exhausted**: 실패한 검증 항목 사용자 보고 → 사용자 판단(skip/재호출) 반영
+
+**Handoff 수신 시 조치**:
+
+- `target: agent-developer` + `blocker: true` → Phase 2(백엔드) 재호출 사용자 확인
+- `target: plan-writer` + `blocker: true` → `/abra:dev-plan` 재실행 사용자 확인
+- `blocker: false` → 임시 처리된 항목을 보고에 표시하고 Phase 4 진행
+
 ### Phase 4: GitHub 배포 여부 사용자 확인
 
 ### Step 0: GitHub 배포 여부 확인
@@ -361,14 +485,16 @@ Phase 0~4 결과를 종합 보고.
 - [ ] README.md 작성 완료
 - [ ] `{output_dir}/develop-report.md` 생성
 - [ ] `{output_dir}/evidence/` 4개 증거 파일 생성
+- [ ] (Phase 3.5 진행 시) `frontend/` 디렉토리 + 백엔드 통합 패치 3종 + `static/` 정적 산출물 생성 + `{output_dir}/develop-frontend-report.md` + `{output_dir}/evidence/frontend/` 4개 파일 생성
+- [ ] (Phase 3.5 진행 시) `uv run uvicorn` 백엔드 기동 후 `urllib.request`로 `GET /` 200(HTML) + `GET /health` 200 검증 완료
 - [ ] 산출물 및 증거 보고 완료
 - [ ] 수동 Playwright 테스트 안내 메시지 제공 완료 (develop 스킬이 직접 생성)
 - [ ] GitHub 배포를 수행한 경우 배포 결과 보고 완료
 
 ## 상태 정리
-
-임시 파일 없음.  
-완료 시 AGENTS.md 진행상황을 `develop: Done`으로 최종 갱신함.
+- 백엔드/프론트엔드 프로세스를 모두 종료  
+- 임시 파일 없음.  
+- 완료 시 AGENTS.md 진행상황을 `develop: Done`으로 최종 갱신함.
 
 ## MUST 규칙
 
@@ -384,6 +510,11 @@ Phase 0~4 결과를 종합 보고.
 | 8 | 재시도 한도(`retry_budget`)를 agent-developer에 전달하고 한도 도달 시 사용자 확인을 거침 |
 | 9 | GitHub 배포 전에는 반드시 사용자 확인과 필수 질문 수집을 수행함 |
 | 10 | 수동 Playwright 테스트 안내 메시지는 develop 스킬이 Phase 5에서 직접 생성함 |
+| 11 | Phase 3.5에서 프론트엔드 필요 여부는 dev-plan §3·§9만 보고 판정한 뒤 반드시 사용자 확인을 거침 |
+| 12 | Phase 3.5에서 기술스택 선택 + 이미지 생성 옵션 + GEMINI_API_KEY 수집을 사용자에게 순차 문의함 |
+| 13 | 백엔드 통합 패치(CORSMiddleware, StaticFiles, FileResponse SPA 라우트, 멀티스테이지 Dockerfile)는 frontend-developer가 직접 적용함 |
+| 14 | 검증 시 `uv run uvicorn`을 사용함 (시스템 `uvicorn` 사용 금지) |
+| 15 | HTTP 검증은 `urllib.request`로 수행함 (Git Bash `curl` 경로변환 회피) |
 
 ## MUST NOT 규칙
 
@@ -396,6 +527,10 @@ Phase 0~4 결과를 종합 보고.
 | 5 | 사용자 확인 없이 GitHub 원격 저장소에 배포하지 않음 |
 | 6 | 재시도 한도 없이 무한 루프로 진단/빌드/테스트를 반복하지 않음 |
 | 7 | Playwright 안내 메시지 생성을 agent-developer에 위임하지 않음 |
+| 8 | 프론트엔드 필수 여부 자동 판정(사용자 확인 없이 자동 진행) 금지 |
+| 9 | `app.mount("/", StaticFiles(html=True))` 패턴 사용 금지 — `/assets` 마운트 + `GET /` 명시 라우트만 허용 |
+| 10 | `os.path.dirname(__file__)` 상대경로 사용 금지 — `Path(__file__).resolve()` 사용 |
+| 11 | 백엔드 통합 패치를 develop 스킬·agent-developer에 위임 금지 (frontend-developer 책임) |
 
 ## 검증 체크리스트
 
@@ -407,3 +542,6 @@ Phase 0~4 결과를 종합 보고.
 - [ ] 스텁 항목에 `TODO(sprint-2)` 마커가 존재하는가
 - [ ] 챗봇 생성 여부를 개발계획서로 먼저 판단하고 사용자 확인을 거쳤는가
 - [ ] 재시도 한도 사용 현황이 최종 보고에 포함되었는가
+- [ ] (Phase 3.5 진행 시) 프론트엔드 필요 여부·기술스택·이미지 옵션·GEMINI_API_KEY 4개 질의를 순차 수행했는가
+- [ ] (Phase 3.5 진행 시) 백엔드 통합 패치 3종(`app/main.py` CORS+`/assets`+`GET /`, 멀티스테이지 Dockerfile, `.gitignore` 보강)이 모두 적용되었는가
+- [ ] (Phase 3.5 진행 시) `uv run uvicorn` + `urllib.request` 검증으로 `GET /` 200(HTML) 응답을 확인했는가
