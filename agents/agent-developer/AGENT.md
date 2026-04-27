@@ -74,7 +74,7 @@ run_context:
 
 - 개발계획서 `§4.0 디렉토리 구조` 트리의 루트가 `app/`인지 확인
 - `app/main.py`, `app/api/routes.py`가 트리에 명시되어 있는지 확인
-- `src/` 루트가 사용되면 핸드오프 대상: `dsl-architect` 또는 `plan-writer` 재실행 권고 (§10 handoff 프로토콜 참조)
+- `src/` 루트가 사용되면 핸드오프 대상: `dsl-architect` 또는 `plan-writer` 재실행 권고 (`Handoff 프로토콜` 섹션 참조)
 
 #### 2.1 구현 준비성 리뷰
 
@@ -141,7 +141,7 @@ run_context:
 - 실제 생성 파일과 DSL 노드 대응 표 작성
 - 누락 노드 여부 확인
 - 파일별 책임 분리 확인
-- 매핑 불일치 발견 시 §10 handoff 프로토콜로 에스컬레이션
+- 매핑 불일치 발견 시 `Handoff 프로토콜` 섹션으로 에스컬레이션
 
 #### 3.2 `§4.2 핵심 워크플로우`
 
@@ -276,7 +276,7 @@ run_context:
 
 - {tool:code_diagnostics}로 파일별 오류·경고 조회
 - 에러 0까지 수정 반복 (최대 `diagnostics_remaining`회)
-- 한도 도달 시: 진단 결과 스냅샷을 `output/evidence/diagnostics.json`에 저장하고 중단 → §6 보고로 전환
+- 한도 도달 시: 진단 결과 스냅샷을 `{output_dir}/evidence/diagnostics.json`에 저장하고 중단 → §7 보고로 전환
 
 **언어별 추가 도구**:
 
@@ -287,7 +287,7 @@ run_context:
 
 - {tool:code_execute}로 언어별 표준 빌드 명령 실행
 - 실패 시 원인 분석 → 수정 → 재빌드 (최대 `build_remaining`회)
-- 한도 도달 시: 근본 원인 가설 3개 정리 후 중단 → §6 보고로 전환
+- 한도 도달 시: 근본 원인 가설 3개 정리 후 중단 → §7 보고로 전환
 
 **언어별 표준 명령**:
 
@@ -300,7 +300,7 @@ run_context:
 
 - {tool:code_execute}로 테스트 실행
 - 실패 시 원인 분석 → 수정 → 재테스트 (최대 `test_remaining`회)
-- 한도 도달 시: 실패 테스트별 "스킵 vs 수정" 분류 후 중단 → §6 보고로 전환
+- 한도 도달 시: 실패 테스트별 "스킵 vs 수정" 분류 후 중단 → §7 보고로 전환
 
 **언어별 표준 명령**:
 
@@ -311,7 +311,7 @@ run_context:
 
 #### 5.4 증거 파일 저장 (Evidence Gate)
 
-`output/evidence/` 디렉토리에 다음 파일 기록:
+`{output_dir}/evidence/` 디렉토리에 다음 파일 기록:
 
 - `diagnostics.json` — 파일별 에러/경고 스냅샷 (최종 상태)
 - `build.log` — 빌드 명령·stdout·stderr·exit code
@@ -338,7 +338,7 @@ run_context:
 
 ### 7. 출력 형식
 
-최종 결과는 다음 항목을 포함.
+최종 결과는 다음 항목을 포함하여 `{output_dir}/develop-report.md`에 작성   
 
 1. 실행한 단계
 2. 의존관계 분석 요약
@@ -346,7 +346,7 @@ run_context:
 4. `구현 / 스텁 / 제외` 판정 결과
 5. 생성된 주요 파일 목록
 6. 빌드/테스트/진단 결과 (재시도 사용 횟수 포함)
-7. 증거 파일 경로 (`output/evidence/*`)
+7. 증거 파일 경로 (`{output_dir}/evidence/*`)
 8. 실행한 주요 명령 요약
 9. README.md 경로
 10. 테스트 챗봇 생성 여부
@@ -377,7 +377,7 @@ run_context:
 - `README.md`
 - `.env.example`, `.gitignore`
 - dev-plan §9 명시된 배포 파일 (Dockerfile, docker-compose.yml 등)
-- `output/evidence/{diagnostics.json, build.log, test-report.xml, commands.md}`
+- `{output_dir}/evidence/{diagnostics.json, build.log, test-report.xml, commands.md}`
 
 ### Business Gate
 
@@ -391,13 +391,13 @@ run_context:
 
 ### Evidence Gate
 
-- [ ] `output/evidence/` 디렉토리에 4개 파일 존재
+- [ ] `{output_dir}/evidence/` 디렉토리에 4개 파일 존재
 - [ ] 재시도 사용 횟수가 최종 보고에 기록됨
 - [ ] 미실행 항목의 사유 기록
 - [ ] 한도 도달로 중단된 항목은 가설·분류 포함
 - [ ] 외부 API 미연동 항목은 "인터페이스 준비(스텁)" 수준으로 정직하게 보고됨
 
-## §10 Handoff 프로토콜
+## Handoff 프로토콜
 
 DSL 결함·계획서 결함 발견 시 에스컬레이션 절차.
 
@@ -433,5 +433,4 @@ handoff:
 
 - 매칭되는 교훈을 실행 계획에 사전 반영
 - 새로운 시행착오 발생 시 `notepad_write_working` 호출
-  - 형식: `agent-developer: {문제 요약}. {해결 방법}. {관련 파일}`
-- 반복 검증된 핵심 교훈은 AGENTS.md 승격 대상으로 보고에 포함
+  (기록 형식·승격 규칙은 `AGENTS.md` `Lessons Learned` 섹션을 따름)

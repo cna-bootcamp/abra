@@ -41,13 +41,13 @@ Dify 로컬 환경 구축부터 Abra 플러그인 초기 설정까지 전 과정
 
   사용자가 'YES'로 답한 경우 현재 디렉토리 경로를 변수 `{PROJECT_DIR}`에 셋팅   
 
-- ABRA 플러그인, DMAP 플러그인 디렉토리 경로 설정 
-`{PROJECT_DIR}/AGENTS.md` 파일에 `{ABRA_PLUGIN_DIR}`, `{DMAP_PLUGIN_DIR}` 변수가 설정되어 있는지 확인함.
+- ABRA 플러그인 디렉토리 경로 설정 
+`{PROJECT_DIR}/AGENTS.md` 파일에 `{ABRA_PLUGIN_DIR}` 변수가 설정되어 있는지 확인함.
 미설정 시 아래 수행 
-사용자에게 ABRA 플러그인, DMAP 플러그인 디렉토리 경로를 입력받음(경로명은 `~/path1/path2` 형식으로 안내)   
+사용자에게 ABRA 플러그인 디렉토리 경로를 입력받음(경로명은 `~/path1/path2` 형식으로 안내)   
 <!--ASK_USER-->
-{"title":"{플러그인 이름} 플러그인 디렉토리","questions":[
-  {"question":"{플러그인 이름} 플러그인 디렉토리 경로를 입력해주세요.","type":"text"}
+{"title":"ABRA 플러그인 디렉토리","questions":[
+  {"question":"ABRA 플러그인 디렉토리 경로를 입력해주세요.","type":"text"}
 ]}
 <!--/ASK_USER-->
 
@@ -57,7 +57,6 @@ Dify 로컬 환경 구축부터 Abra 플러그인 초기 설정까지 전 과정
   - AI_RUNTIME: 현재 구동중인 런타임(Claude Code, Claude Cowork, Cursor, Antigravity, Codex 등)
   - PROJECT_DIR: `{PROJECT_DIR}`
   - ABRA_PLUGIN_DIR: `{ABRA_PLUGIN_DIR}`
-  - DMAP_PLUGIN_DIR: `{DMAP_PLUGIN_DIR}`
   ```
 - AI Runtime이 Claude Code 또는 Claude Cowork인 경우 `{PROJECT_DIR}/CLAUDE.md` 생성하고 아래 내용 저장  
   ```

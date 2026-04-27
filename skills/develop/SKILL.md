@@ -32,15 +32,12 @@ AGENTS.md 파일에서 `## 환경변수` 섹션의 환경변수 로딩.
 | `{PROJECT_DIR}` | AGENTS.md 환경변수 섹션의 `PROJECT_DIR` 값 |
 | `{output_dir}` | `{PROJECT_DIR}/output` (고정) |
 | `{ABRA_PLUGIN_DIR}` | AGENTS.md 환경변수 섹션의 `ABRA_PLUGIN_DIR` 값 |
-| `{project_root}` | `{PROJECT_DIR}` 동의어 (구버전 호환 용도만 사용) |
 
 ## 참조
 
 | 문서 | 경로 | 용도 |
 |------|------|------|
 | 개발 프롬프트 템플릿 | `{ABRA_PLUGIN_DIR}/agents/agent-developer/references/develop.md` | 구현 위임 시 참조 |
-| GitHub 저장소 생성 도구 | `{ABRA_PLUGIN_DIR}/resources/tools/create-repo.md` | 최종 배포 수행 기준 |
-| DMAP Publish 스킬 | `C:\Users\hiond\plugins\dmap\skills\publish\SKILL.md` | 배포 전 사용자 질문 항목 참조 |
 
 ## 에이전트 호출 규칙
 
@@ -69,38 +66,12 @@ AGENTS.md 파일에서 `## 환경변수` 섹션의 환경변수 로딩.
 
 `{PROJECT_DIR}/AGENTS.md`에 각 Phase 완료 시 저장. 최종 완료 시 `Done`으로 표기.
 
-### 상태 해상도 (세분화)
-
 ```md
 ## 워크플로우 진행상황
-- develop: Phase2.impl          # agent-developer 구현 중
-- develop: Phase2.build         # 빌드 루프 진행 중
-- develop: Phase2.test          # 테스트 루프 진행 중
-- develop: Phase3.review        # 결과 검토 중
-- develop: Phase4.github-ask    # GitHub 배포 확인 중
-- develop: Done                 # 전체 완료
+- {skill-name}: Phase3
 ```
 
-### 재개 캐시
-
-실패·중단 발생 시 `{output_dir}/.develop-state.yaml`에 다음 정보 기록하여 재개 지원:
-
-```yaml
-phase: Phase2.build
-retry_usage:
-  diagnostics: 2
-  build: 1
-  test: 0
-  total: 3
-last_evidence: {output_dir}/evidence/build.log
-generated_files:
-  - app/main.py
-  - app/graph/state.py
-  # ...
-handoff: null | {target, reason}
-```
-
-재개 시 이 파일을 먼저 읽어 중복 작업 방지.
+진행상황 정보가 있는 경우 마지막 완료 단계 이후부터 자동 재개.
 
 ## 워크플로우
 
@@ -160,8 +131,11 @@ handoff: null | {target, reason}
 | 4 | 운영 사용자 | 운영자 수동 테스트 화면이 요구되는가 |
 | 5 | MCP 여부 | MCP 서버만으로 검증 가능한가 (Yes이면 챗봇 불필요) |
 
-2개 이상 Yes이면 "테스트 챗봇 생성 추천".  
-MCP 서버만으로 충분하면 "테스트 챗봇 미생성 추천".
+판정 룰 (오버라이드 우선 적용):
+
+- 항목 5(MCP 여부) = Yes → 다른 항목과 무관하게 **"테스트 챗봇 미생성 추천"** (오버라이드)
+- 항목 5 = No이고 항목 1~4 중 2개 이상 Yes → **"테스트 챗봇 생성 추천"**
+- 그 외 → **"테스트 챗봇 미생성 추천"**
 
 #### 실행 규칙
 
@@ -172,7 +146,7 @@ MCP 서버만으로 충분하면 "테스트 챗봇 미생성 추천".
 ### Phase 2: 코드 기반 구현 → Agent: agent-developer
 
 - **TASK**: 개발계획서 기반 프로덕션 코드 구현 및 검증 수행
-- **EXPECTED OUTCOME**: 빌드 성공 + 테스트 통과 + README.md 포함 완성 코드 + `output/evidence/` 증거 파일
+- **EXPECTED OUTCOME**: 빌드 성공 + 테스트 통과 + README.md 포함 완성 코드 + `{output_dir}/evidence/` 증거 파일 + 개발결과 레포트(`{output_dir}/develop-report.md`)
 - **MUST DO**:
   - `{ABRA_PLUGIN_DIR}/agents/agent-developer/references/develop.md` 프롬프트 템플릿 활용
   - 개발계획서, 시나리오, DSL 원본을 그대로 전달
@@ -185,7 +159,7 @@ MCP 서버만으로 충분하면 "테스트 챗봇 미생성 추천".
   - 개발계획서 범위 외 기능 구현 지시 금지
   - DSL 원본 수정 금지
   - `src` 디렉토리 하위에 결과 파일 생성 금지
-  - Playwright 테스트 안내 메시지 생성은 agent-developer에 위임 금지 (Phase 6에서 직접 처리)
+  - Playwright 테스트 안내 메시지 생성은 agent-developer에 위임 금지 (Phase 5에서 직접 처리)
 - **CONTEXT**:
   - 개발계획서: `{output_dir}/dev-plan.md`
   - 시나리오: `{output_dir}/scenario.md`
@@ -222,7 +196,7 @@ run_context:
 - README.md 작성 여부
 - 개발계획서와 구현 범위 일치 여부
 - `구현 / 스텁 / 제외` 판정 결과 보고 여부
-- `output/evidence/` 4개 파일 생성 여부
+- `{output_dir}/evidence/` 4개 파일 생성 여부
 - 스텁 항목에 `TODO(sprint-2)` 마커 존재 여부
 - handoff 보고 여부 (있다면 차단성 확인)
 
@@ -243,121 +217,158 @@ agent-developer가 재시도 예산을 소진하고 중단했을 때:
 
 - 원인 분석
 - 필요한 수정 범위만 지정하여 `agent-developer` 재호출
-- 재호출 시 재시도 예산은 재발급 (`retry_budget.total=10` 초기화)
+- 재호출 시 재시도 예산은 4개 카운터(`diagnostics=5`, `build=3`, `test=3`, `total=10`) 모두 재발급
 - 재호출 누적 3회 초과 시 사용자에게 escalation
 
 ### Phase 4: GitHub 배포 여부 사용자 확인
 
-최종 보고 전에 GitHub 원격 저장소 배포 여부를 반드시 사용자에게 확인함.
+### Step 0: GitHub 배포 여부 확인
 
-#### 질문 기준
+AskUserQuestion 도구로 사용자에게 GitHub Repository 생성·배포 진행 여부를 확인함.  
+배포를 원하지 않으면 Phase 4 전체를 스킵하고 Phase 5(최종 보고)로 직진함.  
+배포를 원하면 Step 1 진행.
 
-`C:\Users\hiond\plugins\dmap\skills\publish\SKILL.md`의 사용자 질문 항목을 참조하여  
-아래 정보를 순차적으로 확인.
+### Step 1: GitHub 인증 정보 수집
 
-1. GitHub 계정 보유 여부
-2. GitHub Username
-3. Personal Access Token 보유 여부 및 입력 가능 여부 (`repo` 권한)
-4. Organization 사용 여부 및 Organization 이름
+사용자에게 GitHub 인증 정보를 수집함.
 
-#### 확인 결과 처리
+AskUserQuestion 도구로 다음 정보를 순차적으로 문의:
 
-- 사용자가 배포를 원하지 않으면 배포 단계 스킵 후 최종 보고로 이동
-- 인증 정보가 준비되지 않았으면 필요한 정보만 안내하고 배포 스킵 가능
-- 사용자가 배포를 원하고 정보가 준비되면 Phase 5 진행
+1. **GitHub 계정 보유 여부**
+   - 보유: 다음 단계로 진행
+   - 미보유: 계정 생성 안내 (`https://github.com/signup`)
 
-### Phase 5: GitHub 원격 저장소 배포
+2. **GitHub Username** 입력 요청
 
-사용자 확인이 완료된 경우에만 배포 수행.
+3. **Private Repository 사용 여부** 입력 요청
 
-#### 수행 기준
+4. **Personal Access Token (PAT)** 입력 요청
+   - 미보유 시: 토큰 생성 안내 (`https://github.com/settings/tokens/new?scopes=repo`)
+   - PAT 필요 권한: `repo` (전체)
 
-- `{ABRA_PLUGIN_DIR}/resources/tools/create-repo.md`를 참조하여 수행
-- `create_repo.py` 기반으로 원격 저장소 생성 및 초기 푸시 수행
-- `repo` 권한 PAT 사용
+5. **Organization 사용 여부**
+   - 개인 계정 사용: username을 owner로 설정
+   - Organization 사용: org 이름 입력 요청
+   - Organization 미보유 시: 생성 안내 (`https://github.com/account/organizations/new`)
 
-#### 필수 보안 규칙
+6. **토큰 저장**
+   - 플러그인 디렉토리에 `{PROJECT_DIR}/.temp/secrets/` 디렉토리 생성
+   - `{PROJECT_DIR}/.temp/secrets/git-token.env` 파일에 저장:
+     ```
+     GITHUB_USERNAME={username}
+     GITHUB_TOKEN={token}
+     GITHUB_OWNER={owner}
+     ```
+   - `{PROJECT_DIR}/.gitignore`에 `.temp/` 패턴이 포함되어 있는지 확인, 없으면 추가
 
-- 토큰을 출력/로그에 노출하지 않음
-- 원격 URL에 토큰이 남지 않도록 검증
-- 기존 저장소를 사용자 확인 없이 덮어쓰지 않음
+### Step 2: 원격 저장소 생성 및 Push
 
-#### 배포 후 확인
+`{ABRA_PLUGIN_DIR}/gateway/tools/create_repo.py` 도구를 사용하여 GitHub 저장소 생성 + 로컬 Git 초기화 + Push를 한번에 수행함.
+`gh` CLI 설치가 불요하며, Python 표준 라이브러리만 사용.
 
-- 원격 저장소 URL 확인
-- 푸시 성공 여부 확인
-- 필요 시 원격 URL 보안 재검증
+**분기 결정**: 현재 프로젝트가 이미 git 저장소이고 `git remote -v`에 origin이 설정되어 있으면 5단계(업데이트 배포)만 수행함. 그 외 신규 저장소는 1~4단계(신규 생성)를 수행함.
 
-### Phase 6: 최종 보고 + 수동 Playwright 테스트 안내
+1. 저장소명 결정: 현재 프로젝트 디렉토리명에서 추출
+2. Description: `{output_dir}/dev-plan.md`의 '프로젝트명, 목적' 참조하여 작성  
+3. `.gitignore` 존재 확인 
+4. `create_repo.py` 실행:
+   ```
+   python {ABRA_PLUGIN_DIR}/gateway/tools/create_repo.py \
+     --name {repo-name} \
+     --desc "{description}" \
+     --private {true/false} \
+     --token {PAT} \
+     --dir {PROJECT_DIR}
+   ```
+   - Organization 사용 시: `--org {org}` 옵션 추가
+5. 이미 git 저장소이고 원격이 설정된 경우 (업데이트 배포):
+   ```
+   git add .
+   git commit -m "{변경사항}"
+   git push
+   ```
 
-Phase 0~5 결과를 종합 보고.
+> `create_repo.py`가 수행하는 작업: 저장소 존재 여부 확인 → 원격 저장소 생성 →
+> `git init` → `git remote add origin` → 초기 커밋 → `git push -u origin main`
 
-#### 6.1 필수 보고 항목
+### Step 2.5: 원격 URL 보안 검증 (자동)
 
-- 실행한 단계
-- 챗봇 생성 여부와 사용자 확인 결과
-- 생성 파일 목록
-- 빌드/테스트/진단 결과 (재시도 사용 횟수 포함)
-- 증거 파일 경로 (`{output_dir}/evidence/*`)
-- 실행 방법
-- README.md 경로
-- GitHub 배포 수행 여부 및 결과
-- 스텁 항목 목록 + 프로덕션 전환 조건
-- 남은 리스크
-- 후속 작업 제안
+1. 원격 URL 확인:
+   ```
+   git remote -v
+   ```
+2. 토큰 패턴 감지 (`ghp_`, `github_pat_`, `gho_`, `ghu_` 등):
+   - 정규식: `https://[^@]+@github\.com/`
+3. 토큰 발견 시 자동 수정:
+   ```
+   git remote set-url origin https://github.com/{owner}/{repo}.git
+   ```
+4. 수정 후 사용자에게 알림 및 PAT 폐기 안내:
+   > ⚠️ 원격 URL에서 토큰이 발견되어 제거함. 해당 토큰을 즉시 폐기 권장.
+   > GitHub → Settings → Developer settings → Personal access tokens → 해당 토큰 삭제
+5. 토큰 미발견 시: `✅ 원격 URL에 토큰 노출 없음` 한 줄 보고로 검증 완료 표시
 
-#### 6.2 검증 수단 계층 안내
+### Step 3: 완료 메시지 
 
-최종 보고에 3단계 검증 수단을 명시.
+Git Push 완료 후 Git Repository 등록 메시지 표시 
 
-| 단계 | 수단 | 자동화 | 책임 |
-|---|---|---|---|
-| 1차 | MCP Client E2E (`tests/e2e/`) | 자동 | agent-developer |
-| 2차 | 테스트 챗봇 (선택) | 반자동 | agent-developer (Phase 1 force일 때) |
-| 3차 | 수동 Playwright | 사용자 | develop 스킬 (아래 안내 메시지) |
 
-#### 6.3 수동 Playwright 테스트 안내 메시지
+### Phase 5: 최종 보고 + 수동 Playwright 테스트 안내
 
-E2E 자동 실행 대신, 최종 보고 시 아래 예제를 프로젝트에 맞게 수정하여 안내 메시지로 제공.
+Phase 0~4 결과를 종합 보고.
 
-```md
-# Playwright MCP를 이용하여 AI 직접 테스트 요청
-※ 주의: Playwright MCP는 스크린샷 이미지를 캡처해서 수행하므로 토큰 소비 많음  
-※ 낮은 모델 사용 권장, 사용자가 일부 준비 동작 직접 수행
+- 개발 결과 레포트 경로 
+- 어플리케이션 수행 방법  
+- 사용자 검증 방법
+  최종 보고에 3단계 검증 수단을 명시.
 
-- Claude Code는 터미널에서 Claude Code 실행
-- Angigravity, Cursor, Codex는 프롬프트창에서 요청
-- 아래 프롬프트로 요청
-  > Playwright MCP로 {테스트 대상 URL 또는 UI}에 접근해 주세요.
-  > {로그인이 필요하면} id: {본인id}, pw: {본인pw}로 로그인해 주세요.
-- 사용자가 테스트할 대상 화면을 직접 열거나 필요한 사전 동작 수행
-- 테스트 요청
-  > dev-plan.md와 DSL 파일을 읽어 테스트 계획을 세우고 테스트하세요.
-- 에러 발생 시 수정 요청
-  > 구현 에러: {에러 내용}
-```
+  | 단계 | 수단 | 자동화 | 책임 |
+  |---|---|---|---|
+  | 1차 | MCP Client E2E (`tests/e2e/`) | 자동 | agent-developer |
+  | 2차 | 테스트 챗봇 (선택) | 반자동 | agent-developer (Phase 1 force일 때) |
+  | 3차 | 수동 Playwright | 사용자 | develop 스킬 (아래 안내 메시지) |
 
-안내 메시지 작성 원칙:
+  Playwright 테스트 안내 메시지: 
+  E2E 자동 실행 대신, 최종 보고 시 아래 예제를 프로젝트에 맞게 수정하여 안내 메시지로 제공.
+  ```md
+  # Playwright MCP를 이용하여 AI 직접 테스트 요청
+  ※ 주의: Playwright MCP는 스크린샷 이미지를 캡처해서 수행하므로 토큰 소비 많음  
+  ※ 낮은 모델 사용 권장, 사용자가 일부 준비 동작 직접 수행
 
-- 실제 테스트 대상 URL 또는 UI 기준으로 작성
-- 로그인 필요 시 로그인 지시 포함
-- `dev-plan.md`와 DSL 파일을 읽고 테스트 계획을 세우라고 안내
-- 에러 발생 시 재수정 요청 문구 포함
+  - Claude Code는 터미널에서 Claude Code 실행
+  - Angigravity, Cursor, Codex는 프롬프트창에서 요청
+  - 아래 프롬프트로 요청
+    > Playwright MCP로 {테스트 대상 URL 또는 UI}에 접근해 주세요.
+    > {로그인이 필요하면} id: {본인id}, pw: {본인pw}로 로그인해 주세요.
+  - 사용자가 테스트할 대상 화면을 직접 열거나 필요한 사전 동작 수행
+  - 테스트 요청
+    > dev-plan.md와 DSL 파일을 읽어 테스트 계획을 세우고 테스트하세요.
+  - 에러 발생 시 수정 요청
+    > 구현 에러: {에러 내용}
+  ```
+
+  안내 메시지 작성 원칙:
+
+  - 실제 테스트 대상 URL 또는 UI 기준으로 작성
+  - 로그인 필요 시 로그인 지시 포함
+  - `dev-plan.md`와 DSL 파일을 읽고 테스트 계획을 세우라고 안내
+  - 에러 발생 시 재수정 요청 문구 포함
 
 ## 완료 조건
 
 - [ ] 코드 빌드 성공 (한도 내)
 - [ ] 테스트 통과 (한도 내)
 - [ ] README.md 작성 완료
-- [ ] `output/evidence/` 4개 증거 파일 생성
+- [ ] `{output_dir}/develop-report.md` 생성
+- [ ] `{output_dir}/evidence/` 4개 증거 파일 생성
 - [ ] 산출물 및 증거 보고 완료
 - [ ] 수동 Playwright 테스트 안내 메시지 제공 완료 (develop 스킬이 직접 생성)
 - [ ] GitHub 배포를 수행한 경우 배포 결과 보고 완료
 
 ## 상태 정리
 
-완료 시 `{output_dir}/.develop-state.yaml` 임시 파일 정리.  
-AGENTS.md 진행상황은 `develop: Done`으로 최종 갱신.
+임시 파일 없음.  
+완료 시 AGENTS.md 진행상황을 `develop: Done`으로 최종 갱신함.
 
 ## MUST 규칙
 
@@ -372,7 +383,7 @@ AGENTS.md 진행상황은 `develop: Done`으로 최종 갱신.
 | 7 | 챗봇 생성 여부는 개발계획서만 읽고 먼저 판단한 뒤 반드시 사용자 확인을 거침 |
 | 8 | 재시도 한도(`retry_budget`)를 agent-developer에 전달하고 한도 도달 시 사용자 확인을 거침 |
 | 9 | GitHub 배포 전에는 반드시 사용자 확인과 필수 질문 수집을 수행함 |
-| 10 | 수동 Playwright 테스트 안내 메시지는 develop 스킬이 Phase 6에서 직접 생성함 |
+| 10 | 수동 Playwright 테스트 안내 메시지는 develop 스킬이 Phase 5에서 직접 생성함 |
 
 ## MUST NOT 규칙
 
@@ -390,15 +401,9 @@ AGENTS.md 진행상황은 `develop: Done`으로 최종 갱신.
 
 - [ ] Phase 0.2 입력 유효성 게이트 G0.1~G0.4 전부 통과
 - [ ] 코드 진단 결과 에러 0 확인 (또는 한도 도달 후 사용자 승인 기록)
-- [ ] 코드 빌드 성공 확인 (또는 한도 도달 후 사용자 승인 기록)
-- [ ] 테스트 통과 확인 (또는 한도 도달 후 사용자 승인 기록)
-- [ ] README.md 작성 확인
-- [ ] 증거 파일 4종 (`diagnostics.json`, `build.log`, `test-report.xml`, `commands.md`) 생성 확인
 - [ ] 개발계획서의 기술스택/아키텍처와 구현 일치 확인
 - [ ] `app` 기준 소스 구조 사용 및 `src` 하위 미생성 확인
 - [ ] 구현 / 스텁 / 제외 판정 결과가 보고되었는가
 - [ ] 스텁 항목에 `TODO(sprint-2)` 마커가 존재하는가
 - [ ] 챗봇 생성 여부를 개발계획서로 먼저 판단하고 사용자 확인을 거쳤는가
 - [ ] 재시도 한도 사용 현황이 최종 보고에 포함되었는가
-- [ ] 수동 Playwright 테스트 안내 메시지가 Phase 6에서 제공되었는가
-- [ ] GitHub 배포를 수행한 경우 사용자 질문 및 배포 결과가 보고되었는가

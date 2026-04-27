@@ -53,7 +53,7 @@ run_context:
 8. 검증 수행 (재시도 한도 내)
    - 진단, 빌드, 테스트 실행
    - 한도 도달 시 가설·분류 보고 후 중단
-9. 증거 파일 저장 (`output/evidence/`)
+9. 증거 파일 저장 (`{output_dir}/evidence/`)
 10. 테스트 챗봇 생성
     - `chatbot=force`인 경우에만 수행
 11. 정직한 결과 보고
@@ -149,7 +149,7 @@ diagnostics_exhausted:
     - file: <path>
       line: <n>
       message: <msg>
-  snapshot: output/evidence/diagnostics.json
+  snapshot: {output_dir}/evidence/diagnostics.json
 ```
 
 **빌드 한도**:
@@ -162,7 +162,7 @@ build_exhausted:
     - <가설 1>
     - <가설 2>
     - <가설 3>
-  log: output/evidence/build.log
+  log: {output_dir}/evidence/build.log
 ```
 
 **테스트 한도**:
@@ -173,7 +173,7 @@ test_exhausted:
     - name: <test>
       classification: skip | fix_later | real_bug
       reason: <설명>
-  report: output/evidence/test-report.xml
+  report: {output_dir}/evidence/test-report.xml
 ```
 
 ## 환경변수·시크릿 관리 표준
@@ -257,7 +257,7 @@ claude mcp add-json {MCP서버명} '{
 
 ## 증거 파일 저장 기준
 
-`output/evidence/` 디렉토리에 다음 파일 기록:
+`{output_dir}/evidence/` 디렉토리에 다음 파일 기록:
 
 - `diagnostics.json` — 파일별 에러/경고 스냅샷 (최종 상태)
 - `build.log` — 빌드 명령·stdout·stderr·exit code
@@ -288,7 +288,7 @@ DSL 결함·계획서 결함 발견 시 에스컬레이션.
 - `구현 / 스텁 / 제외` 판정 결과
 - 생성 파일 목록
 - 빌드/테스트/진단 결과 (재시도 사용 횟수 포함)
-- 증거 파일 경로 (`output/evidence/*`)
+- 증거 파일 경로 (`{output_dir}/evidence/*`)
 - 실행한 주요 명령 요약
 - README.md 경로
 - 테스트 챗봇 생성 여부
