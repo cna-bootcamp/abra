@@ -134,8 +134,6 @@ import → publish → [에러?] → DSL 수정 → validate_dsl → update → 
 # Playwright MCP를 이용하여 AI 직접 테스트 요청
 ※ 주의: Playwright MCP는 스크린샷 이미지를 캡처해서 수행하므로 토큰 소비 많음(낮은 모델 사용, 사용자가 일부 액션 직접 수행)
   
-- Claude Code는 터미널에서 Claude Code 실행(2026.4.24일 현재 Desktop버전 버그로 터미널에서 실행)
-- Angigravity, Cursor, Codex는 프롬프트창에서 요청 
 - 아래 프롬프트로 요청 
   > Playwright MCP로 Dify UI를 접근하여 id: {본인id}, pw: {본인pw}로 로그인
 - 사용자가 테스트 할 워크플로우 선택하고 '미리보기' 클릭해줌 

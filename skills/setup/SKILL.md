@@ -24,7 +24,7 @@ Dify 로컬 환경 구축부터 Abra 플러그인 초기 설정까지 전 과정
 사용자가 `/abra:setup` 명령을 호출하거나 "초기 설정", "setup", "플러그인 설정", "Dify 설치", "Docker 실행", "Dify 환경" 키워드 감지 시.
 
 ## 진행상황 업데이트 및 재개
-`{PROJECT_DIR}/AGENTS.md`에 각 Step 완료 시 저장. 최종 완료 시 'Done'으로 표기.   
+`{PROJECT_DIR}/AGENTS.md`에 각 Phase 완료 시 저장. 최종 완료 시 'Done'으로 표기.   
 ```
 ## 워크플로우 진행상황
 - setup: Step3
@@ -33,7 +33,7 @@ Dify 로컬 환경 구축부터 Abra 플러그인 초기 설정까지 전 과정
 
 ## 워크플로우
 
-### Step 0: 환경변수 셋팅
+### Phase 0: 환경변수 셋팅
 
 - 프로젝트 디렉토리 생성 확인
   사용자에게 AskUserQuestion으로 현재 디렉토리가 프로젝트 루트인지 물어보고 아닌 경우    
@@ -63,11 +63,11 @@ Dify 로컬 환경 구축부터 Abra 플러그인 초기 설정까지 전 과정
   @AGENTS.md
   ```
 
-### Step 1: install.yaml 로드 
+### Phase 1: install.yaml 로드 
 
 `{ABRA_PLUGIN_DIR}/gateway/install.yaml`을 읽어 설치 대상 파악.
 
-### Step 2: Docker 확인 
+### Phase 2: Docker 확인 
 
 `docker --version`과 `docker compose version` 명령으로 Docker 설치 여부 확인.
 
@@ -77,7 +77,7 @@ Dify 로컬 환경 구축부터 Abra 플러그인 초기 설정까지 전 과정
   - Linux: https://docs.docker.com/engine/install/
 - 설치 안내 후 즉시 중단 (사용자가 설치 완료 후 재실행 필요)
 
-### Step 3: Dify 소스 확인
+### Phase 3: Dify 소스 확인
 
 AskUserQuestion으로 Dify 설치 위치 확인 (기본값: `~/workspace/dify`).
 
@@ -95,7 +95,7 @@ git clone https://github.com/langgenius/dify.git {DIFY_DIR}
 **이미 설치된 경우:**
 - 기존 디렉토리 사용
 
-### Step 4: Dify Docker 환경 변수 파일 생성
+### Phase 4: Dify Docker 환경 변수 파일 생성
 
 ```bash
 cd {DIFY_DIR}/docker
@@ -118,14 +118,14 @@ cp .env.example .env
 > `redirect_uri` 오류(400 invalid_request)가 발생한다.
 > 외부 도메인으로 접속하는 경우 `http://localhost` 대신 해당 도메인으로 설정.
 
-### Step 5: Docker Compose 실행
+### Phase 5: Docker Compose 실행
 
 ```bash
 cd {DIFY_DIR}/docker
 docker compose up -d
 ```
 
-### Step 6: 컨테이너 상태 확인 및 헬스체크
+### Phase 6: 컨테이너 상태 확인 및 헬스체크
 
 1. `docker compose ps` 명령으로 컨테이너 상태 확인
 2. HTTP 헬스체크 (최대 60초 대기):
@@ -143,14 +143,14 @@ docker compose up -d
 
 (중요) 컨테이너 헬스 체크하여 정상일때까지 다음 단계 진행 하지 말것   
 
-### Step 7: 초기 설정 안내 
+### Phase 7: 초기 설정 안내 
 
 Dify 관리자 계정 생성 안내:
 - 접속 URL: `http://localhost/install`
 - 브라우저에서 위 URL로 접속하여 관리자 계정 생성 필요
-- 계정 생성 완료 후 다음 단계(Step 8)로 진행
+- 계정 생성 완료 후 다음 단계(Phase 8)로 진행
 
-### Step 8: Groq 모델 설정 
+### Phase 8: Groq 모델 설정 
 
 관리자 계정 생성 완료 후, Groq 모델 프로바이더를 자동 설정한다.
 
@@ -165,7 +165,7 @@ Dify 관리자 계정 생성 안내:
 없으면 AskUserQuestion으로 사용자에게 Groq API Key를 입력받는다:
 - 안내 메시지: "Groq API Key를 입력해주세요. (https://console.groq.com/keys 에서 발급 가능)"
 - 입력값이 `gsk_`로 시작하는지 기본 형식 검증
-- 사용자가 건너뛰기를 원하면 (빈 값 또는 "skip" 입력) Step 9로 이동
+- 사용자가 건너뛰기를 원하면 (빈 값 또는 "skip" 입력) Phase 9로 이동
 - `{DIFY_DIR}/docker/.env` 파일에 GROQ_API_KEY={사용자_입력_API_KEY} 형식으로 저장
 
 **8-3. Dify Console API 로그인**
@@ -182,7 +182,7 @@ client = DifyClient(config)
 ```
 
 **로그인 실패 시:**
-- 에러 메시지 출력 후 Step 9로 이동 (수동 설정 안내)
+- 에러 메시지 출력 후 Phase 9로 이동 (수동 설정 안내)
 
 **8-4. Groq 플러그인 설치**
 
@@ -238,12 +238,12 @@ await client.save_provider_credentials("langgenius/groq/groq", credentials)
 
 **검증 실패 시:**
 - "Groq API Key가 유효하지 않습니다. 키를 확인 후 Settings > Model Providers에서 수동 설정해주세요" 안내
-- Step 9로 이동
+- Phase 9로 이동
 
 **검증 성공 시:**
 - "Groq 모델 프로바이더 설정 완료" 메시지 출력
 
-### Step 9: Dify 접속 정보 수집 
+### Phase 9: Dify 접속 정보 수집 
 
 `{DIFY_DIR}/docker/.env` 파일에서 Dify 접속 정보 읽음.   
 없으면 AskUserQuestion으로 Dify 접속 정보 수집:
@@ -258,7 +258,7 @@ DIFY_EMAIL=admin@example.com
 DIFY_PASSWORD=your_password
 ```
 
-### Step 10: Python 가상환경 생성 및 의존성 설치
+### Phase 10: Python 가상환경 생성 및 의존성 설치
 
 ```bash
 cd {ABRA_PLUGIN_DIR}/gateway
@@ -269,7 +269,7 @@ python -m venv .venv
 source .venv/bin/activate && pip install -r requirements.txt
 ```
 
-### Step 11: 도구 동작 확인 
+### Phase 11: 도구 동작 확인 
 
 ```bash
 # Windows
@@ -280,7 +280,7 @@ source .venv/bin/activate && pip install -r requirements.txt
 
 Dify 연결 테스트 (앱 목록 조회 성공 여부 확인).
 
-#### Step 12: ABRA 플러그인 디렉토리 접근 권한 셋팅 
+#### Phase 12: ABRA 플러그인 디렉토리 접근 권한 셋팅 
 플러그인 디렉토리에 대한 에이전트의 Read/Write/Edit/Bash 권한을 설정하여 개발 및 검증 과정에서 파일 생성/수정/실행 가능하도록 함.
 `{PROJECT_DIR}/.claude/settings.local.json` 파일의 "permissions" 섹션에 아래 권한 추가:  
 ```
@@ -298,7 +298,7 @@ Dify 연결 테스트 (앱 목록 조회 성공 여부 확인).
 }
 ```
 
-### Step 13: 결과 보고
+### Phase 13: 결과 보고
 
 설치 결과 요약:
 - 컨테이너 상태 (실행 중인 서비스 목록)
