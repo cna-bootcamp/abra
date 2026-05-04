@@ -56,7 +56,7 @@ Abra 플러그인을 사용하기 위해 다음 환경이 필요합니다:
 
 ### 플러그인 설치
 
-#### 방법 1: 마켓플레이스 — GitHub (권장)
+#### 방법 1: 마켓플레이스 — GitHub 
 
 **1단계: GitHub 마켓플레이스 등록**
 
@@ -68,36 +68,6 @@ claude plugin marketplace add unicorn-plugins/abra
 
 ```bash
 claude plugin install abra@abra
-```
-
-**3단계: Dify 환경 구축 및 플러그인 초기 설정**
-
-```bash
-/abra:setup
-```
-
-Dify 환경 구축부터 플러그인 설정까지 자동으로 진행합니다:
-1. Docker & Docker Compose 설치 여부 자동 확인
-2. Dify 소스 다운로드 (기본: `~/workspace/dify`)
-3. 환경 변수 파일 생성 (`.env`)
-4. Docker Compose 컨테이너 실행
-5. 컨테이너 상태 확인 및 헬스체크
-6. 관리자 계정 생성 안내 (`http://localhost/install`)
-7. Groq 모델 프로바이더 자동 설정
-8. Dify 접속 정보 입력 (Base URL, Email, Password)
-9. `gateway/.env` 파일 생성
-10. Python 가상환경 생성
-11. 의존성 설치 (`httpx`, `python-dotenv`, `pyyaml`)
-12. Dify 연결 테스트
-
-설정 완료 후 다음 명령어로 사용 가능합니다:
-
-```bash
-/abra:scenario      # STEP 1: 시나리오 생성
-/abra:dsl-generate  # STEP 2: DSL 자동생성
-/abra:prototype     # STEP 3: 프로토타이핑
-/abra:dev-plan      # STEP 4: 개발계획서 작성
-/abra:develop       # STEP 5: AI Agent 개발
 ```
 
 #### 방법 2: 마켓플레이스 — 로컬
@@ -175,6 +145,11 @@ claude plugin install abra@abra
 
 ## 사용법
 
+**사용법 동영상 보기**:   
+아래 링크의 압축파일 다운로드 후 압축 해제하여 각 일련번호별로 실행 하세요.
+https://drive.google.com/file/d/1t3j-sM3Fx3P-UeUZSyezu24UO_4mfte1/view?usp=drive_link
+  
+
 ### 슬래시 명령
 
 | 명령어 | 설명 |
@@ -200,15 +175,38 @@ claude plugin install abra@abra
 
 Abra는 자동으로 core 스킬을 통해 의도를 분류하고 `scenario` 스킬부터 시작하여 `develop` 스킬까지 순차 실행합니다.
 
-#### 개별 단계별 사용
+#### STEP 0: 사전 환경 준비
 
 각 STEP을 독립적으로 실행 가능합니다:
+
+```bash
+/abra:setup
+```
+
+[Setup 상세보기](resources/workflow-images/1.setup.png)
+
+Dify 환경 구축부터 플러그인 설정까지 자동으로 진행합니다:
+1. Docker & Docker Compose 설치 여부 자동 확인
+2. Dify 소스 다운로드 (기본: `~/workspace/dify`)
+3. 환경 변수 파일 생성 (`.env`)
+4. Docker Compose 컨테이너 실행
+5. 컨테이너 상태 확인 및 헬스체크
+6. 관리자 계정 생성 안내 (`http://localhost/install`)
+7. Groq 모델 프로바이더 자동 설정
+8. Dify 접속 정보 입력 (Base URL, Email, Password)
+9. `gateway/.env` 파일 생성
+10. Python 가상환경 생성
+11. 의존성 설치 (`httpx`, `python-dotenv`, `pyyaml`)
+12. Dify 연결 테스트
 
 #### STEP 1: 시나리오 생성
 
 ```bash
 /abra:scenario
 ```
+  
+[시나리오 생성 상세보기](resources/workflow-images/2.biz-scenario.png)
+
 
 **입력:**
 - 서비스 목적 (예: "고객 지원 챗봇")
@@ -226,6 +224,8 @@ Abra는 자동으로 core 스킬을 통해 의도를 분류하고 `scenario` 스
 /abra:dsl-generate
 ```
 
+[DSL 자동생성 상세보기](resources/workflow-images/3.generate_dsl.png)
+  
 **입력:**
 - STEP 1에서 선택된 `scenario.md` 자동 로드
 
@@ -242,7 +242,9 @@ Abra는 자동으로 core 스킬을 통해 의도를 분류하고 `scenario` 스
 ```bash
 /abra:prototype
 ```
-
+  
+[프로토타이핑 상세보기](resources/workflow-images/4.prototype.png)
+  
 **입력:**
 - STEP 2에서 생성된 DSL 파일 자동 로드
 
@@ -268,6 +270,8 @@ Abra는 자동으로 core 스킬을 통해 의도를 분류하고 `scenario` 스
 /abra:dev-plan
 ```
 
+[개발계획서 상세보기](resources/workflow-images/5.dev-plan.png)
+   
 **입력:**
 - 검증된 DSL + 시나리오 자동 로드
 - 비기능요구사항 추가 입력:
@@ -289,7 +293,9 @@ Abra는 자동으로 core 스킬을 통해 의도를 분류하고 `scenario` 스
 ```bash
 /abra:develop
 ```
-
+  
+[개발 상세보기](resources/workflow-images/6.develop.png)
+  
 **입력:**
 - 개발계획서 + 검증된 DSL 자동 로드
 
@@ -328,53 +334,6 @@ Abra는 자동으로 core 스킬을 통해 의도를 분류하고 `scenario` 스
 | `dev-plan.md` | STEP 4에서 생성된 개발계획서 |
 | `{app-name}-code/` | STEP 5-Option B에서 생성된 프로덕션 코드 (Python/Node.js) |
 | `test-results.log` | 테스트 실행 결과 |
-
-#### 트러블슈팅
-
-**문제 1: Dify 연결 실패**
-
-```
-Error: Unable to connect to Dify API
-```
-
-**해결:**
-1. Dify 컨테이너 상태 확인: `docker compose ps`
-2. 포트 확인: `curl http://localhost/console/api/health`
-3. 접속 정보 재확인: `cat gateway/.env`
-4. 플러그인 재설정: `/abra:setup`
-
-**문제 2: DSL 검증 오류**
-
-```
-Error: DSL validation failed
-```
-
-**해결:**
-1. DSL 파일 구조 확인: 노드·엣지·변수 유효성
-2. Dify DSL 가이드 참조: `agents/dsl-architect/references/dify-workflow-dsl-guide.md`
-3. DSL 재생성: `/abra:dsl-generate` 재실행
-
-**문제 3: Dify 프로토타이핑 에러**
-
-```
-Error: Workflow publish/run failed
-```
-
-**해결:**
-1. 에러 메시지 확인
-2. DSL 수정 (자동 루프에서 처리됨)
-3. 도구 의존성 재확인: `gateway/.venv/bin/python gateway/tools/dify_cli.py list`
-
-**문제 4: 의존성 설치 오류**
-
-```
-Error: pip install failed
-```
-
-**해결:**
-1. Python 버전 확인: `python --version` (3.10+ 필수)
-2. 인터넷 연결 확인
-3. 가상환경 재생성: `rm -rf gateway/.venv && /abra:setup`
 
 ---
 
