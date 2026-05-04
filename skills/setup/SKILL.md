@@ -80,6 +80,11 @@ Dify 로컬 환경 구축부터 Abra 플러그인 초기 설정까지 전 과정
 ### Phase 3: Dify 소스 확인
 
 AskUserQuestion으로 Dify 설치 위치 확인 (기본값: `~/workspace/dify`).
+<!--ASK_USER-->
+{"title":"Dify 설치 디렉토리","questions":[
+  {"question":"Dify가 설치되어 있거나 설치할 경로를 입력해주세요.","type":"text", "default": "~/workspace/dify"}
+]}
+<!--/ASK_USER-->
 
 **설치 위치가 없는 경우:**
 ```bash

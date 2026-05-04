@@ -25,6 +25,9 @@ DSL 구조를 참조하여 LangChain/LangGraph 등으로 코드 구현하며,
 AGENTS.md 파일에서 `## 환경변수` 섹션의 환경변수 로딩.  
 로딩 실패 시 사용자에게 `/abra:setup`을 먼저 수행하라고 안내하고 종료.
 
+AI_RUNTIME 자동 감지 및 업데이트:  
+`{ABRA_PLUGIN_DIR}/resources/guides/call-subagent.md`의 **"0. AI_RUNTIME 자동 감지"** 규칙에 따라 현재 런타임을 감지하고 AGENTS.md의 `AI_RUNTIME` 값을 업데이트.
+
 ## 용어집
 
 | 용어 | 정의 |
@@ -57,12 +60,8 @@ AGENTS.md 파일에서 `## 환경변수` 섹션의 환경변수 로딩.
 
 ### 서브 에이전트 호출
 
-워크플로우 단계에 `Agent: {agent-name}`이 명시된 경우,  
-메인 에이전트는 해당 단계를 직접 수행하지 않고,  
-반드시 위 프롬프트 조립 규칙에 따라 해당 에이전트를 호출하여 결과를 받아야 함.
-
-서브에이전트 호출 없이 메인 에이전트가 해당 산출물을 직접 작성하면  
-스킬 미준수로 간주함.
+워크플로우 단계에 `Agent: {agent-name}`이 명시된 경우,
+메인 에이전트는 해당 단계를 직접 수행하지 않고, `{ABRA_PLUGIN_DIR}/resources/guides/call-subagent.md`에 따라 서브 에이젼트 호출 
 
 ## 진행상황 업데이트 및 재개
 
